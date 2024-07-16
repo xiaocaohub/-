@@ -1,13 +1,13 @@
 .banner_con{
     position:relative;
 }
-.ant-carousel .slick-slide {
+.banner_con .ant-carousel .slick-slide {
     text-align: center;
-    background: #364d79;
+ 
     overflow: hidden;
 }
 
-.ant-carousel .slick-slide h3 {
+.banner_con .ant-carousel .slick-slide h3 {
   color: #fff;
 }
 .banner_con .banner_img{

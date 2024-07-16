@@ -1,8 +1,9 @@
-import homeState from "./home";
-import loginState from "./login";
-import {combineReducers} from "redux";
+let defaultState = {
+    count: 1
+}
 
-export default combineReducers({
-    homeState,
-    loginState
-})
+function Reducer (state=defaultState, action={}) {
+      return state;
+}
+
+export default Reducer;

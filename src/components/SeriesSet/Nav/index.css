@@ -1,0 +1,27 @@
+ .series_nav_con{
+    height:73px;
+    overflow:hidden;
+
+    background:#fff;
+}
+.series_nav_con .nav_list{
+    width:51%;
+    overflow:hidden;
+    margin:20px auto 0;
+}
+.series_nav_con .nav_list >li{
+    width:10%;
+    height:32px;
+    line-height:32px;
+    float:left;
+    text-align:center;
+    
+    margin:0 2%;
+    cursor:pointer;
+ 
+}
+.series_nav_con .nav_list >li.on{
+    background:#C6A189 ;
+    color:#fff;
+    border-radius:32px;
+}

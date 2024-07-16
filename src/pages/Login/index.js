@@ -1,27 +1,12 @@
 import React from "react";
-import {connect} from "react-redux";
+class Login extends React.Component {
+    render () {
 
-
-import Show from "./show";
-const mapStateToProps = (state)=> {
-    return {
-        loginState: state.loginState
+        return (
+            <div>
+                login page
+            </div>
+        )
     }
 }
-
-
-
-const mapDispatchToProps = (dispatch)=> {
-    return {
-
-        addFn () {
-
-            dispatch({type: "add_count"})
-        }
-    }
-}
-
-
-
-const Login = connect(mapStateToProps, mapDispatchToProps)(Show);
 export default Login;

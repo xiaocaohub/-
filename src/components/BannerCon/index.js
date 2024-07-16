@@ -20,7 +20,7 @@ class BannerCon extends React.Component {
     }
     onChange = (index)=> {
         
-        console.log(index)
+       // console.log(index)
     }
     render () {
         return (

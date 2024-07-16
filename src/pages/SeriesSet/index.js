@@ -1,13 +1,10 @@
-import React from "react";
 import {connect} from "react-redux";
 import Show from "./show";
-
 var mapStateToProps = (state)=> {
     return {
-        state: state
+        title: "series"
     }
 }
-
 
 var mapDispatchToProps = (dispatch)=> {
     return {
@@ -15,5 +12,8 @@ var mapDispatchToProps = (dispatch)=> {
     }
 }
 
-const Home = connect(mapStateToProps, mapDispatchToProps)(Show);
-export default Home;
+
+
+const SeriesSet = connect(mapStateToProps, mapDispatchToProps)(Show);
+
+export default SeriesSet;

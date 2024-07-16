@@ -4,11 +4,13 @@ import {Row, Col} from "antd";
 
 import "./index.css";
 import Header from "../../components/Header";
+import Footer from "../../components/Footer";
 import BannerCon from "../../components/BannerCon";
 import HotSell from "../../components/Home/HotSell";
 import VedioBanner from "../../components/Home/VedioBanner";
-
 import Good from "../../components/Home/Good";
+import HotSelling from "../../components/Home/HotSelling";
+import popularImg from "../../assets/popular_img.png";
 class Show extends React.Component {
     constructor (props) {
         super(props)
@@ -56,19 +58,13 @@ class Show extends React.Component {
                         </Row>
                     </div>
 
-                    <div className="hot_selling_con">
-                        <Row>
-                            <Col span={3}></Col>
-                            <Col span={18}>
-                                <div className="title_con">
-                                    <div className="left"></div>
-                                </div>
-                            </Col>
-                            <Col span={3}></Col>
-                        </Row>
-                    </div>
+
+                    <HotSelling></HotSelling>
+
+                    <img src={popularImg} className="popular_img" alt=""/>
                 </div>
-                <div className="footer_con">footer</div>
+                
+                <Footer></Footer>
             </div>
         )
     }
