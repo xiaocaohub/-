@@ -1,0 +1,44 @@
+.vedio_shadow_con{
+    width:100%;
+    height:100%;
+    position:fixed;
+    left:0;
+    top:0;
+    z-index:15;
+
+ 
+}
+.vedio_shadow_con .shadow{
+    width:100%;
+    height:100%;
+    position:absolute;
+    left:0;
+    top:0;
+    background:#000;
+
+    opacity:0.8;
+    z-index:1;
+}
+
+.vedio_shadow_con .big_vedio_con{
+    width:80%;
+    height:80%;
+    position:absolute;
+    left:10%;
+    top:10%;
+    z-index:2;
+}
+.vedio_shadow_con .close_btn{
+    position:absolute;
+    right:-10px;
+    top:-10px;
+    color:#fff;
+    font-size:40px;
+    cursor:pointer;
+}
+
+
+
+
+
+

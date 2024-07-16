@@ -1,0 +1,33 @@
+.header_con{
+    color:#fff;
+    text-align:center;
+}
+.ant-carousel .slick-slide {
+    text-align: center;
+    height: 160px;
+    line-height: 160px;
+    background: #364d79;
+    overflow: hidden;
+}
+.ant-carousel .slick-slide h3 {
+    color: #fff;
+}
+
+.slick-list li.slick-active button {
+    background:rgb(165, 147, 42) !important;
+}
+
+.slick-list li button {
+    background:#fff !important;
+}
+.ant-radio-button-checked {
+    background:rgb(165, 147, 42) !important;
+    color: #fff !important;  
+    border-color: #f50 !important;  
+  }
+.box{
+    width:210px;
+
+    height:210px;
+    background:brown;
+}

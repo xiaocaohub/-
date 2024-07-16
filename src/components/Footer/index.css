@@ -1,0 +1,99 @@
+.footer {
+    overflow:hidden;
+    background:#1A1A1A;
+  
+    color:#fff;
+}
+.footer .content{
+    width:1360px;
+    margin:0 auto;
+    overflow:hidden;
+    padding:110px 0 ;
+}
+.footer .left_con{
+    width:412px;
+    float:left;
+}
+.footer .left_con .logo_con{
+    overflow:hidden;
+    padding-bottom:29px;
+    border-bottom:1px solid #D9D9D9;
+}
+.footer .left_con img {
+    float:left;
+}
+
+.footer .left_con .logo_txt{
+    float:right;
+    margin-top:23px;
+}
+
+.footer .icon_list{
+    overflow:hidden;
+    margin-top:29px;
+}
+
+.footer .icon_list>li{
+    width:48%;
+    height:50px;
+    line-height:50px;
+    float:left;
+    margin-bottom:10px;
+    overflow:hidden;
+}
+.footer .icon_list>li img{
+    float:left;
+}
+.footer .icon_list>li span{
+    float:left;
+    margin-left:10px;
+}
+.footer .address_con{
+    width:269px;
+    float:left;
+    margin-left:194px;
+}
+.footer .address_con > li{
+   height:25px;
+   line-height:25px;
+   margin-top:29px;
+   color:#999;
+   text-indent:35px;
+   font-size:16px;
+   overflow:hidden;
+   background-size:24px 24px;
+ 
+}
+.footer .address_con > li.address{
+   background:url("../../assets/footer_map.png") no-repeat left center;
+}
+.footer .address_con > li.telephone{
+    background:url("../../assets/footer_phone.png") no-repeat left center;
+}
+.footer .address_con > li.time{
+    background:url("../../assets/footer_clock.png") no-repeat left center;
+}
+.footer .code_list{
+    float:right;
+}
+.footer .code_list > li{
+    width:110px;
+    height:110px;
+    float:right;
+    margin-left:10px;
+    font-size:12px;
+    text-align:center;
+    margin-top:29px;
+}
+.footer .code_list > li img{
+    width:110px;
+    height:110px;
+    margin-bottom:10px;
+}
+.footer .copy{
+    height:60px;
+    line-height:60px;
+    text-align:center;
+    background:#343434;
+    color:#999;
+}

@@ -1,0 +1,62 @@
+.banner_con{
+    margin-top:160px;
+}
+.banner_con .ant-carousel .slick-slide {
+    text-align: center;
+    height: 636px;
+    line-height: 636px;
+    background: #364d79;
+    overflow: hidden;
+ 
+}
+.banner_con .slick-list li.slick-active button {
+    background:#C6A189    !important;
+}
+.banner_con .slick-list li button {
+    background:#fff !important;
+}
+.banner_con{
+    position:relative;
+   
+}
+
+.banner_con .content{
+    position:absolute;
+    width:1360px;
+    height: 636px;
+    left:50%;
+    top:0;
+    margin-left:-680px;
+}
+.left_banner,.right_banner {
+    width:40px;
+    height:40px;
+    position:absolute;
+    top:50%;
+    margin-top:-20px;
+    cursor:pointer;
+}
+
+
+
+
+
+.left_banner{
+    left:0;
+    background:url("../../assets/left_banner1.png") no-repeat center;
+}
+
+.left_banner:hover {
+    background:url("../../assets/left_banner2.png") no-repeat center;
+    transition:all 0.2s;
+}
+
+.right_banner{
+    right:0;
+
+    background:url("../../assets/right_banner1.png") no-repeat center;
+}
+.right_banner:hover {
+    background:url("../../assets/right_banner2.png") no-repeat center;
+    transition:all 0.2s;
+}

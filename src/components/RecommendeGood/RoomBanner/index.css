@@ -1,0 +1,69 @@
+.room_banner_con .top_title{
+    font-size:24px;
+    height:28px;
+    line-height:28px;
+    overflow:hidden;
+    color:#1A1A1A;
+}
+.room_banner_con .top_title span{
+    text-transform:uppercase;
+    font-size:16px;
+    color:#999;
+    position:relative;
+    top:-3px;
+}
+.room_banner_con .room_banner{
+    margin-top:20px;
+    position:relative;
+}
+.room_banner_con .room_banner .banner_img{
+    display:block;
+    width:100%;
+}
+.room_banner_con .room_banner  .text_con{
+    width:100%;
+    height:100%;
+    position:absolute;
+    left:0;
+    top:0;
+    background:#e5e5e5;
+    z-index:1;
+}
+.room_banner_con .room_banner .big_tit{
+   height:58px;
+   line-height:58px;
+   font-size:48px;
+   margin-left:4%;
+
+
+   margin-top:9%;
+}
+
+
+
+.room_banner_con .room_banner .txt{
+   font-size:16px;
+   height:20px;
+   line-height:20px;
+   margin-left:4%;
+   margin-top:10px;
+}
+.room_banner_con .show_more_btn{
+    width:142px;
+    height:40px;
+    display:block;
+    line-height:40px;
+    text-align:center;
+    border:1px solid #C6A189;
+    border-radius:40px;
+    margin-left:4%;
+    margin-top:3%;
+    overflow:hidden;
+    color:#C6A189;
+}
+.room_banner_con .show_more_btn:hover {
+    background:#C6A189;
+    transition:all 0.5s;
+    color:#fff;
+}
+ 
