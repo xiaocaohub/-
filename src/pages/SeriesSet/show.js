@@ -30,16 +30,18 @@ class Show extends React.Component {
                         </div>
 
                         <div className="series_list_con">
-
-                            <Nav></Nav>
+                            <div className="series_nav_con">
+                                <Nav></Nav>
+                            </div>
                             <ul className="good_list">
                                 <Good></Good>
-                                <Good></Good>
-
-
-                                <Good></Good>
+                                
+                                
                                 <Good></Good>
                                 <Good></Good>
+                                <Good></Good>
+                                <Good></Good>
+                                
                                 <Good></Good>
                             </ul>
                             

@@ -23,15 +23,15 @@ class Artist extends React.Component {
                             <Breadcrumb.Item>共4564款宝贝</Breadcrumb.Item>
                         </Breadcrumb>
 
-                        <Nav></Nav>
+                        <div className="artist_nav_con">
+                            <Nav></Nav>
+                        </div>
 
                         <ul className="good_list">
                             <Good></Good>
-
                             <Good></Good>
                             <Good></Good>
                             <Good></Good>
-                            
                             <Good></Good>
                             <Good></Good>
                         </ul>

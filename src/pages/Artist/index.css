@@ -16,7 +16,12 @@
 }
 
  
-
+.artist_con .artist_nav_con {
+    height:73px;
+    overflow:hidden;
+    background:#fff;
+}
+ 
 
 
 

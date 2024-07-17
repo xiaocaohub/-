@@ -1,12 +1,20 @@
-import React from "react";
-class Login extends React.Component {
-    render () {
+ import {connect} from "react-redux";
+ import Show from "./show";
+ var mapStateToProps = state=> {
+    
+    return {
 
-        return (
-            <div>
-                login page
-            </div>
-        )
     }
-}
-export default Login;
+ }
+
+
+ var mapDispatchToProps = dispatch=> {
+
+    return {
+
+    }
+ }
+
+ const Login = connect(mapStateToProps, mapDispatchToProps)(Show);
+
+ export default Login;

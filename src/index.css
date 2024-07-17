@@ -20,4 +20,8 @@ html {
    cursor:pointer;
 }
 
-
+.more_btn:hover{
+   background:#C6A189;
+   color:#fff;
+   transition:all 0.5s;
+}

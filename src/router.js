@@ -9,6 +9,7 @@ import ProductRoom from "./pages/ProductRoom";
 import SeriesSet from "./pages/SeriesSet";
 
 import Artist from "./pages/Artist";
+import ArtistDetail from "./pages/ArtistDetail";
 class IndexRouter extends React.Component {
     render () {
         return (
@@ -21,7 +22,8 @@ class IndexRouter extends React.Component {
                         <Route path="/productroom" component={ProductRoom}></Route>
 
                         <Route path="/series" component={SeriesSet}></Route>
-                        <Route path="/artist" component={Artist}></Route>
+                        <Route path="/artist" exact component={Artist}></Route>
+                        <Route path="/artist/detail/:id" component={ArtistDetail}></Route>
                     </Switch>
                 </App>
             </BrowserRouter>
