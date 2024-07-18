@@ -1,8 +1,7 @@
 import React from "react";
 import {Row, Col} from "antd";
-import Header from "../../components/Header";
-
 import RoomBanner from "../../components/RecommendeGood/RoomBanner";
+
 import Good from "../../components/RecommendeGood/Good";
 import banner1 from "../../assets/banner1.png";
 import roomImg from "../../assets/hot_sales_small1.png";
@@ -40,8 +39,6 @@ class Show extends React.Component {
     render () {
         return (
             <div className="recommende_good_con">
-                <Header></Header>
-
                 <div className="banner">
                     <img src={banner1} alt=""/>
                     

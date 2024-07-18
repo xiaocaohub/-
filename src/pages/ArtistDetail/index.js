@@ -12,7 +12,6 @@ class ArtistDetail extends React.Component {
     render () {
         return (
             <div className="artist_detail_con">
-                <Header></Header>
                 <Row>
 
                     <Col span={3}></Col>

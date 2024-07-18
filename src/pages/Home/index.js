@@ -3,6 +3,7 @@ import {connect} from "react-redux";
 import Show from "./show";
 
 var mapStateToProps = (state)=> {
+ 
     return {
         state: state
     }
@@ -10,8 +11,11 @@ var mapStateToProps = (state)=> {
 
 
 var mapDispatchToProps = (dispatch)=> {
+   
     return {
+        getHomeDataFn () {
 
+        }
     }
 }
 

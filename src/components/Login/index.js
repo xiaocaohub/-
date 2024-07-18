@@ -7,12 +7,23 @@ import checkedFalseImg from "../../assets/check_false_icon.png";
 class LoginPage extends React.Component {
     constructor (props) {
         super(props)
-    }    
+        
+        this.state = {
+            autoLoginFlag: false
+        }
+    }
+    autoLoginFn = ()=> {
+
+        const flag = this.state.autoLoginFlag;
+        this.setState({
+            autoLoginFlag: !flag
+        })
+    }
     render () {
         return (
             <Form className="login_form_con login-form" >
                 <div className="title">账号密码登录</div>
-                <Form.Item>
+                <Form.Item  >
                     <Input placeholder="请输入账号" className="put_val"></Input>
                 </Form.Item>
                 
@@ -24,8 +35,10 @@ class LoginPage extends React.Component {
                     <div className="sub_btn">登 录</div>
                 </Form.Item>
                 <Form.Item>
-                    <div className="select_con">下次自动登录</div>
-                    <div className="forget_btn">忘记密码</div>
+
+                    
+                    <div className={this.state.autoLoginFlag?"select_con on":"select_con"} onClick={this.autoLoginFn}>下次自动登录</div>
+                    <div className="forget_btn" onClick={this.props.forgetFn}>忘记密码</div>
                 </Form.Item>
             </Form>
         )

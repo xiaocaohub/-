@@ -17,9 +17,9 @@
 
 .login_form_con .put_val{
     display:block;
-    height:20%;
-    /* height:50px;
-    line-height:50px; */
+ 
+    height:50px;
+    line-height:50px;
     text-indent:20px;
     border-radius:50px;
 }
@@ -37,8 +37,6 @@
  
 
 
-
-
 .login_form_con .select_con{
     float:left;
     background:url("../../assets/check_false_icon.png") no-repeat left center;
@@ -46,6 +44,11 @@
 
     cursor:pointer;
     color:#666;
+}
+
+.login_form_con .select_con.on{
+    
+    background:url("../../assets/check_true_icon.png") no-repeat left center;
 }
 .login_form_con .forget_btn{
     float:right;
