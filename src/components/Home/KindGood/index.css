@@ -1,7 +1,5 @@
 .king_good_list_con .good_list .kind_good{
     width:32.6%;
- 
-    
     float:left;
     margin-bottom:31px;
     overflow:hidden;
@@ -27,20 +25,13 @@
 .king_good_list_con .good_list .kind_good .text_con .txt{
     height:21px;
     line-height:21px;
-
     font-size:18px;
     overflow:hidden;
-
     margin:23px 0 10px;
- 
 }
-
 .king_good_list_con .good_list .kind_good .text_con .price{
    height:32px;
    line-height:32px;
-
-
- 
    font-size:28px;
    overflow:hidden;
 }

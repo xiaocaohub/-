@@ -3,52 +3,39 @@ import {Row, Col} from "antd";
 
 
 import "./index.css";
-// import Header from "../../components/Header";
-// import Footer from "../../components/Footer";
 import BannerCon from "../../components/BannerCon";
 import HotSell from "../../components/Home/HotSell";
 import VedioBanner from "../../components/Home/VedioBanner";
 import Good from "../../components/Home/Good";
 import HotSelling from "../../components/Home/HotSelling";
-
-
-
-
-
-
-
-
 import KindGood from "../../components/Home/KindGood";
-
 import popularImg from "../../assets/popular_img.png";
 class Show extends React.Component {
     constructor (props) {
-
         super(props)
+
         this.state = {
             kindNav: [
                 {id: 0, title:"极简"},
                 {id: 1, title:"现代"},
-                
                 {id: 2, title:"奶油"}
             ],
             kindIndex: 0
         }
     }
     kindNavSelectFn = (index)=> {
-        console.log(index)
-
         this.setState({
-
             kindIndex: index
         })
     }
     render () {
         return (            
             <div className="main_content">
-                
                 <BannerCon></BannerCon>
                 <HotSell></HotSell>
+
+
+
 
                 <div className="vedio_text_con">
                     <div className="small_title">Quality of life</div>
@@ -63,12 +50,10 @@ class Show extends React.Component {
                     <div className="big_title">新品推荐</div>
                 </div>
 
-
                 <div className="recommend_good_con">
                     <Row>
                         <Col span={3}></Col>
-                        <Col span={18}>
-                        
+                        <Col span={18}>                        
                             <ul className="recommend_good_list">
                                 <Good></Good>
                                 <Good></Good>
@@ -82,7 +67,6 @@ class Show extends React.Component {
                         <Col span={3}></Col>
                     </Row>
                 </div>
-
 
                 <HotSelling></HotSelling>
 
@@ -103,14 +87,12 @@ class Show extends React.Component {
                                 <KindGood></KindGood>
                                 <KindGood></KindGood>
                                 <KindGood></KindGood>
-
                                 <KindGood></KindGood>
                             </ul>
                         </div>
                     </Col>
                     <Col span={3}></Col>
-                </Row>
-               
+                </Row>    
             </div>
         )
     }
