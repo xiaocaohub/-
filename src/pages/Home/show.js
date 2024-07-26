@@ -82,12 +82,12 @@ class Show extends React.Component {
                                 })}
                             </ul>
                             <ul className="good_list">
+                                {/* <KindGood></KindGood>
                                 <KindGood></KindGood>
                                 <KindGood></KindGood>
                                 <KindGood></KindGood>
                                 <KindGood></KindGood>
-                                <KindGood></KindGood>
-                                <KindGood></KindGood>
+                                <KindGood></KindGood> */}
                             </ul>
                         </div>
                     </Col>

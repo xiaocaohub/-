@@ -11,35 +11,14 @@
 .recommende_good_con .banner img{
     width:100%;
     display:block;
-    opacity:0;
-    border:1px solid brown;
-}
- .recommende_good_con .text_con{
-    width:100%;
-    height:100%;
-    position:absolute;
-    left:0;
-    top:0;
  
-    z-index:1;
- }
-
- .recommende_good_con .banner  .title{
-    height:37px;
-    line-height:37px;
-    overflow:hidden;   
-    font-size:32px;
-    margin-top:14%;
- }
-
- .recommende_good_con .banner .txt{
-    font-size:18px;;
-    height:21px;
-    line-height:21px;
-    overflow:hidden;
-    margin-top:12px;
+ 
+}
   
- }
+
+  
+
+  
 
 
 .recommende_good_con .room_list_con{ 
@@ -56,7 +35,10 @@
     margin-left:2%;
     cursor:pointer;
     overflow:hidden;
+
+    
     position:relative;
+    border-radius:10px;
 }
 .recommende_good_con .room_list_con .room_list > li:first-child{
     margin-left:0;
@@ -76,7 +58,7 @@
    position:absolute;
    left:0;
    top:0;
-   background:#e5e5e5;
+ 
    text-align:center;
 }
 .recommende_good_con .room_list_con .room_list > li .text_con .title{

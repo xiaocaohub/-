@@ -3,7 +3,7 @@ import {Row, Col} from "antd";
 import RoomBanner from "../../components/RecommendeGood/RoomBanner";
 
 import Good from "../../components/RecommendeGood/Good";
-import banner1 from "../../assets/banner1.png";
+import banner1 from "../../assets/recommendeGood_banner.png";
 import roomImg from "../../assets/hot_sales_small1.png";
 import "./index.css";
 
@@ -15,38 +15,34 @@ class Show extends React.Component {
                 {
                     id: 0,
 
-                    imgSrc: require("../../assets/hot_sales_small1.png"),
+                    imgSrc: require("../../assets/room_list_1.png"),
                     title: "餐厅区",
                     txt: "LIVING ROOM AREA"
                 },
                 {
 
                     id: 1,
-                    imgSrc: require("../../assets/hot_sales_small1.png"),
+                    imgSrc: require("../../assets/room_list_2.png"),
                     title: "客厅区",
                     txt: "BEDROOM AREA"
                 },
                 {
                     id: 2,
 
-                    imgSrc: require("../../assets/hot_sales_small1.png"),
+                    imgSrc: require("../../assets/room_list_3.png"),
                     title: "卧房区",
                     txt: "DINING AREA"
                 }
             ]
         }
     }
+
     render () {
         return (
             <div className="recommende_good_con">
                 <div className="banner">
-                    <img src={banner1} alt=""/>
-                    
-                    <div className="text_con">
-                        <div className="title">年轻人de家</div>
-                        <div className="txt">永远需要焕发活力</div>
-                    </div>
-                    
+                  
+                    <img src={banner1} alt=""/>  
                 </div>
 
                 <Row className="room_list_con">
@@ -57,10 +53,10 @@ class Show extends React.Component {
                                 return (
                                     <li key={item.id}>
                                         <img src={item.imgSrc} alt="" className="room_img"/>
-                                        <div className="text_con">
+                                        {/* <div className="text_con">
                                             <div className="title">{item.title}</div>
                                             <div className="txt">{item.txt}</div>
-                                        </div>
+                                        </div> */}
                                     </li>
                                 )
                             })}

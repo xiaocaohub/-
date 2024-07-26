@@ -7,7 +7,7 @@ class Good extends React.Component {
     render () {
         return (
             <li>
-                <Link to="/">
+                <Link to="/productroom/detail/1">
                     <img  src={GoodImg} className="good_img"/>
                 </Link>
 

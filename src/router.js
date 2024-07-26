@@ -7,9 +7,11 @@ import Login from "./pages/Login";
 import Layout from "./pages/Layout";
 
 import RecommendeGood from "./pages/RecommendeGood";
-import ProductRoom from "./pages/ProductRoom";
-import SeriesSet from "./pages/SeriesSet";
 
+import ProductRoom from "./pages/ProductRoom";
+import ProductRoomDetail from "./pages/ProductRoomDetail";
+import SeriesSet from "./pages/SeriesSet";
+import SeriesSetList from "./pages/SeriesSetList";
 import Artist from "./pages/Artist";
 import ArtistDetail from "./pages/ArtistDetail";
 class IndexRouter extends React.Component {
@@ -26,11 +28,13 @@ class IndexRouter extends React.Component {
                             ()=><Layout>
                                     <Route path="/" exact component={Home}></Route>
                                     <Route path="/recommendegood" component={RecommendeGood}></Route>
-                                    <Route path="/productroom" component={ProductRoom}></Route>
-
-                                    <Route path="/series" component={SeriesSet}></Route>
+                                    <Route path="/productroom" exact component={ProductRoom}></Route>
+                                    <Route path="/productroom/detail/:id" component={ ProductRoomDetail }></Route>
+                                    <Route path="/series" exact component={SeriesSet}></Route>
+                                    <Route path="/series/list" component={SeriesSetList}></Route>
                                     <Route path="/artist" exact component={Artist}></Route>
                                     <Route path="/artist/detail/:id" component={ArtistDetail}></Route>
+                         
                             </Layout>
 
                         }></Route>

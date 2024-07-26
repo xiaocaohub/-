@@ -26,7 +26,6 @@
     position:absolute;
     left:0;
     top:0;
-    background:#e5e5e5;
     z-index:1;
 }
 .room_banner_con .room_banner .big_tit{
@@ -34,32 +33,36 @@
    line-height:58px;
    font-size:48px;
    margin-left:4%;
-
-
-   margin-top:9%;
+   margin-top:8.5%;
 }
 
 
-
 .room_banner_con .room_banner .txt{
-   font-size:16px;
-   height:20px;
-   line-height:20px;
+   font-size:24px;
+   height:28px;
+   line-height:28px;
+
    margin-left:4%;
    margin-top:10px;
 }
 .room_banner_con .show_more_btn{
     width:142px;
-    height:40px;
     display:block;
-    line-height:40px;
     text-align:center;
     border:1px solid #C6A189;
     border-radius:40px;
-    margin-left:4%;
-    margin-top:3%;
+    /* margin-left:4%; */
+    margin-left:8.7%;
+    margin-top:1.9%;
     overflow:hidden;
     color:#C6A189;
+    position:absolute;
+    height:10%;
+    display:flex;
+    align-items: center;
+    flex-direction:row;
+    justify-content:center;
+    bottom:24.8%;
 }
 .room_banner_con .show_more_btn:hover {
     background:#C6A189;

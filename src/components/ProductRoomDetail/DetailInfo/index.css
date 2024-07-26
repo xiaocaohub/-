@@ -1,0 +1,178 @@
+.productroom_detail_page .detail_info_con{
+    background:#FFF;
+    margin:20px 0;
+    padding:20px;
+    overflow:hidden;
+    border:1px solid brown;
+}
+.productroom_detail_page  .detail_info{
+    overflow:hidden;
+    border:1px solid brown;
+}
+
+.productroom_detail_page  .detail_info .left{
+    width:59%;
+ 
+    float:left;
+    overflow:hidden;
+
+    border:1px solid brown;
+}
+.productroom_detail_page  .detail_info .left .big_img{
+    display:block;
+    width:100%;
+}
+.productroom_detail_page  .detail_info .left .img_nav{
+    overflow:hidden;
+    margin-top:14px;
+}
+.productroom_detail_page  .detail_info .left .img_nav > li{
+   
+    width:15.2%;
+    height:50px;
+    float:left;
+    margin-left:1%;
+    overflow:hidden;
+    border:2px solid transparent;
+    cursor:pointer;
+}
+
+
+.productroom_detail_page  .detail_info .left .img_nav > li:first-child{
+    margin-left: 0;
+}
+.productroom_detail_page  .detail_info .left .img_nav > li.on{
+    border-color:#C6A189;
+}
+.productroom_detail_page  .detail_info .left .img_nav > li img{
+    display:block;
+    width:100%;
+    height:100%;
+}
+.productroom_detail_page  .detail_info .right {
+    width:40%;
+    float:right;
+    border:1px solid brown;
+}
+.productroom_detail_page  .detail_info .right .top_tit{
+   overflow:hidden;
+}
+.productroom_detail_page  .detail_info .right .top_tit .tit{
+   display:block;
+   width:52px;
+   height:26px;
+   line-height:26px;
+   text-align:center;
+   background:#333;
+   font-size:16px;
+   color:#fff;
+   overflow:hidden;
+   float:left;
+   margin-right:12px;
+}
+.productroom_detail_page  .detail_info .right .top_tit .txt{
+    color:#E8A468;
+}
+.productroom_detail_page  .detail_info .right .top_tit .txt a{
+    font-size:12px;
+    color:#E8A468;
+    margin-top:5px;
+    display:block;
+    float:left;
+    text-decoration:underline;
+}
+.productroom_detail_page  .detail_info .right .top_tit .txt .right_icon{
+    margin-top:7px;
+}
+.productroom_detail_page  .detail_info .right .title{
+    overflow:hidden;
+    margin-top:15px;
+}
+.productroom_detail_page  .detail_info .right .title .tit{
+    display:block;
+    float:left;
+    background:#C6A189;
+    padding:2px 5px;
+    color:#fff;
+    margin-right:8px;
+    border-radius:3px;
+}
+.productroom_detail_page  .detail_info .right .title .tit_txt{
+    width:78%;
+    float:left;
+    font-size:18px;
+    font-weight:bold;
+}
+.productroom_detail_page  .detail_info .right .title .intro{
+    width:100%;
+    font-size:12px;
+    color:#666;
+    margin-top:5px;
+    float:left;
+}
+.productroom_detail_page  .detail_info .right .price{
+   height:48px;
+   line-height:48px;
+   background:#FAFAFA;
+   font-size:36px;
+   color:#E61D36;
+   margin:10px 0 25px;
+
+   overflow:hidden;
+}
+.productroom_detail_page  .detail_info .right .price .unit{
+   font-size:24px;
+   position:relative;
+   top:-3px;
+}
+
+.productroom_detail_page  .detail_info .right .specifications_con{
+    overflow:hidden;
+   border:1px solid brown;
+   margin-bottom:10px;
+}
+.productroom_detail_page  .detail_info .right .specifications_con .title_name{
+   float:left;
+   color:#999;
+
+
+ 
+   font-size:14px;
+   margin-top:5px;
+   margin-right:5%;
+}
+.productroom_detail_page  .detail_info .right .specifications_con .specifications_list{
+
+   width:87%;
+   overflow:hidden;
+   float:left;
+ 
+   border:1px solid brown;
+}
+.productroom_detail_page  .detail_info .right .specifications_con .specifications_list > li{
+   
+   float:left;
+   padding:5px;
+   margin-right:10px;
+
+   font-size:14px;
+   border:1px solid #E1E1E1;
+   border-radius:5px;
+   
+
+   cursor:pointer;
+   margin-bottom:10px;
+}
+.productroom_detail_page  .detail_info .right .specifications_con .specifications_list > li.on{
+    background:#F5F5F5;
+ 
+    color:#E8A468;
+    border: 1px solid #E8A468;
+}
+.productroom_detail_page  .detail_info .right .specifications_con .code_con{
+    
+    float:left;
+    padding:3px 25px 3px 5px;
+    border:1px solid brown;
+    background:url("../../../assets/icon/icon_copy.png") no-repeat center right;
+}

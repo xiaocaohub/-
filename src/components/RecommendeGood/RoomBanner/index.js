@@ -1,6 +1,6 @@
 import React from "react";
 import {Link} from "react-router-dom";
-import bannerImg from "../../../assets/banner1.png";
+import bannerImg from "../../../assets/room_list_banner1.png";
 
 import "./index.css";
 class RoomBanner extends React.Component {
@@ -15,8 +15,10 @@ class RoomBanner extends React.Component {
                     <img src={bannerImg} className="banner_img"/>
 
                     <div className="text_con">
-                        <div className="big_tit">餐厅空间</div>
-                        <div className="txt">用餐 宴客 慢品烟火</div>
+                        {/* <div className="big_tit">餐厅空间</div>
+                        <div className="txt">用餐 宴客 慢品烟火</div> */}
+                        <div className="big_tit"></div>
+                        <div className="txt"></div>
                         <Link to="/" className="show_more_btn">查看更多</Link>
                     </div>
                 </div>
