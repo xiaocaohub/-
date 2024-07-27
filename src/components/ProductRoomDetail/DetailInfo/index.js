@@ -1,9 +1,10 @@
 import React from "react";
 import {Link} from "react-router-dom";
-import { RightOutlined   } from '@ant-design/icons';
+import {Input} from "antd";
 
+import { RightOutlined, StarOutlined, ShareAltOutlined } from '@ant-design/icons';
+import codeImg from "../../../assets/footer_code2.png";
 import "./index.css";
-
 class DetailInfo extends React.Component {
     constructor (props) {
         super(props)
@@ -37,14 +38,13 @@ class DetailInfo extends React.Component {
                     navImg:  require("../../../assets/room_list_3.png")
                 },
 
-
-
                 {
                     id: 5,   
                     srcImg: require("../../../assets/vedio_list1.png"),
                     navImg:  require("../../../assets/room_list_3.png")
                 }
-            ]
+            ],
+            count: 1
         }
     }
     selectNavFn = (index)=> {
@@ -55,6 +55,25 @@ class DetailInfo extends React.Component {
             bigImg: bigImg
         })
     }
+    changeCountFn = (e) => {
+        let value = e.target.value;
+        this.setState({
+            count: value
+        })
+    }
+    handleCountFn = (dir)=> {
+        let count = this.state.count;
+        if (dir<0) {
+            if (count>=2) {
+                count -= 1;
+            }
+        } else {
+            count += 1;
+        }
+        this.setState({
+            count: count
+        })
+    }
     render () {
         return (
             <div className="detail_info_con">
@@ -63,7 +82,7 @@ class DetailInfo extends React.Component {
                         <img src={this.state.bigImg} alt="" className="big_img"/>
                         <ul className="img_nav">
                             {this.state.navArr.map((item, index)=> {
-                                return (<li className={this.state.currentIndex==index?"on":""} onClick={()=>{this.selectNavFn(index)}}>
+                                return (<li className={this.state.currentIndex==index?"on":""} onClick={()=>{this.selectNavFn(index)}} key={item.id}>
                                     <img src={item.navImg} alt=""  />
                                 </li>)
                             })}
@@ -115,9 +134,39 @@ class DetailInfo extends React.Component {
                             </ul>
                         </div>
 
+                      
                         <div className="specifications_con">
                             <div className="title_name">编码</div>
                             <div className="code_con">J-YZ-YZ-HWS-3RW-HS</div>
+                        </div>
+
+                        <div className="specifications_con">
+                            <div className="title_name">模型</div>
+                            <div className="download_btn">点击下载</div>
+                        </div>
+
+                        <div className="specifications_con">
+                            <div className="title_name">数量</div>
+
+                            <div className="count_con">
+                                <div className="btn" onClick={()=>{this.handleCountFn(-1)}}>-</div>
+
+                                <Input className="count" value={this.state.count} onChange={this.changeCountFn}/>      
+                                <div className="btn" onClick={()=>{this.handleCountFn(1)}}>+</div>
+                            </div>
+                        </div>
+
+                        <div className="buy_con">
+                            <div className="btn buy_btn">加入购物车</div>
+                            <div className="btn">定制询价</div>
+                            <div className="small_btn">
+                                <StarOutlined className="icon"/> 收藏
+                            </div>
+                            <span className="line"></span>
+                            <div className="small_btn share_btn">
+                                <ShareAltOutlined className="icon"/> 分享
+                                <img src={codeImg} alt="" className="code_img"/>
+                            </div>
                         </div>
                     </div>
                 </div>

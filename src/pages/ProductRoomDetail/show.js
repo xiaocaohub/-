@@ -2,6 +2,7 @@ import React from "react";
 import {Row, Col} from "antd";
 import DetailInfo from "../../components/ProductRoomDetail/DetailInfo";
 
+import SameKind from "../../components/ProductRoomDetail/SameKind";
 import "./index.css";
 class Show extends React.Component {
     constructor (props) {
@@ -16,12 +17,15 @@ class Show extends React.Component {
 
                     <Col span={18}>
                         <DetailInfo></DetailInfo>
-                    </Col>
 
+                        <SameKind></SameKind>
+
+                    </Col>
                     <Col span={3}></Col>
                 </Row>
             </div>
         )
     }
 }
+
 export default Show;
