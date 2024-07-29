@@ -2,9 +2,33 @@
     overflow:hidden;
 }
 
- 
+.design_same_con{
+    overflow:hidden;
+    padding:40px 20px;
+    
+    background:#fff;
+}
+.design_same_con .nav_list{
+   overflow:hidden;
 
+   border-bottom:1px solid #E1E1E1;
 
+   margin-bottom:28px;
+}
+.design_same_con .nav_list > li{
 
+    float:left;
+    height:45px;
+    line-height:45px;
+    
+    text-align:center;
+    padding:0 15px;
+    cursor:pointer;
+    font-size:18px;
+    border-bottom:2px solid transparent;
+}
+.design_same_con .nav_list > li.on{
+    border-bottom:2px solid #C6A189;
+}
 
  

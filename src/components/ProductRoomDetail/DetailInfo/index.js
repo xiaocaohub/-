@@ -126,7 +126,7 @@ class DetailInfo extends React.Component {
                                 <li>大三位3000*1100*700mm</li>
                                 <li>大三位3000*1100*700mm</li>
                                 <li>大三位3000*1100*700mm</li>
-                                <li>大三位3000*1100*700mm</li>
+                                <li>大三位3000*1100*700mm 大三位3000*1100*700mm 大三位3000*1100*700mm 大三位3000*1100*700mm </li>
                                 <li>大三位3000*1100*700mm</li>
                                 <li>大三位3000*1100*700mm</li>
                                 <li>大三位3000*1100*700mm</li>
@@ -134,7 +134,9 @@ class DetailInfo extends React.Component {
                             </ul>
                         </div>
 
-                      
+
+
+
                         <div className="specifications_con">
                             <div className="title_name">编码</div>
                             <div className="code_con">J-YZ-YZ-HWS-3RW-HS</div>
@@ -150,7 +152,6 @@ class DetailInfo extends React.Component {
 
                             <div className="count_con">
                                 <div className="btn" onClick={()=>{this.handleCountFn(-1)}}>-</div>
-
                                 <Input className="count" value={this.state.count} onChange={this.changeCountFn}/>      
                                 <div className="btn" onClick={()=>{this.handleCountFn(1)}}>+</div>
                             </div>
