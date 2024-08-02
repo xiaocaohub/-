@@ -7,23 +7,21 @@ import Login from "./pages/Login";
 import Layout from "./pages/Layout";
 
 import RecommendeGood from "./pages/RecommendeGood";
-
 import ProductRoom from "./pages/ProductRoom";
 import ProductRoomDetail from "./pages/ProductRoomDetail";
 import SeriesSet from "./pages/SeriesSet";
 import SeriesSetList from "./pages/SeriesSetList";
 import Artist from "./pages/Artist";
 import ArtistDetail from "./pages/ArtistDetail";
+
+import Cart from "./pages/Cart";
 class IndexRouter extends React.Component {
     render () {
         return (
             <BrowserRouter>
                 <App>
                     <Switch>
-                         
-                        
                         <Route path="/login" component={Login}></Route>
-
                         <Route path="/" render={
                             ()=><Layout>
                                     <Route path="/" exact component={Home}></Route>
@@ -34,7 +32,8 @@ class IndexRouter extends React.Component {
                                     <Route path="/series/list" component={SeriesSetList}></Route>
                                     <Route path="/artist" exact component={Artist}></Route>
                                     <Route path="/artist/detail/:id" component={ArtistDetail}></Route>
-                         
+                                    
+                                    <Route path="/cart" component={Cart}></Route>
                             </Layout>
 
                         }></Route>

@@ -1,5 +1,6 @@
  .main_content{
- 
+    background:#fff;
+    overflow:hidden;
 }
 
 .vedio_text_con{
@@ -91,4 +92,7 @@
  
     margin-top:20px;
 }
- 
+
+
+
+

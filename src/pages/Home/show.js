@@ -9,6 +9,8 @@ import VedioBanner from "../../components/Home/VedioBanner";
 import Good from "../../components/Home/Good";
 import HotSelling from "../../components/Home/HotSelling";
 import KindGood from "../../components/Home/KindGood";
+import SmallCart from "../../components/SmallCart";
+
 import popularImg from "../../assets/popular_img.png";
 class Show extends React.Component {
     constructor (props) {
@@ -20,7 +22,8 @@ class Show extends React.Component {
                 {id: 1, title:"现代"},
                 {id: 2, title:"奶油"}
             ],
-            kindIndex: 0
+            kindIndex: 0,
+            showCartFlag: true
         }
     }
     kindNavSelectFn = (index)=> {
@@ -92,10 +95,14 @@ class Show extends React.Component {
                         </div>
                     </Col>
                     <Col span={3}></Col>
-                </Row>    
+                </Row>
+
+                /* 小购物车 */
+                {this.state.showCartFlag && <SmallCart></SmallCart>}
             </div>
         )
     }
 }
+
 
 export default Show;

@@ -4,6 +4,7 @@ import DetailInfo from "../../components/ProductRoomDetail/DetailInfo";
 
 import Design from "../../components/ProductRoomDetail/Design";
 import SameKind from "../../components/ProductRoomDetail/SameKind";
+import GoodDetail from "../../components/ProductRoomDetail/GoodDetail";
 import "./index.css";
 class Show extends React.Component {
     constructor (props) {
@@ -51,13 +52,14 @@ class Show extends React.Component {
                             </ul>
 
                             {this.state.designCurrentIndex == 0 && <Design></Design>}
-
                             {this.state.designCurrentIndex == 1 && <SameKind></SameKind>}
                         </div>
                     </Col>
                     
                     <Col span={3}></Col>
                 </Row>
+                
+                <GoodDetail></GoodDetail>
             </div>
         )
     }
