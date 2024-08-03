@@ -1,14 +1,12 @@
 import React, {useState} from "react";
 import {Link, useHistory} from "react-router-dom";
-import {useDispatch} from "react-redux";
-
 import "./index.css";
+
 import {Row, Col, Badge} from "antd";
 import logo from "../../assets/logo.png";
 import topcart from "../../assets/shopping_cart.png";
-function Header () {
 
-    const dispatch = useDispatch();
+function Header () {
     const navList = [
         {id: 0, title: "首页", path: "/"},
         {id: 1, title: "新品鉴", path: "/recommendegood"},
@@ -28,16 +26,10 @@ function Header () {
         const url = navList[index].path;
         history.push(url)
     } 
-    function showSmallCartFn () {
-        dispatch({type:"show_small_cart", payload: true})
-    }
     return (
         <div className="header_con">
             <Row className="header_top">
                 <Col span={3}></Col>
-        
-        
-        
                 <Col span={18}>
                     <span className="title">更懂年轻人的国潮家居品牌</span>
                     <Link to="/login" className="login_btn">登录</Link>
@@ -59,13 +51,10 @@ function Header () {
                        })}
                     </ul>
              
-
-                    <Badge count={5} className="cart_logo" offset={[-10, 0]} onClick={showSmallCartFn}>
-                        
-                        <img src={topcart}/>    
-                        {/* <Link to="/cart">
+                    <Badge count={5} className="cart_logo" offset={[-10, 0]}>
+                        <Link to="/cart">
                             <img src={topcart}/>      
-                        </Link> */}
+                        </Link>
                     </Badge>
                     <div className="search_con">
                         <div className="btn"></div>

@@ -13,17 +13,22 @@ import SmallCart from "../../components/SmallCart";
 
 import popularImg from "../../assets/popular_img.png";
 class Show extends React.Component {
+   
     constructor (props) {
+        console.log('home props')
+        console.log(props)
+        console.log("home props")
         super(props)
-
+       
         this.state = {
             kindNav: [
                 {id: 0, title:"极简"},
                 {id: 1, title:"现代"},
+
                 {id: 2, title:"奶油"}
             ],
             kindIndex: 0,
-            showCartFlag: true
+            showCartFlag: false // 全局
         }
     }
     kindNavSelectFn = (index)=> {
@@ -35,13 +40,13 @@ class Show extends React.Component {
         return (            
             <div className="main_content">
                 <BannerCon></BannerCon>
+
+
                 <HotSell></HotSell>
-
-
-
 
                 <div className="vedio_text_con">
                     <div className="small_title">Quality of life</div>
+
                     <div className="big_title">LUOCKOO HOME</div>
                     <div className="txt">品质生活，从细节开始<br/> 让每一处空间都有故事，每一款产品都有灵魂<br/> 打造温馨舒适的家，让生活更美好</div>
                 </div>
@@ -98,11 +103,12 @@ class Show extends React.Component {
                 </Row>
 
                 /* 小购物车 */
-                {this.state.showCartFlag && <SmallCart></SmallCart>}
+                {this.props.state.commonState.showCartFlag && <SmallCart hideSmallCart={this.props.hideSmallCartFn}></SmallCart>}
             </div>
         )
     }
 }
+
 
 
 export default Show;

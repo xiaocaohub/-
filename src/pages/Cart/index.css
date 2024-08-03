@@ -4,3 +4,28 @@
     border:1px solid brown;
 }
 
+.cart_page_con .search_con{
+    
+    
+
+    overflow:hidden;
+    background:#fff;
+    margin:20px 0;
+    padding:20px;
+}
+
+.cart_page_con .search_con .title{
+    border:1px solid brown;
+    height:40px;
+    line-height:40px;
+    float:left;
+}
+
+
+
+
+
+
+
+
+

@@ -1,9 +1,14 @@
-let defaultState = {
-    count: 1
-}
+import { combineReducers } from "redux";
+import commonState from "./common.js";
+import homeState from "./home.js";
 
-function Reducer (state=defaultState, action={}) {
-      return state;
-}
+export default combineReducers({
+    commonState,
+    homeState
+})
 
-export default Reducer;
+
+
+
+
+

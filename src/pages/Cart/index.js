@@ -1,12 +1,21 @@
-import React from "react";
-import "./index.css";
-class Cart extends React.Component {
-    render () {
+import {connect} from "react-redux";
+import Show from "./show";
+let mapStateToProps = state=> {
+    return {
 
-        return (<div className="cart_page_con">cart page </div>)
     }
 }
 
 
+let mapDispatchToProps = dispatch=> {
+
+    return {
+
+    }
+}
+
+
+
+let Cart = connect(mapStateToProps, mapDispatchToProps)(Show);
 
 export default Cart;

@@ -7,7 +7,11 @@ import "./index.css";
 import imgGood from "../../assets/recomend_good1.png";
 
 class CartSmall extends React.Component {
-
+    
+    constructor (props) {
+        super(props)
+        console.log("CartSmall props", props)
+    }
     render () {
         return (
             <div className="show_small_cart">
@@ -16,7 +20,7 @@ class CartSmall extends React.Component {
                     <div className="top_title">
                         <span className="title">购物车商品</span>
 
-                        <span className="close">继续购物</span>
+                        <span className="close" onClick={this.props.hideSmallCart}>继续购物</span>
                     </div>    
                     <div className="good_list_con">
                 
