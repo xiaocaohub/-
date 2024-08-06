@@ -25,9 +25,7 @@ class Login extends React.Component {
                 <div className="login_con">
                     <img src={loginBack} className="login_back"/>
                     <div className="form_con">
-                        {this.state.loginFlag?<LoginPage loginFlag={this.state.loginFlag} forgetFn={this.forgetFn}/>:<RegisterPage /> }
-                        
-                          
+                        {this.state.loginFlag?<LoginPage loginFlag={this.state.loginFlag} forgetFn={this.forgetFn}/>:<RegisterPage /> }           
                     </div>
                     <Link to="/" className="home_btn">返回首页</Link>
                 </div>
@@ -35,6 +33,8 @@ class Login extends React.Component {
         )
     }
 }
+
+
 
 
 

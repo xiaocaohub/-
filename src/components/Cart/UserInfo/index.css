@@ -1,0 +1,29 @@
+.cart_page_con .user_info_con{
+    background:#fff;
+    margin:20px 0;
+    padding:20px;
+}
+.cart_page_con .user_info_con .title{
+    overflow:hidden;
+    margin-bottom:32px;
+}
+
+.cart_page_con .user_info_con .title .tit{
+    height:20px;
+    line-height:20px;
+    float:left;
+    font-size:15px;
+}
+.cart_page_con .user_info_con .title .txt{
+    height:20px;
+    line-height:20px;
+    font-size:12px;
+    color:#E61D40;
+    font-size:12px;
+    float:left;
+    margin-left:10px;
+}
+
+.cart_page_con .user_info_con .form_con .submit_btn{
+    background:#333;
+}
