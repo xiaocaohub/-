@@ -5,77 +5,91 @@ import { Pagination,   ConfigProvider } from 'antd';
 import zh_CN from 'antd/es/locale/zh_CN';
 import "./index.css";
 import Header from "../../components/Header";
+
 import Good from "../../components/ProductRoom/Good";
 import request from "../../api/request";
-
 class Show extends React.Component {
     constructor (props) {
-          super(props)
+        super(props)
+        this.state = {
+            goodList: [],
+
+            total: 0,
+            currentPage: 1,
+            pageSize: 40
+        }
+    }
+    componentDidMount () {
+        this.getGoodListFn()
     }
     pageOnChange = (pageNumber)=> {
-
         console.log(pageNumber)
     }
     getGoodListFn = ()=> {
         let formData = new FormData();
         let option = {"brandId":"","minPrice":"","maxPrice":""};
-        
-        formData.append("api", "app.prodcut.listProduct");
+        formData.append("api", "app.product.listProduct");
         formData.append("storeId", 1);
         formData.append("storeType", 6);
-        formData.append("page", 1);
-        formData.append("pageSize", 2);
+        formData.append("page", this.state.currentPage);
+        formData.append("pageSize", this.state.pageSize);
         formData.append("styleIds", "")
         formData.append("sortCriteria", "");
 
+
         formData.append("queryCriteria",  JSON.stringify(option));
-        formData.append("sort", "")
+        formData.append("sort", "");
         request({
             url: "/api/gw",
+         
             method: "POST",
-            data: formData
+            data: formData        
+        
+        }).then((res)=> {
+            let resData =  res.data.data;
+            let goodList = resData.goodsList;
+            let total = resData.total;
+            this.setState({
+                goodList: goodList,
+                total: total
+            })
         })
     }
-
-
     render () {
         return (
-            <Row className="product_room_con">
-                
+            <Row className="product_room_con">           
                 <Col span={3}><button onClick={this.getGoodListFn}>click me</button></Col>
                 <Col span={18}>
                     <div className="nav_con"></div>  
                     <ul className="product_list">
-                        <Good></Good>
-                        <Good></Good>
-                        <Good></Good>
-                        <Good></Good>
-                        <Good></Good>       
-                        <Good></Good>
-                        <Good></Good>
-                        <Good></Good>
+                        {this.state.goodList.map((item)=> {
+                            return (<Good key={item.id} itemData={item}></Good>)
+                        })}
                     </ul>
-
-
-
 
                     <div className="page_con">    
                         <ConfigProvider locale={zh_CN}>
                             <Pagination
                                 className="page"
-                                style={{ textAlign: "right" }}
-                                total={1000}
+                                style={{ textAlign: "center" }}
+                                total={this.state.total}
                                 defaultCurrent={1}
-                                showSizeChanger
+                                showSizeChanger = {false}
                                 showQuickJumper
-                                showTotal={totalCount => `共 1000 条`}
+                                pageSize={this.state.pageSize}
+                                current={this.state.currentPage}
+                                // showTotal={totalCount => "总条数" + this.state.total + "条"}
                                 onChange={(params, state) => {
-                                    // pageParams.pageIndex = params;
-                                    // pageParams.pageSize = 10;
-                                    // pageParams.id = props.policyid;
-                                    // setPage(params);
-                                    // setSize(10)
-                                    // getDataByPage(pageParams)
+                                    this.setState({
+                                        currentPage: params
+                                    }, function () {
+                                        this.getGoodListFn()
+                                    })
+                                }}
+                                onShowSizeChange = {(current, size)=>{
+                                    this.setState({
+                                        pageSize: size
+                                    })
                                 }}
                                 />
                         </ConfigProvider>

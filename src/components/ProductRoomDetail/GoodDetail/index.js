@@ -31,7 +31,7 @@ class GoodDetail extends React.Component {
 
                         <div className="img_list">
                             {this.state.imgArr.map((item, index)=> {
-                                return <img src={item} alt="" className="img"/>
+                                return <img src={item} alt="" className="img" key={index}/>
                             })}                            
                         </div>
 

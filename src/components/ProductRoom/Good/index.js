@@ -1,29 +1,48 @@
 import React from "react";
 import {Link} from "react-router-dom";
-import GoodImg from "../../../assets/recomend_good1.png";
+import {Icon} from "antd";
+
+import { HeartOutlined   } from '@ant-design/icons';
 import "./index.css";
+import goodImg from "../../../assets/recomend_good1.png";
 
 class Good extends React.Component {
+
+    constructor (props) {
+        super(props)
+        // console.log("props")
+
+        // console.log(props)
+
+        // console.log("props")
+    }
     render () {
         return (
-            <li>
-                <Link to="/productroom/detail/1">
-                    <img  src={GoodImg} className="good_img"/>
+            <div className="series_good">
+
+                <Link to={"/productroom/detail/" + this.props.itemData.id} className="good_img">
+                    <img src={this.props.itemData.coverImg} alt="" className="good_img"/>
                 </Link>
-
-
-
-
-
-
                 <div className="text_con">
-                  <div className="txt">现代极简头层牛皮沙发不含抱枕现代极简头层牛皮沙发不含抱枕现代极简头层牛皮沙发不含抱枕</div>
-                  <div className="price"><span className="unit">￥</span>99999</div>
+                    <div className="txt">{this.props.itemData.product_title}</div>
+                    
+                    <div className="price"><span className="unit">￥</span>{this.props.itemData.price}</div>
                 </div>
-            </li>
+                <ul className="btn_group">
+                    <li>
+                       
+                       <HeartOutlined className="collect_icon"/>加入收藏夹
+                    </li>
+                    <li>进入系列集</li>
+                </ul>
+            </div>
         )
     }
 }
+
+
+
+
 
 
 export default Good;
