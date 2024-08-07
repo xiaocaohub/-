@@ -1,9 +1,9 @@
 import React from "react";
-import "./index.css";
+import {Link} from "react-router-dom";
 import {Row, Col, Input} from "antd";
 
+import "./index.css";
 import GoodTable from "../../components/Cart/GoodTable";
-
 import UserInfo from "../../components/Cart/UserInfo";
 class Show extends React.Component {
     constructor (props) {
@@ -39,7 +39,7 @@ class Show extends React.Component {
                        
                         <div className="item delete_all">删除选中商品</div>
                         <div className="item total_count">已选<span className="count"> 5 </span>件商品</div>
-                        <div className="pay_btn">去结算</div>
+                        <Link to="/checkcart" className="pay_btn">去结算</Link>
                         <div className="item total_money">￥14670</div>
                         
                         <div className="item total_money_tit">应付总额 </div>

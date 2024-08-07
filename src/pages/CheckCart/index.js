@@ -1,25 +1,19 @@
-import React from "react";
-import "./index.css";
-class CheckCart extends React.Component {
+import {connect} from "react-redux";
+import Show from "./show";
+let mapStateToProps = state=> {
+    return {
 
-    constructor (props) {
-        super(props)
-    }
-    render () {
-        return (
-
-            <div className="check_cart_page">
-                CheckCart  page
-            </div>
-        )
     }
 }
 
 
+let mapDispatchToProps = dispatch=> {
 
+    return {
 
+    }
+}
 
-
-
+let CheckCart = connect(mapStateToProps, mapDispatchToProps)(Show);
 
 export default CheckCart;

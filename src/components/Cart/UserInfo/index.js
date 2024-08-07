@@ -24,6 +24,13 @@ class UserInfo extends React.Component {
                 {this.state.changeFlag && <UserForm changeInfo={this.changeInfoFn}></UserForm>}
 
                 {!this.state.changeFlag && <UserInfoText changeInfo={this.changeInfoFn}></UserInfoText>}
+
+                <div className="message_title">
+                    <div className="title">物流提示</div>
+
+                    <div className="txt">1.本产品不包含物流费用。</div>
+                    <div className="txt">2.发货前物流公司会与你沟通物流相关费用。</div>
+                </div>
             </div>
         )
     }

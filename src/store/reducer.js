@@ -2,13 +2,19 @@ import { combineReducers } from "redux";
 import commonState from "./common.js";
 import homeState from "./home.js";
 
-import productRoomReducer from "./ProductRoom.js";
+import productRoomState from "./ProductRoom.js";
+
+import productRoomDetailState from "./ProductRoomDetail.js";
 export default combineReducers({
     commonState,
 
     homeState,
-    
-    productRoomReducer
+    productRoomState,
+    productRoomDetailState
+
+
+
+
 })
 
 

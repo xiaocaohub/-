@@ -58,7 +58,7 @@ class Show extends React.Component {
     render () {
         return (
             <Row className="product_room_con">           
-                <Col span={3}><button onClick={this.getGoodListFn}>click me</button></Col>
+                <Col span={3}></Col>
                 <Col span={18}>
                     <div className="nav_con"></div>  
                     <ul className="product_list">

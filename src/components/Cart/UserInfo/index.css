@@ -27,3 +27,18 @@
 .cart_page_con .user_info_con .form_con .submit_btn{
     background:#333;
 }
+
+.cart_page_con  .user_info_con .message_title{
+   margin-top:40px;
+}
+.cart_page_con  .user_info_con .message_title .title{
+   font-size:17px;
+   margin-bottom:20px;
+   font-size:14px;
+}
+
+
+.cart_page_con  .user_info_con .message_title .txt{
+    margin-bottom:5px;
+    color:#666;
+}

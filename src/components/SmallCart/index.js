@@ -204,7 +204,7 @@ class CartSmall extends React.Component {
                     <div className="total_con">
                         <div className="select_all">全选</div>
                         <span className="delete_all">删除选中商品</span>
-                        <Link to="/" className="go_cart_btn">下单采购</Link>
+                        <Link to="/cart" className="go_cart_btn">下单采购</Link>
 
                         <div className="down_btn">导出清单</div>
 

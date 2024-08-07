@@ -8,6 +8,9 @@ import "./index.css";
 class DetailInfo extends React.Component {
     constructor (props) {
         super(props)
+        console.log("show detail props")
+        console.log(props)
+        console.log("show detail props")
         this.state = {
             currentIndex: 1,
             bigImg: require("../../../assets/vedio_list1.png"),
@@ -100,9 +103,12 @@ class DetailInfo extends React.Component {
 
                         <div className="title">
                             <span className="tit">新品</span>
+
                             <span className="tit">现货</span>
-                            <div className="tit_txt">意式极简设计师款直排高脚头层牛皮黑武士沙发</div>
-                            <div className="intro">黑武士真皮沙发意式极简大户型客厅轻奢设计师直排别墅区高脚沙发黑武士真皮沙发意式极简大户型客厅轻奢设计师直排别墅区高脚沙发</div>
+                          
+                            <div className="tit_txt">{this.props.goodDetail.product.productName}</div>
+                            {/* <div className="tit_txt">武士</div> */}
+                            <div className="intro">{this.props.goodDetail.product.subTitle}</div>
                         </div>
 
                         <div className="price"><span className="unit">￥</span>10449</div>

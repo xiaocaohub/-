@@ -4,8 +4,8 @@ const { Option } = Select;
 
 const formItemLayout = {
     labelCol: {
-      xs: { span: 2 },
-      sm: { span: 2 },
+      xs: { span: 1 },
+      sm: { span: 1 },
     },
     wrapperCol: {
       xs: { span: 21 },
@@ -13,6 +13,7 @@ const formItemLayout = {
       sm: { span: 21 },
     }
   };
+
   const tailFormItemLayout = {
     wrapperCol: {
       xs: {
@@ -27,7 +28,6 @@ const formItemLayout = {
   }
 const {TextArea} = Input;
 class UserForm extends React.Component {
-
     constructor (props) {
         super(props)
         console.log("userForm props", props)
