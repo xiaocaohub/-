@@ -51,7 +51,9 @@ class Show extends React.Component {
             _this.props.getGoodInfoFn(id)
         })
     } 
+    // 设置商品详情
     setGoodInfo = ()=> {
+
         let _this = this;
         this.setState({
             goodInfo: _this.props.productRoomDetailState.goodInfo
@@ -68,8 +70,8 @@ class Show extends React.Component {
                 <Row>
                     <Col span={3}></Col>
                     <Col span={18}>
-                            {this.state.goodInfo&&<DetailInfo goodDetail={this.state.goodInfo}></DetailInfo>}
-                            {this.state.goodInfoFlag&&<ShowLoading></ShowLoading>}
+                        {this.state.goodInfo&&<DetailInfo goodDetail={this.state.goodInfo}></DetailInfo>}
+                        {this.state.goodInfoFlag&&<ShowLoading></ShowLoading>}
                         <div className="design_same_con">
                             <ul className="nav_list">          
                                 {this.state.designSameNav.map((item, index)=> {
