@@ -17,6 +17,9 @@ import ArtistDetail from "./pages/ArtistDetail";
 import Cart from "./pages/Cart";
 
 import CheckCart from "./pages/CheckCart";
+
+import Pay from "./pages/Pay";
+
 class IndexRouter extends React.Component {
     render () {
         return (
@@ -32,12 +35,18 @@ class IndexRouter extends React.Component {
                                     <Route path="/productroom/detail/:id" component={ ProductRoomDetail }></Route>
                                     <Route path="/series" exact component={SeriesSet}></Route>
                                     <Route path="/series/list" component={SeriesSetList}></Route>
+                                    
+                                    
                                     <Route path="/artist" exact component={Artist}></Route>
                                     <Route path="/artist/detail/:id" component={ArtistDetail}></Route>
                                     <Route path="/cart" component={Cart}></Route>
-
-
                                     <Route path="/checkcart" component={CheckCart}></Route>
+
+
+
+
+
+                                    <Route path="/pay" component={Pay}></Route>
                             </Layout>
 
                         }></Route>

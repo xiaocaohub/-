@@ -140,23 +140,18 @@ class DetailInfo extends React.Component {
         this.setState({
             currentSizeIndex: index,
             selectGoodIds: selectGoodIds
-
         }, function () {
+            
             this.selectGoodFn()
         })
     }
-
-
-
     selectGoodFn () {
         let allGoodArr = this.state.allGoodArr;
         let selectGoodIds =  this.state.selectGoodIds;
         let length = allGoodArr.length;
-
         let currentGood = "";
 
         for (let i=0; i<length; i++) {
-
             let attributes = allGoodArr[i].attributes;
             let flag = attributes[0].attributeValId == selectGoodIds[0] && attributes[1].attributeValId == selectGoodIds[1];           
             if (flag) {
@@ -211,8 +206,6 @@ class DetailInfo extends React.Component {
                         <div className="specifications_con">
                             <div className="title_name">颜色</div>
                             <ul className="specifications_list">
-
-
                                 {this.state.colorArr.length>0 && this.state.colorArr.map((item, index)=> {
                                     return (<li className={this.state.currentColorIndex==index?"on":""} key={item.id} onClick={()=>{this.selectColorFn(index)}}>{item.attributeValue}</li>)
                                 })}
@@ -224,7 +217,6 @@ class DetailInfo extends React.Component {
                             <div className="title_name">规格</div>
                             <ul className="specifications_list">
                                 {this.state.sizeArr.map((item, index)=>{
-                              
                                     return (<li className={this.state.currentSizeIndex==index?"on":""} key={item.id} onClick={()=>{this.selectSizeFn(index)}}>{item.attributeValue}</li>)
                                 })}                               
                             </ul>
@@ -232,7 +224,6 @@ class DetailInfo extends React.Component {
 
                         <div className="specifications_con">
                             <div className="title_name">编码</div>
-                                
                             <div className="code_con">{this.state.currentGood?this.state.currentGood.productCode:this.props.goodDetail.skuBeanList[0].productCode}</div>
                         </div>
 

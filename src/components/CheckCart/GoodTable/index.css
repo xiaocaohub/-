@@ -5,7 +5,7 @@
 
 .check_cart_page .good_table .header_top{
     overflow:hidden;
-    /* border:1px solid brown; */
+ 
     background:#EFEFEF;
 }
 
@@ -29,8 +29,7 @@
 .check_cart_page .good_table .header_top .good_code{
     width:25%;
 }
-.check_cart_page .good_table .header_top  .vol{
-      
+.check_cart_page .good_table .header_top  .vol{      
     width:8%;
 }
 .check_cart_page .good_table .header_top .price{
@@ -67,7 +66,6 @@
     width:1%;    
 }
 .check_cart_page .good_table .good_list  .info{
-
     width:34%;
 }
 .check_cart_page .good_table .good_list  .info .good_img{
@@ -134,33 +132,24 @@
 
  
 .check_cart_page .good_table .good_list .sub_total{
-  
-  
     width:13%;
     line-height:80px;
+
+
     text-align:center;
     color:#E61D40;
     overflow:hidden;
 }
 
-.check_cart_page .remark_con{
- 
- 
-}
-
-
 .check_cart_page .remark_con .title{
    width:9.5%;
    font-size:14px;
-
    float:left;
    margin-left:1%;
 }
 
 .check_cart_page .remark_con .text_area{
     width:87.5%;
-   
-    
     margin-bottom:20px;
     float:right;
     margin-right:1%;

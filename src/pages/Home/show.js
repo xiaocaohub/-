@@ -101,14 +101,12 @@ class Show extends React.Component {
                     </Col>
                     <Col span={3}></Col>
                 </Row>
-
-                /* 小购物车 */
+            
                 {this.props.state.commonState.showCartFlag && <SmallCart hideSmallCart={this.props.hideSmallCartFn}></SmallCart>}
             </div>
         )
     }
 }
-
 
 
 export default Show;
