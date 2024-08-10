@@ -9,8 +9,8 @@ let instance = axios.create({
 instance.interceptors.request.use(
 
     config => {
-        console.log("config")
-        console.log(config)
+        // console.log("config")
+        // console.log(config)
         config.headers.Authorization = "12345";
         config.headers.token = "123";
 

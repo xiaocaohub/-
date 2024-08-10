@@ -5,48 +5,62 @@ import "./index.css";
 import goodImg from "../../../assets/recomend_good1.png";
 class GoodDetail extends React.Component {
     constructor (props) {
-        
         super(props)
+        console.log("GoodDetail----")
+        console.log(props)
+        console.log("GoodDetail")
         this.state = {
-
-            imgArr: [
-                goodImg, goodImg, goodImg, goodImg, goodImg, goodImg
-            ]
+            realPhotos: [],
+            // 属性
+            attrArr: []
         }
+    }
+    componentDidMount () {
+        this.init()
+    }
+    init () {
+        let  product = this.props.goodDetail.product;
+        let  parameters = product.parameters;
+        parameters = eval(parameters);
+        let realPhotos = product.realPhotos;
+        let content = eval(product.content)[0].content;
+        console.log("content", content)
+        this.setState({
+            content: content ,
+            realPhotos: realPhotos,
+            attrArr: parameters
+        })
     }
     render () {
         return (
             <Row className="good_edit_detail">
+          
+          
+             
                 <Col span={3}></Col>
-               
                 <Col span={18} className="content">
-                    <div className="left"></div>
+                    <div className="left">
+                        {/* {this.state.content} */}
+                    </div>
                     <div className="right">
-
                         <div className="title_top">
-
                             <span className="tit">实物拍摄</span>
                             <span className="show_btn">收起</span>
                         </div>
 
                         <div className="img_list">
-                            {this.state.imgArr.map((item, index)=> {
+                            {this.state.realPhotos.map((item, index)=> {
                                 return <img src={item} alt="" className="img" key={index}/>
                             })}                            
                         </div>
 
-
-
                         <div className="text_con">
+
                             <div className="tit">商品信息</div>
                             <ul className="txt_list">
-                                <li><span className="txt">分类:</span>  沙发</li>
-
-                                <li><span className="txt">风格:</span> 沙发 </li>
-                                <li><span className="txt">型号:</span>  沙发 </li>
-                                <li><span className="txt">软硬度:</span>  沙发 </li>
-                                <li><span className="txt">产品规格:</span>  沙发 </li>
-                                <li><span className="txt">三人位:</span>  沙发 </li>
+                                {this.state.attrArr.map((item, index)=>{
+                                    return (<li key={index}><span className="title">{item.label}:</span>  <span className="txt">{item.value}</span> </li>)
+                                })}
                             </ul>
                         </div>
                     </div>

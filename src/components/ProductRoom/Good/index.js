@@ -7,14 +7,9 @@ import "./index.css";
 import goodImg from "../../../assets/recomend_good1.png";
 
 class Good extends React.Component {
-
     constructor (props) {
         super(props)
-        // console.log("props")
-
-        // console.log(props)
-
-        // console.log("props")
+ 
     }
     render () {
         return (

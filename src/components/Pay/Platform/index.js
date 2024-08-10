@@ -1,11 +1,5 @@
 import React from "react";
 import "./index.css";
-import weiXin from "../../../assets/icon/pay_wechat.png";
-
-import alipay from "../../../assets/icon/pay_alipay_pay.png";
-import unionpay from "../../../assets/icon/pay_unionpay.png";
-import bankCard from "../../../assets/icon/pay_bank_card.png";
-
 import phoneImg from "../../../assets/icon/wechat_example.png";
 
 import code from "../../../assets/footer_code1.png";
@@ -17,7 +11,6 @@ class Platform extends React.Component {
             balanceFlag: false,
             payList: [
                 {
-
                     id: 0,
                     txt: "微信扫码付",
                     imgSrc: require("../../../assets/icon/pay_wechat.png"),
@@ -33,12 +26,6 @@ class Platform extends React.Component {
                     id: 2,
                     txt: "网银支付",
                     imgSrc: require("../../../assets/icon/pay_unionpay.png"),
-                    selectFlag: false
-                },
-                {
-                    id: 3,
-                    txt: "线下转账",
-                    imgSrc: require("../../../assets/icon/pay_bank_card.png"),    
                     selectFlag: false
                 }
             ]
@@ -86,8 +73,7 @@ class Platform extends React.Component {
                {/*  <div className="pay_btn">立即支付</div> */}
                 
                 <div className="code_con">
-                    <div className="title">微信支付</div>
-                   
+                    <div className="title">微信支付</div>                   
                     <div className="tit">微信支付二维码将在<span>01小时43分10</span>秒后失效, 请尽快完成支付, 转发无效! 如您在操作过程中出现问题, 请刷新页面重新完成支付, 谢谢!</div>
                     <div className="code_img_con">
                         <div className="left">

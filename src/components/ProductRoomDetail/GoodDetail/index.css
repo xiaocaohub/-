@@ -47,7 +47,7 @@
 }
 .productroom_detail_page .good_edit_detail .content > .right .img_list .img{
     width:47%;
-    height:auto;
+    height:70px;
     margin-bottom:5%;
     cursor:pointer;
 }
@@ -71,12 +71,12 @@
     padding:20px;
 }
 .productroom_detail_page .good_edit_detail .content > .right .text_con .txt_list >li{
-    height:28px;
-    line-height: 28px;
+ 
     font-size:14px;
     overflow:hidden;
+ 
 }
-.productroom_detail_page .good_edit_detail .content > .right .text_con .txt_list >li .txt{
+.productroom_detail_page .good_edit_detail .content > .right .text_con .txt_list >li .title{
     color:#999;
     margin-left:5px;
     display:block;
@@ -88,7 +88,12 @@
     padding-right:9px;
 }
 
-
+.productroom_detail_page .good_edit_detail .content > .right .text_con .txt_list >li  .txt{
+    width:67%;
+    line-height:28px;
+    float:right;
+ 
+}
 
 
 

@@ -19,11 +19,12 @@ class Show extends React.Component {
             pageSize: 40
         }
     }
+
     componentDidMount () {
         this.getGoodListFn()
     }
     pageOnChange = (pageNumber)=> {
-        console.log(pageNumber)
+        // console.log(pageNumber)
     }
     getGoodListFn = ()=> {
         let formData = new FormData();
@@ -34,14 +35,14 @@ class Show extends React.Component {
         formData.append("page", this.state.currentPage);
         formData.append("pageSize", this.state.pageSize);
         formData.append("styleIds", "")
+
+
         formData.append("sortCriteria", "");
-
-
         formData.append("queryCriteria",  JSON.stringify(option));
         formData.append("sort", "");
         request({
+
             url: "/api/gw",
-         
             method: "POST",
             data: formData        
         

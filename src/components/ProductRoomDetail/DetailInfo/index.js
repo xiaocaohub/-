@@ -61,10 +61,13 @@ class DetailInfo extends React.Component {
             // 选中的商品
             currentGood: ""
         }
+   
     }
     componentDidMount () {
-        this.initDataFn()
+       this.initDataFn()
+     
     }
+ 
     initDataFn = ()=> {
         let attrList = this.props.goodDetail.attrList;
         let colorArr = attrList[0].attr;
@@ -75,20 +78,24 @@ class DetailInfo extends React.Component {
         selectGoodIds[0] = colorArr[0].id;
         selectGoodIds[1] = sizeArr[0].id;
         let goodFirst = this.props.goodDetail.skuBeanList[0];
+        let navArr = goodFirst.imgArr;
         this.setState({
             colorArr: colorArr,
             sizeArr: sizeArr,
             allGoodArr: allGoodArr,
             selectGoodIds: selectGoodIds,
-            currentGood: goodFirst
+            currentGood: goodFirst,
+            navArr: navArr
         }, function () {
-            console.log("colorArr", this.state.colorArr)
-            console.log("sizeArr", this.state.sizeArr)
-            console.log("allGoodArr", this.state.allGoodArr)
-            console.log("selectGoodIds", this.state.selectGoodIds)
+            // console.log("colorArr", this.state.colorArr)
+            // console.log("sizeArr", this.state.sizeArr)
+            // console.log("allGoodArr", this.state.allGoodArr)
+            // console.log("selectGoodIds", this.state.selectGoodIds)
+            // console.log("goodFirst", goodFirst)
         })  
     }
     selectNavFn = (index)=> {
+        // console.log(index)
         let currentIndex = index;
         let bigImg = this.state.navArr[currentIndex].srcImg;
         this.setState({
@@ -117,11 +124,10 @@ class DetailInfo extends React.Component {
     }
 
     selectColorFn = (index)=> {
+    
         let color = this.state.colorArr[index];
-     
         let selectGoodIds = this.state.selectGoodIds;
         selectGoodIds[0] = color.id;
-     
         this.setState({
             currentColorIndex: index,
             selectGoodIds: selectGoodIds
@@ -132,28 +138,29 @@ class DetailInfo extends React.Component {
     selectSizeFn = (index)=> {
         let size = this.state.sizeArr[index];
         let selectGoodIds = this.state.selectGoodIds;
+        
+        
         selectGoodIds[1] = size.id;
-
-
-
-
         this.setState({
             currentSizeIndex: index,
             selectGoodIds: selectGoodIds
+
         }, function () {
-            
             this.selectGoodFn()
         })
     }
     selectGoodFn () {
         let allGoodArr = this.state.allGoodArr;
         let selectGoodIds =  this.state.selectGoodIds;
+
         let length = allGoodArr.length;
         let currentGood = "";
-
         for (let i=0; i<length; i++) {
+
             let attributes = allGoodArr[i].attributes;
             let flag = attributes[0].attributeValId == selectGoodIds[0] && attributes[1].attributeValId == selectGoodIds[1];           
+        
+            
             if (flag) {
                 allGoodArr[i].imgArr = allGoodArr[i].imgArr;
                 currentGood = allGoodArr[i];
@@ -169,16 +176,18 @@ class DetailInfo extends React.Component {
             <div className="detail_info_con">
                 <div className="detail_info">             
                     <div className="left">
+                        {/* <img src={this.state.currentGood.imgurl} alt="" className="big_img"/> */}
                         <img src={this.state.currentGood.imgurl} alt="" className="big_img"/>
                         <ul className="img_nav">
+                                
                             {this.state.currentGood?
                                 this.state.currentGood.imgArr.map((item, index)=> {
-                                    return (<li className={this.state.currentIndex==index?"on":""} onClick={()=>{this.selectNavFn(index)}} key={index}>
+                                    return (<li className={this.state.currentIndex==index?"on":""} onClick={()=>{this.selectNavFn(index, item)}} key={index}>
                                         <img src={item} alt=""  />
                                     </li>)
                                 }):
                                 this.props.goodDetail.skuBeanList[0].imgArr.map((item, index)=> {
-                                    return (<li className={this.state.currentIndex==index?"on":""} onClick={()=>{this.selectNavFn(index)}} key={index}>
+                                    return (<li className={this.state.currentIndex==index?"on":""} onClick={()=>{this.selectNavFn(index, item)}} key={index}>
                                         <img src={item} alt=""  />
                                     </li>)
                                 })

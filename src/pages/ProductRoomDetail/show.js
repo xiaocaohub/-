@@ -8,12 +8,14 @@ import GoodDetail from "../../components/ProductRoomDetail/GoodDetail";
 
 import ShowLoading from "../../components/Loading";
 import "./index.css";
+import request from "../../api/request";
 class Show extends React.Component {
     constructor (props) {
         super(props)
-        console.log("props goodDetail")
-        console.log(props)
-        console.log("props goodDetail")
+        // console.log("props goodDetail")
+      
+        // console.log(props)
+        // console.log("props goodDetail")
         this.state = {
             designCurrentIndex: 0,
             designSameNav: [
@@ -28,35 +30,76 @@ class Show extends React.Component {
             ],
             goodId: 0,
             goodInfo: "",
-            
-
             goodInfoFlag: false
-        }
-        
+        }    
     }
-
-
-
     componentDidMount () {
         this.setGoodId()
-        this.props.getGoodInfoFn()
-        this.setGoodInfo()
+       
+       
+        //this.props.getGoodInfoFn() 
+        //this.setGoodInfo()
     }
     setGoodId = ()=> {
-        let id = this.props.match.params.id;   
+
+        let id = this.props.match.params.id;
         let _this = this;
         this.setState({
             goodId: id
         }, function () {
-            _this.props.getGoodInfoFn(id)
+            // _this.props.getGoodInfoFn(id)
+            this.getGoodInfoFn(id)
         })
     } 
     // 设置商品详情
     setGoodInfo = ()=> {
-
+      
         let _this = this;
+        let goodInfo = _this.props.productRoomDetailState.goodInfo;
+        // let attrList = goodInfo.attrList;
+        // let colorArr = attrList[0].attr;
+        // let sizeArr = attrList[1].attr;
+
+        // let allGoodArr = goodInfo.skuBeanList;
+        // let selectGoodIds = [];
+        // selectGoodIds[0] = colorArr[0].id;
+        // selectGoodIds[1] = sizeArr[0].id;
+        // let goodFirst = goodInfo.skuBeanList[0];
+        // this.setState({
+        //     colorArr: colorArr,
+        //     sizeArr: sizeArr,
+        //     allGoodArr: allGoodArr,
+        //     selectGoodIds: selectGoodIds,
+        //     currentGood: goodFirst
+        // }, function () {
+        //     console.log("colorArr", this.state.colorArr)
+        //     console.log("sizeArr", this.state.sizeArr)
+        //     console.log("allGoodArr", this.state.allGoodArr)
+        //     console.log("selectGoodIds", this.state.selectGoodIds)
+        // })  
+        
+     
         this.setState({
             goodInfo: _this.props.productRoomDetailState.goodInfo
+        })
+    }
+    getGoodInfoFn = (goodId)=> {
+        let _this = this;    
+        let formData = new FormData();
+        let option = {"brandId":"","minPrice":"","maxPrice":""};
+        formData.append("api", "app.product.productDetails");          
+        formData.append("storeId", 1);
+        formData.append("storeType", 6);
+        formData.append("productId", goodId);
+        request({
+            url: "/api/gw",         
+            method: "POST",
+            data: formData
+        }).then((res)=> {
+            let resData = res.data.data;
+            _this.setState({
+                goodInfo: resData
+            })
         })
     }
     selectSameFn = (index)=> {
@@ -89,7 +132,7 @@ class Show extends React.Component {
                     <Col span={3}></Col>
                 </Row>
                 
-                <GoodDetail></GoodDetail>
+                {this.state.goodInfo&&<GoodDetail goodDetail={this.state.goodInfo}></GoodDetail>}
             </div>
         )
     }

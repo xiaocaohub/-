@@ -40,9 +40,9 @@ class Pay extends React.Component {
                                 <span className="tit"><InfoCircleOutlined /> 付款说明</span>
                             </div>
 
-                            {/* <Platform></Platform> */}
+                            <Platform></Platform>
 
-                            <Offline></Offline>
+                            {/* <Offline></Offline> */}
                         </div>
                     </Col>
                     <Col span={3}></Col>

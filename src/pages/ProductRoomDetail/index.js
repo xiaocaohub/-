@@ -3,7 +3,9 @@ import Show from "./show";
 import {getGoodInfoAction} from "../../actions/ProductRoomDetail";
 
 let mapStateToProps = state=> {
-    // console.log("mapState", state)
+    // console.log("mapState detail")
+    // console.log(state)
+    // console.log("mapState detail")
     return {
         productRoomDetailState: state.productRoomDetailState
     }
@@ -11,9 +13,9 @@ let mapStateToProps = state=> {
 
 let mapDispatchToProps = dispatch=> {
     return {
+
         getGoodInfoFn (goodId) {
-            let _this = this;
-            
+            let _this = this;    
             let formData = new FormData();
             let option = {"brandId":"","minPrice":"","maxPrice":""};
             formData.append("api", "app.product.productDetails");          
