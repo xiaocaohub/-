@@ -56,29 +56,6 @@ class Show extends React.Component {
       
         let _this = this;
         let goodInfo = _this.props.productRoomDetailState.goodInfo;
-        // let attrList = goodInfo.attrList;
-        // let colorArr = attrList[0].attr;
-        // let sizeArr = attrList[1].attr;
-
-        // let allGoodArr = goodInfo.skuBeanList;
-        // let selectGoodIds = [];
-        // selectGoodIds[0] = colorArr[0].id;
-        // selectGoodIds[1] = sizeArr[0].id;
-        // let goodFirst = goodInfo.skuBeanList[0];
-        // this.setState({
-        //     colorArr: colorArr,
-        //     sizeArr: sizeArr,
-        //     allGoodArr: allGoodArr,
-        //     selectGoodIds: selectGoodIds,
-        //     currentGood: goodFirst
-        // }, function () {
-        //     console.log("colorArr", this.state.colorArr)
-        //     console.log("sizeArr", this.state.sizeArr)
-        //     console.log("allGoodArr", this.state.allGoodArr)
-        //     console.log("selectGoodIds", this.state.selectGoodIds)
-        // })  
-        
-     
         this.setState({
             goodInfo: _this.props.productRoomDetailState.goodInfo
         })

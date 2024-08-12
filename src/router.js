@@ -17,7 +17,7 @@ import ArtistDetail from "./pages/ArtistDetail";
 import Cart from "./pages/Cart";
 
 import CheckCart from "./pages/CheckCart";
-
+import Us from "./pages/Us";
 import Pay from "./pages/Pay";
 
 class IndexRouter extends React.Component {
@@ -42,11 +42,8 @@ class IndexRouter extends React.Component {
                                     <Route path="/cart" component={Cart}></Route>
                                     <Route path="/checkcart" component={CheckCart}></Route>
 
-
-
-
-
                                     <Route path="/pay" component={Pay}></Route>
+                                    <Route path="/us" component={Us}></Route>
                             </Layout>
 
                         }></Route>

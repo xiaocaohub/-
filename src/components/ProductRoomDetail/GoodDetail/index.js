@@ -58,9 +58,9 @@ class GoodDetail extends React.Component {
 
                             <div className="tit">商品信息</div>
                             <ul className="txt_list">
-                                {this.state.attrArr.map((item, index)=>{
+                                {/* {this.state.attrArr.map((item, index)=>{
                                     return (<li key={index}><span className="title">{item.label}:</span>  <span className="txt">{item.value}</span> </li>)
-                                })}
+                                })} */}
                             </ul>
                         </div>
                     </div>
