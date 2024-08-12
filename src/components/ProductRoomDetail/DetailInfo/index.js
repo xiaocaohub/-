@@ -31,7 +31,7 @@ class DetailInfo extends React.Component {
     }
     componentDidMount () {
        this.initDataFn()
-       this.getBigImgFn()
+       this.setBigImgHeightFn()
     }
     initDataFn = ()=> {
         let attrList = this.props.goodDetail.attrList;
@@ -61,7 +61,7 @@ class DetailInfo extends React.Component {
             // console.log("goodFirst", goodFirst)
         })  
     }
-    getBigImgFn () {
+    setBigImgHeightFn () {
         let bigImg = document.getElementById("big_img");
         let width = bigImg.width;
         let height = (width * 2) / 3;
@@ -151,9 +151,9 @@ class DetailInfo extends React.Component {
             <div className="detail_info_con">
                 <div className="detail_info">             
                     <div className="left">
-                        <img src={this.state.bigImg} alt="" className="big_img" id="big_img" onClick={this.getBigImgFn} style={{height: this.state.bigHeight + "px"}}/>
+                        <img src={this.state.bigImg} alt="" className="big_img" id="big_img"   style={{height: this.state.bigHeight + "px"}}/>
                         <ul className="img_nav">
-                            
+
                              {this.state.currentGood?
                                 this.state.currentGood.imgArr.map((item, index)=> {
                                     return (<li className={this.state.currentIndex==index?"small_img on":"small_img"}  style={{height:this.state.smallHeight + "px"}} onClick={()=>{this.selectNavFn(index, item)}} key={index}>

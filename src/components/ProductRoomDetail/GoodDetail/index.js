@@ -12,7 +12,9 @@ class GoodDetail extends React.Component {
         this.state = {
             realPhotos: [],
             // 属性
-            attrArr: []
+            attrArr: [],
+
+            imgHeight: 90
         }
     }
     componentDidMount () {
@@ -24,20 +26,32 @@ class GoodDetail extends React.Component {
         parameters = eval(parameters);
         let realPhotos = product.realPhotos;
         let content = eval(product.content)[0].content;
-        console.log("content", content)
+  
         this.setState({
             content: content ,
             realPhotos: realPhotos,
             attrArr: parameters
+        }, function () {
+            this.setImgHeightFn()
+        })
+    }
+
+
+    setImgHeightFn () {
+        let img = document.querySelectorAll(".good_edit_detail .img_list .img")[0];
+        let width = img.clientWidth;
+        let height = (width * 2)/3;
+
+        this.setState({
+            imgHeight: height
         })
     }
     render () {
         return (
             <Row className="good_edit_detail">
-          
-          
-             
+
                 <Col span={3}></Col>
+
                 <Col span={18} className="content">
                     <div className="left">
                         {/* {this.state.content} */}
@@ -50,12 +64,11 @@ class GoodDetail extends React.Component {
 
                         <div className="img_list">
                             {this.state.realPhotos.map((item, index)=> {
-                                return <img src={item} alt="" className="img" key={index}/>
+                                return (<img src={item} alt="" className="img" key={index} style={{height:this.state.imgHeight+"px"}}/>)
                             })}                            
                         </div>
 
                         <div className="text_con">
-
                             <div className="tit">商品信息</div>
                             <ul className="txt_list">
                                 {/* {this.state.attrArr.map((item, index)=>{
