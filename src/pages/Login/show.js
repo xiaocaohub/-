@@ -8,6 +8,9 @@ import "./index.css";
 class Login extends React.Component {
     constructor (props) {
         super(props)
+        console.log("login")
+        console.log(props)
+        console.log("login")
         this.state = {
             loginFlag: true
         }

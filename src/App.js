@@ -4,7 +4,6 @@ class App extends React.Component {
 
   constructor (props) {
     super(props)
-    console.log(props)
   }
   render () {
     return (
@@ -17,4 +16,3 @@ class App extends React.Component {
 
 
 export default App;
-

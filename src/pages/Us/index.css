@@ -6,3 +6,17 @@
     display:block;
 }
 
+.us_page_con .intro_text{
+    height:360px;
+    overflow:hidden;
+    border:1px solid brown;
+}
+
+.us_page_con .intro_text .text_con{
+
+   overflow:hidden;
+
+   border:1px solid brown;
+}
+
+

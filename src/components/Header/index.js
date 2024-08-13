@@ -18,7 +18,7 @@ function Header () {
         {id: 4, title: "艺术家", path: "/artist"},
 
         // {id: 5, title: "云设计"},
-        {id: 6, title: "认识我"}
+        {id: 6, title: "认识我", path: "/us"}
     ]
     const [currentIndex, setIndexFn] = useState(0);
     

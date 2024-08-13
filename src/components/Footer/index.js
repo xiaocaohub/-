@@ -99,7 +99,7 @@ class Footer extends React.Component {
                                 {this.state.iconArr.map((item)=>{
                                     return (
 
-                                        <li>
+                                        <li key={item.id}>
                                             <img src={item.imgSrc} alt="" className="icon"/>
         
                                             <span>{item.txt}</span>
@@ -112,7 +112,7 @@ class Footer extends React.Component {
                         <ul className="info_list">
                             {this.state.infoArr.map((item)=> {
                                 return ( 
-                                    <li>
+                                    <li key={item.id}>
                                         <img src={item.imgSrc} alt=""/>
                                         <span>{item.txt}</span>
                                     </li>
@@ -123,7 +123,7 @@ class Footer extends React.Component {
                         <ul className="code_list">
                             {this.state.codeArr.map((item)=> {
                                 return (
-                                    <li>
+                                    <li key={item.id}>
                                         <img src={item.imgSrc} alt=""/>
                                         <div className="txt">{item.txt}</div>
                                     </li>

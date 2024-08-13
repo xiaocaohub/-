@@ -26,7 +26,7 @@ class DetailInfo extends React.Component {
             // 选中的商品 colorId, sizeId
             selectGoodIds: [],
             // 选中的商品
-            currentGood: ""
+            currentGood: props.goodDetail.skuBeanList[0]
         }   
     }
     componentDidMount () {
@@ -142,8 +142,12 @@ class DetailInfo extends React.Component {
                 console.log("currentGood", currentGood)
             }
         }
+        let bigImg = currentGood.imgurl;
+        console.log("currentGood", currentGood)
         this.setState({
-            currentGood: currentGood
+            currentGood: currentGood,
+            bigImg: bigImg,
+            currentIndex: 0
         })
     }
     render () {
@@ -154,9 +158,10 @@ class DetailInfo extends React.Component {
                         <img src={this.state.bigImg} alt="" className="big_img" id="big_img"   style={{height: this.state.bigHeight + "px"}}/>
                         <ul className="img_nav">
 
-                             {this.state.currentGood?
+                            {/* {this.state.currentGood?
                                 this.state.currentGood.imgArr.map((item, index)=> {
                                     return (<li className={this.state.currentIndex==index?"small_img on":"small_img"}  style={{height:this.state.smallHeight + "px"}} onClick={()=>{this.selectNavFn(index, item)}} key={index}>
+                                   
                                         <img src={item} alt=""  />
                                     </li>)
                                 }):
@@ -166,8 +171,14 @@ class DetailInfo extends React.Component {
                                         <img src={item} alt=""  />
                                     </li>)
                                 })
-                            }  
-
+                            }   */}
+                            {
+                                this.state.currentGood.imgArr.map((item, index)=> {
+                                    return (<li className={this.state.currentIndex==index?"small_img on":"small_img"}  style={{height:this.state.smallHeight + "px"}} onClick={()=>{this.selectNavFn(index, item)}} key={index}>
+                                        <img src={item} alt=""  />
+                                    </li>)
+                                })
+                            }
                             
                         </ul>
                     </div>
@@ -192,7 +203,7 @@ class DetailInfo extends React.Component {
                         <div className="specifications_con">
                             <div className="title_name">颜色</div>
                             <ul className="specifications_list">
-                                {this.state.colorArr.length>0 && this.state.colorArr.map((item, index)=> {
+                                {this.state.colorArr && this.state.colorArr.map((item, index)=> {
                                     return (<li className={this.state.currentColorIndex==index?"on":""} key={item.id} onClick={()=>{this.selectColorFn(index)}}>{item.attributeValue}</li>)
                                 })}
                                 
@@ -202,7 +213,8 @@ class DetailInfo extends React.Component {
                         <div className="specifications_con">
                             <div className="title_name">规格</div>
                             <ul className="specifications_list">
-                                {this.state.sizeArr.map((item, index)=>{
+                               
+                                {this.state.sizeArr && this.state.sizeArr.map((item, index)=>{
                                     return (<li className={this.state.currentSizeIndex==index?"on":""} key={item.id} onClick={()=>{this.selectSizeFn(index)}}>{item.attributeValue}</li>)
                                 })}                               
                             </ul>
