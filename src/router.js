@@ -23,7 +23,7 @@ import Pay from "./pages/Pay";
 class IndexRouter extends React.Component {
     render () {
         return (
-            <BrowserRouter>
+            <BrowserRouter basename="/build">
                 <App>
                     <Switch>
                         <Route path="/login" component={Login}></Route>

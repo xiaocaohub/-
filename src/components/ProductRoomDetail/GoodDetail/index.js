@@ -53,9 +53,8 @@ class GoodDetail extends React.Component {
                 <Col span={3}></Col>
 
                 <Col span={18} className="content">
-                    <div className="left">
-                        {/* {this.state.content} */}
-                    </div>
+                   
+                    <div className="left" dangerouslySetInnerHTML={{ __html: this.state.content }}></div>
                     <div className="right">
                         <div className="title_top">
                             <span className="tit">实物拍摄</span>
@@ -71,9 +70,9 @@ class GoodDetail extends React.Component {
                         <div className="text_con">
                             <div className="tit">商品信息</div>
                             <ul className="txt_list">
-                                {/* {this.state.attrArr.map((item, index)=>{
+                                {this.state.attrArr.map((item, index)=>{
                                     return (<li key={index}><span className="title">{item.label}:</span>  <span className="txt">{item.value}</span> </li>)
-                                })} */}
+                                })}
                             </ul>
                         </div>
                     </div>

@@ -10,7 +10,7 @@ import Good from "../../components/Home/Good";
 import HotSelling from "../../components/Home/HotSelling";
 import KindGood from "../../components/Home/KindGood";
 import SmallCart from "../../components/SmallCart";
-
+import StyleGood from "../../components/Home/StyleGood";
 import popularImg from "../../assets/popular_img.png";
 class Show extends React.Component {
    
@@ -96,6 +96,12 @@ class Show extends React.Component {
                                 <KindGood></KindGood>
                                 <KindGood></KindGood>
                                 <KindGood></KindGood> */}
+                                <StyleGood></StyleGood>
+                                <StyleGood></StyleGood>
+                                <StyleGood></StyleGood>
+                                <StyleGood></StyleGood>
+                                <StyleGood></StyleGood>
+                                <StyleGood></StyleGood>
                             </ul>
                         </div>
                     </Col>
