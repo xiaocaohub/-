@@ -65,17 +65,17 @@ class Footer extends React.Component {
                 },
                 {
                     id: 1,
-                    imgSrc: require("../../assets/footer_code1.png"),
+                    imgSrc: require("../../assets/footer_code2.png"),
                     txt: "抖音"
                 },
                 {
                     id: 2,
-                    imgSrc: require("../../assets/footer_code1.png"),
+                    imgSrc: require("../../assets/footer_code3.png"),
                     txt: "小红书"
                 },
                 {
                     id: 3,
-                    imgSrc: require("../../assets/footer_code1.png"),
+                    imgSrc: require("../../assets/footer_code4.png"),
                     txt: "微信公众号"
                 }
             ]
@@ -135,16 +135,15 @@ class Footer extends React.Component {
                     </Col>
                     <Col span={3}></Col>
                 </Row>
+
+
                 <Row>
-                    <Col span={24} className="copy">粤ICP备2024161668号-1</Col>
-
-
+                    <Col span={24} className="copy">粤ICP备2024161668号</Col>
                 </Row>
             </div>
         )
     }
 }
-
 
 
 

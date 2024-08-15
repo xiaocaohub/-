@@ -1,5 +1,6 @@
 .recommende_good_con {
     background:#F5F5F5 ;
+    padding-bottom:150px;
 }
 
 .recommende_good_con .banner{
@@ -76,7 +77,8 @@
    text-transform:uppercase;
    margin-top:10px;
 }
-.recommende_good_con .big_room_com{
+ 
+.recommende_good_con .big_room_con{
    margin-top:80px;
 }
 .recommende_good_con .good_list{

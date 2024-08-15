@@ -1,6 +1,6 @@
 .us_page_con{
  
-    border:1px solid brown;
+   
 }
 .us_page_con .banner_img{
     display:block;
@@ -15,8 +15,31 @@
 .us_page_con .intro_text .text_con{
 
    overflow:hidden;
+   
+   margin-top:120px;
+   border:1px solid brown;
 
+}
+.us_page_con .intro_text .text_con .title{
+
+   font-size:36px;
+   float:left;
    border:1px solid brown;
 }
+.us_page_con .intro_text .text_con .txt{
+
+   width:50%;
+   float:right;
+   border:1px solid brown;
+   line-height:28px;
+}
+
+
+
+
+.us_page_con .intro_text .text_con .txt p{
+    margin-bottom:20px;
+}
+
 
 

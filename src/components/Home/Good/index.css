@@ -13,12 +13,13 @@
 }
 .recommend_good  .good_img{
     display:block;
+
     width:100%;
+
+    height:289px;
 }
 .recommend_good .good_bottom{
-    
     margin:29px 0;
- 
     margin-left:5%;
     overflow:hidden;
     position:relative;

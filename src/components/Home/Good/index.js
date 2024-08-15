@@ -10,13 +10,13 @@ class Good extends React.Component {
     render () {
         return (
             <div className="recommend_good">
-                <Link to="/"><img src={goodImg} alt="" className="good_img"/></Link>
+                <Link to={"/productroom/detail/" + this.props.goodInfo.id}><img src={this.props.goodInfo.coverImg} alt="" className="good_img"/></Link>
                 <div className="good_bottom">
                     <div className="text_con">
-                        <div className="txt">caesar taylor沙发</div>
-
+                        
+                        <div className="txt">{this.props.goodInfo.product_title}</div>
                         <div className="price">
-                            <span className="unit">¥ </span>2888
+                            <span className="unit">¥ </span>{parseInt(this.props.goodInfo.price)}
                         </div>
                     </div>
 

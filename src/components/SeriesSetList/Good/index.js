@@ -23,9 +23,9 @@ class Good extends React.Component {
                     <img src={goodImg} alt="" className="good_img"/>
                 </Link>
                 <div className="text_con">
-                    <div className="txt">{this.props.itemData.product_title}</div>
+                    <div className="txt">product_title</div>
                     
-                    <div className="price"><span className="unit">￥</span>{this.props.itemData.price}</div>
+                    <div className="price"><span className="unit">￥</span>price</div>
                 </div>
                 <ul className="btn_group">
                     <li>

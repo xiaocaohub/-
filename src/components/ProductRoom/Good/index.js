@@ -21,7 +21,7 @@ class Good extends React.Component {
                 <div className="text_con">
                     <div className="txt">{this.props.itemData.product_title}</div>
                     
-                    <div className="price"><span className="unit">￥</span>{this.props.itemData.price}</div>
+                    <div className="price"><span className="unit">￥</span>{parseInt(this.props.itemData.price)}</div>
                 </div>
                 <ul className="btn_group">
                     <li>

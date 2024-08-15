@@ -33,54 +33,44 @@
     display:block;
     width:12.7%;
     overflow:hidden;
-    height:80px;
-
-
-    /* border:1px solid brown;     */
- 
+    height:80px; 
 }
+
+
 .header_con .header_bottom .logo_img{
     display:block;
-
     width:100%;
- 
 } 
+
 .header_con .header_bottom .nav_list{
     width:60%;
     overflow:hidden;
-
-
     float:left;
-    margin-left:3%;
-   
+    margin-left:4.2%;
     margin-top:1.71%;
-    /* margin-top:1.79%; */
-    /* border:1px solid brown; */
 }
-.header_con .header_bottom .nav_list > li{
 
-    /* width:85px; */
-    width:13%;
+.header_con .header_bottom .nav_list > li{
+    /* width:13%; */
     border-bottom:3px solid transparent;
     height:40px;
     line-height:40px;
-
-
     float:left;
     color:#1A1A1A;
     /* margin-left:5%; */
-    font-weight:bold;
-
+    margin-right:7%;
+    font-size:16px;
     overflow:hidden;
     cursor:pointer;
     text-align:center;
-    /* border:1px solid brown; */
+ 
 }
 .header_con .header_bottom .nav_list > li:first-child{
     margin-left:0;
 }
 .header_con .header_bottom .nav_list > li.on{
     
+    font-weight:450;
     font-size:20px;
     border-bottom-color:#C6A189;
 }

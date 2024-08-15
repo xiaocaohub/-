@@ -7,10 +7,23 @@
     overflow:hidden;
 }
 .productroom_detail_page .good_edit_detail .content > .left{
-    width:71%;
+    width:72.5%;
     float:left;
 }
 
+.productroom_detail_page .good_edit_detail .content > .left .ql-align-center img{
+    display:block;
+
+    width:100%;
+}
+.productroom_detail_page .good_edit_detail .content > .left .ql-align-center img:first-child{
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+.productroom_detail_page .good_edit_detail .content > .left .ql-align-center img:last-child{
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
 .productroom_detail_page .good_edit_detail .content > .right{
    width:26%;
 
@@ -33,19 +46,21 @@
 .productroom_detail_page .good_edit_detail .content > .right .title_top .show_btn{
     background:url("../../../assets/icon/icon_down.png") no-repeat right center;
     padding-right:25px;
-
-
     float:right;
     color:#E8A468;
     cursor:pointer;
 }
-
 .productroom_detail_page .good_edit_detail .content > .right .title_top .show_btn.on{
     background:url("../../../assets/icon/icon_up.png") no-repeat right center;
 }
+
 .productroom_detail_page .good_edit_detail .content > .right .img_list{
     overflow:hidden;
     padding:20px 20px 0;
+}
+.productroom_detail_page .good_edit_detail .content > .right .img_list .err_msg{
+    text-align:center;
+    padding:20px;
 }
 .productroom_detail_page .good_edit_detail .content > .right .img_list .img{
     width:47%;
@@ -61,6 +76,8 @@
 }
 .productroom_detail_page .good_edit_detail .content > .right .text_con{
     overflow:hidden;
+    height:750px;
+    overflow-y:auto;
 }
 .productroom_detail_page .good_edit_detail .content > .right .text_con .tit{
     height:54px;
@@ -73,9 +90,9 @@
     padding:20px;
 }
 .productroom_detail_page .good_edit_detail .content > .right .text_con .txt_list >li{
- 
     font-size:14px;
     overflow:hidden;
+    margin-bottom:10px;
  
 }
 .productroom_detail_page .good_edit_detail .content > .right .text_con .txt_list >li .title{
@@ -86,16 +103,20 @@
     float:left;
     height:28px;
     line-height:28px;
+    
     text-align:right;
     padding-right:9px;
- 
 }
-
 .productroom_detail_page .good_edit_detail .content > .right .text_con .txt_list >li  .txt{
     width:65%;
-    line-height:28px;
+    line-height:19px;
     float:right;
+    margin-top:5px;
+
+    display:block;
  
+    
+    word-break: break-all;
 }
 
 

@@ -43,11 +43,13 @@ class GoodDetail extends React.Component {
     setImgHeightFn = ()=> {
 
         let img = document.querySelectorAll(".good_edit_detail .img_list .img")[0];
-        let width = img.clientWidth;
-        let height = (width * 2)/3;
-        this.setState({
-            imgHeight: height
-        })
+        if (img) {
+            let width = img.clientWidth;
+            let height = (width * 2)/3;
+            this.setState({
+                imgHeight: height
+            })
+        }
     }
 
     showMoreFn = ()=> {
@@ -78,9 +80,11 @@ class GoodDetail extends React.Component {
                         </div> 
 
                         <div className="img_list">
-                            {this.state.showRealPhotos.map((item, index)=> {
+                            {this.state.showRealPhotos.length>0 && this.state.showRealPhotos.map((item, index)=> {
                                 return (<img src={item} alt="" className="img" key={index} style={{height:this.state.imgHeight+"px"}}/>)
                             })}                            
+
+                            { this.state.showRealPhotos.length == 0 &&   (<div className="err_msg">~暂未上传实拍图~</div>)}
                         </div>
 
                         <div className="text_con">

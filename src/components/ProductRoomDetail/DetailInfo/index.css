@@ -23,28 +23,48 @@
 .productroom_detail_page  .detail_info .left .img_nav{
     overflow:hidden;
     margin-top:14px;
+    position:relative;
 }
 .productroom_detail_page  .detail_info .left .img_nav > li{  
-    width:15.1%;
+    width:15.593%;
     height:50px;
     float:left;
-    margin-left:1%;
+    margin-left:1.29%;
     overflow:hidden;
-    border:2px solid transparent;
+    /* border:2px solid transparent; */
     cursor:pointer;
+    border-bottom:2px solid transparent;
 }
+
+
 .productroom_detail_page  .detail_info .left .img_nav > li:first-child{
     margin-left: 0;
 }
-.productroom_detail_page  .detail_info .left .img_nav > li.on{
-    border-color:#C6A189;
+.productroom_detail_page  .detail_info .left .img_nav > li:nth-child(6):last-child{
+
+    float:right;
+    position:absolute;
+    top:0;
+
+    right:-4px;
+    width:15.593%;
+    height:50px;
 }
-
-
+.productroom_detail_page  .detail_info .left .img_nav > li:nth-child(6):last-child.on{
+    right:0;
+}
+.productroom_detail_page  .detail_info .left .img_nav > li.on{    
+    border-bottom:2px solid #C6A189;
+}
 .productroom_detail_page  .detail_info .left .img_nav > li img{
     display:block;
-    width:100%;
+    
+    width:96.65%;
     height:100%;
+}
+.productroom_detail_page  .detail_info .left .img_nav > li.on img{
+    border:2px solid #C6A189;
+    border-bottom:0;
 }
 .productroom_detail_page  .detail_info .right {
     width:38.2%;
@@ -53,9 +73,10 @@
 .productroom_detail_page  .detail_info .right .top_tit{
    overflow:hidden;
 }
+
 .productroom_detail_page  .detail_info .right .top_tit .tit{
    display:block;
-   width:52px;
+   padding:0 10px;
    height:26px;
    line-height:26px;
    text-align:center;
@@ -65,6 +86,7 @@
    overflow:hidden;
    float:left;
    margin-right:12px;
+   border-radius:5px;
 }
 .productroom_detail_page  .detail_info .right .top_tit .txt{
     color:#E8A468;
@@ -94,7 +116,7 @@
     border-radius:3px;
 }
 .productroom_detail_page  .detail_info .right .title .tit_txt{
-    width:78%;
+    /* width:78%; */
     float:left;
     font-size:18px;
     font-weight:bold;
@@ -102,7 +124,7 @@
 .productroom_detail_page  .detail_info .right .title .intro{
     width:100%;
     font-size:12px;
-    color:#666;
+    color:#E8A468;
     margin-top:5px;
     float:left;
 }
@@ -123,7 +145,8 @@
 .productroom_detail_page  .detail_info .right .specifications_con{
     overflow:hidden;
    
-    margin-bottom:10px;
+    margin-bottom:15px;
+ 
 }
 .productroom_detail_page  .detail_info .right .specifications_con .title_name{
    float:left;

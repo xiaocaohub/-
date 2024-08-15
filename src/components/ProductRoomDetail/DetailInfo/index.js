@@ -1,10 +1,13 @@
 import React from "react";
 import {Link} from "react-router-dom";
-import {Input} from "antd";
+import {Input, message} from "antd";
 
 import { RightOutlined, StarOutlined, ShareAltOutlined } from '@ant-design/icons';
 import codeImg from "../../../assets/footer_code2.png";
 import "./index.css";
+
+ 
+
 class DetailInfo extends React.Component {
     constructor (props) {
         super(props)
@@ -33,22 +36,26 @@ class DetailInfo extends React.Component {
        this.initDataFn()
        this.setBigImgHeightFn()
     }
+
     initDataFn = ()=> {
         let attrList = this.props.goodDetail.attrList;
-
-
         let colorArr = attrList[0].attr;
+        let colorTitle = attrList[0].attrName;
+
         let sizeArr = attrList[1].attr;
+        let sizeTile = attrList[1].attrName;
         let allGoodArr = this.props.goodDetail.skuBeanList;
         let selectGoodIds = [];
-        
         selectGoodIds[0] = colorArr[0].id;
         selectGoodIds[1] = sizeArr[0].id;
         let goodFirst = this.props.goodDetail.skuBeanList[0];
         
         this.setState({
             colorArr: colorArr,
+            colorTitle: colorTitle,
             sizeArr: sizeArr,
+
+            sizeTile: sizeTile,
             allGoodArr: allGoodArr,
             selectGoodIds: selectGoodIds,
             currentGood: goodFirst,
@@ -88,7 +95,6 @@ class DetailInfo extends React.Component {
     handleCountFn = (dir)=> {
         let count = this.state.count;
         if (dir<0) {
-
             if (count>=2) {
                 count -= 1;
             }
@@ -107,19 +113,16 @@ class DetailInfo extends React.Component {
             currentColorIndex: index,
             selectGoodIds: selectGoodIds
         }, function () {
+
             this.selectGoodFn()
         })
     }
-
-
     selectSizeFn = (index)=> {
-    
         let size = this.state.sizeArr[index];
+     
         let selectGoodIds = this.state.selectGoodIds;    
         selectGoodIds[1] = size.id;
-
         this.setState({
-    
             currentSizeIndex: index,
             selectGoodIds: selectGoodIds
         }, function () {
@@ -131,11 +134,13 @@ class DetailInfo extends React.Component {
         let selectGoodIds =  this.state.selectGoodIds;
         let length = allGoodArr.length;
         let currentGood = "";
+
+
+
         for (let i=0; i<length; i++) {
             let attributes = allGoodArr[i].attributes;
             let flag = attributes[0].attributeValId == selectGoodIds[0] && attributes[1].attributeValId == selectGoodIds[1];           
             if (flag) {
-
 
                 allGoodArr[i].imgArr = allGoodArr[i].imgArr;
                 currentGood = allGoodArr[i];
@@ -143,12 +148,25 @@ class DetailInfo extends React.Component {
             }
         }
         let bigImg = currentGood.imgurl;
-        console.log("currentGood", currentGood)
         this.setState({
             currentGood: currentGood,
             bigImg: bigImg,
             currentIndex: 0
         })
+    }
+    copyFn () {
+        const textarea = document.createElement("textarea");
+        textarea.readOnly = "readonly";
+        textarea.style.position = "absolute";
+        textarea.style.left = "-999px";
+        textarea.style.opacity = "0";
+        textarea.value = message.value;
+        document.body.appendChild(textarea)
+        textarea.select()
+        const result = document.execCommand("copy");
+        if (result) {
+            console.log("copy success", result)
+        }
     }
     render () {
         return (
@@ -174,6 +192,13 @@ class DetailInfo extends React.Component {
                             }   */}
                             {
                                 this.state.currentGood.imgArr.map((item, index)=> {
+                                    // if (index<5) {
+                                    //     return (<li className={this.state.currentIndex==index?"small_img on":"small_img"}  style={{height:this.state.smallHeight + "px"}} onClick={()=>{this.selectNavFn(index, item)}} key={index}>
+                                          
+                                    //         <img src={item} alt=""  />
+                                    //     </li>)
+                                    // }
+                                  
                                     return (<li className={this.state.currentIndex==index?"small_img on":"small_img"}  style={{height:this.state.smallHeight + "px"}} onClick={()=>{this.selectNavFn(index, item)}} key={index}>
                                         <img src={item} alt=""  />
                                     </li>)
@@ -185,7 +210,7 @@ class DetailInfo extends React.Component {
                     
                     <div className="right">
                         <div className="top_tit">
-                            <span className="tit">原创</span>
+                            <span className="tit">{this.props.goodDetail.product.brandName}</span>
                             <span className="txt">
                                 <Link to="/">进入系列</Link> 
                                 <RightOutlined className="right_icon"/>    
@@ -193,27 +218,26 @@ class DetailInfo extends React.Component {
                         </div>
 
                         <div className="title">
-                            <span className="tit">新品</span>
-                            <span className="tit">现货</span>
-                            <div className="tit_txt">{this.props.goodDetail.product.productName}</div>
-                            <div className="intro">{this.props.goodDetail.product.subTitle}</div>
+                            {/* <span className="tit">新品</span>
+                            <span className="tit">现货</span> */}
+
+                            <div className="tit_txt">{this.props.goodDetail.product.productName} </div>
+                            <div className="intro">{this.props.goodDetail.product.subTitle} </div>
                         </div>
 
                         <div className="price"><span className="unit">￥</span>{this.state.currentGood?this.state.currentGood.price:this.props.goodDetail.skuBeanList[0].price}</div>
                         <div className="specifications_con">
-                            <div className="title_name">颜色</div>
+                            <div className="title_name">{this.state.colorTitle}</div>
                             <ul className="specifications_list">
                                 {this.state.colorArr && this.state.colorArr.map((item, index)=> {
                                     return (<li className={this.state.currentColorIndex==index?"on":""} key={item.id} onClick={()=>{this.selectColorFn(index)}}>{item.attributeValue}</li>)
                                 })}
-                                
                             </ul>
                         </div>
 
                         <div className="specifications_con">
-                            <div className="title_name">规格</div>
-                            <ul className="specifications_list">
-                               
+                            <div className="title_name">{this.state.sizeTile}</div>
+                            <ul className="specifications_list">             
                                 {this.state.sizeArr && this.state.sizeArr.map((item, index)=>{
                                     return (<li className={this.state.currentSizeIndex==index?"on":""} key={item.id} onClick={()=>{this.selectSizeFn(index)}}>{item.attributeValue}</li>)
                                 })}                               
@@ -222,13 +246,13 @@ class DetailInfo extends React.Component {
 
                         <div className="specifications_con">
                             <div className="title_name">编码</div>
-                            <div className="code_con">{this.state.currentGood?this.state.currentGood.productCode:this.props.goodDetail.skuBeanList[0].productCode}</div>
+                            <div className="code_con" onClick={this.copyFn}>{this.state.currentGood?this.state.currentGood.productCode:this.props.goodDetail.skuBeanList[0].productCode}</div>
                         </div>
 
-                        <div className="specifications_con">
+                        {/* <div className="specifications_con">
                             <div className="title_name">模型</div>
                             <div className="download_btn">点击下载</div>
-                        </div>
+                        </div> */}
 
 
 
@@ -244,7 +268,8 @@ class DetailInfo extends React.Component {
 
                         <div className="buy_con">
                             <div className="btn buy_btn">加入购物车</div>
-                            <div className="btn">定制询价</div>
+
+                            {/* <div className="btn">定制询价</div> */}
                             <div className="small_btn">
                                 <StarOutlined className="icon"/> 收藏
                             </div>

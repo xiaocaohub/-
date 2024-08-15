@@ -9,19 +9,21 @@ class StyleGood extends React.Component {
     }
     render () {
         return (
+
             <div className="style_good">
-                <Link to="/"><img src={goodImg} alt="" className="good_img"/></Link>
+                <Link to={"/productroom/detail/" + this.props.styleGood.id }>
+                    <img src={this.props.styleGood.coverImg} alt="" className="good_img"/>
+                </Link>
                 <div className="good_bottom">
                     <div className="text_con">
-                        <div className="txt">caesar taylor沙发</div>
-
+                   
+                        <div className="txt">{this.props.styleGood.product_title}</div>
                         <div className="price">
-                            <span className="unit">¥ </span>2888
+                            <span className="unit">¥ </span>{parseInt(this.props.styleGood.price)}
                         </div>
                     </div>
 
                 </div>
-              
             </div>
         )
     }

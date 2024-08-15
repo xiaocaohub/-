@@ -6,19 +6,24 @@ import goodImg from "../../../assets/home_tuijian_1.png";
 import bigGoodImg from "../../../assets/recomend_good1.png";
 class Good extends React.Component {
 
+    constructor (props) {
+        super(props)
+    }
     render () {
         return (
             <li className="recommende_good">
-                <Link to="/" className="img">
-                    <img src={goodImg} alt="" className="small_img"/>
+                <Link to={this.props.goodInfo?("/productroom/detail/" + this.props.goodInfo.id):"/"} className="img">
+               
+                    <img src={this.props.goodInfo?this.props.goodInfo.coverImg:""} alt="" className="small_img"/>
                     <img src={bigGoodImg} alt="" className="big_img"/>
                 </Link>
                 <div className="text_bottom">
-                    <div className="title">现代极简头层牛皮沙发不含抱枕</div>
+                    <div className="title">{this.props.goodInfo?this.props.goodInfo.product_title:""}</div>
                     <div className="price">
-                        <span>￥</span>99999
+                        <span>￥</span>{this.props.goodInfo?this.props.goodInfo.price:""}
                     </div>
-                    <div className="but_btn">GO</div>
+                    <Link to={this.props.goodInfo?("/productroom/detail/" + this.props.goodInfo.id):"/"} className="but_btn">GO</Link>
+ 
                 </div>
             </li>
         )

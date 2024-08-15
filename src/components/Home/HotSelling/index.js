@@ -12,19 +12,23 @@ class HotSelling extends React.Component {
         }
         this.prev = this.prev.bind(this)
         this.next = this.next.bind(this)
+
+
+        console.log("hotSellArrData props")
+        
+        console.log(props)
+        console.log("hotSellArrData props")
+
     }
     prev = (index)=> {
-  
         this.img.prev()
     }
-
     next = ()=> {
         this.img.next()
     }
     onChange = (index)=> {
         
         console.log(index)
- 
         let longLine = document.getElementById("longline");
         longLine.style.cssText="width:"+(index+1)*25+"%;" 
     }
@@ -49,94 +53,84 @@ class HotSelling extends React.Component {
                             <div className="right_btn" onClick={this.next}></div>
                             <Carousel  afterChange={this.onChange} dots={false}    ref={dom=>{this.img=dom }}>
                                 <div>
-                                    <div className="good_item">
-                                        <Link to="/">
-                                            <img src={hotSellImg} className="good_img"/>
-                                        </Link>
-
-
-                                        <div className="text_con">
-                                            <div className="txt">博纳豪斯 棉麻马鞍皮沙发</div>
-                                            <div className="price">¥16199</div>
-                                        </div>
-                                    </div>
-                                    
-                                    
-
-                                    <div className="good_item">
-                                        <Link to="/">
-                                            <img src={hotSellImg} className="good_img"/>
-                                        </Link>
-
-
-                                        <div className="text_con">
-                                            <div className="txt">博纳豪斯 棉麻马鞍皮沙发</div>
-                                            <div className="price">¥16199</div>
-                                        </div>
-                                    </div>
-                                    <div className="good_item">
-                                        <Link to="/">
-                                            <img src={hotSellImg} className="good_img"/>
-                                        </Link>
-
-
-                                        <div className="text_con">
-                                            <div className="txt">博纳豪斯 棉麻马鞍皮沙发</div>
-                                            <div className="price">¥16199</div>
-                                        </div>
-                                    </div>
-                                    <div className="good_item">
-                                        <Link to="/">
-                                            <img src={hotSellImg} className="good_img"/>
-                                        </Link>
-
-
-                                        <div className="text_con">
-                                            <div className="txt">博纳豪斯 棉麻马鞍皮沙发</div>
-                                            <div className="price">¥16199</div>
-                                        </div>
-                                    </div>
+                         
+                                    {this.props.hotSellArrData.length>0 && this.props.hotSellArrData.map((item, index)=>{
+                                        if (index <= 3) {
+                                            return (
+                                                <div className="good_item" key={item.id}>
+                                                    <Link to={"/productroom/detail/" + item.id}>   
+                                                        <img src={item.coverImg} className="good_img"/> 
+                                                    </Link>
+            
+                                                    <div className="text_con">
+                                                        <div className="txt">{item.product_title}</div>
+                                                        <div className="price">¥{parseInt(item.price)}</div>
+                                                    </div>
+                                                </div>
+                                            )
+                                        }
+                                    })}
                                 </div>
                                 <div>
-                                    <div className="good_item">
-                                        <Link to="/">
-                                            <img src={hotSellImg} className="good_img"/>
-                                        </Link>
-
-
-                                        <div className="text_con">
-                                            <div className="txt">博纳豪斯 棉麻马鞍皮沙发</div>
-                                            <div className="price">¥16199</div>
-                                        </div>
-                                    </div>
+                                    {this.props.hotSellArrData.length>0 && this.props.hotSellArrData.map((item, index)=>{
+                                        if (4<= index && index <= 7) {
+                                            return (
+                                                <div className="good_item" key={item.id}>
+                                                    <Link to="/">
+                                                      
+                                                        <img src={item.coverImg} className="good_img"/> 
+                                                    </Link>
+            
+                                                    <div className="text_con">
+                                                        <div className="txt">{item.product_title}</div>
+                                                        <div className="price">¥{parseInt(item.price)}</div>
+                                                    </div>
+                                                </div>
+                                            )
+                                        }
+                                    })}
                                 </div>
                                 
                                 
                                 <div>
-                                    <div className="good_item">
-                                        <Link to="/">
-                                            <img src={hotSellImg} className="good_img"/>
-                                        </Link>
-
-
-                                        <div className="text_con">
-                                            <div className="txt">博纳豪斯 棉麻马鞍皮沙发</div>
-                                            <div className="price">¥16199</div>
-                                        </div>
-                                    </div>
+                                    {this.props.hotSellArrData.length>0 && this.props.hotSellArrData.map((item, index)=>{
+                                        if (8 <= index && index <= 11) {
+                                            return (
+                                                <div className="good_item" key={item.id}>
+                                                    <Link to="/">
+                                                      
+                                                        <img src={item.coverImg} className="good_img"/> 
+                                                    </Link>
+            
+                                                    <div className="text_con">
+                                                        <div className="txt">{item.product_title}</div>
+                                                        <div className="price">¥{parseInt(item.price)}</div>
+                                                    </div>
+                                                </div>
+                                            )
+                                        }
+                                    })}
                                 </div>
                                 <div>
-                                    <div className="good_item">
-                                        <Link to="/">
-                                            <img src={hotSellImg} className="good_img"/>
-                                        </Link>
-
-
-                                        <div className="text_con">
-                                            <div className="txt">博纳豪斯 棉麻马鞍皮沙发</div>
-                                            <div className="price">¥16199</div>
-                                        </div>
-                                    </div>
+                                  
+                                    {this.props.hotSellArrData.length>0 && this.props.hotSellArrData.map((item, index)=>{
+                                      
+                                      if (12 <= index && index <= 15) {
+                                            return (
+                                                <div className="good_item" key={item.id}>
+                                                    <Link to="/">
+                                                      
+                                                        <img src={item.coverImg} className="good_img"/> 
+                                                    </Link>
+            
+                                                    <div className="text_con">
+                                                        <div className="txt">{item.product_title}</div>
+                                                        <div className="price">¥{parseInt(item.price)}</div>
+                                                    </div>
+                                                </div>
+                                            )
+                                        }
+                                    })}
                                 </div>
                             </Carousel>
                             

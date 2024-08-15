@@ -10,9 +10,9 @@ class RoomBanner extends React.Component {
     render () {
         return (
             <div className="room_banner_con">
-                <div className="top_title">餐厅 <span>/Dining area</span></div>
+                <div className="top_title">{this.props.bannerData.topTitle} <span>{this.props.bannerData.topTxt}</span></div>
                 <div className="room_banner">
-                    <img src={bannerImg} className="banner_img"/>
+                    <img src={this.props.bannerData.imgSrc} className="banner_img"/>
 
                     <div className="text_con">
                         {/* <div className="big_tit">餐厅空间</div>

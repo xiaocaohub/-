@@ -41,7 +41,8 @@ function Header () {
                 <Col span={18}>
                     <span className="title">更懂年轻人的国潮家居品牌</span>
                     <Link to="/login" className="login_btn">登录</Link>
-                    <Link to="/login" className="login_btn">注册</Link>
+
+                    {/* <Link to="/login" className="login_btn">注册</Link> */}
                 </Col>
                 <Col span={3}></Col>
 

@@ -34,7 +34,7 @@ class IndexRouter extends React.Component {
                                     <Route path="/productroom" exact component={ProductRoom}></Route>
                                     <Route path="/productroom/detail/:id" component={ ProductRoomDetail }></Route>
                                     <Route path="/series" exact component={SeriesSet}></Route>
-                                    <Route path="/series/list" component={SeriesSetList}></Route>
+                                    <Route path="/series/list/:id" component={SeriesSetList}></Route>
                                     
                                     
                                     <Route path="/artist" exact component={Artist}></Route>

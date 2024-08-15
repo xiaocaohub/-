@@ -15,10 +15,7 @@ class HotSell extends React.Component {
             <Row className="hot_sell_con">
                 <Col span={3}></Col>
                 <Col span={18}>
-                    
-
                     <Row>
-
                         <Col span={16} >
                             <div className="hot_big">
                                <img src={hostBig} alt=""/>
@@ -28,16 +25,17 @@ class HotSell extends React.Component {
                         <Col span={8} >
                             <div className="hot_small">
                                 <img src={hostSmalla} alt=""/>
-                                <Link to="/" className="search">即可搜索</Link>
+                                <Link to="/" className="search">点我搜索</Link>
                             </div>
                             <div className="hot_small">
                                 <img src={hostSmallb} alt=""/>
-                                <Link to="/" className="search">即可搜索</Link>
+                                <Link to="/" className="search">点我搜索</Link>
                             </div>
                         </Col>
                     </Row>
                 </Col>
                 
+
 
                 <Col span={3}></Col>
             </Row>

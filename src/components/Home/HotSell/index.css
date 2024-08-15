@@ -6,6 +6,7 @@
     overflow:hidden;
     width:98%;
     height:100%;
+    border-radius:10px;
 }
 .hot_sell_con .hot_big img{
     display:block;
@@ -18,8 +19,9 @@
     transition:all 1s;
     opacity:0.9;
 }
+
 .hot_sell_con .hot_small{
-   
+    border-radius:10px;
     margin-top:4%;
     position:relative;
     overflow:hidden;
@@ -33,9 +35,12 @@
 }
 .hot_sell_con .hot_small:hover img{
     transform:scale(1.05);
+ 
+ 
     transition:all 0.8s;
     cursor:pointer;
 }
+
 
 .hot_sell_con .hot_small .search{
     display:block;
@@ -48,8 +53,10 @@
     left:50%;
     margin-left:-40px;
     bottom:43px;
+  
     color:#fff;
     background:#000;
+    opacity:0.6;
 }
 
 .hot_sell_con .hot_small .search:hover{

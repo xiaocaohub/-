@@ -5,14 +5,20 @@ import GoodImg from "../../../assets/recomend_good1.png";
 import "./index.css";
 
 class Good extends React.Component {
+    constructor (props) {
+        super(props)
+        console.log("props good")
+        console.log(props)
+        console.log("props good")
+    }
     render () {
         return (
+
             <li className="good">
-                <Link to="/">
-                     
-                     <img src={GoodImg} alt="" className="good_img"/>
+                <Link to={"/productroom/detail/" + this.props.styleGood.id}>        
+                    <img src={this.props.styleGood.coverImg} alt="" className="good_img"/>
                 </Link>  
-                <div className="text">深圳·深圳湾1号</div>
+                <div className="text">{ this.props.styleGood.product_title }</div>
             </li>
         )
     }
