@@ -26,6 +26,7 @@ class DetailInfo extends React.Component {
             currentColor: "",
             sizeArr: [],
             currentSizeIndex: 0,
+            currentSize: "",
             // 所有规格商品
             allGoodArr: [],
             // 选中的商品 colorId, sizeId
@@ -36,6 +37,7 @@ class DetailInfo extends React.Component {
             allColorSizeGoodArr: []
         }   
     }
+
 
     componentDidMount () {
        this.initDataFn()
@@ -61,12 +63,12 @@ class DetailInfo extends React.Component {
             sizeTile: sizeTile,
             allGoodArr: allGoodArr,
             selectGoodIds: selectGoodIds,
-            currentGood: goodFirst,
-            currentColor: colorArr[0],
+            currentGood: goodFirst,    
             bigImg: goodFirst.imgurl
         }, function () {
+            this.selectSizeFn(0)
+            this.selectColorFn(0)
             this.props.setSelectGood(goodFirst)
-            this.getAllColorSizeGoodArrFn()
         })  
     }
     setBigImgHeightFn () {
@@ -110,21 +112,53 @@ class DetailInfo extends React.Component {
         let color = this.state.colorArr[index];
         let selectGoodIds = this.state.selectGoodIds;
         selectGoodIds[0] = color.id;
-        console.log("color", color)
+        let sizeArr = this.resetSizeArrFn();
         this.setState({
             currentColorIndex: index,
             selectGoodIds: selectGoodIds,
             currentColor: color
+            // sizeArr: sizeArr
         }, function () {
+
+            this.checkSizeArrDisableFn()
             this.selectGoodFn()
         })
     }
-
-    getAllColorSizeGoodArrFn = ()=> {
-        // let colorArr = attrList[0].attr;
-        // let sizeArr = attrList[1].attr;
+    resetSizeArrFn = ()=> {
+        let sizeArr = this.state.sizeArr;
+        sizeArr.forEach((item)=> {
+            item.showFlag = true;
+        })
+        return sizeArr;
+    }
+    checkSizeArrDisableFn = ()=> {    
         let currentColor = this.state.currentColor;
-        console.log("currentColor", currentColor)
+        let colorId = currentColor.id;
+       
+       
+     
+        // console.log("currentColor", currentColor)
+        let sizeArr = this.state.sizeArr;
+        let sizeLength = sizeArr.length;
+        let allGoodArr = this.state.allGoodArr;
+     
+        let allLength = allGoodArr.length;
+        // console.log("allGoodArr", allGoodArr)
+        for (let i=0; i<sizeLength; i++) {
+            let sizeItem = sizeArr[i];
+            sizeItem.showFlag = false;
+            for (let j=0; j<allLength; j++) {
+                let allItem = allGoodArr[j];                
+                if (colorId == allItem.attributes[0].attributeValId && sizeItem.id == allItem.attributes[1].attributeValId) {
+                    if (allItem.status == 0) {
+                        sizeItem.showFlag = true;
+                    }
+                }
+            }
+        }
+        this.setState({
+            sizeArr: sizeArr
+        })
     }
     selectSizeFn = (index)=> {
         let size = this.state.sizeArr[index];
@@ -132,30 +166,57 @@ class DetailInfo extends React.Component {
         selectGoodIds[1] = size.id;
         this.setState({
             currentSizeIndex: index,
-            selectGoodIds: selectGoodIds
+            selectGoodIds: selectGoodIds,
+            currentSize: size
         }, function () {
+            this.checkColorArrDisableFn()
             this.selectGoodFn()
         })
     }
-
-    selectGoodFn () {
+    checkColorArrDisableFn = ()=> {    
+        let currentSize = this.state.currentSize;
+        let sizeId = currentSize.id;
+        console.log("currentSize", currentSize)
+        console.log("sizeId", sizeId)
+     
+        let colorArr = this.state.colorArr;
+        let colorLength = colorArr.length;
+        let allGoodArr = this.state.allGoodArr;
+        let allLength = allGoodArr.length;
+        // console.log("allGoodArr", allGoodArr)
+        for (let i=0; i<colorLength; i++) {
+            let colorItem = colorArr[i];
+            colorItem.showFlag = false;
+            for (let j=0; j<allLength; j++) {
+                let allItem = allGoodArr[j];                
+                if (colorItem.id == allItem.attributes[0].attributeValId && sizeId == allItem.attributes[1].attributeValId) {
+                    if (allItem.status == 0) {
+                        colorItem.showFlag = true;
+                    }
+                }
+            }
+        }
+        // setTimeout(()=>{
+        //     console.log("colorArr", colorArr)
+       
+        // }, 3500)
+        this.setState({
+            colorArr: colorArr
+        })
+    }
+    selectGoodFn () {   
         let allGoodArr = this.state.allGoodArr;
         let selectGoodIds =  this.state.selectGoodIds;
         let length = allGoodArr.length;
-    
         let currentGood = "";
         for (let i=0; i<length; i++) {
             let attributes = allGoodArr[i].attributes;
             let flag = attributes[0].attributeValId == selectGoodIds[0] && attributes[1].attributeValId == selectGoodIds[1];           
             if (flag) {
-
-
-                allGoodArr[i].imgArr = allGoodArr[i].imgArr;
+                allGoodArr[i].imgArr = allGoodArr[i].imgArr;        
                 currentGood = allGoodArr[i];
             }
         }
-
-        console.log("currentGood", currentGood)
         let bigImg = currentGood.imgurl;
         this.setState({
             currentGood: currentGood,
@@ -184,7 +245,7 @@ class DetailInfo extends React.Component {
             <div className="detail_info_con">
                 <div className="detail_info">             
                     <div className="left">
-                        <img src={this.state.bigImg} alt="" className="big_img" id="big_img"   style={{height: this.state.bigHeight + "px"}} onClick={this.getAllColorSizeGoodArrFn}/>
+                        <img src={this.state.bigImg} alt="" className="big_img" id="big_img"   style={{height: this.state.bigHeight + "px"}} onClick={this.checkSizeArrDisableFn}/>
                         <ul className="img_nav">
                             {
                                 this.state.currentGood && this.state.currentGood.imgArr.map((item, index)=> {
@@ -214,20 +275,32 @@ class DetailInfo extends React.Component {
                         </div>
 
                         <div className="price"><span className="unit">￥</span>{this.state.currentGood?this.state.currentGood.price:this.props.goodDetail.skuBeanList[0].price}</div>
+                      
+                      
                         <div className="specifications_con">
                             <div className="title_name">{this.state.colorTitle}</div>
                             <ul className="specifications_list">
                                 {this.state.colorArr && this.state.colorArr.map((item, index)=> {
-                                    return (<li className={this.state.currentColorIndex==index?"on":""} key={item.id} onClick={()=>{this.selectColorFn(index)}}>{item.attributeValue}</li>)
+                                    if (item.showFlag) {
+                                        return (<li className={this.state.currentColorIndex==index?"on":""} key={item.id} onClick={()=>{this.selectColorFn(index)}}>{item.attributeValue}</li>)
+                                    } else {
+                                        return (<li className="dis" key={item.id} >{item.attributeValue}</li>)
+                                    }
                                 })}
                             </ul>
                         </div>
 
                         <div className="specifications_con">
                             <div className="title_name">{this.state.sizeTile}</div>
-                            <ul className="specifications_list">             
+                            <ul className="specifications_list">   
+
                                 {this.state.sizeArr && this.state.sizeArr.map((item, index)=>{
-                                    return (<li className={this.state.currentSizeIndex==index?"on":""} key={item.id} onClick={()=>{this.selectSizeFn(index)}}>{item.attributeValue}</li>)
+                                    if (item.showFlag) {
+                                        return (<li className={this.state.currentSizeIndex==index?"on":""} key={item.id} onClick={()=>{this.selectSizeFn(index)}}>{item.attributeValue}</li>)
+                                    } else {
+                                        return (<li className="dis" key={item.id}>{item.attributeValue}</li>)
+                                    }
+                                   
                                 })}                               
                             </ul>
                         </div>

@@ -175,6 +175,10 @@
     color:#E8A468;
     border: 1px solid #E8A468;
 }
+.productroom_detail_page  .detail_info .right .specifications_con .specifications_list > li.dis{
+    color: #c6c6c6;
+    background: #f2f2f2;
+}
 .productroom_detail_page  .detail_info .right .specifications_con .code_con{
     float:left;
     padding:6px 25px 3px 5px;
