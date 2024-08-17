@@ -49,13 +49,14 @@
     width:142px;
     display:block;
     text-align:center;
-    border:1px solid #C6A189;
     border-radius:40px;
-    /* margin-left:4%; */
+
     margin-left:8.7%;
     margin-top:1.9%;
+    
     overflow:hidden;
-    color:#C6A189;
+    color:#fff;
+    background: #C6A189;
     position:absolute;
     height:10%;
     display:flex;

@@ -54,6 +54,10 @@
     background:url("../../../assets/icon/icon_up.png") no-repeat right center;
 }
 
+.productroom_detail_page .good_edit_detail .content > .right .img_txt_con{
+    height:750px;
+    overflow-y:auto;
+}
 .productroom_detail_page .good_edit_detail .content > .right .img_list{
     overflow:hidden;
     padding:20px 20px 0;
@@ -74,10 +78,10 @@
 .productroom_detail_page .good_edit_detail .content > .right .img_list .img:nth-child(even) {
     float:right;
 }
+
+ 
 .productroom_detail_page .good_edit_detail .content > .right .text_con{
     overflow:hidden;
-    height:750px;
-    overflow-y:auto;
 }
 .productroom_detail_page .good_edit_detail .content > .right .text_con .tit{
     height:54px;
@@ -120,6 +124,24 @@
 }
 
 
+::-webkit-scrollbar {
+    width: 5px; /* 对于垂直滚动条，设置宽度 */
+    height: 5px; /* 对于水平滚动条，设置高度 */
+  }
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1; /* 背景色 */
+  }
+   
+  /* 滚动条滑块 */
+  ::-webkit-scrollbar-thumb {
+    background: #888; /* 滑块颜色 */
+  }
+   
 
 
 
+
+ /* 滑块hover效果 */
+::-webkit-scrollbar-thumb:hover {
+    background: #555; /* 滑块hover颜色 */
+  }

@@ -7,7 +7,7 @@
 }
 
 .us_page_con .intro_text{
-    height:360px;
+ 
     overflow:hidden;
     border:1px solid brown;
 }
@@ -17,20 +17,17 @@
    overflow:hidden;
    
    margin-top:120px;
-   border:1px solid brown;
+ 
 
 }
 .us_page_con .intro_text .text_con .title{
-
    font-size:36px;
    float:left;
-   border:1px solid brown;
 }
 .us_page_con .intro_text .text_con .txt{
 
-   width:50%;
+   width:67%;
    float:right;
-   border:1px solid brown;
    line-height:28px;
 }
 
@@ -42,4 +39,8 @@
 }
 
 
-
+.us_page_con #video{
+   width:90%;
+   float:right;
+   margin:20px 0 120px;
+}

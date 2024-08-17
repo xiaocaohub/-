@@ -6,6 +6,7 @@ import zh_CN from 'antd/es/locale/zh_CN';
 import "./index.css";
 import Header from "../../components/Header";
 
+import GoodNav from "../../components/ProductRoom/GoodNav";
 import Good from "../../components/ProductRoom/Good";
 import request from "../../api/request";
 class Show extends React.Component {
@@ -34,21 +35,21 @@ class Show extends React.Component {
         formData.append("storeType", 6);
         formData.append("page", this.state.currentPage);
         formData.append("pageSize", this.state.pageSize);
+        
+        
         formData.append("styleIds", "")
-
-
         formData.append("sortCriteria", "");
         formData.append("queryCriteria",  JSON.stringify(option));
         formData.append("sort", "");
+        
         request({
-
             url: "/api/gw",
             method: "POST",
-            data: formData        
-        
+            data: formData
         }).then((res)=> {
             let resData =  res.data.data;
             let goodList = resData.goodsList;
+            
             let total = resData.total;
             this.setState({
                 goodList: goodList,
@@ -60,8 +61,10 @@ class Show extends React.Component {
         return (
             <Row className="product_room_con">           
                 <Col span={3}></Col>
+                
                 <Col span={18}>
-                    <div className="nav_con"></div>  
+                    <GoodNav></GoodNav>
+
                     <ul className="product_list">
                         {this.state.goodList.map((item)=> {
                             return (<Good key={item.id} itemData={item}></Good>)

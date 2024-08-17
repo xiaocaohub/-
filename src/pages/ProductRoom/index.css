@@ -1,15 +1,10 @@
 .product_room_con{
     background:#F5F5F5;
 }
-.product_room_con .nav_con{
-    height:306px;
-    border:1px solid brown;
-}
+
 .product_list{
     margin-top:20px;
-    overflow:hidden;
-
- 
+    overflow:hidden; 
 }
   
 .page_con{
@@ -19,10 +14,7 @@
 
 
 
-
 .page_con .page{
     display: block;
     margin:0 auto;
- 
- 
 }

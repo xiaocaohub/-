@@ -12,14 +12,8 @@ class HotSelling extends React.Component {
         }
         this.prev = this.prev.bind(this)
         this.next = this.next.bind(this)
-
-
-        console.log("hotSellArrData props")
-        
-        console.log(props)
-        console.log("hotSellArrData props")
-
     }
+    
     prev = (index)=> {
         this.img.prev()
     }

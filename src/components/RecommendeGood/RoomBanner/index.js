@@ -19,7 +19,8 @@ class RoomBanner extends React.Component {
                         <div className="txt">用餐 宴客 慢品烟火</div> */}
                         <div className="big_tit"></div>
                         <div className="txt"></div>
-                        <Link to="/" className="show_more_btn">查看更多</Link>
+
+                        <Link to="/" className="show_more_btn">查看更多 &gt;</Link>
                     </div>
                 </div>
             </div>

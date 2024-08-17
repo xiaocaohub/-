@@ -30,7 +30,8 @@ class Show extends React.Component {
             ],
             goodId: 0,
             goodInfo: "",
-            goodInfoFlag: false
+            goodInfoFlag: false,
+
         }    
     }
     componentDidMount () {
@@ -74,6 +75,9 @@ class Show extends React.Component {
             data: formData
         }).then((res)=> {
             let resData = res.data.data;
+            console.log("resData")
+            console.log(resData)
+            console.log("resData----------------")
             _this.setState({
                 goodInfo: resData
             })
@@ -84,13 +88,19 @@ class Show extends React.Component {
             designCurrentIndex: index 
         }) 
     }
+    setSelectGoodFn = (currentGood)=> {
+        console.log("currentGoodFn", currentGood)
+        this.setState({
+            currentGood: currentGood
+        })
+    }
     render () {
         return (
             <div className="productroom_detail_page">
                 <Row>
                     <Col span={3}></Col>
                     <Col span={18}>
-                        {this.state.goodInfo&&<DetailInfo goodDetail={this.state.goodInfo}></DetailInfo>}
+                        {this.state.goodInfo&&<DetailInfo goodDetail={this.state.goodInfo} setSelectGood={this.setSelectGoodFn}></DetailInfo>}
                         {this.state.goodInfoFlag&&<ShowLoading></ShowLoading>}
                         <div className="design_same_con">
                             <ul className="nav_list">          
@@ -109,7 +119,7 @@ class Show extends React.Component {
                     <Col span={3}></Col>
                 </Row>
                 
-                {this.state.goodInfo&&<GoodDetail goodDetail={this.state.goodInfo}></GoodDetail>}
+                {this.state.goodInfo && this.state.currentGood &&<GoodDetail goodDetail={this.state.goodInfo} currentGood={this.state.currentGood}></GoodDetail>}
             </div>
         )
     }

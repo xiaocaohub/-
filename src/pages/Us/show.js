@@ -2,6 +2,7 @@ import React from "react";
 import {Row, Col} from "antd";
 import bannerImg from "../../assets/us_banner.png";
 
+import bigVedio1 from "../../assets/big_vedio1.mp4";
 import "./index.css";
 class Show extends React.Component {    
     render () {
@@ -26,7 +27,10 @@ class Show extends React.Component {
                                     
                                 </div>
                             </div>
+                            <video  className="big_video" src={bigVedio1} id="video" muted></video>
                         </div>
+
+                        <div className="brand_con"></div>
                     </Col>
                   
                 </Row>
