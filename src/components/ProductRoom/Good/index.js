@@ -6,12 +6,14 @@ import { HeartOutlined   } from '@ant-design/icons';
 import "./index.css";
 import goodImg from "../../../assets/recomend_good1.png";
 
+
+import {setImgAutoFn} from "../../../utils/imgAuto"; 
 class Good extends React.Component {
     constructor (props) {
         super(props)
- 
     }
     render () {
+
         return (
             <div className="series_good">
 

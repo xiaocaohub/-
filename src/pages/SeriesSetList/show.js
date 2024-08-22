@@ -5,21 +5,21 @@ import Good from "../../components/SeriesSetList/Good";
 import {getGoodListApi} from "../../api/SeriesSetList";
 import { getStorageFn } from "../../utils/localStorage";
 import banner from "../../assets/seriesset_list.png";
+
 import "./index.css";
 class Show extends React.Component {
     constructor (props) {
         super(props)
         console.log("props --------")
+
         console.log(props)
         console.log('props -')
         this.state = {
             brandId: parseInt(props.match.params.id),
-
             goodListArr: []
         }
     }
     getGoodListFn = ()=> {
-
         let formData = new FormData();
         let storeId = getStorageFn("storeId") || 1;
         let storeType = getStorageFn("storeType") || 6;

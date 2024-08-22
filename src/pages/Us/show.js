@@ -4,7 +4,7 @@ import bannerImg from "../../assets/us_banner.png";
 
 import bigVedio1 from "../../assets/big_vedio1.mp4";
 import "./index.css";
-class Show extends React.Component {    
+class Show extends React.Component {
     render () {
         return (
             <div className="us_page_con">

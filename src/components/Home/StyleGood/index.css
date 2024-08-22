@@ -7,13 +7,16 @@
     background:#fff;
     border:1px solid transparent;
     border-radius:10px;
+    border:1px solid brown;
 }
 .style_good:nth-child(3n+1) {
     margin-left:0;
 }
 .style_good:hover{
+   
     border-color:#C6A189;
 }
+
 .style_good  .good_img{
     display:block;
     width:100%;

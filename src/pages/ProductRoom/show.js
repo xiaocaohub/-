@@ -9,47 +9,72 @@ import Header from "../../components/Header";
 import GoodNav from "../../components/ProductRoom/GoodNav";
 import Good from "../../components/ProductRoom/Good";
 import request from "../../api/request";
+import {getStorageFn} from "../../utils/localStorage";
 class Show extends React.Component {
     constructor (props) {
         super(props)
+
         this.state = {
             goodList: [],
-
             total: 0,
             currentPage: 1,
-            pageSize: 40
+            pageSize: 16
         }
     }
-
     componentDidMount () {
+        // this.getSpaceNavFn()
         this.getGoodListFn()
     }
     pageOnChange = (pageNumber)=> {
         // console.log(pageNumber)
     }
-    getGoodListFn = ()=> {
+    getGoodListFn = (optionIds)=> {
+        console.log("optionIds", optionIds)
+        // console.log("spaceId", spaceId)
+        // console.log("categoryId", categoryId)
         let formData = new FormData();
         let option = {"brandId":"","minPrice":"","maxPrice":""};
+        let storeId = getStorageFn("storeId") || 1;
+       
+       
+        let storeType = getStorageFn("storeType") || 6;
+        let productClass = "";
+        let styleId = "";
+        if (optionIds) {
+
+            if (optionIds.spaceSid && optionIds.spaceId) {
+                productClass = "-" + optionIds.spaceSid + "-" + optionIds.spaceId + "-";
+            }
+            
+            if (optionIds.categoryId) {
+                productClass += optionIds.categoryId + "-";
+            }
+            styleId = optionIds.styleId;
+            console.log("productClass: " + productClass)
+            console.log("productClass styleId: " + styleId)
+        }
+       
+        
         formData.append("api", "app.product.listProduct");
-        formData.append("storeId", 1);
-        formData.append("storeType", 6);
+        formData.append("storeId", storeId);
+        formData.append("storeType", storeType);
         formData.append("page", this.state.currentPage);
-        formData.append("pageSize", this.state.pageSize);
+        formData.append("pageSize", this.state.pageSize);   
         
-        
-        formData.append("styleIds", "")
+        formData.append("productClass", productClass);
+        formData.append("styleIds",  styleId);
         formData.append("sortCriteria", "");
         formData.append("queryCriteria",  JSON.stringify(option));
+
         formData.append("sort", "");
-        
         request({
             url: "/api/gw",
             method: "POST",
             data: formData
         }).then((res)=> {
+            console.log(res)
             let resData =  res.data.data;
-            let goodList = resData.goodsList;
-            
+            let goodList = resData.goodsList;    
             let total = resData.total;
             this.setState({
                 goodList: goodList,
@@ -57,13 +82,31 @@ class Show extends React.Component {
             })
         })
     }
+
+    // getSpaceNavFn = ()=> {
+    //     let _this = this;
+    //     let formData = new FormData();
+    //     formData.append("api", "app.product.getSpaceClassList");
+    //     formData.append("storeId", 1);
+    //     formData.append("storeType", 6);
+    //     request({
+    //         url: "/api/gw",
+    //         method: "POST",
+    //         data: formData
+    //     }).then((res)=> {
+    //         let resData =  res.data.data;
+    //         _this.setState({
+    //             spaceNavArr: resData
+    //         })
+    //     })
+    // }
     render () {
         return (
             <Row className="product_room_con">           
                 <Col span={3}></Col>
                 
                 <Col span={18}>
-                    <GoodNav></GoodNav>
+                    <GoodNav getGoodListFn={this.getGoodListFn} total={this.state.total}></GoodNav>
 
                     <ul className="product_list">
                         {this.state.goodList.map((item)=> {
@@ -104,5 +147,7 @@ class Show extends React.Component {
         )
     }
 }
+
+
 
 export default Show;

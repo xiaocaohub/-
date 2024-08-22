@@ -49,6 +49,8 @@
    flex-direction:row;
    align-items:center;
    overflow:hidden;
+
+   margin-bottom:20px;
 }
 .footer_con  .icon_list > li .icon{
     width:24.2%;

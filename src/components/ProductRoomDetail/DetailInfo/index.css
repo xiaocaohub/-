@@ -149,6 +149,8 @@
  
 }
 .productroom_detail_page  .detail_info .right .specifications_con .title_name{
+
+   max-width:20%;
    float:left;
    color:#999;
    font-size:14px;
@@ -156,7 +158,7 @@
    margin-right:5%;
 }
 .productroom_detail_page  .detail_info .right .specifications_con .specifications_list{
-   width:87%;
+   max-width:83%;
    overflow:hidden;
    float:left;
 }

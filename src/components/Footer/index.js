@@ -18,19 +18,19 @@ class Footer extends React.Component {
                 },
                 {
                     id: 1,
-                    imgSrc: require("../../assets/footer_icon1.png"),
+                    imgSrc: require("../../assets/footer_icon2.png"),
 
                     txt: "高颜高品质"
                 },
                 {
                     id: 2,
-                    imgSrc: require("../../assets/footer_icon2.png"),
+                    imgSrc: require("../../assets/footer_icon3.png"),
 
                     txt: "色尺面百变定制"
                 },
                 {
                     id: 3,
-                    imgSrc: require("../../assets/footer_icon3.png"),
+                    imgSrc: require("../../assets/footer_icon4.png"),
                     txt: "极致售后保障"
                 }
             ],

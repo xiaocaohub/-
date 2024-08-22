@@ -13,10 +13,10 @@ class StyleGood extends React.Component {
             <div className="style_good">
                 <Link to={"/productroom/detail/" + this.props.styleGood.id }>
                     <img src={this.props.styleGood.coverImg} alt="" className="good_img"/>
+          
                 </Link>
                 <div className="good_bottom">
-                    <div className="text_con">
-                   
+                    <div className="text_con">         
                         <div className="txt">{this.props.styleGood.product_title}</div>
                         <div className="price">
                             <span className="unit">¥ </span>{parseInt(this.props.styleGood.price)}
