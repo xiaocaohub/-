@@ -94,10 +94,11 @@ class GoodDetail extends React.Component {
                                     //     </div>
                                     // )
                                     return (
-                                        <div  className="img_con" key={index} style={{height:this.state.imgHeight+"px"}}>
+                                        <div  className="img_con" key={index}>
                                             <Image
                                                 src= {item}      
-                                                width={150} height={this.state.imgHeight} className="img"
+                                                // width={150} height={this.state.imgHeight} className="img"
+                                                width={150} height={150} className="img"
                                                 preview={{
                                                     visible: false
                                                 }}
