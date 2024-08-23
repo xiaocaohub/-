@@ -24,6 +24,19 @@
     color:#fff;
     transition:all 0.5s;
 }
+
+.header_con .header_top .header_img{
+    display:block;
+
+    width:29px;
+    height:29px;
+    float:right;
+    border-radius:32px;
+    margin-top:5px;
+}
+
+
+
 .header_con .header_bottom {
     padding:20px 0;
     background:#fff;

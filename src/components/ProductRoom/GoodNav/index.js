@@ -421,6 +421,8 @@ class GoodNav extends React.Component {
                         <div className="show_btn">收起 <DownOutlined /></div>
                     </div> */}
                 </div>
+
+                <div className="sort_con"></div>
             </div>
         )
     }

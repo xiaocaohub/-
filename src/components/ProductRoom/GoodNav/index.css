@@ -1,6 +1,6 @@
-.product_nav_con .good_nav_con{
+.product_nav_con {
  
-    /* border:1px solid brown; */
+    border:1px solid brown;
 }
 .product_nav_con .breadcrumb_con{
     overflow:hidden;
@@ -155,4 +155,10 @@
     cursor:pointer;
 }
 
+.product_nav_con .sort_con{
+    height:50px;
 
+    border:1px solid brown;
+    
+    margin-top:20px;
+}

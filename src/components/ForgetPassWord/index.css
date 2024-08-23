@@ -97,32 +97,12 @@
     color:#fff;
     cursor:pointer;
     letter-spacing:6px;
+
+    
 }
-.register_form_con .agreement_text{
-    overflow:hidden;
  
-    margin-top:29px;
- }
-
- .register_form_con .agreement_text .tit{
-    float:left;
  
-    font-size:14px;
-    background:url("../../assets/icon/icon_select.png") no-repeat left center;
-    cursor:pointer;
-    padding-left:20px;
- }
-  .register_form_con .agreement_text .tit.on{
 
-    background:url("../../assets/icon/icon_select_on.png") no-repeat left center;
-  }
- .register_form_con .agreement_text .txt{
-    float:right;
-
-    font-size:14px;
-    color:#C6A189;
-    text-decoration:none;
- }
 
 
  

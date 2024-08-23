@@ -2,25 +2,21 @@ import React from "react";
 import {Link} from "react-router-dom";
 import loginBack from "../../assets/login_small_back.png";
 
-import LoginPage from "../../components/Login";
-import ForgetPassWord from "../../components/ForgetPassWord";
+import Register from "../../components/Register";
 import "./index.css";
 class Show extends React.Component {
     constructor (props) {
         super(props)
-        console.log("login")
+        console.log("props register")
         console.log(props)
-        console.log("login")
+        console.log("props register")
         this.state = {
             loginFlag: true
         }
     }
-    forgetFn = ()=> {
+    goLoginFn = ()=> {
 
-        this.setState({
-            
-            loginFlag: false
-        })
+        this.props.history.push("/login")
     }
     render () {
         return (
@@ -28,7 +24,7 @@ class Show extends React.Component {
                 <div className="login_con">
                     <img src={loginBack} className="login_back"/>
                     <div className="form_con">
-                        {this.state.loginFlag?<LoginPage loginFlag={this.state.loginFlag} forgetFn={this.forgetFn}/>:<ForgetPassWord /> }           
+                        <Register goLoginFn={this.goLoginFn}/>       
                     </div>
                     <Link to="/" className="home_btn">返回首页</Link>
                 </div>
@@ -36,6 +32,5 @@ class Show extends React.Component {
         )
     }
 }
-
 
 export default Show;
