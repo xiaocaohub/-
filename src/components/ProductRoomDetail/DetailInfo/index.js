@@ -16,14 +16,17 @@ class DetailInfo extends React.Component {
 
         // console.log("show detail props")
         this.state = {
+            // 大图 index
             currentIndex: 1,
             bigImg: require("../../../assets/vedio_list1.png"),
+         
             bigHeight: 450,
-
             count: 1,
+            // 颜色
             colorArr: [],
             currentColorIndex: 0,
             currentColor: "",
+            // 尺寸
             sizeArr: [],
             currentSizeIndex: 0,
             currentSize: "",
@@ -31,19 +34,19 @@ class DetailInfo extends React.Component {
             allGoodArr: [],
             // 选中的商品 colorId, sizeId
             selectGoodIds: [],
+            
+            
+            
             // 选中的商品
             currentGood: props.goodDetail.skuBeanList[0],
             // 选中颜色匹配上的所有商品
             allColorSizeGoodArr: []
         }   
     }
-
-
     componentDidMount () {
        this.initDataFn()
        this.setBigImgHeightFn()
     }
-
     initDataFn = ()=> {
         let attrList = this.props.goodDetail.attrList;
         let colorArr = attrList[0].attr;
@@ -55,7 +58,7 @@ class DetailInfo extends React.Component {
         selectGoodIds[0] = colorArr[0].id;
         selectGoodIds[1] = sizeArr[0].id;
         let goodFirst = this.props.goodDetail.skuBeanList[0];
-        
+
         this.setState({
             colorArr: colorArr,
             colorTitle: colorTitle,
@@ -81,6 +84,41 @@ class DetailInfo extends React.Component {
         this.setState({
             bigHeight: height,
             smallHeight: smallHeight
+        })
+    }
+    leftImgFn = ()=> {
+        let imgArr = this.state.currentGood.imgArr;
+        let length = imgArr.length;
+        let currentIndex = this.state.currentIndex;
+        let bigImg = "";
+        if (currentIndex > 0) {
+            currentIndex -= 1;
+        } else {
+            currentIndex = length - 1;
+        }
+        bigImg = imgArr[currentIndex];
+
+        this.setState({
+            currentIndex: currentIndex,
+            bigImg: bigImg
+        })
+        console.log(this.state.currentIndex)
+    }
+    rightImgFn = ()=> {
+        let imgArr = this.state.currentGood.imgArr;
+        let length = imgArr.length;
+        let currentIndex = this.state.currentIndex;
+        let bigImg = "";
+        if (currentIndex >= (length-1)) {
+            currentIndex = 0;
+        } else {
+            currentIndex +=  1;
+        }
+        bigImg = imgArr[currentIndex];
+
+        this.setState({
+            currentIndex: currentIndex,
+            bigImg: bigImg
         })
     }
     selectNavFn = (index, item)=> {
@@ -119,7 +157,6 @@ class DetailInfo extends React.Component {
             currentColor: color
             // sizeArr: sizeArr
         }, function () {
-
             this.checkSizeArrDisableFn()
             this.selectGoodFn()
         })
@@ -133,15 +170,14 @@ class DetailInfo extends React.Component {
     }
     checkSizeArrDisableFn = ()=> {    
         let currentColor = this.state.currentColor;
+        
+        
         let colorId = currentColor.id;
-       
-       
-     
         // console.log("currentColor", currentColor)
         let sizeArr = this.state.sizeArr;
         let sizeLength = sizeArr.length;
+
         let allGoodArr = this.state.allGoodArr;
-     
         let allLength = allGoodArr.length;
         // console.log("allGoodArr", allGoodArr)
         for (let i=0; i<sizeLength; i++) {
@@ -176,9 +212,6 @@ class DetailInfo extends React.Component {
     checkColorArrDisableFn = ()=> {    
         let currentSize = this.state.currentSize;
         let sizeId = currentSize.id;
-        console.log("currentSize", currentSize)
-        console.log("sizeId", sizeId)
-     
         let colorArr = this.state.colorArr;
         let colorLength = colorArr.length;
         let allGoodArr = this.state.allGoodArr;
@@ -196,10 +229,7 @@ class DetailInfo extends React.Component {
                 }
             }
         }
-        // setTimeout(()=>{
-        //     console.log("colorArr", colorArr)
        
-        // }, 3500)
         this.setState({
             colorArr: colorArr
         })
@@ -245,7 +275,13 @@ class DetailInfo extends React.Component {
             <div className="detail_info_con">
                 <div className="detail_info">             
                     <div className="left">
-                        <img src={this.state.bigImg} alt="" className="big_img" id="big_img"   style={{height: this.state.bigHeight + "px"}} onClick={this.checkSizeArrDisableFn}/>
+                        <div className="big_img_con">
+
+                            <img src={this.state.bigImg} alt="" className="big_img" id="big_img"   style={{height: this.state.bigHeight + "px"}} onClick={this.checkSizeArrDisableFn}/>
+                            <div className="btn left_btn" onClick={this.leftImgFn}></div>
+                            <div className="btn right_btn" onClick={this.rightImgFn}></div>
+                        </div>
+                       
                         <ul className="img_nav">
                             {
                                 this.state.currentGood && this.state.currentGood.imgArr.map((item, index)=> {

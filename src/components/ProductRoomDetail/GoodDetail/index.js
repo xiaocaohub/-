@@ -1,8 +1,9 @@
 import React from "react";
-import {Row, Col} from "antd";
+import {Row, Col, Image } from "antd";
 import "./index.css";
 
 import goodImg from "../../../assets/recomend_good1.png";
+ 
 class GoodDetail extends React.Component {
     constructor (props) {
         super(props)
@@ -12,7 +13,9 @@ class GoodDetail extends React.Component {
             // 属性
             attrArr: [],
             imgHeight: 90,
-            foldFlag: true
+            foldFlag: true,
+
+            visible: false
         }
     }
     componentDidMount () {
@@ -64,6 +67,11 @@ class GoodDetail extends React.Component {
             showRealPhotos: showRealPhotos
         })
     }
+    showBigImgFn = (flag)=> {
+        this.setState({
+            visible: flag
+        })
+    }
     render () {
         return (
             <Row className="good_edit_detail">
@@ -78,12 +86,33 @@ class GoodDetail extends React.Component {
  
                         <div className="img_txt_con"> 
                             <div className="img_list">
+                                <Image.PreviewGroup>
                                 {this.state.showRealPhotos.length>0 && this.state.showRealPhotos.map((item, index)=> {
-                                    return (<img src={item} alt="" className="img" key={index} style={{height:this.state.imgHeight+"px"}}/>)
+                                    // return (
+                                    //     <div  className="img_con" key={index} style={{height:this.state.imgHeight+"px"}}>
+                                    //         <Image src= {item}    preview={{ visible: false }}  width={150} height={this.state.imgHeight} className="img" onClick={this.showBigImgFn}/>
+                                    //     </div>
+                                    // )
+                                    return (
+                                        <div  className="img_con" key={index} style={{height:this.state.imgHeight+"px"}}>
+                                            <Image
+                                                src= {item}      
+                                                width={150} height={this.state.imgHeight} className="img"
+                                                preview={{
+                                                    visible: false
+                                                }}
+                                        />
+                                       </div>
+                                    )
                                 })}                            
-
+                                </Image.PreviewGroup>
+                               
                                 { this.state.showRealPhotos.length == 0 &&   (<div className="err_msg">~暂未上传实拍图~</div>)}
                             </div>
+
+                            
+
+
 
                             <div className="text_con">
                                 <div className="tit">商品信息</div>

@@ -66,19 +66,21 @@
     text-align:center;
     padding:20px;
 }
-.productroom_detail_page .good_edit_detail .content > .right .img_list .img{
+.productroom_detail_page .good_edit_detail .content > .right .img_list .img_con{
     width:47%;
-    height:70px;
+    height:100px;
     margin-bottom:5%;
     cursor:pointer;
 }
-.productroom_detail_page .good_edit_detail .content > .right .img_list .img:nth-child(odd) {
+.productroom_detail_page .good_edit_detail .content > .right .img_list .img_con:nth-child(odd) {
     float:left;
 }
-.productroom_detail_page .good_edit_detail .content > .right .img_list .img:nth-child(even) {
+.productroom_detail_page .good_edit_detail .content > .right .img_list .img_con:nth-child(even) {
     float:right;
 }
-
+.productroom_detail_page .good_edit_detail .content > .right .img_list .img_con .img{
+    object-fit: cover;
+}
  
 .productroom_detail_page .good_edit_detail .content > .right .text_con{
     overflow:hidden;
