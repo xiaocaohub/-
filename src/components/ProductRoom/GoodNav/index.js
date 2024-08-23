@@ -38,7 +38,8 @@ class GoodNav extends React.Component {
 
 
             styleIdSelectArr: [],
-            styleNameSelectArr: []
+            styleNameSelectArr: [],
+            categoryUlShowFlag: true
         }
     }
 
@@ -52,8 +53,8 @@ class GoodNav extends React.Component {
             styleHover: styleHover
         })
     }
-    selectStyleHoverFn = (index)=> {
-       
+
+    selectStyleHoverFn = (index)=> {   
         let styleNavArr = this.state.styleNavArr;
         let styleId = styleNavArr[index].id;
         let navOption = this.state.navOption;
@@ -183,7 +184,7 @@ class GoodNav extends React.Component {
             data: formData
         }).then((res)=> {
             let resData =  res.data.data.list;
-            
+
             resData.forEach((item, index)=>{
                 item.checked = false;
             })
@@ -331,6 +332,15 @@ class GoodNav extends React.Component {
         })
         this.getSpaceGoodListFn(navOption)
     }
+    categoryUlShowFn = ()=> {
+        let categoryUlShowFlag = !this.state.categoryUlShowFlag;
+
+
+
+        this.setState({
+            categoryUlShowFlag: categoryUlShowFlag
+        })
+    }
     render () { 
         return (
             <div className="good_nav_con">
@@ -363,8 +373,6 @@ class GoodNav extends React.Component {
                                     </li>)
                                 })}
                             </ul>
-                    
-                    
                             {/* <div className="slect_more">+多选</div>
                                 <div className="show_btn">收起 <DownOutlined /></div> */}
                         </div>
@@ -372,15 +380,14 @@ class GoodNav extends React.Component {
 
                     <div className="nav_list_con">
                         <div className="title">品类</div>
-                        <ul className="nav_list">
-                            
+                        <ul className={this.state.categoryUlShowFlag?"nav_list category_ul_on": "nav_list"}>
                             {this.state.categoryNavArr.length>0 && this.state.categoryNavArr.map((item, index)=> {
                                 return (<li className={item.checked?"category_item on": "category_item"} key={item.cid} onClick={()=>{this.selectCategoryNavFn(item, index)}} data-id= {item.cid}>{ item.pname }</li>)
                             })}
                         </ul>
  
                         {/*  <div className="slect_more">+多选</div> */}
-                        <div className="show_btn">收起 <DownOutlined /></div> 
+                        <div className="show_btn" onClick={this.categoryUlShowFn}>收起 <DownOutlined /></div> 
                     </div>
 
                     

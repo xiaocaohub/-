@@ -74,6 +74,11 @@
     width:76%;
     float:left;
 }
+.product_room_con .good_nav .nav_list_con .nav_list.category_ul_on{
+    height: 50px;
+    overflow:hidden;
+ 
+}
 .product_room_con .good_nav .nav_list_con.on{
     border:1px solid  #E8A468;
     padding-right:15px;
