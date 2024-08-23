@@ -35,8 +35,9 @@ class RegisterPage extends React.Component {
             if (count === 0) {
                 clearInterval(set)
                 _this.setState({
-                    setFlag: false,
                  
+                 
+                    setFlag: false,
                  
                     count: 60
                 })
