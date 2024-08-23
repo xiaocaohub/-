@@ -56,7 +56,10 @@ class GoodNav extends React.Component {
 
     selectStyleHoverFn = (index)=> {   
         let styleNavArr = this.state.styleNavArr;
-        let styleId = styleNavArr[index].id;
+        // console.log("styleNavArr[index]")
+        // console.log(styleNavArr[index])
+        // console.log("styleNavArr[index]")
+        let styleId = parseInt(styleNavArr[index].value);
         let navOption = this.state.navOption;
         navOption.styleId = styleId;
         navOption.stylePname = styleNavArr[index].text;
@@ -72,17 +75,22 @@ class GoodNav extends React.Component {
         let navOption = this.state.navOption;
         let styleIdSelectArr = [];
         let styleNameSelectArr = [];
+        
         styleNavArr.forEach((item, i)=>{
             if (item.checked) {
-                styleIdSelectArr.push(item.id)
-                styleNameSelectArr.push(item.text)
+                let styleId = parseInt(item.value);
+                styleIdSelectArr.push(styleId);
+                styleNameSelectArr.push(item.text);
             }
         })
         // let styleId = styleIdSelectArr.join(",");
         // let stylePname = styleNameSelectArr.join(", ");
         // navOption.styleId = styleId;
         // navOption.stylePname = stylePname;
-       
+
+        // console.log("style styleIdSelectArr" )
+        // console.log(this.state.styleIdSelectArr)
+        // console.log("style styleIdSelectArr")
         this.setState({
             styleNavArr: styleNavArr,
             styleIdSelectArr: styleIdSelectArr,
@@ -184,7 +192,6 @@ class GoodNav extends React.Component {
             data: formData
         }).then((res)=> {
             let resData =  res.data.data.list;
-
             resData.forEach((item, index)=>{
                 item.checked = false;
             })
@@ -216,11 +223,9 @@ class GoodNav extends React.Component {
     }
 
     selectCategoryNavFn = (item, index)=> {
-        console.log("item cate")
-        console.log(item)
-        console.log("item cate")
-         
-
+        // console.log("item cate")
+        // console.log(item)
+        // console.log("item cate")
         let _this = this;
         let navOption = this.state.navOption;
         if (!navOption.spaceSid) {
@@ -229,17 +234,18 @@ class GoodNav extends React.Component {
         if (!navOption.spaceId) {
             navOption.spaceId = _this.state.currentSpaceId;
         }
+
+
+
         if (!navOption.spacePname) {
             navOption.spacePname = _this.state.currentSpacePname;
         }
         let categoryNavArr = this.state.categoryNavArr;
+        
         categoryNavArr.forEach((item, i)=>{
             item.checked = false;
         })
       
-
-
-
         categoryNavArr[index].checked = true;
         navOption.categoryPname = item.pname;
         navOption.categoryId =  item.cid;
@@ -247,9 +253,9 @@ class GoodNav extends React.Component {
             currentCategoryId: item.cid,
             categoryPname: item.pname,
             navOption: navOption,
+
             categoryNavArr: categoryNavArr
         }, function () {
-
             _this.getSpaceGoodListFn(_this.state.navOption)
         })
     }
@@ -267,13 +273,10 @@ class GoodNav extends React.Component {
         styleNavArr.forEach((item, index)=> {
             item.checked = false;
         })
-     
-     
         this.setState({
             navOption: navOption,
             styleNavArr: styleNavArr,
             styleIdSelectArr: [],
-
             styleNameSelectArr: []
         }, function () {
             this.getSpaceGoodListFn(this.state.navOption)
@@ -289,9 +292,9 @@ class GoodNav extends React.Component {
             styleId: "",
             stylePname: ""
         }
-        console.log("spaceNavArr")
-        console.log(this.state.spaceNavArr)
-        console.log("spaceNavArr")
+        // console.log("spaceNavArr")
+        // console.log(this.state.spaceNavArr)
+        // console.log("spaceNavArr")
         let currentSpaceId = this.state.spaceNavArr[0].cid;
         this.setState({
             navOption: navOption,
@@ -311,18 +314,12 @@ class GoodNav extends React.Component {
         categoryNavArr.forEach((item)=> {
             item.checked = false;
         })
-
-
-
-
         this.setState({
             navOption: navOption,
             categoryNavArr: categoryNavArr
         })
         this.getSpaceGoodListFn(navOption)
     }
-
-
     clearStyleFn = ()=> {
         let navOption = this.state.navOption;
         navOption.styleId = "";
@@ -334,33 +331,29 @@ class GoodNav extends React.Component {
     }
     categoryUlShowFn = ()=> {
         let categoryUlShowFlag = !this.state.categoryUlShowFlag;
-
-
-
         this.setState({
             categoryUlShowFlag: categoryUlShowFlag
         })
     }
     render () { 
         return (
-            <div className="good_nav_con">
+            <div className="product_nav_con">
                 <div className="breadcrumb_con">
                     <Breadcrumb  separator={<CaretRightOutlined />} className="breadcrumb">     
                         <Breadcrumb.Item>首页</Breadcrumb.Item>
+            
                         <Breadcrumb.Item><a href="">产品仓</a></Breadcrumb.Item>
                         <Breadcrumb.Item>共 {this.props.total} 款宝贝</Breadcrumb.Item>
                     </Breadcrumb>
 
                     <div className="select_nav_con">
-
-
                         {(this.state.navOption.spacePname || this.state.navOption.categoryPname || this.state.navOption.stylePname) &&  <div className="clear_all" onClick={this.clearNavFn}>清空 <DeleteOutlined /></div>}
                         {this.state.navOption.spacePname &&  <div className="select_nav_item" onClick={this.clearSpaceFn}>{this.state.navOption.spacePname} <CloseOutlined /></div>}
                         {this.state.navOption.categoryPname && <div className="select_nav_item" onClick={this.clearCategoryFn}>{this.state.navOption.categoryPname} <CloseOutlined /></div>}
                         {this.state.navOption.stylePname && <div className="select_nav_item" onClick={this.clearStyleFn}> {this.state.navOption.stylePname} <CloseOutlined /></div>}
                     </div>
-
                     <div className="show_btn_a">收起筛选 <UpOutlined /></div>
+
                 </div>
                 <div className="good_nav">
                     {   !this.state.navOption.spacePname &&

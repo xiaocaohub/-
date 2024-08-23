@@ -19,13 +19,13 @@ class Good extends React.Component {
     render () {
         return (
             <div className="series_good">
-                <Link to="/">
-                    <img src={goodImg} alt="" className="good_img"/>
+                <Link to={"/productroom/detail/" + this.props.goodItem.id}>
+                    <img src={this.props.goodItem.coverImg} alt="" className="good_img"/>
                 </Link>
                 <div className="text_con">
-                    <div className="txt">product_title</div>
+                    <div className="txt">{this.props.goodItem.product_title}</div>
                     
-                    <div className="price"><span className="unit">￥</span>price</div>
+                    <div className="price"><span className="unit">￥</span>{this.props.goodItem.price}</div>
                 </div>
                 <ul className="btn_group">
                     <li>

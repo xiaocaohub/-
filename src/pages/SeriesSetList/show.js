@@ -6,40 +6,104 @@ import {getGoodListApi} from "../../api/SeriesSetList";
 import { getStorageFn } from "../../utils/localStorage";
 import banner from "../../assets/seriesset_list.png";
 
+import GoodNav from "../../components/SeriesSetList/GoodNav";
+import request from "../../api/request";
+
 import "./index.css";
 class Show extends React.Component {
     constructor (props) {
         super(props)
-        console.log("props --------")
 
-        console.log(props)
-        console.log('props -')
         this.state = {
-            brandId: parseInt(props.match.params.id),
-            goodListArr: []
+            brandId: parseInt(props.match.params.id),        
+            goodListArr: [],
+            goodList: [],
+            total: 0,
+            currentPage: 1,
+            pageSize: 16
         }
     }
-    getGoodListFn = ()=> {
+    // getGoodListFn = ()=> {
+    //     let formData = new FormData();
+    //     let storeId = getStorageFn("storeId") || 1;
+    //     let storeType = getStorageFn("storeType") || 6;
+    //     let queryCriteria = {brandId:"88",minPrice:"",maxPrice:""};
+    //     formData.append("api", "app.product.listProduct");
+    //     formData.append("storeId", storeId);
+    //     formData.append("storeType", storeType);
+    //     formData.append("page", 1);
+    //     formData.append("pageSize", 6);
+    //     formData.append("queryCriteria", JSON.stringify(queryCriteria));
+    //     getGoodListApi(formData).then((res)=>{     
+    //         // let goodListArr = res.data.data.goodsList;
+    //         console.log("-", res)
+           
+           
+
+
+    //         // this.setState({
+    //         //     goodListArr:
+    //         // })
+    //     })
+    // }
+    componentDidMount () {
+        this.getGoodListFn()
+    }
+
+    getGoodListFn = (optionIds)=> {
+        console.log("optionIds", optionIds)
+        // console.log("spaceId", spaceId)
+        // console.log("categoryId", categoryId)
         let formData = new FormData();
+        let option = {"brandId":"","minPrice":"","maxPrice":""};
         let storeId = getStorageFn("storeId") || 1;
+       
         let storeType = getStorageFn("storeType") || 6;
-        let queryCriteria = {brandId:"88",minPrice:"",maxPrice:""};
+        let productClass = "";
+        let styleId = "";
+        if (optionIds) {
+
+            if (optionIds.spaceSid && optionIds.spaceId) {
+                productClass = "-" + optionIds.spaceSid + "-" + optionIds.spaceId + "-";
+            }
+            
+            if (optionIds.categoryId) {
+                productClass += optionIds.categoryId + "-";
+            }
+
+            if (optionIds.styleId) {
+                styleId = optionIds.styleId;
+            }
+            
+            // console.log("productClass: " + productClass)
+            // console.log("productClass styleId: " + styleId)
+        }
+      
         formData.append("api", "app.product.listProduct");
         formData.append("storeId", storeId);
         formData.append("storeType", storeType);
-        formData.append("page", 1);
-        formData.append("pageSize", 6);
-        formData.append("queryCriteria", JSON.stringify(queryCriteria));
-        getGoodListApi(formData).then((res)=>{     
-            // let goodListArr = res.data.data.goodsList;
-            console.log("-", res)
-           
-           
+        formData.append("page", this.state.currentPage);
+        formData.append("pageSize", this.state.pageSize);   
+        formData.append("brandId", this.state.brandId);
+        formData.append("productClass", productClass);
+        formData.append("styleIds",  styleId);
+        formData.append("sortCriteria", "");
+        formData.append("queryCriteria",  JSON.stringify(option));
 
-
-            // this.setState({
-            //     goodListArr:
-            // })
+        formData.append("sort", "");
+        request({
+            url: "/api/gw",
+            method: "POST",
+            data: formData
+        }).then((res)=> {
+            // console.log(res)
+            let resData =  res.data.data;
+            let goodList = resData.goodsList;    
+            let total = resData.total;
+            this.setState({
+                goodList: goodList,
+                total: total
+            })
         })
     }
     render () {
@@ -59,20 +123,18 @@ class Show extends React.Component {
                             </div>
                         </div>
                         
-                        <div className="nav_con"></div>
+                        <GoodNav getGoodListFn={this.getGoodListFn} total={this.state.total}></GoodNav>
 
                         <div className="good_list">
-                            
-                            <Good></Good>
-                            <Good></Good>
-                            <Good></Good>
-                            <Good></Good>
-                            <Good></Good>
-                            <Good></Good>
+                            {this.state.goodList.length>0 && this.state.goodList.map((item, index)=>{
+                                return (
+                                    <Good goodItem={item} key={item.id}></Good>
+                                )
+                            })}
                         </div>
 
 
-                        <Pagination showQuickJumper defaultCurrent={2} total={500} className="page"/>
+                        <Pagination showQuickJumper defaultCurrent={1} total={this.state.total} className="page"/>
                     </Col>
                     <Col span={3}></Col>
                 </Row>

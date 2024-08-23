@@ -1,12 +1,12 @@
-.product_room_con .good_nav_con{
+.product_nav_con .good_nav_con{
  
     /* border:1px solid brown; */
 }
-.product_room_con .breadcrumb_con{
+.product_nav_con .breadcrumb_con{
     overflow:hidden;
     padding:20px 0;
 }
-.product_room_con .breadcrumb_con .breadcrumb{
+.product_nav_con .breadcrumb_con .breadcrumb{
     float:left;
 
     margin-top:4px;
@@ -14,17 +14,17 @@
 
 
 
-.product_room_con .breadcrumb_con .show_btn_a{
+.product_nav_con .breadcrumb_con .show_btn_a{
     float:right;
     color:#E8A468;
 }
 
 
-.product_room_con .select_nav_con{
+.product_nav_con .select_nav_con{
     float:left;
     margin-left:12px;
 }
-.product_room_con .select_nav_con .clear_all{
+.product_nav_con .select_nav_con .clear_all{
     width:65px;
     height:29px;
     line-height:29px;
@@ -37,7 +37,7 @@
     cursor:pointer;
 }
 
-.product_room_con .select_nav_con .select_nav_item{ 
+.product_nav_con .select_nav_con .select_nav_item{ 
    height:27px;
    line-height:27px;
    float:left; 
@@ -49,20 +49,21 @@
    border:1px solid #E8A468;
    cursor:pointer;
 }
-.product_room_con .good_nav{ 
+
+.product_nav_con .good_nav{ 
     background:#fff;
     border-radius:10px;
     /* border:1px solid brown; */
 }
 
-.product_room_con .good_nav .nav_list_con{
+.product_nav_con .good_nav .nav_list_con{
     overflow:hidden;
      /* border:1px solid brown;  */
     font-size:14px;
     padding:5px 0;
 }
  
-.product_room_con .good_nav .nav_list_con .title{
+.product_nav_con .good_nav .nav_list_con .title{
     width:10%;
     height:100%;
     line-height:52px;
@@ -70,20 +71,20 @@
     float:left;
     font-weight: bold;
 }
-.product_room_con .good_nav .nav_list_con .nav_list{
+.product_nav_con .good_nav .nav_list_con .nav_list{
     width:76%;
     float:left;
 }
-.product_room_con .good_nav .nav_list_con .nav_list.category_ul_on{
+.product_nav_con .good_nav .nav_list_con .nav_list.category_ul_on{
     height: 50px;
     overflow:hidden;
  
 }
-.product_room_con .good_nav .nav_list_con.on{
+.product_nav_con .good_nav .nav_list_con.on{
     border:1px solid  #E8A468;
     padding-right:15px;
 }
-.product_room_con .good_nav .nav_list_con .nav_list > li{
+.product_nav_con .good_nav .nav_list_con .nav_list > li{
     float:left;
     margin-right:3%;
     margin-top:12px;
@@ -91,11 +92,11 @@
     cursor:pointer;
     border-radius:5px;
 }
-.product_room_con .good_nav .nav_list_con .nav_list > li:hover{
+.product_nav_con .good_nav .nav_list_con .nav_list > li:hover{
     color:#E8A468;
     background:#F6F1E8;
 }
-.product_room_con .good_nav .nav_list_con .nav_list > li .select{
+.product_nav_con .good_nav .nav_list_con .nav_list > li .select{
     width:15px;
     height:15px;
     float:left;
@@ -103,14 +104,14 @@
     margin-right:5px;
     margin-top:2px;
 }
-.product_room_con .good_nav .nav_list_con .nav_list > li .select.on{
+.product_nav_con .good_nav .nav_list_con .nav_list > li .select.on{
     background:url("../../../assets/check_true_icon.png") no-repeat center;
 }
-.product_room_con .good_nav .nav_list_con .nav_list > li.category_item.on {
+.product_nav_con .good_nav .nav_list_con .nav_list > li.category_item.on {
     color:#E8A468;
     background:#F6F1E8;
 }
-.product_room_con .good_nav .nav_list .btn_group{
+.product_nav_con .good_nav .nav_list .btn_group{
     width:100%;
     float:left;
     margin-top:20px;
@@ -118,21 +119,25 @@
     justify-content:center;
     padding-bottom:20px;
 }
-.product_room_con .good_nav .nav_list .btn_group .btn{
+
+.product_nav_con .good_nav .nav_list .btn_group .btn{
     padding:5px 15px;
     margin:0 20px;
     border-radius:5px;
     cursor:pointer;
 }
-.product_room_con .good_nav .nav_list .btn_group .sub_btn{
+.product_nav_con .good_nav .nav_list .btn_group .sub_btn{
     background:#E8A468;
     color:#fff;
 }
-.product_room_con .good_nav .nav_list .btn_group .cancel_btn{
+.product_nav_con .good_nav .nav_list .btn_group .cancel_btn{
     color:#999;
     border:1px solid #999;
 }
-.product_room_con .good_nav .nav_list_con .slect_more{
+
+
+
+.product_nav_con .good_nav .nav_list_con .slect_more{
     float:right;
     border:1px solid #1A1A1A;
     padding:3px 10px;
@@ -142,7 +147,7 @@
 }
 
 
-.product_room_con .good_nav .nav_list_con  .show_btn{
+.product_nav_con .good_nav .nav_list_con  .show_btn{
     float:right;
     margin-top:15px;
     margin-right:15px;

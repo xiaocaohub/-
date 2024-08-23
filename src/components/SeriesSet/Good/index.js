@@ -6,10 +6,10 @@ import goodImg from "../../../assets/recomend_good1.png";
 class Good extends React.Component {
     constructor (props) {
         super(props)
-        console.log("item props")
+        // console.log("item props")
 
-        console.log(props)
-        console.log("item props")
+        // console.log(props)
+        // console.log("item props")
     }
     render () {
         return (
