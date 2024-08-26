@@ -41,6 +41,7 @@ class VedioBanner extends React.Component {
         this.getVedioHeight()
     }
     play = ()=> {
+     
         const video = document.getElementById("video");
         video.autoplay = true;
         video.style.outline = "none";

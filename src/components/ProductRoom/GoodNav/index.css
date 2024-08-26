@@ -1,6 +1,6 @@
 .product_nav_con {
  
-    border:1px solid brown;
+    /* border:1px solid brown; */
 }
 .product_nav_con .breadcrumb_con{
     overflow:hidden;
@@ -156,9 +156,77 @@
 }
 
 .product_nav_con .sort_con{
-    height:50px;
+ 
 
-    border:1px solid brown;
-    
+    /* border:1px solid brown; */
+    overflow:hidden;
     margin-top:20px;
+    margin-bottom:40px;
 }
+.product_nav_con .sort_con .sort_list_con{
+    width:49.8%;
+    
+    /* border:1px solid brown; */
+    float:left;
+}
+.product_nav_con .sort_con .sort_list_con .title{
+    
+    height:26px;
+    line-height:26px;
+   
+    float: left;
+    /* border:1px solid brown; */
+    padding-left:25px;
+    font-size:14px;
+}
+.product_nav_con .sort_con .sort_list_con .title.sort_tit{
+    background:url("../../../assets/icon/sort.png") no-repeat left center;
+}
+.product_nav_con .sort_con .sort_list_con .title.filter_tit{
+    background:url("../../../assets/icon/filter.png") no-repeat left center;
+}
+.product_nav_con .sort_con .sort_list_con .sort_list{
+    float:left;
+    /* border:1px solid brown; */
+}
+.product_nav_con .sort_con .sort_list_con .sort_ul{
+    width:35%;
+}
+.product_nav_con .sort_con .sort_list_con .filter_sort{
+    width:75%;
+}
+.product_nav_con .sort_con .sort_list_con .sort_list li{
+    width:58px;
+    height:26px;
+    line-height:26px;
+    text-align:center;
+    float:left;
+    border-radius:26px;
+    cursor:pointer;
+}
+.product_nav_con .sort_con .sort_list_con .sort_list li.on{
+
+    background:#C6A189;
+    color:#fff;
+}
+.product_nav_con .sort_con .sort_list_con .sort_ul > li{
+    margin-left:8%;
+}
+
+.product_nav_con .sort_con .sort_list_con .filter_sort > li{
+    margin-left:4%;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

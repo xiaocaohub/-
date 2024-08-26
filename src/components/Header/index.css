@@ -19,6 +19,8 @@
     margin-left:29px;
     color:#999;
     letter-spacing: 2px;
+
+    cursor:pointer;
 }
 .header_con .header_top .login_btn:hover{
     color:#fff;

@@ -18,7 +18,7 @@ class Good extends React.Component {
             <div className="series_good">
 
                 <Link to={"/productroom/detail/" + this.props.itemData.id} className="good_img">
-                    <img src={this.props.itemData.coverImg} alt="" className="good_img"/>
+                    <img src={this.props.itemData.coverImg} alt="" />
                 </Link>
                 <div className="text_con">
                     <div className="txt">{this.props.itemData.product_title}</div>

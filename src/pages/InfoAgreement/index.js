@@ -1,12 +1,11 @@
 import {connect} from "react-redux";
 import Show from "./show";
 let mapStateToProps = state=> {
-    
     return {
+
 
     }
 }
-
 
 let mapDispatchToProps = dispatch=> {
     return {
@@ -14,6 +13,7 @@ let mapDispatchToProps = dispatch=> {
     }
 }
 
-let Us = connect(mapStateToProps, mapDispatchToProps)(Show);
 
-export default Us;
+let InfoAgreement = connect(mapStateToProps, mapDispatchToProps)(Show);
+
+export default InfoAgreement;

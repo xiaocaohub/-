@@ -13,16 +13,16 @@ class GoodDetail extends React.Component {
             // 属性
             attrArr: [],
             imgHeight: 90,
-            foldFlag: true,
 
+            foldFlag: true,
             visible: false
         }
     }
     componentDidMount () {
+
         this.init()
     }
     init = ()=> {
-      
         let  product = this.props.goodDetail.product;
         let  parameters = product.parameters;
         parameters = eval(parameters);
@@ -35,16 +35,16 @@ class GoodDetail extends React.Component {
             attrArr: parameters,
             showRealPhotos: showRealPhotos
         }, function () {
+
+
             this.setImgHeightFn()
         })
     }
-
-
     setImgHeightFn = ()=> {
+     
         let img = document.querySelectorAll(".good_edit_detail .img_list .img")[0];
         if (img) {
-            let width = img.clientWidth;
-            
+            let width = img.clientWidth;       
             let height = (width * 2)/3;
             this.setState({
                 imgHeight: height
@@ -52,11 +52,10 @@ class GoodDetail extends React.Component {
         }
     }
     showMoreFn = ()=> {
-     
         let flag = !this.state.foldFlag;
+
         let realPhotos = this.state.realPhotos;   
         let showRealPhotos = [];
-
         if (flag) {
             showRealPhotos = realPhotos.slice(0, 2)
         } else {
@@ -96,33 +95,28 @@ class GoodDetail extends React.Component {
                                     return (
                                         <div  className="img_con" key={index}>
                                             <Image
-                                                src= {item}      
+                                                 src= {item}      
                                                 // width={150} height={this.state.imgHeight} className="img"
                                                 width={150} height={150} className="img"
-                                                preview={{
-                                                    visible: false
-                                                }}
                                         />
                                        </div>
                                     )
-                                })}                            
+                                })}  
                                 </Image.PreviewGroup>
                                
                                 { this.state.showRealPhotos.length == 0 &&   (<div className="err_msg">~暂未上传实拍图~</div>)}
                             </div>
 
-                            
-
-
-
                             <div className="text_con">
                                 <div className="tit">商品信息</div>
                                 <ul className="txt_list">
+
                                     <li><span className="title">分类:</span>  <span className="txt">{this.props.goodDetail.product.categoryName} </span> </li>
                                     <li><span className="title">风格:</span>  <span className="txt">{this.props.goodDetail.product.styleName}</span> </li>
                                     <li><span className="title">型号:</span>  <span className="txt">{ this.props.currentGood.marque }</span> </li>
                                     <li><span className="title">体积:</span>  <span className="txt">{ this.props.currentGood.capacity }</span> </li>
                                     <li><span className="title">包件数:</span>  <span className="txt">{ this.props.currentGood.bomNums }</span> </li>
+
                                     {this.state.attrArr.map((item, index)=>{
                                         if (item.value) {
                                             return (<li key={index}><span className="title">{item.label}:</span>  <span className="txt">{item.value}</span> </li>)

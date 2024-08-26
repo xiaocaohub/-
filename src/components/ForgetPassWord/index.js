@@ -11,17 +11,15 @@ class RegisterPage extends React.Component {
         this.state = {
             count: 60,
             setFlag: false,
+            phoneValue: "",
+            code: "",
 
-
-
-
-            phoneValue: "18529562078",
-            code: "876706",
-            passWord: "dddabc123",
-            passWordConfirm: "dddabc123"
+            passWord: "",
+            passWordConfirm: ""
         }
     }    
     getCodeFn = () => {
+        
         const _this = this;
         this.setState({
             setFlag: true
@@ -31,25 +29,22 @@ class RegisterPage extends React.Component {
             _this.setState({
                 count: count
             })
-        
             if (count === 0) {
                 clearInterval(set)
-                _this.setState({
-                 
-                 
+                _this.setState({   
                     setFlag: false,
-                 
                     count: 60
                 })
             }
+
         }, 1000)
         let formData = new FormData();
         formData.append("api", "app.user.sendSms");
         formData.append("storeId", 1);
+        
         formData.append("storeType", 6);
         formData.append("phone", this.state.phoneValue);
         formData.append("smsType", 4);
-        
         request({
             url: "/api/gw",
             method: "POST",
@@ -58,8 +53,9 @@ class RegisterPage extends React.Component {
             console.log("code")
             console.log(res)
             console.log("code")
-            if (res.data.code == 200) {
 
+            if (res.data.code == 200) {
+                 
             } else {
 
             }

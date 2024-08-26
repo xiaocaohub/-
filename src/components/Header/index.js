@@ -3,7 +3,7 @@ import {Link, useHistory} from "react-router-dom";
 import {useDispatch} from "react-redux";
 
 import "./index.css";
-import {Row, Col, Badge} from "antd";
+import {Row, Col, Badge, message} from "antd";
 import logo from "../../assets/logo.png";
 import topcart from "../../assets/shopping_cart.png";
 import { getStorageFn } from "../../utils/localStorage";
@@ -37,7 +37,16 @@ function Header () {
     }
 
 
+    function loginOutFn () {
+        window.localStorage.clear()
+        message.success('退出成功');
+        setTimeout(()=>{
+
+            history.push("/login")
+        }, 2000)
+    } 
     useEffect(()=>{
+
         getUserInfoFn()
     }, [])
     return (
@@ -47,7 +56,7 @@ function Header () {
                 <Col span={3}></Col>
                 <Col span={18}>
                     <span className="title" onClick={getUserInfoFn}>更懂年轻人的国潮家居品牌</span>
-                    {userInfo && <Link to="/login" className="login_btn">退出</Link>}
+                    {userInfo && <div className="login_btn" onClick={loginOutFn}>退出</div>}
                     {userInfo && <img src={userInfo.headimgurl} alt="" className="header_img"/>}
                      
                     {!userInfo && <Link to="/login" className="login_btn">登录</Link>}

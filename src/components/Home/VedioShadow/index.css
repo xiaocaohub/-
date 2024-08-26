@@ -37,7 +37,10 @@
     cursor:pointer;
 }
 
-
+.vedio_shadow_con .big_vedio_con .big_video{
+    display:block;
+    width:100%;
+}
 
 
 

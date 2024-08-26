@@ -5,6 +5,7 @@ import {Breadcrumb } from "antd";
 import { CaretRightOutlined , UpOutlined,  DownOutlined, DeleteOutlined, CloseOutlined } from '@ant-design/icons';
 
 import "./index.css";
+
 import request from "../../../api/request";
 import {getStorageFn} from "../../../utils/localStorage";
 class GoodNav extends React.Component {
@@ -28,18 +29,60 @@ class GoodNav extends React.Component {
                 categoryId:  "",
                 categoryPname: "",
                 styleId: "",
-                stylePname: ""
+                stylePname: "", 
+                sortCriteria: "",  // 排序  volume: "", // 销量 price: "" 
+                productLabel: ""   // 筛选
             },
             // 风格导航
             styleHover: true,
+
+
             styleNavArr: [
                 // {   id: 0, text: "现代", checked: false }
             ],
-
-
             styleIdSelectArr: [],
+           
             styleNameSelectArr: [],
-            categoryUlShowFlag: true
+            categoryUlShowFlag: true,
+            sortArr: [
+                {
+                    id: 0,
+                    title: "综合"
+                },
+                {
+                    id: 1,
+                    title: "销量"
+                },
+                {
+                    id: 2,
+                    title: "价格"
+                }
+            ],
+            currentSortIndex: 0,
+            filterArr: [
+                {
+                    id: 0,
+                    title: "全部",
+                    goodId: ""
+                },
+                {
+                    id: 1,
+                    title: "好货物",
+                    goodId: 101
+                },
+                {
+                    id: 2,
+                    title: "找新品",
+                    goodId: 102
+                },
+                {
+                    id: 3,
+                    title: "找现货",
+                    goodId: 10
+                }
+            ],
+            currentFilterIndex:0
+                       
         }
     }
 
@@ -236,7 +279,6 @@ class GoodNav extends React.Component {
         }
 
 
-
         if (!navOption.spacePname) {
             navOption.spacePname = _this.state.currentSpacePname;
         }
@@ -335,6 +377,50 @@ class GoodNav extends React.Component {
             categoryUlShowFlag: categoryUlShowFlag
         })
     }
+
+    selectSortFn = (index)=> {
+        let navOption = this.state.navOption;
+        if (index == 0) {
+            navOption.sortCriteria = "";
+        }
+
+        if (index == 1) {
+
+            navOption.sortCriteria = "volume";
+        }
+        if (index == 2) {
+            navOption.sortCriteria = "price";
+        }
+        this.setState({
+            currentSortIndex: index,
+            navOption: navOption
+        }, function () {
+                 this.getSpaceGoodListFn(navOption)
+        })    
+    }
+    selectFilterFn = (index)=>{
+        let navOption = this.state.navOption;
+        if (index == 0) {
+
+            navOption.productLabel = "";
+        }
+        if (index == 1) {
+            navOption.productLabel = 101;
+        }
+        if (index == 2) {
+            navOption.productLabel = 102;
+        }
+        
+        if (index == 3) {
+            navOption.productLabel = 103;
+        }
+        this.setState({
+            currentFilterIndex: index,
+            navOption: navOption
+        }, function () {
+            this.getSpaceGoodListFn(navOption)
+        })
+    }
     render () { 
         return (
             <div className="product_nav_con">
@@ -422,7 +508,29 @@ class GoodNav extends React.Component {
                     </div> */}
                 </div>
 
-                <div className="sort_con"></div>
+                <div className="sort_con">
+                    
+                    <div className="sort_list_con">
+                        <div className="title sort_tit">排序</div>
+                        <ul className="sort_list sort_ul">
+                            { this.state.sortArr.map((item, index)=> {
+                                return (<li className={this.state.currentSortIndex==index?"on":""} key={index} onClick={()=>{
+                                    this.selectSortFn(index)
+                                }}>{item.title}</li>)
+                            })}       
+                        </ul>
+                    </div>
+                    <div className="sort_list_con filter_ul">
+                        <div className="title filter_tit">筛选</div>
+                        
+                 
+                        <ul className="sort_list filter_sort">
+                            {this.state.filterArr.map((item, index)=> {
+                                return (<li className={this.state.currentFilterIndex == index?"on": ""} onClick={()=>{this.selectFilterFn(index)}}>{item.title}</li>)
+                            })}
+                        </ul>
+                    </div>
+                </div>
             </div>
         )
     }

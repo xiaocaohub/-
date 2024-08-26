@@ -14,8 +14,9 @@
 .series_con .series_list_con .good_list  .good .good_img{
    display:block;
 
-
    width:100%;
+
+   object-fit: cover;
 }
 
 .series_con .series_list_con .good_list  .good .title{

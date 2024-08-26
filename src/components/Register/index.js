@@ -15,9 +15,10 @@ class RegisterPage extends React.Component {
             setFlag: false,
 
             readFlag: false,
-            phoneValue: "18529562078",
-            code: "530720",
-            passWord: "abc123abc"
+            phoneValue: "",
+            code: "",
+            passWord: ""
+            // passWord: "abc123abc"
         }
     }    
 
@@ -70,12 +71,10 @@ class RegisterPage extends React.Component {
     }
     codeFn = (e)=> {
         let value = e.target.value;
-
         this.setState({
             code: value
         })
     }
-
     passWordFn = (e)=> {
         let value = e.target.value;
         this.setState({
@@ -91,22 +90,25 @@ class RegisterPage extends React.Component {
         formData.append("phone", this.state.phoneValue);
         formData.append("keyCode", this.state.code);
         formData.append("password", this.state.passWord);
-        message.success('注册成功');
-       
-        return ;
         request({
             url: "/api/gw",
             method: "POST",
             data: formData
         }).then((res)=> {
-            console.log("code")
-            console.log(res)
-            console.log("code")
             if (res.data.code == 200) {
                 message.success('注册成功');
                 setTimeout(()=>{
                     _this.props.goLoginFn()
                 }, 2000)
+            } else {
+                let msg = res.data.message;
+                message.error(msg);
+                
+                if (msg == "该账号已被注册") {
+                    setTimeout(()=>{
+                        _this.props.goLoginFn()
+                    }, 2000)
+                }
             }
         })
     }
@@ -141,8 +143,8 @@ class RegisterPage extends React.Component {
                 <div className="sub_btn" onClick={this.registerFn}>注册</div>
                 <div className="agreement_text">
                     <div className={this.state.readFlag?"tit on": "tit"} onClick={this.readoverFn}>我已阅读并同意</div>
-                    <Link to="/" className="txt">《信息数据收集协议》</Link>
-                    <Link to="/" className="txt">《珞珂用户服务协议》</Link>
+                    <Link to="/info/agreement" className="txt">《信息数据收集协议》</Link>
+                    <Link to="/luoke/agreement" className="txt">《珞珂用户服务协议》</Link>
 
 
                 </div>

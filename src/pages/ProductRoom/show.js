@@ -40,8 +40,10 @@ class Show extends React.Component {
         let storeType = getStorageFn("storeType") || 6;
         let productClass = "";
         let styleId = "";
-        if (optionIds) {
+        let sortCriteria = "";
 
+        let productLabel = "";
+        if (optionIds) {
             if (optionIds.spaceSid && optionIds.spaceId) {
                 productClass = "-" + optionIds.spaceSid + "-" + optionIds.spaceId + "-";
             }
@@ -50,6 +52,14 @@ class Show extends React.Component {
                 productClass += optionIds.categoryId + "-";
             }
             styleId = optionIds.styleId;
+
+            if (optionIds.sortCriteria) {
+
+                sortCriteria = optionIds.sortCriteria;
+            }
+            if (optionIds.productLabel) {
+                productLabel = optionIds.productLabel;
+            }
             console.log("productClass: " + productClass)
             console.log("productClass styleId: " + styleId)
         }
@@ -63,9 +73,11 @@ class Show extends React.Component {
         
         formData.append("productClass", productClass);
         formData.append("styleIds",  styleId);
-        formData.append("sortCriteria", "");
+        formData.append("sortCriteria", sortCriteria);
+        
+        formData.append("productLabel", productLabel);
         formData.append("queryCriteria",  JSON.stringify(option));
-
+        
         formData.append("sort", "");
         request({
             url: "/api/gw",
