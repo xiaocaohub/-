@@ -115,15 +115,18 @@
     margin-top:32px;
     cursor:pointer;
 }
+.cart_small_con .good_list_con .good_list > li .select_con .select.on{
+    background:url("../../assets/icon/icon_select_on.png") no-repeat center;
+}
 .cart_small_con .good_list_con .good_list > li .info_con{
     width:51%;
 }
-
 .cart_small_con .good_list_con .good_list > li .info_con .img{
 
     width:32.4%;
     height:100%;
 }
+
 .cart_small_con .good_list_con .good_list > li .info_con .info{
     width:61%;
     height:80px;    
@@ -135,7 +138,11 @@
     line-height:14px;
     font-weight:bold;
     max-height:43px;
+
+
     overflow:hidden;
+    margin-bottom:10px;
+
 }
 .cart_small_con .good_list_con .good_list > li .info_con .info .tit{
     max-height:29px;
@@ -198,8 +205,6 @@
     background:url("../../assets/icon/icon_delete.png") no-repeat center;
     cursor:pointer;
 } 
-
-
 .cart_small_con .total_con{
     height:60px;
     padding:0 29px;
@@ -208,10 +213,18 @@
  }
  .cart_small_con .total_con .select_all{
    float:left;
+
    margin-top:23px;
    background:url("../../assets/icon/icon_select.png") no-repeat left center;
    padding-left:20px;
    cursor:pointer;
+}
+
+.cart_small_con .total_con .select_all.on{
+    padding-left:20px;
+    margin-top:23px;
+
+    background:url("../../assets/icon/icon_select_on.png") no-repeat left center;
 }
 .cart_small_con .total_con .delete_all{
    float:left;

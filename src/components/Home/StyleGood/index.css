@@ -7,7 +7,7 @@
     background:#fff;
     border:1px solid transparent;
     border-radius:10px;
-    border:1px solid brown;
+  
 }
 .style_good:nth-child(3n+1) {
     margin-left:0;
@@ -16,14 +16,11 @@
    
     border-color:#C6A189;
 }
-
 .style_good  .good_img{
     display:block;
     width:100%;
-    height:408px;
 }
 .style_good .good_bottom{
- 
     margin:29px 0;
     margin-left:5%;
     overflow:hidden;
@@ -35,11 +32,13 @@
     float:left;
     font-weight:bold;
 }
+
+
+
 .style_good .good_bottom .text_con .txt{
     height:21px;
     line-height:21px;
     overflow:hidden;
-
  
     text-transform: uppercase;
 }

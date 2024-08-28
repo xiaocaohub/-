@@ -7,6 +7,28 @@ import bannerImaga from "../../assets/banner1.png";
 class BannerCon extends React.Component {
     constructor (props) {
         super(props)
+        this.state = {
+            bannerList: [
+                {
+                    id: 0,
+                    src: require("../../assets/banner1.png")
+                },
+
+                {
+                    id: 1,
+                    src: require("../../assets/banner2.png")
+                },
+                {
+                    id: 2,
+                    src: require("../../assets/banner3.png")
+                },
+                {
+
+                    id: 3,
+                    src: require("../../assets/banner4.png")
+                }
+            ]
+        }
         this.prev = this.prev.bind(this)
         this.next = this.next.bind(this)
     }
@@ -27,26 +49,17 @@ class BannerCon extends React.Component {
             <div className="banner_con">
 
                 <Carousel autoplay afterChange={this.onChange} ref={dom=>{this.img=dom }} >
-                    <div>
-                        <Link to="/">
-                            <img src={bannerImaga} className="banner_img"/>
-                        </Link> 
-                    </div>
-                    <div>
-                        <Link to="/">
-                            <img src={bannerImaga} className="banner_img"/>
-                        </Link> 
-                    </div>
-                    <div>
-                        <Link to="/">
-                            <img src={bannerImaga} className="banner_img"/>
-                        </Link> 
-                    </div>
-                    <div>
-                        <Link to="/">
-                            <img src={bannerImaga} className="banner_img"/>
-                        </Link> 
-                    </div>
+                    {this.state.bannerList.map((item, index)=>{
+                        return (
+                            <div key={index}>
+                                <Link to="/">
+                                 
+                                    <img src={item.src} className="banner_img"/>
+                                </Link> 
+                            </div>
+                        )
+                    })}
+                   
                 </Carousel>
 
                 <div className="operate_con">

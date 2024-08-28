@@ -33,15 +33,16 @@
 .series_con .series_list_con .good_list  .good .txt{
     height:20px;
     line-height:20px;
-    padding:0 29px;
+    
     font-size:16px;
     margin:10px 0;
 
 
   
-
+    text-align:center;
     overflow:hidden;
     color:#999;
+ 
 }
 
 .series_con .series_list_con .good_list  .good  .total{
@@ -59,10 +60,7 @@
 }
 .series_con .series_list_con .good_list  .good:hover .total{
     background:#FFF9F5;
-    
     color:#C6A189;
-
-
     border-color:#C6A189;
 }
 

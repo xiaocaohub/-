@@ -2,15 +2,16 @@ import {connect} from "react-redux";
 import Show from "./show";
 var mapStateToProps = (state)=> {
     return {
-
+        state: {
+            commonState: state.commonState
+        }
     }
 }
-
-
 var mapDispatchToProps = (dispatch)=> {
-    
-    return {
-
+    return {       
+        hideSmallCartFn () {
+               dispatch({type:"show_small_cart", payload: false})
+        }
     }
 }
 

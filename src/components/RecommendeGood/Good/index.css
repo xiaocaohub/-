@@ -10,13 +10,13 @@
 .recommende_good_con .recommende_good .img{
     overflow:hidden;
     position:relative;
+    display:block;
+    object-fit: cover;
 }
 .recommende_good_con .recommende_good .small_img{
     display:block;
-
     width:100%;
-    height:265px;
-    object-fit: cover;
+    /* height:265px; */
 }
 .recommende_good_con .recommende_good .big_img{
     display:block;
@@ -27,35 +27,33 @@
     top:50%;
     z-index:1; 
     opacity:0;
-    height:265px;
+    /* height:265px; */
 }
-
 .recommende_good_con .recommende_good:hover .big_img{
     width:100%;
     height:100%;
     left:0;
+
     top:0;
+
+
     opacity:1;
- 
 }
-
-
-
 .recommende_good_con .recommende_good:hover .small_img{
     opacity:0;
-    transition:all 0.3s;
  
+    transition:all 0.3s; 
 }
-
 .recommende_good_con .recommende_good .text_bottom{
     padding:20px 20px 31px;
     position:relative;
 }
 .recommende_good_con .recommende_good:hover .text_bottom{
-   background:#C6A189;
-   color:#fff;
+    background:#C6A189;
+    color:#fff;
 }
 .recommende_good_con .recommende_good .text_bottom .title{
+ 
     height:28px;
     line-height:28px;
     font-size:24px;

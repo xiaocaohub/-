@@ -13,7 +13,7 @@ function Header () {
         {id: 2, title: "产品仓", path: "/productroom"},
         {id: 3, title: "系列集", path: "/series"},
 
-        {id: 4, title: "艺术家", path: "/artist"},
+        // {id: 4, title: "艺术家", path: "/artist"},
 
         // {id: 5, title: "云设计"},
         {id: 6, title: "认识我"}

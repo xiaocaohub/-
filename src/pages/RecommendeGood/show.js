@@ -7,6 +7,8 @@ import banner1 from "../../assets/recommendeGood_banner.png";
 import "./index.css";
 import {getStorageFn} from "../../utils/localStorage";
 import {getGoodInfoApi} from "../../api/RecommendeGood";
+import SmallCart from "../../components/SmallCart";
+import {scrollTopFn} from "../../utils/imgAuto";
 class Show extends React.Component {
     constructor (props) {
         super(props)
@@ -35,8 +37,6 @@ class Show extends React.Component {
             ],
 
 
-
-           
             roomBannerArr: [
                 {
                     id: 0,
@@ -65,6 +65,7 @@ class Show extends React.Component {
         }
     }
     componentDidMount () {
+        scrollTopFn()
         this.getGoodInfoFn()
         this.getGoodInfoTwoFn()
         this.getGoodInfoThreeFn()
@@ -193,6 +194,7 @@ class Show extends React.Component {
                     </Col>
                     <Col span={3}></Col>
                 </Row>
+                {this.props.state.commonState.showCartFlag && <SmallCart hideSmallCart={this.props.hideSmallCartFn}></SmallCart>}
             </div>
         )
     }

@@ -1,9 +1,10 @@
 .us_page_con{
     background:#fff;
-   
 }
 .us_page_con .banner_img{
     display:block;
+
+    width:100%;
 }
 
 .us_page_con .intro_text{
@@ -25,18 +26,20 @@
 .us_page_con .intro_text .text_con .txt{
 
    width:67%;
-   float:right;
+   font-size:14px;
    line-height:28px;
+   float:right;
 }
 .us_page_con .intro_text .text_con .txt p{
     margin-bottom:20px;
 }
+
 .us_page_con  .video_con{
+
+
    width:79%;
    float:right;
    margin:20px 0 120px;
-
-
    position:relative;
 }
 .us_page_con  .video_con img{
@@ -73,6 +76,11 @@
    padding:120px 0 140px;
    /* float:right; */
 }
+
+.us_page_con .brand_con .title_img{
+   display:block;
+   margin:0 auto;
+}
 .us_page_con .brand_title_con{
    text-align:center;
 }
@@ -95,16 +103,28 @@
 .us_page_con .brand_con .brand_list{
       overflow:hidden;
  
-      margin-top:80px;
-    
+      margin-top:80px;  
 }
+
 .us_page_con .brand_con .brand_list > li{
      width:31%;
      float:left;
+     height:345px;
      margin-left:3.25%;     
      border-radius:10px;
-     background:#fff;
-     padding-bottom:70px;
+     background:#fff;   
+     padding:80px 0 70px;
+   }
+
+   .us_page_con .brand_con .brand_list > li:hover{
+      cursor:pointer;
+      background-image: linear-gradient(to bottom, #FFF3EC, #fff);
+   }
+.us_page_con .brand_con .brand_list > li img{
+
+     display:block;
+     
+     margin:0 auto;
 }
 .us_page_con .brand_con .brand_list>li:first-child{
 
@@ -175,8 +195,8 @@
    margin-bottom:5px;
    color:#999;
 }
+
 .us_page_con .brand_total_con{
-   margin-bottom:120px;
    background:url("../../assets/total_banner.png") no-repeat center;
 }
 .us_page_con .brand_total_con .total_list{
@@ -203,6 +223,14 @@
    overflow:hidden;
 }
 
+.us_page_con .compete_con {
+   padding:120px 0;
+   background:#F0F0F0;
+}
+.us_page_con .compete_con img{
+   display:block;
+   max-width:100%;
+}
 .us_page_con .compete_con .compete_txt_con{
    margin-bottom:65px ;
    overflow:hidden;
@@ -293,8 +321,17 @@
    float:left;
    width:100%;
 }
+
+
 .us_page_con .product_text_con{
-   margin:200px 0 180px;
+   padding:120px 0 180px;
+}
+.us_page_con .product_text_con img{
+
+   display:block;
+   margin:0 auto;
+
+   max-width:100%;
 }
 .us_page_con .product_text_con .text_list{
    overflow:hidden;

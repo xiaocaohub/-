@@ -16,7 +16,7 @@ function Header () {
 
         {id: 2, title: "产品仓", path: "/productroom"},
         {id: 3, title: "系列集", path: "/series"},
-        {id: 4, title: "艺术家", path: "/artist"},
+        // {id: 4, title: "艺术家", path: "/artist"},
         // {id: 5, title: "云设计"},
         {id: 6, title: "认识我", path: "/us"}
     ]
@@ -55,7 +55,7 @@ function Header () {
             <Row className="header_top">
                 <Col span={3}></Col>
                 <Col span={18}>
-                    <span className="title" onClick={getUserInfoFn}>更懂年轻人的国潮家居品牌</span>
+                    <span className="title" onClick={getUserInfoFn}>更懂年轻人的国潮家居平台</span>
                     {userInfo && <div className="login_btn" onClick={loginOutFn}>退出</div>}
                     {userInfo && <img src={userInfo.headimgurl} alt="" className="header_img"/>}
                      

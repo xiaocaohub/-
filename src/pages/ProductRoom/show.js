@@ -9,7 +9,9 @@ import Header from "../../components/Header";
 import GoodNav from "../../components/ProductRoom/GoodNav";
 import Good from "../../components/ProductRoom/Good";
 import request from "../../api/request";
+import SmallCart from "../../components/SmallCart";
 import {getStorageFn} from "../../utils/localStorage";
+import {scrollTopFn} from "../../utils/imgAuto";
 class Show extends React.Component {
     constructor (props) {
         super(props)
@@ -24,6 +26,7 @@ class Show extends React.Component {
     componentDidMount () {
         // this.getSpaceNavFn()
         this.getGoodListFn()
+        scrollTopFn()
     }
     pageOnChange = (pageNumber)=> {
         // console.log(pageNumber)
@@ -43,6 +46,7 @@ class Show extends React.Component {
         let sortCriteria = "";
 
         let productLabel = "";
+        let sort = "";
         if (optionIds) {
             if (optionIds.spaceSid && optionIds.spaceId) {
                 productClass = "-" + optionIds.spaceSid + "-" + optionIds.spaceId + "-";
@@ -59,6 +63,10 @@ class Show extends React.Component {
             }
             if (optionIds.productLabel) {
                 productLabel = optionIds.productLabel;
+            }
+
+            if (optionIds.sort) {
+                sort = optionIds.sort;
             }
             console.log("productClass: " + productClass)
             console.log("productClass styleId: " + styleId)
@@ -78,7 +86,7 @@ class Show extends React.Component {
         formData.append("productLabel", productLabel);
         formData.append("queryCriteria",  JSON.stringify(option));
         
-        formData.append("sort", "");
+        formData.append("sort", sort);
         request({
             url: "/api/gw",
             method: "POST",
@@ -155,6 +163,7 @@ class Show extends React.Component {
                     </div>
                 </Col>
                 <Col span={3}></Col>
+                {this.props.state.commonState.showCartFlag && <SmallCart hideSmallCart={this.props.hideSmallCartFn}></SmallCart>}
             </Row>
         )
     }

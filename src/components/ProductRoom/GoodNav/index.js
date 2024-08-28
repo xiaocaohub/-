@@ -2,7 +2,7 @@ import React from "react";
 import {Breadcrumb } from "antd";
 
 
-import { CaretRightOutlined , UpOutlined,  DownOutlined, DeleteOutlined, CloseOutlined } from '@ant-design/icons';
+import { CaretRightOutlined , UpOutlined,  DownOutlined, DeleteOutlined, CloseOutlined, ArrowUpOutlined, ArrowDownOutlined  } from '@ant-design/icons';
 
 import "./index.css";
 
@@ -31,7 +31,8 @@ class GoodNav extends React.Component {
                 styleId: "",
                 stylePname: "", 
                 sortCriteria: "",  // 排序  volume: "", // 销量 price: "" 
-                productLabel: ""   // 筛选
+                productLabel: "",   // 筛选
+                sort: "asc"
             },
             // 风格导航
             styleHover: true,
@@ -51,11 +52,13 @@ class GoodNav extends React.Component {
                 },
                 {
                     id: 1,
-                    title: "销量"
+                    title: "销量",
+                    sort: "desc"
                 },
                 {
                     id: 2,
-                    title: "价格"
+                    title: "价格",
+                    sort: "desc"
                 }
             ],
             currentSortIndex: 0,
@@ -85,7 +88,6 @@ class GoodNav extends React.Component {
                        
         }
     }
-
     componentDidMount () {
         this.getSpaceNavFn()
         this.getStyleNavFn()
@@ -96,7 +98,6 @@ class GoodNav extends React.Component {
             styleHover: styleHover
         })
     }
-
     selectStyleHoverFn = (index)=> {   
         let styleNavArr = this.state.styleNavArr;
         // console.log("styleNavArr[index]")
@@ -378,8 +379,18 @@ class GoodNav extends React.Component {
         })
     }
 
-    selectSortFn = (index)=> {
+    selectSortFn = (item, index)=> {
+        console.log(item)
         let navOption = this.state.navOption;
+        let _this = this;
+        let sortArr = this.state.sortArr;
+        if ( item.sort == "asc") {
+            sortArr[index].sort = "desc";
+        } else {
+
+            sortArr[index].sort = "asc";
+        }
+
         if (index == 0) {
             navOption.sortCriteria = "";
         }
@@ -387,15 +398,28 @@ class GoodNav extends React.Component {
         if (index == 1) {
 
             navOption.sortCriteria = "volume";
+            navOption.sort =  sortArr[index].sort;
         }
         if (index == 2) {
             navOption.sortCriteria = "price";
+            navOption.sort =  sortArr[index].sort;
         }
+
+        
+        
+      
         this.setState({
             currentSortIndex: index,
-            navOption: navOption
+            navOption: navOption,
+            sortArr: sortArr
         }, function () {
-                 this.getSpaceGoodListFn(navOption)
+            console.log("this.state.currentSortIndex:" + this.state.currentSortIndex)
+            console.log("index:" + index)
+            console.log("sort:"+ item.sort)
+            this.getSpaceGoodListFn(navOption)
+            
+           
+                 
         })    
     }
     selectFilterFn = (index)=>{
@@ -435,6 +459,8 @@ class GoodNav extends React.Component {
                     <div className="select_nav_con">
                         {(this.state.navOption.spacePname || this.state.navOption.categoryPname || this.state.navOption.stylePname) &&  <div className="clear_all" onClick={this.clearNavFn}>清空 <DeleteOutlined /></div>}
                         {this.state.navOption.spacePname &&  <div className="select_nav_item" onClick={this.clearSpaceFn}>{this.state.navOption.spacePname} <CloseOutlined /></div>}
+                     
+                     
                         {this.state.navOption.categoryPname && <div className="select_nav_item" onClick={this.clearCategoryFn}>{this.state.navOption.categoryPname} <CloseOutlined /></div>}
                         {this.state.navOption.stylePname && <div className="select_nav_item" onClick={this.clearStyleFn}> {this.state.navOption.stylePname} <CloseOutlined /></div>}
                     </div>
@@ -515,8 +541,10 @@ class GoodNav extends React.Component {
                         <ul className="sort_list sort_ul">
                             { this.state.sortArr.map((item, index)=> {
                                 return (<li className={this.state.currentSortIndex==index?"on":""} key={index} onClick={()=>{
-                                    this.selectSortFn(index)
-                                }}>{item.title}</li>)
+                                    this.selectSortFn(item, index)
+                                }}>
+                                    {item.title} {index != 0 && item.sort=="asc" && <ArrowUpOutlined/>} {(index != 0 && item.sort=="desc") && <ArrowDownOutlined />}
+                                </li>)
                             })}       
                         </ul>
                     </div>
@@ -526,7 +554,7 @@ class GoodNav extends React.Component {
                  
                         <ul className="sort_list filter_sort">
                             {this.state.filterArr.map((item, index)=> {
-                                return (<li className={this.state.currentFilterIndex == index?"on": ""} onClick={()=>{this.selectFilterFn(index)}}>{item.title}</li>)
+                                return (<li className={this.state.currentFilterIndex == index?"on": ""} key={index} onClick={()=>{this.selectFilterFn(index)}}>{item.title}</li>)
                             })}
                         </ul>
                     </div>

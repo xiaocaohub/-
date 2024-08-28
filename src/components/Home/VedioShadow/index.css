@@ -21,10 +21,10 @@
 }
 
 .vedio_shadow_con .big_vedio_con{
-    width:80%;
+    width:70%;
     height:80%;
     position:absolute;
-    left:10%;
+    left:15%;
     top:10%;
     z-index:2;
 }

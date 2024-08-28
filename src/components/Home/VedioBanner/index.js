@@ -19,17 +19,26 @@ class VedioBanner extends React.Component {
                 {
                     id: 0,
                     imgSrc: require("../../../assets/vedio_list1.png"),
-                    vedioSrc: "../../../assets/big_vedio1.mp4"
+                    // vedioSrc: "../../../assets/big_vedio1.mp4",
+                    vedioSrc: "https://luockoo.oss-cn-shenzhen.aliyuncs.com/0/1/20240826/%E4%B8%80%E5%88%86%E9%92%9F%E4%BA%86%E8%A7%A3%E5%8E%9F%E5%88%9B%E7%B3%BB%E5%88%97.mp4",
+                    txt: "一分钟了解原创系列"
                 },
                 {
                     id: 1,
-                    imgSrc: require("../../../assets/vedio_list1.png"),
-                    vedioSrc: "../../../assets/big_vedio2.mp4"
+                    imgSrc: require("../../../assets/vedio_list2.png"),
+                    // vedioSrc: "../../../assets/big_vedio2.mp4",
+                    
+                    vedioSrc: "https://luockoo.oss-cn-shenzhen.aliyuncs.com/0/1/20240826/%E4%B8%80%E5%88%86%E9%92%9F%E4%BA%86%E8%A7%A3%E4%B8%87%E7%89%A9%E7%B3%BB%E5%88%97.mp4",
+                    txt: "一分钟了解万物系列"
                 },
                 {
                     id: 2,
-                    imgSrc: require("../../../assets/vedio_list1.png"),
-                    vedioSrc: "../../../assets/big_vedio3.mp4"
+                    imgSrc: require("../../../assets/vedio_list3.png"),
+                    // vedioSrc: "../../../assets/big_vedio3.mp4",
+
+
+                    vedioSrc: " https://luockoo.oss-cn-shenzhen.aliyuncs.com/0/1/20240826/%E4%B8%80%E5%88%86%E9%92%9F%E4%BA%86%E8%A7%A3%E8%BD%AF%E5%BA%8A%E4%B8%93%E4%BE%9B.mp4",
+                    txt: "一分钟了解软床专供"
                 }
             ]
         }
@@ -85,13 +94,13 @@ class VedioBanner extends React.Component {
                                 <ul className="vedio_list">
                                     {this.state.vedioList.map((item, index)=> {
                                         return (
-                                            <li key={item.id}>
+                                            <li key={item.id} onClick={()=>{this.showVedioFn(index)}}>
                                                 <img src={item.imgSrc} alt="" className="img"/>
-                                                <img src={playIcon} alt="" className="play_icon" onClick={()=>{this.showVedioFn(index)}}/>
+                                                <img src={playIcon} alt="" className="play_icon"/>
                                                 <div className="text_con">
                                                     <div className="shadow"></div>
                                                     <div className="text">
-                                                        <span className="txt">一分钟了解设计师严选系列</span>
+                                                        <span className="txt">{item.txt}</span>
                                                         <div className="collect_txt">10K</div>
                                                     </div>
                                                 </div>

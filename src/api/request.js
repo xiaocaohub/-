@@ -1,4 +1,5 @@
 import axios from "axios";
+import {getStorageFn} from "../utils/localStorage";
 let instance = axios.create({
     baseURL: "http://116.62.207.126:55121",
 
@@ -9,10 +10,9 @@ let instance = axios.create({
 instance.interceptors.request.use(
 
     config => {
-        // console.log("config")
-        // console.log(config)
+        let token = getStorageFn("token");
         config.headers.Authorization = "12345";
-        config.headers.token = "123";
+        config.headers.token = token || "123";
 
         return config;
     },

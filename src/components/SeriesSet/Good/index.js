@@ -3,21 +3,33 @@ import {Link} from "react-router-dom";
 import "./index.css";
  
 import goodImg from "../../../assets/recomend_good1.png";
+
+import {setImgAutoHeightFn} from "../../../utils/imgAuto";
 class Good extends React.Component {
     constructor (props) {
         super(props)
-        // console.log("item props")
-
-        // console.log(props)
-        // console.log("item props")
+        this.state = {
+            goodImgHeight: 0
+        }
+    }
+    componentDidMount () {
+        this.loadImgHeightFn()
+    }
+    loadImgHeightFn = ()=> {
+        let recommendGood = document.getElementById("good");
+        
+        let goodImgHeight = setImgAutoHeightFn(recommendGood);
+        this.setState({      
+            goodImgHeight: goodImgHeight
+        })
     }
     render () {
         return (
 
-            <li className="good">
+            <li className="good" id="good">
             
                 <Link to={ "/series/list/" + this.props.goodInfo.brand_id } >         
-                    <img src={this.props.goodInfo.brand_image} alt="" className="good_img"/>
+                    <img src={this.props.goodInfo.brand_image} alt="" className="good_img" style={{height: this.state.goodImgHeight + "px"}}/>
                 </Link>
 
                 <div className="title">{this.props.goodInfo.brand_name}</div>

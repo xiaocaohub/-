@@ -15,11 +15,16 @@ import popularImg from "../../assets/popular_img.png";
 
 
 import {homeInfoApi, getStyleApi, getStyleGoodArrApi} from "../../api/home";
-import { getStorageFn } from "../../utils/localStorage";
+
+import {setStorageFn, getStorageFn} from "../../utils/localStorage";
+import {scrollTopFn} from "../../utils/imgAuto";
+import titleImg  from "../../assets/index_title.png";
+
+import request from "../../api/request";
 class Show extends React.Component {
     constructor (props) {
-        super(props)
 
+        super(props)
         this.state = {
             styleNav: [
                 {id: 0, text:"奶油"}
@@ -28,16 +33,21 @@ class Show extends React.Component {
             styleId: 0,
             styleGoodArr: [],
             showCartFlag: false, // 全局
+
             hotSellArr: [], // 热销爆款
+
+            
             recomendGoodArr: [] // 品推荐
         }
     }
     componentDidMount () {
         this.getHotSellInfoFn()
         this.getRecomendGoodFn()
-
-
         this.getStyleFn()
+
+        scrollTopFn()
+
+        this.getCartInfoFn()
     }
     // 热销爆款
     getHotSellInfoFn = ()=> {
@@ -135,8 +145,31 @@ class Show extends React.Component {
         })
     }
 
+    // 获后台购物车数据
 
-    
+    getCartInfoFn = ()=> {
+        let _this = this;
+        let formData = new FormData();
+        let token = getStorageFn("token");
+        let option = {"brandId":"","minPrice":"","maxPrice":""};
+        formData.append("api", "app.cart.index");    
+        formData.append("accessId", token);  
+        formData.append("storeId", 1);
+        formData.append("storeType", 6);
+        request({
+            url: "/api/gw",         
+            method: "POST",    
+            data: formData
+
+        }).then((res)=> {
+            let resData = res.data.data.data;
+ 
+            resData.forEach((item, index)=>{
+                item.selectFlag = false;
+            })
+            setStorageFn("cartArr", resData)
+        })
+    }
     render () {
         return (            
             <div className="main_content" onClick={this.getStyleGoodArrFn}>
@@ -146,10 +179,10 @@ class Show extends React.Component {
                 {this.state.hotSellArr.length>0 && <HotSell hotSellArrData={this.state.hotSellArr}></HotSell>}
 
                 <div className="vedio_text_con">
-                    <div className="small_title">Quality of life</div>
+                    {/* <div className="small_title">Quality of life</div>
                     <div className="big_title">LUOCKOO HOME</div>
-                    <div className="txt">品质生活，从细节开始<br/> 让每一处空间都有故事，每一款产品都有灵魂<br/> 打造温馨舒适的家，让生活更美好</div>
-                
+                    <div className="txt">品质生活，从细节开始<br/> 让每一处空间都有故事，每一款产品都有灵魂<br/> 打造温馨舒适的家，让生活更美好</div> */}
+                    <img src={titleImg} alt=""/>
                 </div>
 
                 <VedioBanner></VedioBanner>                  

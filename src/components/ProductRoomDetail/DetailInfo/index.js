@@ -77,11 +77,13 @@ class DetailInfo extends React.Component {
     setBigImgHeightFn () {
         let bigImg = document.getElementById("big_img");
         let width = bigImg.width;
-        let height = (width * 2) / 3;
+        let height = (width * 2)/3 ;
+       
         let smallImg = document.querySelectorAll(".img_nav li")[0];
         let smallWidth = smallImg.clientWidth;
-        let smallHeight = (smallWidth * 3) / 4;
+        let smallHeight = (smallWidth * 2) / 3;
         this.setState({
+            
             bigHeight: height,
             smallHeight: smallHeight
         })
@@ -270,14 +272,20 @@ class DetailInfo extends React.Component {
             console.log("copy success", result)
         }
     }
+    addCartFn = ()=> {
+        this.props.addCartFn()
+    }
     render () {
         return (
             <div className="detail_info_con">
                 <div className="detail_info">             
                     <div className="left">
                         <div className="big_img_con">
+                            <div className="big_img_c">
+                                <img src={this.state.bigImg} alt="" className="big_img" id="big_img"   style={{height: this.state.bigHeight + "px"}} onClick={this.checkSizeArrDisableFn}/>
+                                {/* <img src={this.state.bigImg} alt="" className="big_img" id="big_img"  onClick={this.checkSizeArrDisableFn}/> */}
+                            </div>
 
-                            <img src={this.state.bigImg} alt="" className="big_img" id="big_img"   style={{height: this.state.bigHeight + "px"}} onClick={this.checkSizeArrDisableFn}/>
                             <div className="btn left_btn" onClick={this.leftImgFn}></div>
                             <div className="btn right_btn" onClick={this.rightImgFn}></div>
                         </div>
@@ -285,7 +293,10 @@ class DetailInfo extends React.Component {
                         <ul className="img_nav">
                             {
                                 this.state.currentGood && this.state.currentGood.imgArr.map((item, index)=> {
+                                  // return (<li className={this.state.currentIndex==index?"small_img on":"small_img"}  onClick={()=>{this.selectNavFn(index, item)}} key={index}>
+                                 
                                     return (<li className={this.state.currentIndex==index?"small_img on":"small_img"}  style={{height:this.state.smallHeight + "px"}} onClick={()=>{this.selectNavFn(index, item)}} key={index}>
+                                
                                         <img src={item} alt=""  />
                                     </li>)
                                 })
@@ -364,7 +375,7 @@ class DetailInfo extends React.Component {
                         </div>
 
                         <div className="buy_con">
-                            <div className="btn buy_btn">加入购物车</div>
+                            <div className="btn buy_btn" onClick={this.addCartFn}>加入购物车</div>
 
                             {/* <div className="btn">定制询价</div> */}
                             <div className="small_btn">

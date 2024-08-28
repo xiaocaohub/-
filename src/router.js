@@ -23,6 +23,8 @@ import InfoAgreement from "./pages/InfoAgreement";
 import LuoKeAgreement from "./pages/LuoKeAgreement";
 import Pay from "./pages/Pay";
 import Register from "./pages/Register";
+
+import PeopleHome from "./pages/PeopleHome";
 class IndexRouter extends React.Component {
     render () {
         return (
@@ -33,15 +35,16 @@ class IndexRouter extends React.Component {
                         <Route path="/register" component={Register}></Route>
                         <Route path="/luoke/agreement" component={LuoKeAgreement}></Route>
                         <Route path="/info/agreement" component={InfoAgreement}></Route>
+                 
+                 
+                        <Route path="/people" component={PeopleHome}></Route>
                         <Route path="/" render={
                             ()=><Layout>
-                             
-                             
                                     <Route path="/" exact component={Home}></Route>
                                     <Route path="/recommendegood" component={RecommendeGood}></Route>
+                                    
                                     <Route path="/productroom" exact component={ProductRoom}></Route>       
                                     <Route path="/productroom/detail/:id" component={ ProductRoomDetail }></Route>
-                                    
                                     <Route path="/series" exact component={SeriesSet}></Route>
                                     <Route path="/series/list/:id" component={SeriesSetList}></Route> 
                                     <Route path="/artist" exact component={Artist}></Route>

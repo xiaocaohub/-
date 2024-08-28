@@ -2,16 +2,18 @@ import {connect} from "react-redux";
 import Show from "./show";
 var mapStateToProps = (state)=> {
     return {
-        title: "series"
+        state: {
+            commonState: state.commonState
+        }
     }
 }
-
 var mapDispatchToProps = (dispatch)=> {
-    return {
-
+    return {       
+        hideSmallCartFn () {
+               dispatch({type:"show_small_cart", payload: false})
+        }
     }
 }
-
 
 
 const SeriesSet = connect(mapStateToProps, mapDispatchToProps)(Show);

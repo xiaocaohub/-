@@ -42,7 +42,7 @@
 
 
 .register_form_con .item_put .code_val{
-    width:55%;
+    width:58%;
     float:left;
 }
 .register_form_con .item_put .code_btn{
@@ -109,16 +109,18 @@
  
     font-size:14px;
     background:url("../../assets/icon/icon_select.png") no-repeat left center;
+    background-size:16px 16px;
     cursor:pointer;
-    padding-left:20px;
+    color:#666;
+    padding-left:24px;
+ 
  }
   .register_form_con .agreement_text .tit.on{
-
     background:url("../../assets/icon/icon_select_on.png") no-repeat left center;
+    background-size:16px 16px;
   }
  .register_form_con .agreement_text .txt{
-    float:right;
-
+    float:left;
     font-size:14px;
     color:#C6A189;
     text-decoration:none;

@@ -6,7 +6,9 @@ import { getStorageFn } from "../../utils/localStorage";
 import Nav from "../../components/SeriesSet/Nav";
 import "./index.css";
 import bannerImg from "../../assets/series_banner.png";
+import SmallCart from "../../components/SmallCart";
 import Good from "../../components/SeriesSet/Good";
+import {scrollTopFn} from "../../utils/imgAuto";
 class Show extends React.Component {
     constructor (props) {
         super(props)
@@ -23,6 +25,7 @@ class Show extends React.Component {
         }
     }
     componentDidMount () {
+        scrollTopFn()
         this.getStyleFn()
     }
     getStyleFn = ()=> {
@@ -36,10 +39,8 @@ class Show extends React.Component {
         formData.append("pageSize", 6);
         formData.append("key", "");
 
-        
         formData.append("pageSize", 10);
         getStyleApi(formData).then((res)=>{  
-            console.log(res.data)   
             let styleArr = res.data.data.list;
             let styleId = styleArr[0].value;
             this.setState({
@@ -76,7 +77,10 @@ class Show extends React.Component {
         // formData.append("productLabel", 102);
         formData.append("styleId", styleId);
         getStyleGoodArrApi(formData).then((res)=>{
-            console.log(res.data)
+            console.log("SeriesSet")
+
+            console.log(res.data)   
+            console.log("SeriesSet")
             let goodArr = res.data.data.brandsList;
             this.setState({
                 styleGoodArr: goodArr
@@ -120,6 +124,8 @@ class Show extends React.Component {
                     </div>
                 </Col>
                 <Col span={3}></Col>
+
+                {this.props.state.commonState.showCartFlag && <SmallCart hideSmallCart={this.props.hideSmallCartFn}></SmallCart>}
             </Row>
         )
     }

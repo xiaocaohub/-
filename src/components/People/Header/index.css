@@ -1,0 +1,79 @@
+.people_header_con{
+    overflow:hidden;
+    padding:12px 24px;
+    background:#333;
+}
+
+.people_header_con .logo_con{
+    border:1px solid brown;
+}
+ .people_header_con .logo_a{
+    float:left;
+    margin-top:9px;
+   border:1px solid brown;
+ }
+.people_header_con .logo{
+    width:218px;
+    display:block;
+    float:left;
+}
+.people_header_con .title{
+    float:left;
+ 
+    color:#fff;
+    font-size:18px;
+    border-left:1px solid #fff;
+
+    float:left;
+    height:42px;
+    line-height:42px;
+
+    margin:7px 0 5px 29px;
+    padding-left:20px;
+}
+.people_header_con .top_nav{
+    width:22.9%;
+    float:left;
+    border:1px solid brown;
+
+
+    display:flex;
+    flex-direction:row;
+    justify-content: space-around;
+    margin-left:2%;
+}
+
+
+.people_header_con .top_nav li{
+    float:left;
+    border:1px solid brown;
+    color:#fff;
+    text-align:center;
+    font-size:14px;
+    
+}
+
+
+.people_header_con .top_nav li .icon{    
+    width:29px;
+    height:29px;
+    border:1px solid brown;
+    background:url("../../../assets/icon/people_header_nav2.png") no-repeat center;
+}
+.people_header_con .top_nav li.on .icon{    
+    background:url("../../../assets/icon/people_header_nav1_on.png") no-repeat center;
+}
+
+.people_header_con .top_nav li:nth-child(1) .icon{   
+    background:url("../../../assets/icon/people_header_nav2.png") no-repeat center;
+}
+.people_header_con .top_nav li:nth-child(2) .icon{   
+    background:url("../../../assets/icon/people_header_nav2.png") no-repeat center;
+ 
+ }
+ .people_header_con .top_nav li:nth-child(3) .icon{   
+    background:url("../../../assets/icon/people_header_nav3.png") no-repeat center;
+ }
+.people_header_con .top_nav li p{
+    margin-top:5px;
+}

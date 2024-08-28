@@ -143,9 +143,9 @@ class RegisterPage extends React.Component {
                 <div className="sub_btn" onClick={this.registerFn}>注册</div>
                 <div className="agreement_text">
                     <div className={this.state.readFlag?"tit on": "tit"} onClick={this.readoverFn}>我已阅读并同意</div>
-                    <Link to="/info/agreement" className="txt">《信息数据收集协议》</Link>
+                   
                     <Link to="/luoke/agreement" className="txt">《珞珂用户服务协议》</Link>
-
+                    <Link to="/info/agreement" className="txt">《信息数据收集协议》</Link>
 
                 </div>
             </form>

@@ -18,6 +18,10 @@
     position:relative;
     overflow:hidden;
 }
+.productroom_detail_page  .detail_info .left .big_img_c{
+    object-fit: cover;
+    overflow:hidden;
+}
 .productroom_detail_page  .detail_info .left .btn{
    
     width:40px;
@@ -30,14 +34,16 @@
     background:url("../../../assets/left_banner1.png") no-repeat center;   
     left:20px;
 }
+
+
+
 .productroom_detail_page  .detail_info .left .btn.left_btn:hover{
     background:url("../../../assets/left_banner2.png") no-repeat center;
 }
 
 
-
-
 .productroom_detail_page  .detail_info .left .btn.right_btn{
+
     right:20px;
     background:url("../../../assets/right_banner1.png") no-repeat center;
 }
@@ -57,7 +63,7 @@
 }
 .productroom_detail_page  .detail_info .left .img_nav > li{  
     width:15.593%;
-    height:50px;
+    height:80px;
     float:left;
     margin-left:1.29%;
     overflow:hidden;
@@ -74,7 +80,7 @@
     top:0;
     right:-4px;
     width:15.593%;
-    height:50px;
+    height:80px;
 }
 .productroom_detail_page  .detail_info .left .img_nav > li:nth-child(6):last-child.on{
     right:0;

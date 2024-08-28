@@ -1,6 +1,10 @@
 import React from "react";
+import {Link} from "react-router-dom";
 import {Row, Col} from "antd";
+
 import "./index.css";
+
+ 
 
 import logoFooter from "../../assets/footer_logo.png";
 import iconA from "../../assets/footer_map.png";
@@ -78,6 +82,25 @@ class Footer extends React.Component {
                     imgSrc: require("../../assets/footer_code4.png"),
                     txt: "微信公众号"
                 }
+            ],
+            copyIcon: [
+                {
+                    id: 0,
+                    imgSrc: require("../../assets/footer_icon_1.png")
+                },
+                {
+                    id: 1,
+                    imgSrc: require("../../assets/footer_icon_2.png")
+                },
+                {
+
+                    id: 2,
+                    imgSrc: require("../../assets/footer_icon_3.png")
+                },
+                {
+                    id: 3,
+                    imgSrc: require("../../assets/footer_icon_4.png")
+                }
             ]
         }
     }
@@ -138,7 +161,15 @@ class Footer extends React.Component {
 
 
                 <Row>
-                    <Col span={24} className="copy">粤ICP备2024161668号</Col>
+                    <Col span={24} className="copy">
+                        Copyright©2024 深圳市珞珂家居有限公司<a href="https://beian.miit.gov.cn" className="copy_number">粤ICP备2024161668号</a>
+                        
+                        {
+                            this.state.copyIcon.map((item, index)=> {
+                                return (<Link to="/" className="icon" key={index}><img src={item.imgSrc} alt=""/></Link>)
+                            })
+                        }
+                    </Col>
                 </Row>
             </div>
         )
