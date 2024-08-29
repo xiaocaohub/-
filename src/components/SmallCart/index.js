@@ -23,9 +23,9 @@ class CartSmall extends React.Component {
     }
 
     initFn = ()=> {
+
         let cartArr = getStorageFn("cartArr") || [];
         console.log("cartArr smallCart")
-      
         console.log(cartArr)
         console.log("cartArr smallCart")
         this.setState({
@@ -35,17 +35,17 @@ class CartSmall extends React.Component {
         })
     }
     selectGoodFn = (item, index)=> {
+    
+    
         let cartArr = this.state.cartArr;
         item.selectFlag = !item.selectFlag;
-
         cartArr[index] = item;
-        
-
         setStorageFn("cartArr", cartArr)
+
         this.setState({
+
             cartArr: cartArr
         }, function () {
-
             this.totalAll()
         })
     }
@@ -54,18 +54,19 @@ class CartSmall extends React.Component {
         let flag = true;
         let totalMoney = 0;
 
+        if (cartArr.length>0) {
+            cartArr.forEach((item,index)=> {
+                if (!item.selectFlag) {
     
-        cartArr.forEach((item,index)=> {
-            if (!item.selectFlag) {
-
-                flag = false;
-            }
-            if (item.selectFlag) {
-                totalMoney += item.price * item.goods_num;
-            }
-        })
-        if (cartArr.length == 0) {
+                    flag = false;
+                }
+                if (item.selectFlag) {
+                    totalMoney += item.price * item.goods_num;
+                }
+            })
+        } else {
             flag = false;
+            totalMoney = 0;
         }
         this.setState({
             selectAllFlag: flag,
@@ -86,24 +87,25 @@ class CartSmall extends React.Component {
         })
     }
     reduceFn = (item, index)=> {
-        console.log(item)
         let cartArr = this.state.cartArr;
         if (item.goods_num > 1) {
             cartArr[index].goods_num = item.goods_num - 1;
         }
-
         this.setState({
             cartArr: cartArr
+        }, function () {
+         
+            this.totalAll()
         })
     }
     addFn = (item, index)=> {
-        
-
         let cartArr = this.state.cartArr;
- 
         cartArr[index].goods_num = item.goods_num + 1;
+
         this.setState({
             cartArr: cartArr
+        }, function () {
+            this.totalAll()
         })
     }
     deleteGoodFn = (item, index)=> {
@@ -111,27 +113,63 @@ class CartSmall extends React.Component {
 
         let cartArr = this.state.cartArr;
         let selectAllFlag = this.state.selectAllFlag;
+      
         Modal.confirm({
             title: "温馨提示",
             content: "确认删除吗?",
+            cancelText: "取消",
+
+            okText: "确认",
             onOk: function () {
                 cartArr.splice(index, 1)
                 
                  
-
-                console.log(cartArr.length)
-                if (cartArr.length == 0) {
-                    selectAllFlag = false;
-                }
-                console.log(selectAllFlag)
                 _this.setState({
-                    cartArr: cartArr,
-                    selectAllFlag: selectAllFlag
+                    cartArr: cartArr
                 }, function () {
                     _this.totalAll()
                 })
             }
         })
+    }
+    deleteSelectAllFn = ()=> {
+
+        let _this = this;
+
+
+        let cartArr = this.state.cartArr;
+        let length = cartArr.length;
+        if (length > 0) {
+            let selectCount = 0;
+
+            cartArr.forEach((item)=> {
+                
+                if (item.selectFlag) {
+                    selectCount += 1;
+                }
+            })
+            if (selectCount > 0) {
+
+                Modal.confirm({
+                    title: "温馨提示",
+                    content: "确认删除吗?",
+
+                    cancelText: "取消",
+                    okText: "确认",
+                    onOk: function () {
+                    
+                        for (let i=length-1; i>=0; i--) {
+                            if (cartArr[i].selectFlag) {
+                                cartArr.splice(i, 1)
+                            }
+                        } 
+                        _this.setState({
+                            cartArr: cartArr
+                        })
+                    }
+                })
+            }
+        }
     }
     render () {
         return (
@@ -168,8 +206,8 @@ class CartSmall extends React.Component {
                                             <div className="info_con">
                                                 <img src={item.imgurl} alt="" className="img"/>
                                                 <div className="info">
-                                                    <div className="txt"> { item.product_title } </div>
-                                                    <div className="tit">{ item.skuName }</div>
+                                                    <div className="txt"> { item.product_title?item.product_title:"极简风格设计师款式普拉多沙发" } </div>
+                                                    <div className="tit">{ item.skuName?item.skuName:"04系列 单人位-1050*1050*750mm" }</div>
                                                 </div>
                                             </div>
             
@@ -192,7 +230,7 @@ class CartSmall extends React.Component {
 
                     <div className="total_con">
                         <div className={this.state.selectAllFlag?"select_all on":"select_all"} onClick={this.selectAllFn}>全选</div>
-                        <span className="delete_all">删除选中商品</span>
+                        <span className="delete_all" onClick={this.deleteSelectAllFn}>删除选中商品</span>
                         <Link to="/cart" className="go_cart_btn">下单采购</Link>
 
                         <div className="down_btn">导出清单</div>

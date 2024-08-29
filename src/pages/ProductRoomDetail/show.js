@@ -88,14 +88,12 @@ class Show extends React.Component {
             data: formData
         }).then((res)=> {
             let resData = res.data.data;
-            // console.log("resData")
-            // console.log(resData)
-            // console.log("resData----------------")
             _this.setState({
                 goodInfo: resData
             })
         })
     }
+
     selectSameFn = (index)=> {
         this.setState({
             designCurrentIndex: index 
@@ -107,23 +105,17 @@ class Show extends React.Component {
             currentGood: currentGood
         })
     }
-
     addCartFn = ()=> {
         let _this = this;
         let token = getStorageFn("token");
         if (!token) {
             message.error("未登录")
-
             return ;
         }
-        // let cartArr = getStorageFn("cartArr") || this.state.cartArr;
-
         let cartArr =  this.state.cartArr;
-
+        
         let currentGood = this.state.currentGood;
         let addCartFlag = this.state.addCartFlag;
-
-
         this.setState({
             addCartFlag: false
         })
@@ -131,17 +123,11 @@ class Show extends React.Component {
         if (!addCartFlag) {
             return ;
         } 
-
         currentGood.goods_id = parseInt(this.state.goodId);
         currentGood.attribute_id = currentGood.cid;
-    
-    
-        const arr = cartArr.filter(item=>item.goods_id == currentGood.goods_id && item.attribute_id == currentGood.attribute_id);
+        const arr = cartArr.filter(item=>item.goods_id == currentGood.goods_id && item.attribute_id == currentGood.attribute_id);        
         if (arr.length > 0) {
             cartArr.forEach((item, index)=>{
-              
-
-
                 if (item.goods_id == currentGood.goods_id && item.attribute_id == currentGood.attribute_id) {  
                     item.goods_num += 1;
                     currentGood = item;
@@ -149,6 +135,7 @@ class Show extends React.Component {
             })
         } else {
             currentGood.goods_num = 1;
+
 
             currentGood.selectFlag = false;
             cartArr.push(currentGood)
@@ -158,27 +145,17 @@ class Show extends React.Component {
             cartArr: cartArr,
             currentGood: currentGood
         }, function () {
-            
-            
-
-
-            // console.log("currentGood", currentGood)
-           
-            // console.log("cartArr")
-            // console.log(cartArr)
-            // console.log("cartArr")
-
             this.addCurrentGoodCartFn()
         })
     }
-    // 当前的商品加入后台购物车
 
+    // 当前的商品加入后台购物车
     addCurrentGoodCartFn () {
         let _this = this;
         let currentGood = this.state.currentGood;
+
         let formData = new FormData();
         let option = {"brandId":"","minPrice":"","maxPrice":""};
-        
         let token = getStorageFn("token");
         formData.append("api", "app.cart.addCart");   
         formData.append("accessId", token); 
@@ -186,12 +163,11 @@ class Show extends React.Component {
         formData.append("storeType", 6);
         formData.append("goodsId",  currentGood.goods_id );
         formData.append("num",  currentGood.goods_num );
+        
         formData.append("attributeId",  currentGood.attribute_id );
-    
         request({
             url: "/api/gw",         
             method: "POST",
-
             data: formData
         }).then((res)=> {
             let code = res.data.code;
@@ -214,6 +190,7 @@ class Show extends React.Component {
                         {this.state.goodInfo&&<DetailInfo goodDetail={this.state.goodInfo} setSelectGood={this.setSelectGoodFn} addCartFn={this.addCartFn}></DetailInfo>}
                         {this.state.goodInfoFlag&&<ShowLoading></ShowLoading>}
                         <div className="design_same_con">
+            
                             <ul className="nav_list">          
                                 {this.state.designSameNav.map((item, index)=> {
                                     return (<li className={this.state.designCurrentIndex == index?"on":""} onClick={()=>{this.selectSameFn(index)}} key={item.id}>
@@ -223,6 +200,7 @@ class Show extends React.Component {
                             </ul>
 
                             {this.state.designCurrentIndex == 0 && <Design></Design>}
+            
                             {this.state.designCurrentIndex == 1 && <SameKind></SameKind>}
                         </div>
                     </Col>

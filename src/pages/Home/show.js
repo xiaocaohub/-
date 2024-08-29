@@ -146,7 +146,6 @@ class Show extends React.Component {
     }
 
     // 获后台购物车数据
-
     getCartInfoFn = ()=> {
         let _this = this;
         let formData = new FormData();
@@ -234,6 +233,8 @@ class Show extends React.Component {
                     </Col>
                     <Col span={3}></Col>
                 </Row>
+            
+
             
                 {this.props.state.commonState.showCartFlag && <SmallCart hideSmallCart={this.props.hideSmallCartFn}></SmallCart>}
             </div>

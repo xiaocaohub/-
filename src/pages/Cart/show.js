@@ -3,8 +3,10 @@ import {Link} from "react-router-dom";
 import {Row, Col, Input} from "antd";
 
 import "./index.css";
+
 import GoodTable from "../../components/Cart/GoodTable";
 import UserInfo from "../../components/Cart/UserInfo";
+import SmallCart from "../../components/SmallCart";
 class Show extends React.Component {
     constructor (props) {
         super(props)
@@ -48,6 +50,7 @@ class Show extends React.Component {
                     </Col>
                     <Col span={3}></Col>
                 </Row>
+                {/* {this.props.state.commonState.showCartFlag && <SmallCart hideSmallCart={this.props.hideSmallCartFn}></SmallCart>} */}
             </div>
         )
     }
