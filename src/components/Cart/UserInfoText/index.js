@@ -17,12 +17,18 @@ class UserInfoText extends React.Component {
                 </div>
 
                 <ul className="user_info_text">
-                    <li><span className="tit">收 货 人:</span>黄S <div className="change_btn" onClick={this.changeFn}>修改</div></li>
-                    <li><span className="tit">联系电话:</span>00000000000</li>
+                    <li><span className="tit">收 货 人:</span>{this.props.userInfo.recipient} <div className="change_btn" onClick={this.changeFn}>修改</div></li>
+                    <li><span className="tit">联系电话:</span>{this.props.userInfo.phone}</li>
 
-                    <li><span className="tit">收货地址:</span>广东省深圳市龙岗区同乐镇黄屋村</li>
+                    <li><span className="tit">收货地址:</span>
+                        {  this.props.userInfo.province } 
+                        {  this.props.userInfo.city }
 
-                    <li><span className="tit">备 注:</span>请按收货地址发货</li>
+                        { this.props.userInfo.area }
+                        { this.props.userInfo.detailAdress }
+                    </li>
+
+                    <li><span className="tit">备 注:</span>{this.props.userInfo.remark }</li>
                 </ul>
             </div>
         )

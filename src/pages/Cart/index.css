@@ -52,6 +52,11 @@
     background:url("../../assets/icon/icon_select.png") no-repeat left center;
     float:left;
 }
+
+
+.cart_page_con  .total_con .select_all.on{
+    background:url("../../assets/icon/icon_select_on.png") no-repeat left center;
+}
 .cart_page_con  .total_con .delete_all{
    float:left;
    margin-left:25px;

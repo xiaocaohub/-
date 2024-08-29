@@ -32,7 +32,7 @@ class Show extends React.Component {
             goodInfo: "",
             goodInfoFlag: false,
             cartArr: [],
-            addCartFlag: true
+            addCartFlag: true  // 防止多次点击
         }    
     }
     componentDidMount () {
@@ -105,6 +105,49 @@ class Show extends React.Component {
             currentGood: currentGood
         })
     }
+    // addCartFn = ()=> {
+    //     let _this = this;
+    //     let token = getStorageFn("token");
+    //     if (!token) {
+    //         message.error("未登录")
+    //         return ;
+    //     }
+    //     let cartArr =  this.state.cartArr;
+        
+    //     let currentGood = this.state.currentGood;
+    //     let addCartFlag = this.state.addCartFlag;
+    //     this.setState({
+    //         addCartFlag: false
+    //     })
+
+    //     if (!addCartFlag) {
+    //         return ;
+    //     } 
+    //     currentGood.goods_id = parseInt(this.state.goodId);
+    //     currentGood.attribute_id = currentGood.cid;
+    //     const arr = cartArr.filter(item=>item.goods_id == currentGood.goods_id && item.attribute_id == currentGood.attribute_id);        
+    //     if (arr.length > 0) {
+    //         cartArr.forEach((item, index)=>{
+    //             if (item.goods_id == currentGood.goods_id && item.attribute_id == currentGood.attribute_id) {  
+    //                 item.goods_num += 1;
+    //                 currentGood = item;
+    //             }
+    //         })
+    //     } else {
+    //         currentGood.goods_num = 1;
+
+
+    //         currentGood.selectFlag = false;
+    //         cartArr.push(currentGood)
+    //     }
+    //     setStorageFn("cartArr", cartArr)
+    //     this.setState({
+    //         cartArr: cartArr,
+    //         currentGood: currentGood
+    //     }, function () {
+    //         this.addCurrentGoodCartFn()
+    //     })
+    // }
     addCartFn = ()=> {
         let _this = this;
         let token = getStorageFn("token");
@@ -114,6 +157,7 @@ class Show extends React.Component {
         }
         let cartArr =  this.state.cartArr;
         
+
         let currentGood = this.state.currentGood;
         let addCartFlag = this.state.addCartFlag;
         this.setState({
@@ -135,25 +179,23 @@ class Show extends React.Component {
             })
         } else {
             currentGood.goods_num = 1;
-
-
             currentGood.selectFlag = false;
-            cartArr.push(currentGood)
+            // cartArr.push(currentGood)
         }
-        setStorageFn("cartArr", cartArr)
+        // setStorageFn("cartArr", cartArr)
+
         this.setState({
-            cartArr: cartArr,
+            // cartArr: cartArr,
             currentGood: currentGood
         }, function () {
             this.addCurrentGoodCartFn()
         })
     }
-
     // 当前的商品加入后台购物车
     addCurrentGoodCartFn () {
+
         let _this = this;
         let currentGood = this.state.currentGood;
-
         let formData = new FormData();
         let option = {"brandId":"","minPrice":"","maxPrice":""};
         let token = getStorageFn("token");
@@ -161,9 +203,9 @@ class Show extends React.Component {
         formData.append("accessId", token); 
         formData.append("storeId", 1);
         formData.append("storeType", 6);
+        
         formData.append("goodsId",  currentGood.goods_id );
         formData.append("num",  currentGood.goods_num );
-        
         formData.append("attributeId",  currentGood.attribute_id );
         request({
             url: "/api/gw",         
@@ -173,12 +215,42 @@ class Show extends React.Component {
             let code = res.data.code;
             if (code == 200) {
                 message.success("加入成功")
+                _this.getCartInfoFn()
             } else {
                 message.error(res.data.message);
             }
             _this.setState({
                 addCartFlag: true
             })
+        })
+    }
+    
+    // 获后台购物车数据
+    getCartInfoFn = ()=> {
+        let _this = this;
+        let formData = new FormData();
+        let token = getStorageFn("token");
+        let option = {"brandId":"","minPrice":"","maxPrice":""};
+        formData.append("api", "app.cart.index");    
+        formData.append("accessId", token);  
+        formData.append("storeId", 1);
+        formData.append("storeType", 6);
+        request({
+            url: "/api/gw",         
+            method: "POST",    
+            data: formData
+
+        }).then((res)=> {
+            let resData = res.data.data.data;
+    
+
+            // resData.forEach((item, index)=>{
+            //     item.selectFlag = false;
+            // })
+            _this.setState({
+                cartArr: resData
+            })
+            setStorageFn("cartArr", resData)
         })
     }
     render () {

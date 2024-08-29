@@ -1,23 +1,22 @@
 import { combineReducers } from "redux";
-import commonState from "./common.js";
-import homeState from "./home.js";
+import commonState from "./common";
+import homeState from "./home";
 
-import productRoomState from "./ProductRoom.js";
+import productRoomState from "./ProductRoom";
 
-import productRoomDetailState from "./ProductRoomDetail.js";
+import productRoomDetailState from "./ProductRoomDetail";
+
+import cartState from "./cart"
 export default combineReducers({
     commonState,
-
     homeState,
     productRoomState,
-    productRoomDetailState
+    productRoomDetailState,
 
 
-
+    cartState
 
 })
-
-
 
 
 

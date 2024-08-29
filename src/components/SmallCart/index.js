@@ -1,63 +1,106 @@
 import React from "react";
-import {Input, Modal} from "antd";
+import {Input, Modal, message} from "antd";
 import {Link} from "react-router-dom";
 
 import "./index.css";
 
 import imgGood from "../../assets/recomend_good1.png";
 import {setStorageFn, getStorageFn} from "../../utils/localStorage";
+import {setImgAutoHeightFn} from "../../utils/imgAuto";
 import request from "../../api/request";
 class CartSmall extends React.Component {
     constructor (props) {
         super(props)
         this.state = {
             cartArr: [],
-            selectAllFlag: false,
 
-            totalMoney: 0
+            selectAllFlag: false,
+            totalMoney: 0,
+            setImgHeight: 0
         }
     }
     componentDidMount () {
-         this.initFn()
-        // this.getCartInfoFn()
+         //this.initFn()
+        this.getCartInfoFn()
     }
 
     initFn = ()=> {
+        // let cartArr = getStorageFn("cartArr") || [];
+        // this.setState({
+        //     cartArr: cartArr
+        // }, function () {
+        //     if (cartArr.length>0) {
+        //         this.setImgHeightFn()
+        //     }
+        //     this.totalAll()
+        // })
 
-        let cartArr = getStorageFn("cartArr") || [];
-        console.log("cartArr smallCart")
-        console.log(cartArr)
-        console.log("cartArr smallCart")
+
+
+        let cartArr = this.state.cartArr;
+        if (cartArr.length>0) {
+            this.setImgHeightFn()
+        }
+    }
+
+
+    setImgHeightFn = ()=> {
+        let img = document.querySelectorAll(".info_con .img")[0];
+        let setImgHeight = setImgAutoHeightFn(img);
         this.setState({
-            cartArr: cartArr
-        }, function () {
-            this.totalAll()
+
+            setImgHeight: setImgHeight
         })
     }
     selectGoodFn = (item, index)=> {
-    
-    
+        console.log(item)
         let cartArr = this.state.cartArr;
         item.selectFlag = !item.selectFlag;
         cartArr[index] = item;
         setStorageFn("cartArr", cartArr)
-
+        this.selectGoodRequestFn(item.id)
         this.setState({
 
             cartArr: cartArr
         }, function () {
             this.totalAll()
         })
+    }
+    selectGoodRequestFn = (selectId)=> {
+        
+        let _this = this; 
+        let formData = new FormData();
+        let token = getStorageFn("token");
+        selectId = selectId + "";
+        formData.append("api", "app.cart.checkedCart");
+        formData.append("accessId", token);
+        formData.append("storeId", 1);
+        formData.append("storeType", 6);
+        formData.append("cartIds", selectId)
+        request({
+            url: "/api/gw",         
+            method: "POST",    
+            data: formData
+        }).then((res)=> {
+            // console.log(res.data)
+            // if (res.data.data) {
+            //    message.success("删除成功")
+            //    _this.getCartInfoFn()
+
+            // } else {
+            //     message.error(res.data.message)
+            // }
+        })
+
     }
     totalAll = ()=> {
         let cartArr = this.state.cartArr;
         let flag = true;
         let totalMoney = 0;
-
         if (cartArr.length>0) {
+
             cartArr.forEach((item,index)=> {
                 if (!item.selectFlag) {
-    
                     flag = false;
                 }
                 if (item.selectFlag) {
@@ -65,6 +108,7 @@ class CartSmall extends React.Component {
                 }
             })
         } else {
+
             flag = false;
             totalMoney = 0;
         }
@@ -74,15 +118,14 @@ class CartSmall extends React.Component {
         })
     }
     selectAllFn = ()=> {
+     
         let cartArr = this.state.cartArr;
         let selectAllFlag = !this.state.selectAllFlag;
-
         cartArr.forEach((item,index)=> {
             item.selectFlag = selectAllFlag ;
         })
         this.setState({
             cartArr: cartArr,
-            
             selectAllFlag: selectAllFlag
         })
     }
@@ -94,101 +137,152 @@ class CartSmall extends React.Component {
         this.setState({
             cartArr: cartArr
         }, function () {
-         
             this.totalAll()
         })
     }
     addFn = (item, index)=> {
         let cartArr = this.state.cartArr;
         cartArr[index].goods_num = item.goods_num + 1;
-
         this.setState({
             cartArr: cartArr
         }, function () {
             this.totalAll()
         })
     }
-    deleteGoodFn = (item, index)=> {
+    deleteGoodConfirmFn = (item, index)=> {
         let _this = this;
-
         let cartArr = this.state.cartArr;
         let selectAllFlag = this.state.selectAllFlag;
-      
+        let deleteId = item.id;
+
         Modal.confirm({
             title: "温馨提示",
             content: "确认删除吗?",
-            cancelText: "取消",
 
+            cancelText: "取消",
             okText: "确认",
             onOk: function () {
-                cartArr.splice(index, 1)
-                
-                 
-                _this.setState({
-                    cartArr: cartArr
-                }, function () {
-                    _this.totalAll()
-                })
+                _this.deleteGoodFn(deleteId)
+            }
+        })
+    }
+    deleteGoodFn = (deleteId)=> {
+       
+        let _this = this; 
+        let formData = new FormData();
+        let token = getStorageFn("token");
+        formData.append("api", "app.cart.delCart");
+
+        formData.append("accessId", token);
+        
+        formData.append("storeId", 1);
+        formData.append("storeType", 6);
+        formData.append("cartIds", deleteId)
+
+        request({
+            url: "/api/gw",         
+            method: "POST",    
+            data: formData
+        }).then((res)=> {
+            // console.log(res.data)
+            if (res.data.data) {
+               message.success("删除成功")
+               _this.getCartInfoFn()
+
+            } else {
+                message.error(res.data.message)
             }
         })
     }
     deleteSelectAllFn = ()=> {
-
         let _this = this;
-
-
         let cartArr = this.state.cartArr;
         let length = cartArr.length;
+        
         if (length > 0) {
             let selectCount = 0;
-
             cartArr.forEach((item)=> {
-                
                 if (item.selectFlag) {
                     selectCount += 1;
                 }
             })
+
             if (selectCount > 0) {
 
                 Modal.confirm({
                     title: "温馨提示",
                     content: "确认删除吗?",
-
                     cancelText: "取消",
                     okText: "确认",
                     onOk: function () {
-                    
+                        let deleteIds = "";
                         for (let i=length-1; i>=0; i--) {
                             if (cartArr[i].selectFlag) {
-                                cartArr.splice(i, 1)
+                             
+                                deleteIds += cartArr[i].id + ",";
                             }
                         } 
-                        _this.setState({
-                            cartArr: cartArr
-                        })
+                        _this.deleteGoodFn(deleteIds)
                     }
                 })
             }
         }
     }
+
+    // 获后台购物车数据
+    getCartInfoFn = ()=> {
+        let _this = this;
+        let formData = new FormData();
+        let token = getStorageFn("token");
+    
+        formData.append("api", "app.cart.index");    
+        formData.append("accessId", token);  
+        formData.append("storeId", 1);
+        
+        formData.append("storeType", 6);
+      
+      
+      
+      
+        request({
+            url: "/api/gw",         
+            method: "POST",    
+            data: formData
+
+        }).then((res)=> {
+      
+            let resData = res.data.data.data;
+            resData.forEach((item, index)=>{
+                item.selectFlag = item.checked;
+            })
+            _this.setState({
+                cartArr: resData
+            }, function () {
+
+                _this.totalAll()
+                _this.initFn()
+            })
+
+            setStorageFn("cartArr", resData)
+        })
+    }
     render () {
         return (
             <div className="show_small_cart">
         
-        
                 <div className="shadow"></div>    
                 <div className="cart_small_con">
                     <div className="top_title">
-                        <span className="title">购物车商品</span>
-
+                        <span className="title" onClick={this.setImgHeightFn}>购物车商品</span>
                         <span className="close" onClick={this.props.hideSmallCart}>继续购物</span>
-                    
                     </div>    
                     <div className="good_list_con">
                         <ul className="table_title">
                             <li className="select_con"></li>
                             <li className="info_con">商品信息</li>
                             <li className="price">单价(元)</li>
+
+
                             <li className="count_con">数量</li>
                             <li className="sub_total">金额(元)</li>
                             <li className="operate">操作</li>
@@ -202,12 +296,15 @@ class CartSmall extends React.Component {
                                             <div className="select_con">
                                                 <div className={item.selectFlag?"select on":"select"} onClick={()=>{this.selectGoodFn(item, index)}}></div>
                                             </div>
-            
                                             <div className="info_con">
-                                                <img src={item.imgurl} alt="" className="img"/>
+                                                
+                                                <div className="img" style={{height: this.state.setImgHeight + "px"}}>
+                                                    <img src={item.imgurl} alt=""/>  
+                                                </div>
+
                                                 <div className="info">
-                                                    <div className="txt"> { item.product_title?item.product_title:"极简风格设计师款式普拉多沙发" } </div>
-                                                    <div className="tit">{ item.skuName?item.skuName:"04系列 单人位-1050*1050*750mm" }</div>
+                                                    <div className="txt"> { item.product_title } </div>
+                                                    <div className="tit">{ item.skuName }</div>
                                                 </div>
                                             </div>
             
@@ -219,7 +316,7 @@ class CartSmall extends React.Component {
                                             </div>
                                             <div className="sub_total">{ item.price * item.goods_num }</div>
                                             <div className="operate_con">
-                                                <div className="delete" onClick={()=>{this.deleteGoodFn(item, index)}}></div>
+                                                <div className="delete" onClick={()=>{this.deleteGoodConfirmFn(item, index)}}></div>
                                             </div>
                                         </li>
                                     )
@@ -243,7 +340,6 @@ class CartSmall extends React.Component {
         )
     }
 }
-
 
 
 export default CartSmall;

@@ -113,8 +113,8 @@ class GoodDetail extends React.Component {
                                     <li><span className="title">分类:</span>  <span className="txt">{this.props.goodDetail.product.categoryName} </span> </li>
                                     <li><span className="title">风格:</span>  <span className="txt">{this.props.goodDetail.product.styleName}</span> </li>
                                     <li><span className="title">型号:</span>  <span className="txt">{ this.props.currentGood.marque }</span> </li>
-                                    <
-                                        li><span className="title">体积:</span>  <span className="txt">{ this.props.currentGood.capacity }</span> </li>
+                                    
+                                    <li><span className="title">体积(m3):</span>  <span className="txt">{ this.props.currentGood.capacity }</span> </li>
                                     <li><span className="title">包件数:</span>  <span className="txt">{ this.props.currentGood.bomNums }</span> </li>
                                     {this.state.attrArr.map((item, index)=>{
                                         if (item.value) {

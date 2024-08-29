@@ -1,5 +1,7 @@
 import React from "react";
 import {Form, Select, Input, Button} from "antd";
+import {setStorageFn, getStorageFn} from "../../../utils/localStorage";
+
 const { Option } = Select;
 
 const formItemLayout = {
@@ -30,18 +32,70 @@ const {TextArea} = Input;
 class UserForm extends React.Component {
     constructor (props) {
         super(props)
-        console.log("userForm props", props)
+        console.log("props userForm")
+        console.log(props)
+        console.log("props userForm")
+
+       
+        this.state = { 
+            userInfo: {
+                province: "",
+                city:  "",
+
+                area: "",
+
+                detailAdress:  "",
+                recipient:  "", // 收件人
+                phone:  "",
+                remark:  ""
+            }
+        }
+    }
+    detailAdressFn = (e)=> {
+        let value = e.target.value;
+     
+        let userInfo = this.state.userInfo;
+        userInfo.detailAdress = value;
+        this.setState({
+
+            userInfo: userInfo
+        })
+    }
+    recipientFn = (e)=> {
+        let value = e.target.value;
+        
+        let userInfo = this.state.userInfo;
+        userInfo.recipient = value;
+        this.setState({
+            userInfo: userInfo
+        })
+    }
+    phoneFn = (e)=> {
+        let value = e.target.value;
+        let userInfo = this.state.userInfo;
+        userInfo.phone = value;
+        this.setState({
+            userInfo: userInfo
+        })
+    }
+
+    remarkFn = (e)=> {
+        let value = e.target.value;
+        let userInfo = this.state.userInfo;
+        userInfo.remark = value;
+        this.setState({
+            userInfo: userInfo
+        })
     }
     submitFn = ()=> {
-        this.props.changeInfo()
+        this.props.changeInfo(this.state.userInfo)
+        let UserInfo = this.state.userInfo;
+        setStorageFn("UserInfo", UserInfo)
     }
-
-
     render () {
         return (
             <div>        
-                <div className="title">
-                 
+                <div className="title">            
                     <div className="tit">客户信息</div>
                     <div className="txt">（注：客户收货地址信息）</div>
                 </div>
@@ -74,20 +128,27 @@ class UserForm extends React.Component {
                         </Select>
                     </Form.Item>
 
+
+
                     <Form.Item label="详细地址">
-                        <Input style={{ width:670, marginLeft:20}}/> 
+                        <Input style={{ width:670, marginLeft:20}} value={this.state.userInfo.detailAdress} onChange={this.detailAdressFn}/> 
                     </Form.Item>
 
                     <Form.Item label="收件人" >
-                        <Input style={{ width:670, marginLeft:20}}/> 
+                        <Input style={{ width:670, marginLeft:20}} value={this.state.userInfo.recipient} onChange={this.recipientFn}/> 
                     </Form.Item>
 
+                 
                     <Form.Item label="手机号" >
-                        <Input style={{ width:670, marginLeft:20}}/> 
+
+                        <Input style={{ width:670, marginLeft:20}} value={this.state.userInfo.phone} onChange={this.phoneFn}/> 
+                  
+                  
                     </Form.Item>
-                
+ 
                     <Form.Item label="备注">
-                        <TextArea rows={5} style={{ width:670, marginLeft: 20}}/>
+                        <TextArea rows={5} style={{ width:670, marginLeft: 20}} value={this.state.userInfo.remark} onChange={this.remarkFn}/>
+                  
                     </Form.Item>
 
                     <Form.Item {...tailFormItemLayout}>

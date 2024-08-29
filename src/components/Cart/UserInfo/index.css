@@ -42,3 +42,22 @@
     margin-bottom:5px;
     color:#666;
 }
+
+
+
+.user_form_com{
+   display:none;
+}
+.user_form_com.on{
+
+    display: block;
+}
+
+
+.user_info_text_con{
+    display: none;
+}
+
+.user_info_text_con.on{
+    display: block;
+}

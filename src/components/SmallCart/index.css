@@ -16,7 +16,7 @@
     opacity:0.5;   
 }
 .cart_small_con{
-    width:60%;
+    width:52.5%;
     height:70%;
     background:#fff;
     position:absolute;
@@ -41,7 +41,9 @@
    float:right;
    color:#666;
    font-size:15px;
+
    background:url("../../assets/icon/icon_close.png") no-repeat left center;
+   
    padding-left:31px;
    cursor:pointer;
 }
@@ -51,10 +53,11 @@
    overflow-y:auto;
 }
 .cart_small_con .good_list_con .table_title{
+   
     overflow:hidden;
     padding:0 29px;
-
     background:#FAFAFA;
+
     font-size:14px;
     color:#666;
 }
@@ -91,8 +94,6 @@
 }
 .cart_small_con .good_list_con .good_list > li{
    
-
-    height:80px;
     border-bottom:1px solid #E1E1E1;
     padding:20px 0;
     overflow:hidden;
@@ -112,6 +113,7 @@
     width:15px;
     height:15px;
     background:url("../../assets/icon/icon_select.png") no-repeat center;
+    
     margin-top:32px;
     cursor:pointer;
 }
@@ -121,40 +123,47 @@
 .cart_small_con .good_list_con .good_list > li .info_con{
     width:51%;
 }
+
 .cart_small_con .good_list_con .good_list > li .info_con .img{
-
-    width:32.4%;
+    width:25.5%;
     height:100%;
+    float: left;
+    overflow:hidden;
 }
-
+.cart_small_con .good_list_con .good_list > li .info_con .img img{
+    object-fit: cover;
+    width:100%;
+}
 .cart_small_con .good_list_con .good_list > li .info_con .info{
+    
+    
     width:61%;
     height:80px;    
     float:right;
     margin-right:3%;
     font-size:12px;
 }
+
 .cart_small_con .good_list_con .good_list > li .info_con .info .txt{
     line-height:14px;
     font-weight:bold;
     max-height:43px;
-
-
     overflow:hidden;
     margin-bottom:10px;
-
 }
 .cart_small_con .good_list_con .good_list > li .info_con .info .tit{
     max-height:29px;
+
     line-height:14px;
     font-size:12px;
-
     color:#666;
+
     margin-top:5px;
     overflow:hidden;
 }
 
 .cart_small_con .good_list_con .good_list > li .price{
+    
     width:12%;
     line-height:80px;
     text-align:center;
