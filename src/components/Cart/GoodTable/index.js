@@ -45,9 +45,9 @@ class GoodTable extends React.Component {
                 <ul className="good_list">
                     {this.props.cartArr.map((item, index)=>{
                         return (
-                            <li key={item.id}>
+                            <li key={item.id} className={item.checked?"":"on"}>
           
-                                <div className={item.selectFlag?"select on":"select"} onClick={()=>{this.selectGoodFn(item, index)}}></div>
+                                <div className={item.checked?"select on":"select"} onClick={()=>{this.selectGoodFn(item, index)}}></div>
           
                                 <div className="info">          
                                     <Link to="/" className="good_img">
@@ -60,10 +60,10 @@ class GoodTable extends React.Component {
                                     </div>
 
                                 </div>
-                                <div className="good_code"> ---------- </div>
+                                <div className="good_code"> {item.productCode} </div>
                         
 
-                                <div className="vol">-------</div>
+                                <div className="vol"> {item.capacity} </div>
                                 <div className="price">{item.price}</div>
                                 <div className="count_con">
                                     <div className="btn" onClick={()=>{this.reduceFn(item, index)}}> - </div>

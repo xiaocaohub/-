@@ -48,7 +48,6 @@ class CartSmall extends React.Component {
         let img = document.querySelectorAll(".info_con .img")[0];
         let setImgHeight = setImgAutoHeightFn(img);
         this.setState({
-
             setImgHeight: setImgHeight
         })
     }
@@ -58,16 +57,15 @@ class CartSmall extends React.Component {
         item.selectFlag = !item.selectFlag;
         cartArr[index] = item;
         setStorageFn("cartArr", cartArr)
+        
         this.selectGoodRequestFn(item.id)
         this.setState({
-
             cartArr: cartArr
         }, function () {
             this.totalAll()
         })
     }
     selectGoodRequestFn = (selectId)=> {
-        
         let _this = this; 
         let formData = new FormData();
         let token = getStorageFn("token");
@@ -91,14 +89,13 @@ class CartSmall extends React.Component {
             //     message.error(res.data.message)
             // }
         })
-
     }
     totalAll = ()=> {
         let cartArr = this.state.cartArr;
         let flag = true;
+
         let totalMoney = 0;
         if (cartArr.length>0) {
-
             cartArr.forEach((item,index)=> {
                 if (!item.selectFlag) {
                     flag = false;
@@ -154,27 +151,25 @@ class CartSmall extends React.Component {
         let cartArr = this.state.cartArr;
         let selectAllFlag = this.state.selectAllFlag;
         let deleteId = item.id;
-
         Modal.confirm({
             title: "温馨提示",
-            content: "确认删除吗?",
 
+            content: "确认删除吗?",
             cancelText: "取消",
             okText: "确认",
+
             onOk: function () {
                 _this.deleteGoodFn(deleteId)
             }
         })
     }
-    deleteGoodFn = (deleteId)=> {
-       
+
+    deleteGoodFn = (deleteId)=> {   
         let _this = this; 
         let formData = new FormData();
         let token = getStorageFn("token");
         formData.append("api", "app.cart.delCart");
-
         formData.append("accessId", token);
-        
         formData.append("storeId", 1);
         formData.append("storeType", 6);
         formData.append("cartIds", deleteId)

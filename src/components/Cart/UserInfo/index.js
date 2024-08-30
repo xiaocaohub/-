@@ -4,10 +4,13 @@ import {setStorageFn, getStorageFn} from "../../../utils/localStorage";
 import UserForm from "../UserForm";
 import UserInfoText from "../UserInfoText";
 
-import "./index.css";
 
- 
+import provinceData from "../../../citys/province";
+import cityData from "../../../citys/city";
+import areaData from "../../../citys/area";
+import "./index.css";
 const { Option } = Select;
+let areaList = [];
 const formItemLayout = {
     labelCol: {
       xs: { span: 1 },
@@ -34,27 +37,37 @@ const formItemLayout = {
     }
   }
 
-const {TextArea} = Input;
- 
 
+const {TextArea} = Input;
 class UserInfo extends React.Component {
     constructor (props) {
         super(props)
-        this.state = {
-            changeFlag: true,
-            userInfo: {
 
-                province: "",               
-                city: "",
-                area: "",
+        this.state = {
+        
+            changeFlag: true,
+            userInfoDetail: {
+                province: "",
+                provinceId: "",           
+                city: "请选择",  
+                cityId: "",
+                cityList: [
+                    
+                
+                ],
+                areaId: "",
+                areaList: [],
+                
+                area: "请选择",
                 detailAdress:  "",
                 recipient:  "", // 收件人
                 phone:  "",
                 remark:  ""
             }
         }
+        console.log(provinceData)
     }
-    changeInfoFn = (userInfo)=> {
+    changeInfoFn = (userInfoDetail)=> {
         let changeFlag = !this.state.changeFlag;
         this.setState({
      
@@ -64,49 +77,148 @@ class UserInfo extends React.Component {
     detailAdressFn = (e)=> {   
         let value = e.target.value;
 
-        let userInfo = this.state.userInfo;
-        userInfo.detailAdress = value;
+        let userInfoDetail = this.state.userInfoDetail;
+        userInfoDetail.detailAdress = value;
         this.setState({
-            userInfo: userInfo
+            userInfoDetail: userInfoDetail
         })
     }
     recipientFn = (e)=> {
         let value = e.target.value;
-        let userInfo = this.state.userInfo;
+        let userInfoDetail = this.state.userInfoDetail;
 
-        userInfo.recipient = value;
+        userInfoDetail.recipient = value;
         this.setState({
-            userInfo: userInfo
+            userInfoDetail: userInfoDetail
         })
     }
     phoneFn = (e)=> {
         let value = e.target.value;
-        let userInfo = this.state.userInfo;
-        userInfo.phone = value;
+        let userInfoDetail = this.state.userInfoDetail;
+        userInfoDetail.phone = value;
         this.setState({
-            userInfo: userInfo
+            userInfoDetail: userInfoDetail
         })
     }
     remarkFn = (e)=> {
         let value = e.target.value;
-        let userInfo = this.state.userInfo;
-        userInfo.remark = value;
+        let userInfoDetail = this.state.userInfoDetail;
+        userInfoDetail.remark = value;
         this.setState({
-            userInfo: userInfo
+            userInfoDetail: userInfoDetail
         })
     }
     submitFn = ()=> {
-        let userInfo = this.state.userInfo;
-        setStorageFn("userInfo", userInfo)
+        let userInfoDetail = this.state.userInfoDetail;
+        setStorageFn("userInfoDetail", userInfoDetail)
         this.setState({
             changeFlag: false
         })
     }
     changeFn = ()=> {
-
         this.setState({
             changeFlag: true
         })
+    }
+    selectProvinceFn = (option)=> {
+        console.log(option)
+        let userInfoDetail = this.state.userInfoDetail;
+      
+        userInfoDetail.province =  option.label;
+        userInfoDetail.provinceId = option.value;
+        userInfoDetail.cityList = [];
+
+        userInfoDetail.city = "请选择";
+        userInfoDetail.areaList = [];
+        userInfoDetail.area = "请选择";
+        areaList = [];
+        this.setState({
+
+            userInfoDetail: userInfoDetail
+        
+        
+        }, function () {
+            console.log("userInfoDetail cityList")
+            console.log(this.state.userInfoDetail)
+            console.log("userInfoDetail cityList")
+            
+            this.filterCityListFn(cityData, Number(option.value))
+        })
+    }
+   
+    filterCityListFn = (cityData, provinceId)=> {
+        // let cityList = this.state.cityList;
+        let cityList = [];
+        let userInfoDetail = this.state.userInfoDetail;
+        let lengthCityArrLength = cityData.length;
+        // console.log("provinceId", provinceId)
+
+        for (let i=0; i< lengthCityArrLength; i++) {
+
+            let cityArrItem = cityData[i];
+            let length = cityArrItem.length;
+            for (let j=0; j<length; j++) {
+                if (cityArrItem[j].value.slice(0,2) == provinceId) {
+                    cityList.push( cityArrItem[j])
+                }
+            }
+        }
+        userInfoDetail.cityList = cityList;
+        
+        this.setState({
+            userInfoDetail: userInfoDetail
+        }, function () {
+
+            console.log(cityList)
+        })
+    }
+    selectCityFn = (option)=> {
+        console.log(option.value)
+        let _this = this;
+
+        let userInfoDetail = this.state.userInfoDetail;
+        userInfoDetail.city = option.label;
+        userInfoDetail.area = "请选择";
+        // userInfoDetail.areaList;
+        areaList = [];
+        this.filterAreaFn(areaData, option.value)
+        setTimeout(()=>{
+            console.log("areaList", areaList)
+            userInfoDetail.areaList = areaList;
+            _this.setState({
+                userInfoDetail: userInfoDetail
+            })
+        })
+    }
+    filterAreaFn = (arr, cityId)=> {
+        let _this = this;
+        let numLength = cityId.length;
+        // console.log("cityId:", cityId)
+        // console.log("length", cityId.length)
+        // console.log("flag:", flag)
+        let userInfoDetail = this.userInfoDetail;
+      
+
+        let length = arr.length;
+        for (let i=0; i<length; i++) {
+            let flag = Array.isArray(arr[i]);
+            if (flag) {
+                _this.filterAreaFn(arr[i], cityId)
+            } else {
+                if (arr[i].value.slice(0, numLength) == cityId){
+                    areaList.push(arr[i])
+                }
+            }
+        }
+    }
+    selectAreaFn = (option)=>{
+        let userInfoDetail = this.state.userInfoDetail;
+     
+        userInfoDetail.area = option.label;
+        this.setState({
+            userInfoDetail: userInfoDetail
+        })
+
     }
     render () {
         return (
@@ -125,51 +237,67 @@ class UserInfo extends React.Component {
                         <Form.Item label="所在地区" >
                        
                             <Select
-                                labelInValue  defaultValue={{ key: 'lucy' }}
-                                style={{ width:210, marginLeft:20}}>                             
-                                <Option value="jack">Jack (100)</Option>
-                                <Option value="lucy">Lucy (101)</Option>
+                                labelInValue  defaultValue={{ key: '请选择' }}
+                                style={{ width:210, marginLeft:20}}
+                                onChange={this.selectProvinceFn}> 
+                                {provinceData.map((item, index)=>{
+                                    return (<Option value={item.value}>{item.label}</Option>)
+                                })}                            
+                            </Select>
+
+
+ 
+                            <Select
+                                labelInValue
+                                defaultValue={{ key: '请选择' }} 
+                                style={{ width:210, marginLeft:20}}   
+                                onChange={this.selectCityFn}   
+                                value={this.state.userInfoDetail.city}           
+                            >    
+                       
+                               
+                               
+                               
+                                {this.state.userInfoDetail.cityList.length>0 && this.state.userInfoDetail.cityList.map((item, index)=>{
+                                    return (<Option value={item.value} key={index}>{item.label}</Option>)
+                                })}
                             </Select>
 
                             <Select
                                 labelInValue
-                                defaultValue={{ key: 'lucy' }}
-                                style={{ width:210, marginLeft: 20}}                    
-                            >
-                                <Option value="lucy">Lucy (101)</Option>
-                                <Option value="jack">jack (102)</Option>
-                            </Select>
-
-                            <Select
-                                labelInValue
-                                defaultValue={{ key: 'lucy' }}                            
+                                defaultValue={{ key: '请选择' }}                            
                                 style={{ width:210, marginLeft: 20}}
+
+                                value={ this.state.userInfoDetail.area }
+                                onChange={this.selectAreaFn}
                             >
-                                <Option value="jack">Jack (100)</Option>
-                                <Option value="lucy">Lucy (101)</Option>
+                                {this.state.userInfoDetail.areaList.length>0 && this.state.userInfoDetail.areaList.map((item, index)=>{
+                                    return (<Option  value={item.value} key={index}>{item.label}</Option>)
+                                })}
+                        
                             </Select>
                         </Form.Item>
 
 
 
                         <Form.Item label="详细地址">
-                            <Input style={{ width:670, marginLeft:20}} value={this.state.userInfo.detailAdress} onChange={this.detailAdressFn}/> 
+                            <Input style={{ width:670, marginLeft:20}} value={this.state.userInfoDetail.detailAdress} onChange={this.detailAdressFn}/> 
                         </Form.Item>
 
                         <Form.Item label="收件人" >
-                            <Input style={{ width:670, marginLeft:20}} value={this.state.userInfo.recipient} onChange={this.recipientFn}/> 
+                            <Input style={{ width:670, marginLeft:20}} value={this.state.userInfoDetail.recipient} onChange={this.recipientFn}/> 
                         </Form.Item>
 
                     
                         <Form.Item label="手机号" >
 
-                            <Input style={{ width:670, marginLeft:20}} value={this.state.userInfo.phone} onChange={this.phoneFn}/> 
+                            <Input style={{ width:670, marginLeft:20}} value={this.state.userInfoDetail.phone} onChange={this.phoneFn}/> 
                     
                     
                         </Form.Item>
     
                         <Form.Item label="备注">
-                            <TextArea rows={5} style={{ width:670, marginLeft: 20}} value={this.state.userInfo.remark} onChange={this.remarkFn}/>
+                            <TextArea rows={5} style={{ width:670, marginLeft: 20}} value={this.state.userInfoDetail.remark} onChange={this.remarkFn}/>
                     
                         </Form.Item>
 
@@ -185,20 +313,25 @@ class UserInfo extends React.Component {
                     <div className="title">
                         <div className="tit">客户信息</div>
                     </div>
+
                     <ul className="user_info_text">
 
-                        <li><span className="tit">收 货 人:</span>{this.state.userInfo.recipient} <div className="change_btn" onClick={this.changeFn}>修改</div></li>
-                        <li><span className="tit">联系电话:</span>{this.state.userInfo.phone}</li>
+                        <li><span className="tit">收 货 人:</span>{this.state.userInfoDetail.recipient} <div className="change_btn" onClick={this.changeFn}>修改</div></li>
+                        <li><span className="tit">联系电话:</span>{this.state.userInfoDetail.phone}</li>
                         <li><span className="tit">收货地址:</span>
-                            {  this.state.userInfo.province } 
+                      
+                            {  this.state.userInfoDetail.province }       
+                            {  this.state.userInfoDetail.city }
+                            { this.state.userInfoDetail.area }
                             
-                            {  this.state.userInfo.city }
-
-                            { this.state.userInfo.area }
-                            { this.state.userInfo.detailAdress }
+                            { this.state.userInfoDetail.detailAdress }
                         </li>
 
-                        <li><span className="tit">备 注:</span>{this.state.userInfo.remark }</li>
+                        <li>
+                            <span className="tit">备 注:</span>
+
+                            <div className="txt_remark">{this.state.userInfoDetail.remark }</div>    
+                        </li>
                     </ul>
                 </div>
 

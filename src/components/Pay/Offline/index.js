@@ -42,6 +42,10 @@ class Offline extends React.Component {
         })
     }
 
+    selectDateFn = (date, dateString)=> {
+
+        console.log(dateString)
+    }
     render () {
         return (
             <div className="offline_con">
@@ -79,7 +83,7 @@ class Offline extends React.Component {
                         </li>
                         <li>
                             <div className="title">实际汇款时间</div>
-                            <DatePicker className="date"/>
+                            <DatePicker className="date" onChange={this.selectDateFn}/>
                         </li>
                         <li>
                             <div className="title">上传汇款凭证</div>

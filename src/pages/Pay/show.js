@@ -3,12 +3,48 @@ import {Row, Col} from "antd";
 import {InfoCircleOutlined} from '@ant-design/icons';
 
 import Platform from "../../components/Pay/Platform";
+
 import Offline from "../../components/Pay/Offline";
 import "./index.css";
-
 class Pay extends React.Component {
     constructor (props) {
         super(props)
+        this.state = {
+            
+            dateText: ""
+        }
+    }
+    componentDidMount () {
+        
+        this.ltTime()
+    }
+    ltTime = ()=> {
+
+        let _this = this;
+        var curTime=new Date();
+        var endTime=new Date("2024/9/2, 17:9:25");
+       
+        var leftTime=parseInt((endTime.getTime()-curTime.getTime())/1000);
+        var d=parseInt(leftTime/(60*60*24));
+        var h=parseInt(leftTime/(60*60)%24);
+        var m=parseInt(leftTime/60%60);
+        var s=parseInt(leftTime%60);
+        let dateText = d + "天" + h + "时" + m + "分" + s + "秒";
+        if(leftTime <= 0) {
+            dateText = "未支付";
+        }
+
+
+
+
+        this.setState({
+            dateText: dateText
+        })
+        setTimeout(()=>{
+        
+            _this.ltTime()
+    
+        }, 1000);
     }
     render () {
         return (
@@ -20,7 +56,8 @@ class Pay extends React.Component {
                             {/* <div className="order_status"></div> */}
                             <div className="title_con">
 
-                                <div className="tit">订单提交成功, 请您在<span className="last_time">6天23小时59分59秒</span>内完成支付, 否则订单会被自动取消!</div>
+        
+                                <div className="tit">订单提交成功, 请您在 <span className="last_time">{this.state.dateText}</span> 内完成支付, 否则订单会被自动取消!</div>
                                 <div className="txt">
                                     <span className="item">订单编号: 12345789123451</span>
                                     <span className="item">应付款金额: 3333.33</span>
@@ -32,7 +69,7 @@ class Pay extends React.Component {
                         <div className="pay_con">
                             <div className="top">
                                 <ul className="nav_list">                 
-                                    <li>结算通</li>
+                                    <li style={{display:"none"}}>结算通</li>
                                     <li>线下汇款</li>
                                 </ul>
 
@@ -40,9 +77,9 @@ class Pay extends React.Component {
                                 <span className="tit"><InfoCircleOutlined /> 付款说明</span>
                             </div>
 
-                            <Platform></Platform>
+                            {/* <Platform ></Platform>  */}
 
-                            {/* <Offline></Offline> */}
+                            <Offline></Offline>
                         </div>
                     </Col>
                     <Col span={3}></Col>
