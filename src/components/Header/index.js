@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import {Link, useHistory} from "react-router-dom";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 
 import "./index.css";
 import {Row, Col, Badge, message} from "antd";
@@ -22,62 +22,81 @@ function Header () {
     ]
     const [currentIndex, setIndexFn] = useState(0);
     const [userInfo, setUserInfoFn] = useState("");
+    let [goodCount, setGoodCountFn] = useState(1);
+
     const history = useHistory();
+    const storeData = useSelector(state=>state)
     function getUserInfoFn () {
         let userInfo = JSON.parse(getStorageFn("userInfo"));
         setUserInfoFn(userInfo)
     }
+
     function selectNavFn (index) { 
         setIndexFn(index)
+    
         const url = navList[index].path;
         history.push(url)
     } 
+
+
+
     function showSmallCartFn () {
         dispatch({type:"show_small_cart", payload: true})
     }
 
 
     function loginOutFn () {
+
         window.localStorage.clear()
         message.success('退出成功');
         setTimeout(()=>{
-
             history.push("/login")
         }, 2000)
     } 
-    useEffect(()=>{
 
+    useEffect(()=>{
+        getGoodListFn()
         getUserInfoFn()
-    }, [])
+
+        console.log("effect---")
+    }, [storeData.commonState.goodCount])
+
+    function getGoodListFn () {
+        console.log("storeData-------------")
+        console.log(storeData.commonState.goodCount)
+        console.log("storeData---------")
+        let goodCount = storeData.commonState.goodCount;
+        setGoodCountFn(goodCount)
+    }
     return (
-        
         <div className="header_con">
             <Row className="header_top">
                 <Col span={3}></Col>
                 <Col span={18}>
+
                     <span className="title" onClick={getUserInfoFn}>更懂年轻人的国潮家居平台</span>
                     {userInfo && <div className="login_btn" onClick={loginOutFn}>退出</div>}
-                    {userInfo && <img src={userInfo.headimgurl} alt="" className="header_img"/>}
-                     
+                    {userInfo && <img src={userInfo.headimgurl} alt="" className="header_img"/>}         
                     {!userInfo && <Link to="/login" className="login_btn">登录</Link>}
                     {!userInfo && <Link to="/register" className="login_btn">注册</Link>}
-
-
                 </Col>
                 <Col span={3}></Col>
-
             </Row>
             <Row className="header_bottom">
+          
                 <Col span={3}></Col>
-                <Col span={18}>
-                    <Link to="/" className="logo"><img src={logo} className="logo_img" alt=""/></Link>
+                <Col span={18} style={{width:"1px solid brown"}}>
+                    <Link to="/" className="logo">
+                        {/* <img src={logo} className="logo_img" alt=""/> */}
+                    </Link>
                     <ul className="nav_list">
                        {navList.map((item, index)=>{
                             return (<li key={item.id} className={currentIndex==index?"on":""} onClick={()=>{selectNavFn(index)}}>{item.title}</li>)
                        })}
                     </ul>
              
-                    <Badge count={5} className="cart_logo" offset={[-10, 0]} onClick={showSmallCartFn}>           
+                    <Badge count={goodCount} className="cart_logo" offset={[-10, 0]} onClick={showSmallCartFn}>           
+                      
                         <img src={topcart}/>    
                         {/* <Link to="/cart">
                             <img src={topcart}/>      

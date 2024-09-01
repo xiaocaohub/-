@@ -104,7 +104,7 @@ class DetailInfo extends React.Component {
             currentIndex: currentIndex,
             bigImg: bigImg
         })
-        console.log(this.state.currentIndex)
+   
     }
     rightImgFn = ()=> {
         let imgArr = this.state.currentGood.imgArr;

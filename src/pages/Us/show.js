@@ -22,6 +22,10 @@ import coreCompetence from "../../assets/core_competence.png";
 import productAdvantages from "../../assets/product_advantages.png";
 import {scrollTopFn} from "../../utils/imgAuto";
 import {setVedioHeightFn} from "../../utils/imgAuto";
+
+
+import request from "../../api/request";
+import {getStorageFn,setStorageFn} from "../../utils/localStorage";
 class Show extends React.Component {
         constructor (props) {
             super(props)
@@ -55,6 +59,38 @@ class Show extends React.Component {
             console.log("vedioHeight", vedioHeight)
             this.setState({
                 vedioHeight: vedioHeight
+            })
+        }
+
+        // 统计购物车数量
+        totalCartGoodCountFn = ()=> {
+        
+            let _this = this;
+            let formData = new FormData();
+            let token = getStorageFn("token");
+            formData.append("api", "app.cart.index");    
+            formData.append("accessId", token);  
+            formData.append("storeId", 1);
+            formData.append("storeType", 6);
+            request({
+                url: "/api/gw",         
+            
+                method: "POST",    
+            
+            
+                data: formData
+            }).then((res)=> {
+                let resData = res.data.data.data;
+                _this.setState({
+                
+                    cartArr: resData
+                
+                },function () {
+                    let cartArr = _this.state.cartArr;
+                    let length = cartArr.length;
+                    _this.props.totalCartGoodCountFn(length)
+                })
+                setStorageFn("cartArr", resData)
             })
         }
         render () {
@@ -239,7 +275,7 @@ class Show extends React.Component {
                     </Row>
                     {/* {this.state.vedioShadowFlag && <VedioShadow index={this.state.currentVedioIndex} closeFn={this.closeVedioFn}/>} */}
                     
-                    {this.props.state.commonState.showCartFlag && <SmallCart hideSmallCart={this.props.hideSmallCartFn}></SmallCart>}
+                    {this.props.state.commonState.showCartFlag && <SmallCart hideSmallCart={this.props.hideSmallCartFn} totalCartGoodCountFn={this.totalCartGoodCountFn}></SmallCart>}
                 </div>
             )
         }
@@ -247,7 +283,6 @@ class Show extends React.Component {
     
 
 }
-
 
 
 

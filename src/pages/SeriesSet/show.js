@@ -2,13 +2,15 @@ import React from "react";
 import {Row, Col} from "antd";
 import { getStyleApi, getStyleGoodArrApi} from "../../api/SeriesSet";
 
-import { getStorageFn } from "../../utils/localStorage";
+import {setStorageFn, getStorageFn} from "../../utils/localStorage";
 import Nav from "../../components/SeriesSet/Nav";
 import "./index.css";
 import bannerImg from "../../assets/series_banner.png";
 import SmallCart from "../../components/SmallCart";
 import Good from "../../components/SeriesSet/Good";
 import {scrollTopFn} from "../../utils/imgAuto";
+import request from "../../api/request";
+ 
 class Show extends React.Component {
     constructor (props) {
         super(props)
@@ -87,6 +89,37 @@ class Show extends React.Component {
             })
         })
     }
+    // 统计购物车数量
+    totalCartGoodCountFn = ()=> {
+    
+        let _this = this;
+        let formData = new FormData();
+        let token = getStorageFn("token");
+        formData.append("api", "app.cart.index");    
+        formData.append("accessId", token);  
+        formData.append("storeId", 1);
+        formData.append("storeType", 6);
+        request({
+            url: "/api/gw",         
+        
+            method: "POST",    
+        
+        
+            data: formData
+        }).then((res)=> {
+            let resData = res.data.data.data;
+            _this.setState({
+            
+                cartArr: resData
+            
+            },function () {
+                let cartArr = _this.state.cartArr;
+                let length = cartArr.length;
+                _this.props.totalCartGoodCountFn(length)
+            })
+            setStorageFn("cartArr", resData)
+        })
+    }
     render () {
         return (
 
@@ -125,7 +158,7 @@ class Show extends React.Component {
                 </Col>
                 <Col span={3}></Col>
 
-                {this.props.state.commonState.showCartFlag && <SmallCart hideSmallCart={this.props.hideSmallCartFn}></SmallCart>}
+                {this.props.state.commonState.showCartFlag && <SmallCart hideSmallCart={this.props.hideSmallCartFn} totalCartGoodCountFn={this.totalCartGoodCountFn}></SmallCart>}
             </Row>
         )
     }

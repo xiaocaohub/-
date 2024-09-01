@@ -105,49 +105,6 @@ class Show extends React.Component {
             currentGood: currentGood
         })
     }
-    // addCartFn = ()=> {
-    //     let _this = this;
-    //     let token = getStorageFn("token");
-    //     if (!token) {
-    //         message.error("未登录")
-    //         return ;
-    //     }
-    //     let cartArr =  this.state.cartArr;
-        
-    //     let currentGood = this.state.currentGood;
-    //     let addCartFlag = this.state.addCartFlag;
-    //     this.setState({
-    //         addCartFlag: false
-    //     })
-
-    //     if (!addCartFlag) {
-    //         return ;
-    //     } 
-    //     currentGood.goods_id = parseInt(this.state.goodId);
-    //     currentGood.attribute_id = currentGood.cid;
-    //     const arr = cartArr.filter(item=>item.goods_id == currentGood.goods_id && item.attribute_id == currentGood.attribute_id);        
-    //     if (arr.length > 0) {
-    //         cartArr.forEach((item, index)=>{
-    //             if (item.goods_id == currentGood.goods_id && item.attribute_id == currentGood.attribute_id) {  
-    //                 item.goods_num += 1;
-    //                 currentGood = item;
-    //             }
-    //         })
-    //     } else {
-    //         currentGood.goods_num = 1;
-
-
-    //         currentGood.selectFlag = false;
-    //         cartArr.push(currentGood)
-    //     }
-    //     setStorageFn("cartArr", cartArr)
-    //     this.setState({
-    //         cartArr: cartArr,
-    //         currentGood: currentGood
-    //     }, function () {
-    //         this.addCurrentGoodCartFn()
-    //     })
-    // }
     addCartFn = ()=> {
         let _this = this;
         let token = getStorageFn("token");
@@ -249,9 +206,44 @@ class Show extends React.Component {
             // })
             _this.setState({
                 cartArr: resData
+            
+            },function () {
+                _this.totalCartGoodCountFn()
             })
             setStorageFn("cartArr", resData)
         })
+    }
+
+
+    // 统计购物车数量
+    totalCartGoodCountFn = ()=> {
+        let _this = this;
+        let formData = new FormData();
+        let token = getStorageFn("token");
+    
+        // let option = {"brandId":"","minPrice":"","maxPrice":""};
+        formData.append("api", "app.cart.index");    
+        formData.append("accessId", token);  
+        formData.append("storeId", 1);
+        formData.append("storeType", 6);
+        request({
+            url: "/api/gw",         
+            method: "POST",    
+            data: formData
+
+        }).then((res)=> {
+            let resData = res.data.data.data;
+            _this.setState({
+                cartArr: resData
+            
+            },function () {
+                let cartArr = _this.state.cartArr;
+                let length = cartArr.length;
+                _this.props.totalCartGoodCountFn(length)
+            })
+            setStorageFn("cartArr", resData)
+        })
+       
     }
     render () {
         return (
@@ -281,7 +273,7 @@ class Show extends React.Component {
                 </Row>
                 
                 {this.state.goodInfo && this.state.currentGood &&<GoodDetail goodDetail={this.state.goodInfo} currentGood={this.state.currentGood}></GoodDetail>}
-                {this.props.state.commonState.showCartFlag && <SmallCart hideSmallCart={this.props.hideSmallCartFn}></SmallCart>}
+                {this.props.state.commonState.showCartFlag && <SmallCart hideSmallCart={this.props.hideSmallCartFn} totalCartGoodCountFn={this.totalCartGoodCountFn}></SmallCart>}
             </div>
         )
     }

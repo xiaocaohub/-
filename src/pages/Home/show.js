@@ -169,6 +169,10 @@ class Show extends React.Component {
             setStorageFn("cartArr", resData)
         })
     }
+
+    goCartFn = ()=> {
+        
+    }
     render () {
         return (            
             <div className="main_content" onClick={this.getStyleGoodArrFn}>

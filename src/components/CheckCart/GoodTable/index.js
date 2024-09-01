@@ -9,11 +9,14 @@ const { TextArea } = Input;
 class GoodTable extends React.Component {
     constructor (props) {
         super(props)
-        console.log("props goodtable")
-        console.log(props)
+ 
+    }
+    remarkFn = (e)=> {
+        let value = e.target.value;
+        
+        this.props.remarkFn(this.props.index, value)
     }
     render () {
-
         return (
             <div className="good_table">
      
@@ -63,10 +66,12 @@ class GoodTable extends React.Component {
                     <Row className="remark_con">
                         <div className="title">特殊信息备注:</div>
                         <TextArea
-                                placeholder="若延期发货, 请自行修改期望发货时间, 若定制, 请填写定制信息, 否则按常规产品出货。"
-                                autoSize={{ minRows: 3, maxRows: 5 }}
-                                className="text_area"
-                            />
+                           
+                            placeholder="若延期发货, 请自行修改期望发货时间, 若定制, 请填写定制信息, 否则按常规产品出货。"
+                            autoSize={{ minRows: 3, maxRows: 5 }}
+                            className="text_area"
+                            onChange={this.remarkFn} 
+                        />
                     </Row>
                 </ul>
             </div>

@@ -49,12 +49,19 @@
     width:12.7%;
     overflow:hidden;
     height:80px; 
+    
+    background: url("../../assets/logo.png") no-repeat center;
+    background-size: 100% ;
 }
 
 
 .header_con .header_bottom .logo_img{
     display:block;
+    
     width:100%;
+    float: left;
+    object-fit: cover;
+    height: 100%;
 } 
 
 .header_con .header_bottom .nav_list{

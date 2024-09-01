@@ -1,5 +1,12 @@
 import React from "react";
-import {Input, DatePicker, Upload} from "antd";
+import {Input, DatePicker, Upload, Modal, message} from "antd";
+import {setStorageFn, getStorageFn} from "../../../utils/localStorage";
+
+import {DeleteOutlined} from '@ant-design/icons';
+
+import request from "../../../api/request";
+
+ 
 import "./index.css";
 
 class Offline extends React.Component {
@@ -12,39 +19,181 @@ class Offline extends React.Component {
                 {
                     id: 0,
                     txt: "线下转账",
-                    imgSrc: require("../../../assets/icon/pay_bank_card.png"),    
-
+                    imgSrc: require("../../../assets/icon/pay_bank_card.png"),
                     selectFlag: true
                 }
             ],
+
             uploadImg: require("../../../assets/icon/add_pic.png"),
-            fileList: []
+            date: "",
+            fileList: [],
+
+            uploadFlag: true,
+            orderNumber: "",
+            bankText: ""
         }
     }
+
+    componentDidMount () {
+
+
+        this.init()
+    }
+    init = ()=> {
+        let orderNumber = getStorageFn("orderNumber");
+
+        this.setState({
+            orderNumber: orderNumber
+        })
+    }
+
     selectBalanceFn = ()=> {
+    
         let balanceFlag = !this.state.balanceFlag;
         this.setState({
             balanceFlag: balanceFlag
         })
     }
+
     selectPayFn (index) {
         let payList = this.state.payList;
         payList.forEach((item, i)=>{            
-            item.selectFlag = false;
+
+            item.selectFlag = false;               
             if (i===index) {
                 item.selectFlag = true
             }
         })
-
-
         this.setState({
             payList: payList
         })
     }
 
     selectDateFn = (date, dateString)=> {
+        this.setState({
+            date: dateString
+        })
+    }
+    selectImgFn = (e) => {
+        let _this = this;
+        if (e.target.files.length === 0) return false;
+        const fileArr = e.target.files;
+ 
+        console.log(fileArr)
+        for (let key in fileArr) {
+            console.log("key --------")
+            console.log(fileArr[key])
+            console.log(typeof fileArr[key])
+            console.log("key --------")
+            if (fileArr[key].type) {
 
-        console.log(dateString)
+                _this.uploadImgFn(fileArr[key])
+            }
+        }
+       
+        // if (!/^image\//.test(file.type)) {
+        //     alert(`File ${file.name} is not an image.`);
+        //     return false;
+        // }
+    }
+    uploadImgFn = (file) => {
+        let _this = this;
+
+        let token = getStorageFn("token");
+        let formData = new FormData();
+        let fileList = this.state.fileList;
+        formData.append("api", "resources.file.uploadFiles");
+        formData.append("accessId", token);  
+        formData.append("storeId", 1);
+        formData.append("storeType", 6);
+        formData.append("title", file.name );
+        formData.append("file", file)
+        
+        request({
+            url: "/api/gw",
+            method: "POST",
+            data: formData
+        }).then((res)=> {
+            console.log("code")
+            console.log(res)
+            console.log("code")
+            let imgSrc = res.data.data.imgUrls[0];
+          
+            if (fileList.length <5) {
+                fileList.push(imgSrc)
+                _this.setState({
+                    fileList: fileList
+                })
+            }
+        })
+    };
+    deleteImgFn = (item, index)=> {
+      
+        let _this = this;
+        let fileList = this.state.fileList;
+        Modal.confirm({
+            title: '温馨提示',
+            content: "确认删除吗?",
+            cancelText: "取消",
+            okText: "确定",
+            onOk: function () {
+                fileList.splice(index, 1)   
+          
+          
+          
+          
+                _this.setState({
+                    fileList: fileList
+                })
+            }
+        })
+       
+    }
+    bankFn = (e)=> {
+        let value = e.target.value;
+        console.log(value)
+        this.setState({
+            bankText: value
+        })
+    }
+    submitFn = ()=> {
+        let _this = this;
+        let token = getStorageFn("token");
+        let orderNumber = this.state.orderNumber;
+        let formData = new FormData();
+        
+        let imgStr = "";
+        let fileList = this.state.fileList;
+        fileList.forEach((item)=>{
+            imgStr += item;
+        })
+
+        console.log("imgStr")
+        console.log(imgStr)
+ 
+        formData.append("api", "app.orderV2.balancePay");
+        formData.append("accessId", token);  
+        formData.append("storeId", 1);
+        formData.append("storeType", 6);
+        formData.append("orderParentNo",  orderNumber);
+        formData.append("offlinePayBank", this.state.bankText);
+        formData.append("offlinePayImg", imgStr)
+        formData.append("offlinePayTime", this.state.date)
+        request({
+            url: "/api/gw",
+
+            method: "POST",
+            data: formData
+        }).then((res)=> {
+            if (res.data.code == 200) {
+                message.success(res.data.message)
+                setTimeout(()=>{
+                    window.location.href = "/pay/over"
+                }, 2000)
+            } else {
+                message.error(res.data.message)
+            }
+        })
     }
     render () {
         return (
@@ -54,15 +203,15 @@ class Offline extends React.Component {
                         <div className="title">账户余额</div>
                         <div className="money"><span className="unit">￥</span> 21005.00</div>
                     </div>
-                    <div className="balance_pay">账户余额支付: <span>21005.00</span></div>
+                    <div className="balance_pay">账户余额支付: <span>1000 元 </span></div>
                 </div>
 
 
                 <ul className="pay_list">
                     {this.state.payList.map((item, index)=> {
-                        return (<li className={item.selectFlag?"on":""} onClick={()=>{this.selectPayFn(index)}}> <img src={item.imgSrc} /> {item.txt}</li>)
+                        return (<li className={item.selectFlag?"on":""} key={index} onClick={()=>{this.selectPayFn(index)}}> <img src={item.imgSrc} /> {item.txt}</li>)
                     })}
-                    <div className="money">其他支付: <span>22005.00</span></div>
+                    <div className="money">转账支付: <span>{this.props.payTotal.totalPrice} 元</span></div>
                 </ul>
                 <div className="line"></div>
  
@@ -78,7 +227,7 @@ class Offline extends React.Component {
                     <ul className="upload_con">
                         <li>
                             <div className="title">汇款银行</div>
-                            <Input className="bank_name" placeholder="请输入汇款银行"/>
+                            <Input className="bank_name" placeholder="请输入汇款银行" value={this.state.bankText} onChange={this.bankFn}/>
                             <div className="txt">例：工商银行、中国银行...</div>
                         </li>
                         <li>
@@ -88,7 +237,7 @@ class Offline extends React.Component {
                         <li>
                             <div className="title">上传汇款凭证</div>
 
-                            <Upload
+                            {/* <Upload
                                 name="avatar"
                                 listType="picture-card"
                                 className="avatar-uploader"
@@ -97,13 +246,23 @@ class Offline extends React.Component {
                                 fileList={this.state.fileList}                         
                             >
                                  <img src={this.state.uploadImg} alt="avatar" style={{ width: '100%' }} />
-                            </Upload>
+                            </Upload> */}
+
+
+                            <ul className="img_list">
+                                {this.state.fileList.map((item, index)=>{
+                                    return (<li><img src={item} alt=""/><DeleteOutlined className="delete" onClick={()=>{this.deleteImgFn(item, index)}}/></li>)
+                                })}
+                            </ul>
+                            <div className={this.state.fileList.length>=5?"upload_btn on":"upload_btn"}>
+                                <input type="file" className="file" onChange={(e) => this.selectImgFn(e)} multiple="multiple"/>
+                            </div>
                             <div className="txt">最多上传5张图 (每张不超过1M) 请一定按照订单金额 (精准到小数点2位) 付款, 否则财务审核不通过, 视为无效订单!</div>
                         </li>
                     </ul>
                 </div>
 
-                <div className="sub_btn">提交</div>
+                <div className="sub_btn" onClick={this.submitFn}>提交</div>
             </div>
         )
     }

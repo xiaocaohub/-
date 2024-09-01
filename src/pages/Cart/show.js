@@ -326,8 +326,9 @@ class Show extends React.Component {
                                     
                         <div className="item total_count">已选<span className="count"> {this.state.totalCount} </span>件商品</div>
                         <Link to="/checkcart" className="pay_btn">去结算</Link>
-                        <div className="item total_money">￥{this.state.totalMoney}</div>
-                        <div className="item total_money_tit">应付总额 </div>
+                        {/* <div className="item total_money">￥{this.state.totalMoney}</div>
+                        <div className="item total_money_tit">应付总额 </div> */}
+               
                         <div className="item good_money">商品总额: ￥{this.state.totalMoney}</div>
                         <div className="item vol"> 体积: {this.state.totalVol }m² </div>
                     </Col>

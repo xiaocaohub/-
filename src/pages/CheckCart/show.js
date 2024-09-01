@@ -1,5 +1,5 @@
 import React from "react";
-import {Row, Col, DatePicker} from "antd";
+import {Row, Col, DatePicker, Button, message} from "antd";
 import { RightOutlined } from '@ant-design/icons';
 
 import GoodTable from "../../components/CheckCart/GoodTable";
@@ -12,14 +12,16 @@ class Show extends React.Component {
         super(props)
         this.state = {
             cartArr: [],
-            orders: [],
+            orderInfo: "",
 
+            orders: [],
             totalVolume: 0, // 总体积
             totalPrice: 0, // 总价
+            taxation: 0, // 税额
             orderFlag: true,
             date: ""
         }
-        console.log("checkcart", props)
+ 
     }
     componentDidMount () {
         this.getCartInfoFn()
@@ -40,11 +42,11 @@ class Show extends React.Component {
 
         setTimeout(()=>{
             _this.getCartListFn(ids)
-        }, 1000)
+        })
     }
 
-    // 获后台购物车数据
 
+    // 获后台购物车数据
     getCartInfoFn = ()=> {
         let _this = this;        
         let formData = new FormData();
@@ -60,8 +62,8 @@ class Show extends React.Component {
         }).then((res)=> {
 
             let resData = res.data.data.data;
-            // console.log("resData-----")
-            // console.log(resData)
+            console.log("resData-----")
+            console.log(resData)
             setStorageFn("cartArr", resData)
             _this.setState({
                 cartArr: resData
@@ -86,27 +88,35 @@ class Show extends React.Component {
         formData.append("storeId", 1);
 
         formData.append("storeType", 6);
-        // formData.append("cartIds",  selectId);
+        formData.append("cartIds",  selectId);
 
-        formData.append("cartIds",  743)
+ 
         request({
             url: "/api/gw",         
             method: "POST",    
             data: formData
         }).then((res)=> {
             let resData = res.data.data;
-            let orders =  resData.orders;
+            // let orders = resData.orders;
+            let orders =  [];
+            if (resData.orders) {
+                orders = resData.orders;
+            }
             orders.forEach((item, index)=>{
-
                 item.remark = "";
             })
 
-            
             console.log("order")
             console.log(res.data.data)
             console.log("order")
+            let payOption = {
+                totalVolume: resData.totalVolume, // 总体积
+                totalPrice: resData.totalPrice, // 总价
+                taxation: resData.taxation // 税额
+            }
+            setStorageFn("payOption", JSON.stringify(payOption))
             this.setState({     
-
+                orderInfo: resData,
                 orders: orders,
                 totalPrice: resData.totalPrice,
                 taxation: resData.taxation,
@@ -114,38 +124,119 @@ class Show extends React.Component {
             })
         })
     }
-
+    // 提交订单
     payOrderFn = ()=> {
-        this.props.history.push("/pay")
+        let _this = this;        
+        let formData = new FormData(); 
+        let token = getStorageFn("token");
+        let orderInfo = this.state.orderInfo;
+        let orders = this.state.orders;
+        let remarks = [];
+
+        orders.forEach((item, index)=>{
+            let orderItem = {
+                mchId: item.mchId,
+
+                remark: item.remark
+            }
+            remarks.push(orderItem)
+        })
+        console.log("date", this.state.date)
+
+        let userInfoDetail = getStorageFn("userInfoDetail");
+
+
+        console.log(userInfoDetail)
+        formData.append("api", "app.orderV2.placeOrder");   
+        formData.append("accessId", token);  
+        formData.append("storeId", 1);
+        formData.append("storeType", 6);
+        formData.append("cartIds", orderInfo.cartIds); 
+
+        // formData.append("cartIds", '751,743');
+        // formData.append("remarks", JSON.stringify(remarks)); 
+        // formData.append("remarks",""); 
+        
+        formData.append("taxType", 0); 
+        formData.append("taxName", ""); 
+        formData.append("taxCardNo", ""); 
+        formData.append("expectedDeliveryTime", this.state.date); 
+        formData.append("organization", ""); 
+        formData.append("taxpayerNumber", ""); 
+
+        formData.append("taxAddress", ""); 
+        formData.append("taxPhone", ""); 
+        formData.append("taxAccount", ""); 
+       
+        formData.append("taxBank", "");
+        formData.append("name", userInfoDetail.recipient); 
+        formData.append("sheng", userInfoDetail.province); 
+        formData.append("city",  userInfoDetail.city);
+        formData.append("quyu",  userInfoDetail.area);
+
+        formData.append("address",  userInfoDetail.detailAdress);
+        formData.append("tel",  userInfoDetail.phone);
+        formData.append("invoice", 0)
+        request({
+            url: "/api/gw",         
+            method: "POST",    
+            data: formData
+        }).then((res)=> {
+            console.log("confirm order")
+           console.log(res)
+            // console.log("resData-----")
+            if (res.data.code == 200) {
+                setStorageFn("orderNumber", res.data.data);
+                message.success(res.data.message)
+                setTimeout(()=>{
+                    _this.props.history.push("/pay")
+                
+                }, 2000)     
+            } else {
+                message.error(res.data.message)
+            }
+        })
     }
     selectDateFn = (date, dateString)=> {
-
         this.setState({
             date: dateString
         })
- 
+    }
+
+    remarkFn = (index, value)=> {
+        let orders = this.state.orders;
+
+        orders[index].remark = value;
+        this.setState({
+            orders: orders
+        })
     }
     render () {
         return (
+        
+        
             <div className="check_cart_page">
                 <Row>
                     <Col span={3}></Col>
-                  
+
+
                     <Col span={18}>
+
                         {this.state.orders.length>0 && this.state.orders.map((orderItem, index)=> {
-                            return (<GoodTable orderItem={orderItem} key={index}></GoodTable>)
+                            return (<GoodTable orderItem={orderItem} key={index} index={index} remarkFn={this.remarkFn}></GoodTable>)
                         })}
                         
-
                         <ul className="invoice_info_con">
                             <li>
                                 <div className="title">期望发货时间</div>
                                 <DatePicker onChange={this.selectDateFn}></DatePicker>
                             </li>
+                        
                             <li>
-
                                 <div className="title">发货说明</div>
                                 <div className="txt">
+                         
+                         
                                     1.现货订单我们将在期望发货时间内发货。 <br/>
                                     2.无现货订单，发货时间以实际生产周期为准。
                                 </div>
@@ -168,13 +259,11 @@ class Show extends React.Component {
                         <ul className="total_list">
                             <li>体积: {this.state.totalVolume}m²</li>
                             <li>税额: ￥{this.state.taxation}</li>
-
                             <li>商品总额: ￥{this.state.totalPrice}</li>
                             <li>应付总额:</li>
-                            <li className="money">￥{this.state.totalPrice}</li>
-                          
-                             
+                            <li className="money">￥{this.state.totalPrice + this.state.taxation} </li>
                         </ul>
+
                     </Col>
 
                     <Col span={3}></Col>

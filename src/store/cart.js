@@ -13,9 +13,10 @@ let defaultState = {
 }
 
 
+
 function cartReducer (state=defaultState, action) {
-    console.log("reducer")
-    console.log(action)
+    // console.log("reducer")
+    // console.log(action)
     let {type, payload} = action;
     let newState = JSON.parse(JSON.stringify(state));
 

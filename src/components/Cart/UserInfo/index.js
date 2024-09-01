@@ -1,5 +1,5 @@
 import React from "react";
-import {Form, Select, Input, Button} from "antd";
+import {Form, Select, Input, Button, message} from "antd";
 import {setStorageFn, getStorageFn} from "../../../utils/localStorage";
 import UserForm from "../UserForm";
 import UserInfoText from "../UserInfoText";
@@ -47,7 +47,7 @@ class UserInfo extends React.Component {
         
             changeFlag: true,
             userInfoDetail: {
-                province: "",
+                province: "请选择",
                 provinceId: "",           
                 city: "请选择",  
                 cityId: "",
@@ -65,7 +65,20 @@ class UserInfo extends React.Component {
                 remark:  ""
             }
         }
-        console.log(provinceData)
+    }
+    componentDidMount () {
+        this.init()
+    }
+    init = ()=> {
+        let userInfoDetail = getStorageFn("userInfoDetail");
+        console.log("init userInfoDetail")
+        console.log(userInfoDetail)
+        if (userInfoDetail) {
+            this.setState({
+                
+                userInfoDetail: userInfoDetail
+            })
+        }
     }
     changeInfoFn = (userInfoDetail)=> {
         let changeFlag = !this.state.changeFlag;
@@ -110,6 +123,33 @@ class UserInfo extends React.Component {
     }
     submitFn = ()=> {
         let userInfoDetail = this.state.userInfoDetail;
+ 
+        if (!userInfoDetail.province || userInfoDetail.province == "请选择") {
+            message.error("请选择省份");
+
+            return ;
+        }
+        if (!userInfoDetail.city || userInfoDetail.city == "请选择") {
+            message.error("请选择城市");
+            return ;
+        }
+        if (!userInfoDetail.area || userInfoDetail.area == "请选择") {
+            message.error("请选择地区");
+            return ;
+        }
+        if (!userInfoDetail.detailAdress) {
+            message.error("请填写详细地址")
+            return ;
+        }
+        if (!userInfoDetail.recipient) {
+            message.error("请填写收件人")
+            return ;
+        }
+        if (!userInfoDetail.phone) {
+            message.error("请填写手机号")
+            return ;
+        }
+
         setStorageFn("userInfoDetail", userInfoDetail)
         this.setState({
             changeFlag: false
@@ -239,9 +279,12 @@ class UserInfo extends React.Component {
                             <Select
                                 labelInValue  defaultValue={{ key: '请选择' }}
                                 style={{ width:210, marginLeft:20}}
-                                onChange={this.selectProvinceFn}> 
+                                onChange={this.selectProvinceFn}
+                                value={this.state.userInfoDetail.province}
+                                > 
                                 {provinceData.map((item, index)=>{
-                                    return (<Option value={item.value}>{item.label}</Option>)
+                                 
+                                   return (<Option value={item.value}>{item.label}</Option>)
                                 })}                            
                             </Select>
 
@@ -302,9 +345,8 @@ class UserInfo extends React.Component {
                         </Form.Item>
 
                         <Form.Item {...tailFormItemLayout}>
-                            <Button type="primary" onClick={this.submitFn} className="submit_btn">
-                                Register
-                            </Button>
+                            <Button type="primary" onClick={this.submitFn} className="submit_btn">保存</Button>
+
                         </Form.Item>
                     </Form>
                 </div>

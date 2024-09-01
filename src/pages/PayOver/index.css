@@ -1,0 +1,46 @@
+.pay_over_text_con{
+    background:#fff;
+    border:1px solid transparent;
+}
+.pay_over_text{
+    width:710px;
+
+    overflow:hidden;
+    margin:127px auto 0;
+}
+.pay_over_text .icon{
+    width:42px;
+    height:42px;
+    background:url("../../assets/icon/pay_over_1.png") no-repeat center;
+    float:left;
+}
+
+.pay_over_text .text_con{   
+    width:642px;
+    height:500px;
+    float:right;
+ 
+}
+
+.pay_over_text .text_con .big_title{ 
+    font-size:20px;
+}
+
+.pay_over_text .text_con p span{
+    color:red;
+}
+
+.pay_over_text .text_con p{
+    margin-bottom:10px;
+    color:#666;
+}
+.pay_over_text .text_con a{
+    margin-right:20px;
+}
+
+
+.pay_over_text .text_con .line{
+    height:0;
+    border-top:1px solid #E1E1E1;
+    margin-bottom:10px;
+}

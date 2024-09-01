@@ -80,7 +80,12 @@ class CartSmall extends React.Component {
             method: "POST",    
             data: formData
         }).then((res)=> {
-            // console.log(res.data)
+            console.log("slect")
+            console.log(res.data)
+            if (res.data) {
+
+                
+            }
             // if (res.data.data) {
             //    message.success("删除成功")
             //    _this.getCartInfoFn()
@@ -131,6 +136,8 @@ class CartSmall extends React.Component {
         if (item.goods_num > 1) {
             cartArr[index].goods_num = item.goods_num - 1;
         }
+
+        this.changeGoodCountFn(cartArr[index])
         this.setState({
             cartArr: cartArr
         }, function () {
@@ -140,10 +147,41 @@ class CartSmall extends React.Component {
     addFn = (item, index)=> {
         let cartArr = this.state.cartArr;
         cartArr[index].goods_num = item.goods_num + 1;
+        this.changeGoodCountFn(cartArr[index])
         this.setState({
             cartArr: cartArr
         }, function () {
             this.totalAll()
+        })
+    }
+
+    changeGoodCountFn = (selectGood)=> {   
+        console.log("selectGood")
+        console.log(selectGood)
+      
+        let _this = this; 
+        let formData = new FormData();
+        let token = getStorageFn("token");
+        let goodsJson = [{"num": selectGood.goods_num,"cart_id":selectGood.goods_id}]
+        formData.append("api", "app.cart.updateCart");
+        formData.append("accessId", token);
+        formData.append("storeId", 1);
+        formData.append("storeType", 6);
+        // formData.append("cartIds", "")
+        formData.append("goodsJson", JSON.stringify(goodsJson))
+        request({
+            url: "/api/gw",         
+            method: "POST",    
+            data: formData
+        }).then((res)=> {
+            // console.log(res.data)
+            if (res.data.data) {
+               message.success("删除成功")
+               _this.getCartInfoFn()
+
+            } else {
+                message.error(res.data.message)
+            }
         })
     }
     deleteGoodConfirmFn = (item, index)=> {
@@ -253,9 +291,11 @@ class CartSmall extends React.Component {
             _this.setState({
                 cartArr: resData
             }, function () {
-
                 _this.totalAll()
                 _this.initFn()
+    
+                console.log("delete ----------------delete")
+                _this.props.totalCartGoodCountFn()
             })
 
             setStorageFn("cartArr", resData)
@@ -324,7 +364,7 @@ class CartSmall extends React.Component {
                         <div className={this.state.selectAllFlag?"select_all on":"select_all"} onClick={this.selectAllFn}>全选</div>
                         <span className="delete_all" onClick={this.deleteSelectAllFn}>删除选中商品</span>
                         <Link to="/cart" className="go_cart_btn">下单采购</Link>
-
+                        {/* <div className="go_cart_btn" onChange={this.props.goCartFn}>下单采购</div> */}
                         <div className="down_btn">导出清单</div>
                       
                         <div className="total">合计<span className="money">￥{this.state.totalMoney}</span></div>
