@@ -13,11 +13,11 @@ import {scrollTopFn} from "../../utils/imgAuto";
 class Show extends React.Component {
     constructor (props) {
         super(props)
+
         this.state = {
             roomList: [
                 {
                     id: 0,
-
                     imgSrc: require("../../assets/room_list_1.png"),
                     title: "餐厅区",
                     txt: "LIVING ROOM AREA"

@@ -8,9 +8,14 @@ let mapStateToProps = state=> {
 
 
 let mapDispatchToProps = dispatch=> {
-
     return {
- 
+        // 统计购物车数量
+        totalCartGoodCountFn (goodCount) {
+            console.log("totalCartGoodCountFn")
+            console.log(goodCount)
+
+            dispatch({type:"change_good_count", payload: goodCount})
+        }
     }
 }
 

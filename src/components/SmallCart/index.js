@@ -8,6 +8,7 @@ import imgGood from "../../assets/recomend_good1.png";
 import {setStorageFn, getStorageFn} from "../../utils/localStorage";
 import {setImgAutoHeightFn} from "../../utils/imgAuto";
 import request from "../../api/request";
+import Empty from "../Empty";
 class CartSmall extends React.Component {
     constructor (props) {
         super(props)
@@ -52,8 +53,8 @@ class CartSmall extends React.Component {
         })
     }
     selectGoodFn = (item, index)=> {
-        console.log(item)
         let cartArr = this.state.cartArr;
+
         item.selectFlag = !item.selectFlag;
         cartArr[index] = item;
         setStorageFn("cartArr", cartArr)
@@ -119,10 +120,11 @@ class CartSmall extends React.Component {
             totalMoney: totalMoney
         })
     }
-    selectAllFn = ()=> {
-     
+
+    selectAllFn = ()=> { 
         let cartArr = this.state.cartArr;
         let selectAllFlag = !this.state.selectAllFlag;
+        
         cartArr.forEach((item,index)=> {
             item.selectFlag = selectAllFlag ;
         })
@@ -132,13 +134,16 @@ class CartSmall extends React.Component {
         })
     }
     reduceFn = (item, index)=> {
+      
         let cartArr = this.state.cartArr;
+     
         if (item.goods_num > 1) {
             cartArr[index].goods_num = item.goods_num - 1;
         }
-
         this.changeGoodCountFn(cartArr[index])
+        
         this.setState({
+         
             cartArr: cartArr
         }, function () {
             this.totalAll()
@@ -148,6 +153,7 @@ class CartSmall extends React.Component {
         let cartArr = this.state.cartArr;
         cartArr[index].goods_num = item.goods_num + 1;
         this.changeGoodCountFn(cartArr[index])
+     
         this.setState({
             cartArr: cartArr
         }, function () {
@@ -162,7 +168,7 @@ class CartSmall extends React.Component {
         let _this = this; 
         let formData = new FormData();
         let token = getStorageFn("token");
-        let goodsJson = [{"num": selectGood.goods_num,"cart_id":selectGood.goods_id}]
+        let goodsJson = [{"num": selectGood.goods_num,"cart_id":selectGood.id}]
         formData.append("api", "app.cart.updateCart");
         formData.append("accessId", token);
         formData.append("storeId", 1);
@@ -175,13 +181,7 @@ class CartSmall extends React.Component {
             data: formData
         }).then((res)=> {
             // console.log(res.data)
-            if (res.data.data) {
-               message.success("删除成功")
-               _this.getCartInfoFn()
-
-            } else {
-                message.error(res.data.message)
-            }
+          
         })
     }
     deleteGoodConfirmFn = (item, index)=> {
@@ -358,6 +358,8 @@ class CartSmall extends React.Component {
                                 })
                             }
                         </ul>
+
+                        {this.state.cartArr.length == 0 && <Empty></Empty>}
                     </div>    
 
                     <div className="total_con">

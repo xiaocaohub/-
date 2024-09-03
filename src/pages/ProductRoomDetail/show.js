@@ -124,21 +124,40 @@ class Show extends React.Component {
         if (!addCartFlag) {
             return ;
         } 
+        console.log("currentGood----------start")
+        console.log(currentGood)
+        console.log("currentGood---------start")
         currentGood.goods_id = parseInt(this.state.goodId);
         currentGood.attribute_id = currentGood.cid;
+ 
         const arr = cartArr.filter(item=>item.goods_id == currentGood.goods_id && item.attribute_id == currentGood.attribute_id);        
+        
         if (arr.length > 0) {
+
+    
             cartArr.forEach((item, index)=>{
                 if (item.goods_id == currentGood.goods_id && item.attribute_id == currentGood.attribute_id) {  
                     item.goods_num += 1;
+                    console.log("currentGood item")
+                    console.log(item)
+                    console.log("currentGood item")
+
+                    item.cid = currentGood.cid;
                     currentGood = item;
                 }
             })
         } else {
+            console.log("小于0")
             currentGood.goods_num = 1;
             currentGood.selectFlag = false;
             // cartArr.push(currentGood)
         }
+
+        console.log("currentGood------end")
+                 
+                 
+        console.log(currentGood)
+        console.log("currentGood-----end")
         // setStorageFn("cartArr", cartArr)
 
         this.setState({
@@ -153,6 +172,8 @@ class Show extends React.Component {
 
         let _this = this;
         let currentGood = this.state.currentGood;
+
+       
         let formData = new FormData();
         let option = {"brandId":"","minPrice":"","maxPrice":""};
         let token = getStorageFn("token");

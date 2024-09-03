@@ -28,7 +28,9 @@ class Show extends React.Component {
                 detailAdress: "",
                 recipient: "", // 收件人
                 remark: ""
-            }
+            },
+            // 被选择的商品
+            totalSelectGoodCount: 0
         }
     }
     componentDidMount () {
@@ -44,7 +46,6 @@ class Show extends React.Component {
     //     })
     // }
     reduceFn = (item, index)=> {
-     
         let cartArr = this.state.cartArr;
         if (item.goods_num > 1) {
             cartArr[index].goods_num = item.goods_num - 1;
@@ -52,6 +53,8 @@ class Show extends React.Component {
         this.setState({
             cartArr: cartArr
         }, function () {
+
+            this.changeGoodCountFn(cartArr[index])
             this.totalAll()
         })
     }
@@ -61,7 +64,31 @@ class Show extends React.Component {
         this.setState({
             cartArr: cartArr
         }, function () {
+            this.changeGoodCountFn(cartArr[index])
             this.totalAll()
+        })
+    }
+    changeGoodCountFn = (selectGood)=> {   
+        console.log("selectGood")
+        console.log(selectGood)
+      
+        let _this = this; 
+        let formData = new FormData();
+        let token = getStorageFn("token");
+        let goodsJson = [{"num": selectGood.goods_num,"cart_id":selectGood.id}]
+        formData.append("api", "app.cart.updateCart");
+        formData.append("accessId", token);
+        formData.append("storeId", 1);
+        formData.append("storeType", 6);
+        // formData.append("cartIds", "")
+        formData.append("goodsJson", JSON.stringify(goodsJson))
+        request({
+            url: "/api/gw",         
+            method: "POST",    
+            data: formData
+        }).then((res)=> {
+            // console.log(res.data)
+          
         })
     }
     totalAll = ()=> {
@@ -142,7 +169,7 @@ class Show extends React.Component {
         }).then((res)=> {
             // console.log(res.data)
             if (res.data.data) {
-               message.success("删除成功")
+            //    message.success("删除成功")
                _this.getCartInfoFn()
 
             } else {
@@ -227,6 +254,7 @@ class Show extends React.Component {
             }, function () {
                 _this.totalSelectGoodFn()
                 _this.totalAll()
+                _this.totleSelectGoodCountFn()
             })
             setStorageFn("cartArr", resData)
         })
@@ -301,6 +329,64 @@ class Show extends React.Component {
             }
         })
     }
+    // 统计被选择的商品
+    totleSelectGoodCountFn = ()=> {
+    
+        let cartArr = this.state.cartArr;
+      
+        let length = cartArr.length;
+       
+       
+        let totalSelectGoodCount = 0;
+        cartArr.forEach((item)=> {
+            if (item.checked) {
+                totalSelectGoodCount += 1;
+            }
+        })
+        this.setState({
+ 
+            totalSelectGoodCount: totalSelectGoodCount
+        })
+    }
+
+    goPayFn = ()=> {
+    
+        if (this.state.totalSelectGoodCount > 0) {
+          
+            window.location.href = "/checkcart";
+        } else {
+            message.error("未选择商品")
+        }
+    }
+
+
+
+
+      // 统计购物车数量
+      totalCartGoodCountFn = ()=> {
+        let _this = this;
+        let formData = new FormData();
+        let token = getStorageFn("token");
+        formData.append("api", "app.cart.index");    
+        formData.append("accessId", token);  
+        formData.append("storeId", 1);
+        formData.append("storeType", 6);
+        request({
+            url: "/api/gw",         
+            method: "POST",    
+            data: formData
+        }).then((res)=> {
+            let resData = res.data.data.data;
+            _this.setState({
+                cartArr: resData
+            },function () {
+                let cartArr = _this.state.cartArr;
+                let length = cartArr.length;
+                _this.props.totalCartGoodCountFn(length)
+            })
+            setStorageFn("cartArr", resData)
+        })
+    }
     render () {
         return (    
             <div className="cart_page_con">
@@ -311,8 +397,8 @@ class Show extends React.Component {
                             <div className="title">普通购买</div>
                             <div className="search_btn"></div>       
                             <Input className="serach_put"/>
-                         </div>
-                        {this.state.cartArr.length>0 && <GoodTable cartArr={this.state.cartArr} reduceFn={this.reduceFn} addFn={this.addFn} selectGoodFn={this.selectGoodFn} deleteGoodConfirmFn={this.deleteGoodConfirmFn}></GoodTable>}
+                        </div>
+                        {this.state.cartArr.length>0 && <GoodTable cartArr={this.state.cartArr} totalSelectGoodCount={this.state.totalSelectGoodCount} reduceFn={this.reduceFn} addFn={this.addFn} selectGoodFn={this.selectGoodFn} deleteGoodConfirmFn={this.deleteGoodConfirmFn}></GoodTable>}
             
                         <UserInfo userInfo={this.props.state.cartState.userInfo} detailAdressFn={this.detailAdressFn} changeInfo={this.changeInfoFn}></UserInfo>
                     </Col>
@@ -325,7 +411,8 @@ class Show extends React.Component {
                         <div className="item delete_all" onClick={this.deleteSelectAllFn}>删除选中商品</div>
                                     
                         <div className="item total_count">已选<span className="count"> {this.state.totalCount} </span>件商品</div>
-                        <Link to="/checkcart" className="pay_btn">去结算</Link>
+                        {/* <Link to="/checkcart" className="pay_btn">去结算</Link> */}
+                        <div className="pay_btn" onClick={this.goPayFn}>去结算</div>
                         {/* <div className="item total_money">￥{this.state.totalMoney}</div>
                         <div className="item total_money_tit">应付总额 </div> */}
                
@@ -334,7 +421,7 @@ class Show extends React.Component {
                     </Col>
                     <Col span={3}></Col>
                 </Row>
-                {/* {this.props.state.commonState.showCartFlag && <SmallCart hideSmallCart={this.props.hideSmallCartFn}></SmallCart>} */}
+                {/* {this.props.state.commonState.showCartFlag && <SmallCart hideSmallCart={this.props.hideSmallCartFn}  totalCartGoodCountFn={this.totalCartGoodCountFn}></SmallCart>} */}
             </div>
         )
     }

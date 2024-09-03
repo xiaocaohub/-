@@ -143,8 +143,15 @@ class GoodNav extends React.Component {
         })
     }
     cancelStyleFn = ()=> {
+
+        // console.log(this.state.styleNavArr)
+        let styleNavArr = this.state.styleNavArr;
+        styleNavArr.forEach((item)=> {
+            item.checked = false;
+        })
         this.setState({
-            styleHover: true
+            styleHover: true,
+            styleNavArr: styleNavArr
         })
     }
     submitStyleFn = ()=> {
@@ -492,7 +499,9 @@ class GoodNav extends React.Component {
                         </ul>
  
                         {/*  <div className="slect_more">+多选</div> */}
-                        <div className="show_btn" onClick={this.categoryUlShowFn}>收起 <DownOutlined /></div> 
+                        {this.state.categoryUlShowFlag && <div className="show_btn" onClick={this.categoryUlShowFn}>  展开 <DownOutlined /></div>} 
+
+                        {!this.state.categoryUlShowFlag && <div className="show_btn" onClick={this.categoryUlShowFn}>收起 <UpOutlined /></div>} 
                     </div>
 
                     

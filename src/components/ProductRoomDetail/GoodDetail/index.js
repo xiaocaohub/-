@@ -4,6 +4,7 @@ import "./index.css";
 
 import goodImg from "../../../assets/recomend_good1.png";
  
+import EmptyPage from "../../Empty";
 class GoodDetail extends React.Component {
     constructor (props) {
         super(props)
@@ -15,7 +16,8 @@ class GoodDetail extends React.Component {
             imgHeight: 90,
 
             foldFlag: true,
-            visible: false
+            visible: false,
+            content: ""
         }
     }
     componentDidMount () {
@@ -76,7 +78,14 @@ class GoodDetail extends React.Component {
             <Row className="good_edit_detail">
                 <Col span={3}></Col>
                 <Col span={18} className="content">       
-                    <div className="left" dangerouslySetInnerHTML={{ __html: this.state.content }}></div>
+                    {this.state.content.length>0 && <div className="left" dangerouslySetInnerHTML={{ __html: this.state.content }}>
+                         
+                    </div>}
+                    {this.state.content.length==0 &&  <div className="left">
+                            <EmptyPage></EmptyPage>
+                         </div>}
+                  
+                     
                     <div className="right">
                         <div className="title_top">
                             <span className="tit">实物拍摄</span>

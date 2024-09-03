@@ -1,21 +1,23 @@
 .people_header_con{
-    overflow:hidden;
-    padding:12px 24px;
+    width:100%;
+    padding:12px 0;
     background:#333;
+    float: left;
 }
 
 .people_header_con .logo_con{
-    border:1px solid brown;
+ 
 }
  .people_header_con .logo_a{
     float:left;
     margin-top:9px;
-   border:1px solid brown;
+ 
  }
 .people_header_con .logo{
     width:218px;
     display:block;
     float:left;
+    margin-left:24px;
 }
 .people_header_con .title{
     float:left;
@@ -34,7 +36,7 @@
 .people_header_con .top_nav{
     width:22.9%;
     float:left;
-    border:1px solid brown;
+    
 
 
     display:flex;
@@ -46,7 +48,7 @@
 
 .people_header_con .top_nav li{
     float:left;
-    border:1px solid brown;
+ 
     color:#fff;
     text-align:center;
     font-size:14px;
@@ -57,7 +59,7 @@
 .people_header_con .top_nav li .icon{    
     width:29px;
     height:29px;
-    border:1px solid brown;
+ 
     background:url("../../../assets/icon/people_header_nav2.png") no-repeat center;
 }
 .people_header_con .top_nav li.on .icon{    
@@ -74,6 +76,66 @@
  .people_header_con .top_nav li:nth-child(3) .icon{   
     background:url("../../../assets/icon/people_header_nav3.png") no-repeat center;
  }
+
+ .people_header_con .top_nav li:nth-child(4) .icon{
+    background:url("../../../assets/icon/people_header_nav4.png") no-repeat center;
+ }
 .people_header_con .top_nav li p{
     margin-top:5px;
+}
+
+.people_header_con  .out_btn{
+    width: 72px;
+    height: 32px;
+    line-height:32px;
+    text-indent: 33px;
+    border-radius: 6px;
+    float:right;
+    font-size:14px;
+    background:#4A4A4A url("../../../assets/icon/esc.png") no-repeat 10px center;
+   
+    color:#999;
+    margin-top:12px;
+    cursor:pointer;
+    margin-right:24px;
+}
+.people_header_con .phone_con{
+    width:179px;
+    float:right;
+    margin-right: 20px;
+
+    position:relative;
+    margin-top:15px;
+}
+
+.people_header_con .phone_con .phone_title{
+    height:29px;
+    line-height: 29px;
+    font-size: 14px;
+    color:#999;
+ 
+}
+.people_header_con .phone_con .btn_list{
+    overflow:hidden;
+    position:absolute;
+    width:100%;
+    top:40px;
+    
+    left:0;
+}
+.people_header_con .phone_con .btn_list > li{
+
+    height:32px;
+    line-height:32px;
+    text-align:center;
+    cursor: pointer;
+    background: #EFEFEF;
+    color:#333;
+    overflow:hidden;
+    font-size:14px;
+}
+
+.people_header_con .phone_con .btn_list > li.out_b{
+    color:#C6A189;
+    background:#333;
 }

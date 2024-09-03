@@ -1,19 +1,26 @@
 import React from "react";
-import {Row, Col, DatePicker, Button, message} from "antd";
+import {Row, Col, DatePicker, Button, message, Input} from "antd";
 import { RightOutlined } from '@ant-design/icons';
 
 import GoodTable from "../../components/CheckCart/GoodTable";
 
 import {setStorageFn, getStorageFn} from "../../utils/localStorage";
 import request from "../../api/request";
+import moment from "moment";
+import zhCN from "antd/es/date-picker/locale/zh_CN";
+import 'moment/locale/zh-cn';
 import "./index.css";
+moment.locale('zh-cn')
+// import zhCN from 'antd/es/date-picker/locale/zh_CN';
+
+ 
 class Show extends React.Component {
     constructor (props) {
         super(props)
         this.state = {
             cartArr: [],
+ 
             orderInfo: "",
-
             orders: [],
             totalVolume: 0, // 总体积
             totalPrice: 0, // 总价
@@ -25,12 +32,20 @@ class Show extends React.Component {
     }
     componentDidMount () {
         this.getCartInfoFn()
+        
     }
 
+
+
+    // init = ()=> {
+    //     let date =  new Date().toLocaleDateString();
+    //     this.setState({
+    //         date: date
+    //     })
+    // }
     // 选中商品 id
     getSelectIdsFn = ()=> {
         let _this = this;
-
         let cartArr = this.state.cartArr;
         let ids = "";
         cartArr.forEach((item, index)=> {
@@ -39,13 +54,10 @@ class Show extends React.Component {
             }
         })
 
-
         setTimeout(()=>{
             _this.getCartListFn(ids)
         })
     }
-
-
     // 获后台购物车数据
     getCartInfoFn = ()=> {
         let _this = this;        
@@ -60,10 +72,11 @@ class Show extends React.Component {
             method: "POST",    
             data: formData
         }).then((res)=> {
-
             let resData = res.data.data.data;
-            console.log("resData-----")
+
+            console.log("getCartInfoFn---")
             console.log(resData)
+            console.log("getCartInfoFn---")
             setStorageFn("cartArr", resData)
             _this.setState({
                 cartArr: resData
@@ -84,20 +97,21 @@ class Show extends React.Component {
         let formData = new FormData();
         let token = getStorageFn("token");
         formData.append("api", "app.orderV2.confirmOrder");
+     
         formData.append("accessId", token);  
         formData.append("storeId", 1);
-
         formData.append("storeType", 6);
         formData.append("cartIds",  selectId);
-
- 
         request({
             url: "/api/gw",         
             method: "POST",    
             data: formData
         }).then((res)=> {
+
             let resData = res.data.data;
-            // let orders = resData.orders;
+            console.log("getCartListFn----getCartListFn")
+            console.log(resData)
+            console.log("getCartListFn---getCartListFn")
             let orders =  [];
             if (resData.orders) {
                 orders = resData.orders;
@@ -105,11 +119,8 @@ class Show extends React.Component {
             orders.forEach((item, index)=>{
                 item.remark = "";
             })
-
-            console.log("order")
-            console.log(res.data.data)
-            console.log("order")
             let payOption = {
+              
                 totalVolume: resData.totalVolume, // 总体积
                 totalPrice: resData.totalPrice, // 总价
                 taxation: resData.taxation // 税额
@@ -131,8 +142,9 @@ class Show extends React.Component {
         let token = getStorageFn("token");
         let orderInfo = this.state.orderInfo;
         let orders = this.state.orders;
+        
+        
         let remarks = [];
-
         orders.forEach((item, index)=>{
             let orderItem = {
                 mchId: item.mchId,
@@ -141,22 +153,18 @@ class Show extends React.Component {
             }
             remarks.push(orderItem)
         })
-        console.log("date", this.state.date)
-
         let userInfoDetail = getStorageFn("userInfoDetail");
-
-
-        console.log(userInfoDetail)
+        if (!this.state.date) {
+            message.error("请选择日期")
+            return ;
+        }
         formData.append("api", "app.orderV2.placeOrder");   
         formData.append("accessId", token);  
+
         formData.append("storeId", 1);
         formData.append("storeType", 6);
         formData.append("cartIds", orderInfo.cartIds); 
-
-        // formData.append("cartIds", '751,743');
-        // formData.append("remarks", JSON.stringify(remarks)); 
-        // formData.append("remarks",""); 
-        
+   
         formData.append("taxType", 0); 
         formData.append("taxName", ""); 
         formData.append("taxCardNo", ""); 
@@ -167,7 +175,6 @@ class Show extends React.Component {
         formData.append("taxAddress", ""); 
         formData.append("taxPhone", ""); 
         formData.append("taxAccount", ""); 
-       
         formData.append("taxBank", "");
         formData.append("name", userInfoDetail.recipient); 
         formData.append("sheng", userInfoDetail.province); 
@@ -182,66 +189,61 @@ class Show extends React.Component {
             method: "POST",    
             data: formData
         }).then((res)=> {
-            console.log("confirm order")
-           console.log(res)
-            // console.log("resData-----")
             if (res.data.code == 200) {
                 setStorageFn("orderNumber", res.data.data);
                 message.success(res.data.message)
                 setTimeout(()=>{
                     _this.props.history.push("/pay")
-                
                 }, 2000)     
             } else {
                 message.error(res.data.message)
             }
         })
     }
-    selectDateFn = (date, dateString)=> {
+
+    selectDateFn = (e)=> {
+        let value = e.target.value;        
         this.setState({
-            date: dateString
+            date: value
         })
     }
-
     remarkFn = (index, value)=> {
         let orders = this.state.orders;
-
         orders[index].remark = value;
+    
         this.setState({
             orders: orders
         })
     }
     render () {
-        return (
-        
-        
+        return (   
             <div className="check_cart_page">
                 <Row>
                     <Col span={3}></Col>
 
 
                     <Col span={18}>
-
                         {this.state.orders.length>0 && this.state.orders.map((orderItem, index)=> {
                             return (<GoodTable orderItem={orderItem} key={index} index={index} remarkFn={this.remarkFn}></GoodTable>)
                         })}
                         
                         <ul className="invoice_info_con">
                             <li>
-                                <div className="title">期望发货时间</div>
-                                <DatePicker onChange={this.selectDateFn}></DatePicker>
+                                <div className="title">期望发货时间</div>  
+                                
+                                {/* <DatePicker onChange={this.selectDateFn} locale={zhCN} ></DatePicker> */}
+                                {/* <input type="date" style={{display:"block",width:"250px",height: "32px", border:"1px solid #d9d9d9"}} onChange={this.selectDateFn} placeholder="请选择日期"/> */}
+                                <Input type="date" value={this.state.date} className="date_con" onChange={this.selectDateFn} />
                             </li>
-                        
                             <li>
                                 <div className="title">发货说明</div>
-                                <div className="txt">
-                         
-                         
+                                <div className="txt">                         
                                     1.现货订单我们将在期望发货时间内发货。 <br/>
                                     2.无现货订单，发货时间以实际生产周期为准。
                                 </div>
                             </li>
                 
+
                             <li style={{display:"none"}}>
                                 <div className="title">开票信息</div>           
                                 <div className="invoice_select">开票</div>
@@ -250,8 +252,8 @@ class Show extends React.Component {
                         </ul>
                     </Col>
                     <Col span={3}></Col>
-
                 </Row>
+
                 <Row className="total_con">
                     <Col span={3}></Col>
                     <Col span={18} className="total_list_con">

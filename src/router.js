@@ -26,18 +26,35 @@ import Register from "./pages/Register";
 
 import PeopleHome from "./pages/PeopleHome";
 import PayOver from "./pages/PayOver";
+import PeopleOrderList from "./pages/PeopleOrderList";
+
+import PeopleOrderListPage from "./pages/PeopleOrderListPage";
+import PeopleOrderDetail from "./pages/PeopleOrderDetail";
 class IndexRouter extends React.Component {
     render () {
         return (
             <BrowserRouter basename="/build">
                 <App>
+
                     <Switch>
+
+
                         <Route path="/login" component={Login}></Route>
                         <Route path="/register" component={Register}></Route>
                         <Route path="/luoke/agreement" component={LuoKeAgreement}></Route>
                         <Route path="/info/agreement" component={InfoAgreement}></Route>
                  
-                        <Route path="/people" component={PeopleHome}></Route>
+                        <Route path="/people" exact component={PeopleHome}></Route>
+
+                        <Route path="/people/order" render={
+                            ()=> <PeopleOrderList>
+                                    <Route path="/people/order/list" component={PeopleOrderListPage}></Route>
+                                    
+                                    <Route path="/people/order/detail" component={PeopleOrderDetail}></Route>
+                                </PeopleOrderList>
+                        }>
+
+                        </Route>
                         <Route path="/" render={
                             ()=><Layout>
                                     <Route path="/" exact component={Home}></Route>

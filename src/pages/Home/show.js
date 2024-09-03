@@ -41,12 +41,12 @@ class Show extends React.Component {
         }
     }
     componentDidMount () {
+
         this.getHotSellInfoFn()
+        
         this.getRecomendGoodFn()
         this.getStyleFn()
-
         scrollTopFn()
-
         this.getCartInfoFn()
     }
     // 热销爆款
@@ -144,7 +144,6 @@ class Show extends React.Component {
             })
         })
     }
-
     // 获后台购物车数据
     getCartInfoFn = ()=> {
         let _this = this;
@@ -172,6 +171,33 @@ class Show extends React.Component {
 
     goCartFn = ()=> {
         
+    }
+
+
+    // 统计购物车数量
+    totalCartGoodCountFn = ()=> {
+        let _this = this;
+        let formData = new FormData();
+        let token = getStorageFn("token");
+        formData.append("api", "app.cart.index");    
+        formData.append("accessId", token);  
+        formData.append("storeId", 1);
+        formData.append("storeType", 6);
+        request({
+            url: "/api/gw",         
+            method: "POST",    
+            data: formData
+        }).then((res)=> {
+            let resData = res.data.data.data;
+            _this.setState({
+                cartArr: resData
+            },function () {
+                let cartArr = _this.state.cartArr;
+                let length = cartArr.length;
+                _this.props.totalCartGoodCountFn(length)
+            })
+            setStorageFn("cartArr", resData)
+        })
     }
     render () {
         return (            
@@ -240,7 +266,7 @@ class Show extends React.Component {
             
 
             
-                {this.props.state.commonState.showCartFlag && <SmallCart hideSmallCart={this.props.hideSmallCartFn}></SmallCart>}
+                {this.props.state.commonState.showCartFlag && <SmallCart hideSmallCart={this.props.hideSmallCartFn} totalCartGoodCountFn={this.totalCartGoodCountFn}></SmallCart>}
             </div>
         )
     }

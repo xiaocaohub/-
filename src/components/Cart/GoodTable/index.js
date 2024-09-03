@@ -2,12 +2,14 @@ import React from "react";
 import {Link} from "react-router-dom";
 import {Input} from "antd";
 
+import EmptyPage from "../../Empty";
+
 import "./index.css";
 import goodImg from "../../../assets/recomend_good1.png";
 class GoodTable extends React.Component {
     constructor (props) {
         super(props)
-        console.log('props', props)
+        console.log('props----------', props)
     }
     reduceFn = (item, index)=> {
         this.props.reduceFn(item, index)
@@ -42,6 +44,7 @@ class GoodTable extends React.Component {
                 </ul>
           
           
+                {this.props.totalSelectGoodCount==0 && <EmptyPage></EmptyPage>}
                 <ul className="good_list">
                     {this.props.cartArr.map((item, index)=>{
                         return (
@@ -79,6 +82,7 @@ class GoodTable extends React.Component {
                         )
                     })}
                 </ul>
+
             </div>
         )
     }

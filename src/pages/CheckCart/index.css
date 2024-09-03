@@ -89,3 +89,10 @@
     border-radius:5px;
     cursor:pointer;
 }
+.check_cart_page .date_con{
+    display:block;
+    width:250px;
+    height: 32px;
+    
+    border:1px solid #d9d9d9;
+}
