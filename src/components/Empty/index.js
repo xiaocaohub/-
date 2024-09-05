@@ -8,6 +8,7 @@ class Empty extends React.Component {
         return (
             <div className="empty_con">
                 <img src={EmptyImg} alt="" className="empty_img"/>
+                <p className="tit">暂无商品</p>
             </div>
         )
     }

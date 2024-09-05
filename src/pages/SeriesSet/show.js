@@ -3,6 +3,8 @@ import {Row, Col} from "antd";
 import { getStyleApi, getStyleGoodArrApi} from "../../api/SeriesSet";
 
 import {setStorageFn, getStorageFn} from "../../utils/localStorage";
+
+import Empty from "../../components/Empty";
 import Nav from "../../components/SeriesSet/Nav";
 import "./index.css";
 import bannerImg from "../../assets/series_banner.png";
@@ -19,7 +21,8 @@ class Show extends React.Component {
             //     {id: 0,title: "全部"}
             // ],
             styleNav: [
-                {id: 0, text:"奶油"}
+
+                {id: 0, text:"全部", value: 0}
             ],
             styleIndex: 0,
             styleId: 0,
@@ -42,9 +45,20 @@ class Show extends React.Component {
         formData.append("key", "");
 
         formData.append("pageSize", 10);
+        
         getStyleApi(formData).then((res)=>{  
+        
             let styleArr = res.data.data.list;
-            let styleId = styleArr[0].value;
+            // let styleId = styleArr[0].value;
+            let item = {id: 0, text:"全部", value: ""};
+            styleArr.unshift(item);
+            
+            let styleId = "";
+            console.log("styleArr")
+          
+
+           
+
             this.setState({
                 styleNav: styleArr,
                 styleId: styleId
@@ -70,8 +84,8 @@ class Show extends React.Component {
         let storeId = getStorageFn("storeId") || 1;
         let storeType = getStorageFn("storeType") || 6;
         let styleId = this.state.styleId;
-       
         formData.append("api", "app.product.getBrands"); 
+
         formData.append("storeId", storeId);
         formData.append("storeType", storeType);
         formData.append("page", 1);
@@ -152,7 +166,7 @@ class Show extends React.Component {
                             })}    
                            
                         </ul>
-                        
+                        {this.state.styleGoodArr.length==0 && <Empty></Empty>}
                         
                     </div>
                 </Col>

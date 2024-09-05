@@ -71,6 +71,7 @@
 .hot_selling_con   .ant-carousel .slick-slide .good_item a{
     display:block;
     height: 450px;
+    overflow: hidden;
     position:relative;
 }
 .hot_selling_con   .ant-carousel .slick-slide  .good_item .good_img{
@@ -78,7 +79,9 @@
     width:100%;
     position:absolute;
     left:0;
-    top:50%;
+    /* top:50%; */
+    top:0;
+    object-fit: cover;
 }
 .hot_selling_con   .ant-carousel .slick-slide  .good_item  .text_con{
    background:#fff;

@@ -40,4 +40,11 @@
 .people_order_list_page_con .order_table .operate_btn{
    margin: 5px 0;
 }
- 
+
+
+
+
+.people_order_list_page_con .page_con{
+   text-align: center;
+   padding-bottom: 50px;
+}

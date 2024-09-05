@@ -56,21 +56,22 @@
  
     height:28px;
     line-height:28px;
-    font-size:24px;
+    font-size:20px;
     margin-bottom:20px;
     overflow:hidden;
     text-overflow: ellipsis;
     white-space: nowrap;  
+ 
 }
 .recommende_good_con .recommende_good .text_bottom .price{
     height:36px;
     line-height:36px;
-    font-size:30px;
+    font-size:25px;
 }
 .recommende_good_con .recommende_good .text_bottom .price span{
     font-size:18px;
     position:relative;
-    top:-3px;
+    top:-1px;
 }
 
 .recommende_good_con .recommende_good .text_bottom .but_btn{

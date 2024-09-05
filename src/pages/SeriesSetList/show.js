@@ -18,55 +18,33 @@ class Show extends React.Component {
             brandId: parseInt(props.match.params.id),        
             goodListArr: [],
             goodList: [],
+            brandInfo: "",
             total: 0,
             currentPage: 1,
             pageSize: 16
         }
     }
-    // getGoodListFn = ()=> {
-    //     let formData = new FormData();
-    //     let storeId = getStorageFn("storeId") || 1;
-    //     let storeType = getStorageFn("storeType") || 6;
-    //     let queryCriteria = {brandId:"88",minPrice:"",maxPrice:""};
-    //     formData.append("api", "app.product.listProduct");
-    //     formData.append("storeId", storeId);
-    //     formData.append("storeType", storeType);
-    //     formData.append("page", 1);
-    //     formData.append("pageSize", 6);
-    //     formData.append("queryCriteria", JSON.stringify(queryCriteria));
-    //     getGoodListApi(formData).then((res)=>{     
-    //         // let goodListArr = res.data.data.goodsList;
-    //         console.log("-", res)
-           
-           
-
-
-    //         // this.setState({
-    //         //     goodListArr:
-    //         // })
-    //     })
-    // }
+   
     componentDidMount () {
         this.getGoodListFn()
     }
 
     getGoodListFn = (optionIds)=> {
-        console.log("optionIds", optionIds)
-        // console.log("spaceId", spaceId)
-        // console.log("categoryId", categoryId)
         let formData = new FormData();
         let option = {"brandId":"","minPrice":"","maxPrice":""};
         let storeId = getStorageFn("storeId") || 1;
-       
+
         let storeType = getStorageFn("storeType") || 6;
         let productClass = "";
+
+
         let styleId = "";
         if (optionIds) {
-
             if (optionIds.spaceSid && optionIds.spaceId) {
                 productClass = "-" + optionIds.spaceSid + "-" + optionIds.spaceId + "-";
             }
             
+
             if (optionIds.categoryId) {
                 productClass += optionIds.categoryId + "-";
             }
@@ -74,33 +52,37 @@ class Show extends React.Component {
             if (optionIds.styleId) {
                 styleId = optionIds.styleId;
             }
-            
-            // console.log("productClass: " + productClass)
-            // console.log("productClass styleId: " + styleId)
         }
       
+
         formData.append("api", "app.product.listProduct");
         formData.append("storeId", storeId);
         formData.append("storeType", storeType);
+
         formData.append("page", this.state.currentPage);
         formData.append("pageSize", this.state.pageSize);   
         formData.append("brandId", this.state.brandId);
         formData.append("productClass", productClass);
         formData.append("styleIds",  styleId);
-        formData.append("sortCriteria", "");
-        formData.append("queryCriteria",  JSON.stringify(option));
 
+        formData.append("sortCriteria", "");        
+        formData.append("queryCriteria",  JSON.stringify(option));
         formData.append("sort", "");
         request({
             url: "/api/gw",
             method: "POST",
             data: formData
         }).then((res)=> {
-            // console.log(res)
             let resData =  res.data.data;
+
             let goodList = resData.goodsList;    
+            let brandInfo = resData.brandInfo;
             let total = resData.total;
+            console.log("resData set goodList")
+            console.log(resData)
+            console.log("resData set goodList")
             this.setState({
+                brandInfo: brandInfo,
                 goodList: goodList,
                 total: total
             })
@@ -113,13 +95,12 @@ class Show extends React.Component {
                     <Col span={3}></Col>
 
                     <Col span={18}>
-
-                        <div className="banner_con" onClick={this.getGoodListFn}>
+                        <div className="banner_con">
                             <img src={banner} alt="" className="banner"/>
                             <div className="banner_text">
-                                <div className="title">原创系列</div>
-                                <div className="txt">国潮元素/流行趋势/中国制造</div>
-                                <div className="btn">在售商品998款</div>
+                                <div className="title">{this.state.brandInfo?this.state.brandInfo.brand_name:"---"}</div>
+                                <div className="txt">{this.state.brandInfo?this.state.brandInfo.brand_introduce:"---"}</div>
+                                <div className="btn">在售商品{this.state.total}款</div>
                             </div>
                         </div>
                         

@@ -26,7 +26,19 @@ class Design extends React.Component {
     render () {
         return (
             <div className="design_con">
-                <SameGood></SameGood>
+                {/* <SameGood></SameGood> */}
+
+                <div className="same_kind_good">
+                    <Link to="/">
+                        <img src={designImg} alt="" className="img"/>
+                    </Link>
+                    <div className="txt">极简 时尚岩板 茶几 品质升 极简 时尚岩板 茶几 品质升</div>
+                    
+                    
+
+                    <div className="price">¥ 3632</div>
+                </div>
+
                 <img src={addIcon} alt="" className="add_icon"/>
                 <div className="banner_con">
                     <div className="small_left" onClick={this.prev}></div>

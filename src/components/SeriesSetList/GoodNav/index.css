@@ -1,4 +1,4 @@
-.product_nav_con .good_nav_con{
+.product_nav_con {
  
     /* border:1px solid brown; */
 }
@@ -58,18 +58,27 @@
 
 .product_nav_con .good_nav .nav_list_con{
     overflow:hidden;
-     /* border:1px solid brown;  */
+    border-top:1px solid #E1E1E1;
     font-size:14px;
     padding:5px 0;
 }
- 
+.product_nav_con .good_nav .nav_list_con:first-child{
+    border-top:none;
+}
 .product_nav_con .good_nav .nav_list_con .title{
     width:10%;
     height:100%;
     line-height:52px;
     text-align:center;
     float:left;
-    font-weight: bold;
+ 
+    background: #fafafa;
+}
+.product_nav_con .good_nav .nav_list_con:first-child .title{
+    border-top-left-radius: 12px;
+}
+.product_nav_con .good_nav .nav_list_con:nth-child(3) .title{
+    border-bottom-left-radius: 12px;
 }
 .product_nav_con .good_nav .nav_list_con .nav_list{
     width:76%;
@@ -122,12 +131,14 @@
 
 .product_nav_con .good_nav .nav_list .btn_group .btn{
     padding:5px 15px;
-    margin:0 20px;
+    margin:0 0px;
     border-radius:5px;
     cursor:pointer;
 }
+
+
 .product_nav_con .good_nav .nav_list .btn_group .sub_btn{
-    background:#E8A468;
+    background:#C6A189 !important;
     color:#fff;
 }
 .product_nav_con .good_nav .nav_list .btn_group .cancel_btn{
@@ -139,11 +150,12 @@
 
 .product_nav_con .good_nav .nav_list_con .slect_more{
     float:right;
-    border:1px solid #1A1A1A;
+    border:1px solid #E1E1E1;
     padding:3px 10px;
     border-radius:3px;
     cursor:pointer;
     margin-top:12px;
+    margin-right:15px;
 }
 
 
@@ -154,5 +166,90 @@
     font-size:14px;
     cursor:pointer;
 }
+
+.product_nav_con .sort_con{
+ 
+
+    /* border:1px solid brown; */
+    overflow:hidden;
+    margin-top:20px;
+    margin-bottom:40px;
+}
+.product_nav_con .sort_con .sort_list_con{
+    width:49%;
+    padding: 10px 0;
+ 
+    float:left;
+    background: #fff;
+    border-radius: 12px;
+}
+.product_nav_con .sort_con .sort_list_con:nth-child(2) {
+    float: right;
+    margin-right: 0.4%;
+}
+.product_nav_con .sort_con .sort_list_con .title{
+    
+    height:26px;
+    line-height:26px;
+   
+    float: left;
+    /* border:1px solid brown; */
+    padding-left:25px;
+    font-size:14px;
+    margin-left:20px;
+    color: #666;
+}
+.product_nav_con .sort_con .sort_list_con .title.sort_tit{
+    background:url("../../../assets/icon/sort.png") no-repeat left center;
+}
+.product_nav_con .sort_con .sort_list_con .title.filter_tit{
+    background:url("../../../assets/icon/filter.png") no-repeat left center;
+}
+.product_nav_con .sort_con .sort_list_con .sort_list{
+    float:left;
+    /* border:1px solid brown; */
+}
+.product_nav_con .sort_con .sort_list_con .sort_ul{
+    width:35%;
+}
+.product_nav_con .sort_con .sort_list_con .filter_sort{
+    width:75%;
+}
+.product_nav_con .sort_con .sort_list_con .sort_list li{
+    width:58px;
+    height:26px;
+    line-height:26px;
+    text-align:center;
+    float:left;
+    border-radius:26px;
+    cursor:pointer;
+    color: #666;
+    background: #f8f8f8;
+   
+}
+.product_nav_con .sort_con .sort_list_con .sort_list li.on{
+
+    background:#C6A189;
+    color:#fff;
+}
+.product_nav_con .sort_con .sort_list_con .sort_ul > li{
+    margin-left:8%;
+}
+
+.product_nav_con .sort_con .sort_list_con .filter_sort > li{
+    margin-left:4%;
+}
+
+
+
+
+
+
+
+
+
+
+
+
 
 

@@ -11,6 +11,7 @@
 .series_list_page .banner_con .banner{
     display:block;
     width:100%;
+    object-fit: cover;
 }
 
 .series_list_page .banner_con .banner_text{
@@ -61,7 +62,6 @@
 .series_list_page .good_list{
    overflow:hidden;
    margin-top:50px;
-   background:#FFF;
 }
 .series_list_page .page{
    display:block;

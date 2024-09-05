@@ -7,9 +7,9 @@ import "./index.css";
 class Show extends React.Component {
     constructor (props) {
         super(props)
-        console.log("props register")
-        console.log(props)
-        console.log("props register")
+        // console.log("props register")
+        // console.log(props)
+        // console.log("props register")
         this.state = {
             loginFlag: true
         }

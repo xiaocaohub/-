@@ -353,6 +353,7 @@ class DetailInfo extends React.Component {
                         </div>
 
                         <div className="specifications_con">
+                           
                             <div className="title_name">编码</div>
                             <div className="code_con" onClick={this.copyFn}>{this.state.currentGood?this.state.currentGood.productCode:this.props.goodDetail.skuBeanList[0].productCode}</div>
                         </div>
@@ -367,10 +368,10 @@ class DetailInfo extends React.Component {
                         <div className="specifications_con">
                             <div className="title_name">数量</div>
                             <div className="count_con">
-                                <div className="btn" onClick={()=>{this.handleCountFn(-1)}}>-</div>
+                                <div className="btn reduce_btn" onClick={()=>{this.handleCountFn(-1)}}>-</div>
                                 
                                 <Input className="count" value={this.state.count} onChange={this.changeCountFn}/>      
-                                <div className="btn" onClick={()=>{this.handleCountFn(1)}}>+</div>
+                                <div className="btn add_btn" onClick={()=>{this.handleCountFn(1)}}>+</div>
                             </div>
                         </div>
 
@@ -378,14 +379,14 @@ class DetailInfo extends React.Component {
                             <div className="btn buy_btn" onClick={this.addCartFn}>加入购物车</div>
 
                             {/* <div className="btn">定制询价</div> */}
-                            <div className="small_btn">
+                            {/* <div className="small_btn">
                                 <StarOutlined className="icon"/> 收藏
                             </div>
                             <span className="line"></span>
                             <div className="small_btn share_btn">
                                 <ShareAltOutlined className="icon"/> 分享
                                 <img src={codeImg} alt="" className="code_img"/>
-                            </div>
+                            </div> */}
                         </div>
                     </div>
                 </div>

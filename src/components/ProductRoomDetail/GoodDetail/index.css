@@ -9,8 +9,15 @@
 .productroom_detail_page .good_edit_detail .content > .left{
     width:72.5%;
     float:left;
+    border-radius: 12px;
 }
 
+.productroom_detail_page .good_edit_detail .content > .left img {
+ 
+    display: block;
+    margin: 0 auto;
+    width: 100%;
+}
 .productroom_detail_page .good_edit_detail .content > .left .ql-align-center img{
     display:block;
 
@@ -28,6 +35,10 @@
    width:26%;
 
    border-radius:10px;
+
+
+   height:750px;
+   overflow-y:auto;
    float:right;
    background:#FFF;
 }
@@ -40,8 +51,9 @@
 }
 .productroom_detail_page .good_edit_detail .content > .right .title_top .tit{
    float:left;
-   font-size:15px;
-   font-weight:bold;
+   font-size:16px;
+
+   color: #1A1A1A;
 }
 .productroom_detail_page .good_edit_detail .content > .right .title_top .show_btn{
     background:url("../../../assets/icon/icon_down.png") no-repeat right center;
@@ -55,8 +67,8 @@
 }
 
 .productroom_detail_page .good_edit_detail .content > .right .img_txt_con{
-    height:750px;
-    overflow-y:auto;
+    /* height:750px;
+    overflow-y:auto; */
 }
 .productroom_detail_page .good_edit_detail .content > .right .img_list{
     overflow:hidden;
@@ -88,8 +100,9 @@
 .productroom_detail_page .good_edit_detail .content > .right .text_con .tit{
     height:54px;
     line-height:54px;
-    font-size:15px;
+    font-size:16px;
     padding:0 20px;
+    color: #1A1A1A;
     border-bottom:1px solid #E1E1E1;
 }
 .productroom_detail_page .good_edit_detail .content > .right .text_con .txt_list{
@@ -122,27 +135,36 @@
  
     word-break: break-all;
 }
-:where(.css-dev-only-do-not-override-98ntnt) .ant-image-preview-close{
-    top:100px !important;
-    background: #292829 !important;
-    right:100px !important;
-}
-::-webkit-scrollbar {
-    width: 5px; /* 对于垂直滚动条，设置宽度 */
-    height: 5px; /* 对于水平滚动条，设置高度 */
-  }
-  ::-webkit-scrollbar-track {
-    background: #f1f1f1; /* 背景色 */
-  }
  
-  
 
-  /* 滚动条滑块 */
-  ::-webkit-scrollbar-thumb {
-    background: #888; /* 滑块颜色 */
+
+
+::-webkit-scrollbar {
+    width: 12px;  /* 宽度 */
   }
    
- /* 滑块hover效果 */
-::-webkit-scrollbar-thumb:hover {
-    background: #555; /* 滑块hover颜色 */
-}
+  /* 滚动条轨道 */
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1; /* 颜色 */
+  }
+   
+  /* 滚动条滑块 */
+  ::-webkit-scrollbar-thumb {
+    background: #888; /* 颜色 */
+  }
+   
+  /* 滚动条滑块hover效果 */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555; /* 颜色 */
+  }
+   
+  /* Firefox 的滚动条样式 */
+  * {
+    scrollbar-width: thin; /* "auto" or "thin" */
+    scrollbar-color: #888 #f1f1f1; /* 滑块颜色 轨道颜色 */
+  }
+   
+  /* IE 和 Edge 的滚动条样式 */
+  body {
+    -ms-overflow-style: scrollbar; /* 或者 "border" 或 "none" */
+  }

@@ -151,11 +151,14 @@ class UserInfo extends React.Component {
         }
 
         setStorageFn("userInfoDetail", userInfoDetail)
+        this.props.setKeepFn(true)
         this.setState({
             changeFlag: false
         })
     }
     changeFn = ()=> {
+     
+        this.props.setKeepFn(false)
         this.setState({
             changeFlag: true
         })

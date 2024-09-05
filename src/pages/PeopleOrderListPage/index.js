@@ -1,8 +1,8 @@
 import React from "react";
 import {Link} from "react-router-dom";
-import {Tabs, Table, Button  } from "antd";
+import {Tabs, Table, Button, Pagination  } from "antd";
 
-import "./index.css";
+import "./index.css";  
 
 import {setStorageFn, getStorageFn} from "../../utils/localStorage";
 import request from "../../api/request";
@@ -36,7 +36,6 @@ const columns = [
           )  
       }
     },
-
 
     {
       title: '下单账号',
@@ -117,14 +116,13 @@ const columns = [
     },
     {
       title: '操作',
-     
       dataIndex: 'operateText',
       key: 'operateText',
       render: (item)=> {
           return (
               <div>
                   <Button className="operate_btn">{item.payBtn}</Button> <br/>
-                  <Button className="operate_btn"><Link to="/people/order/detail">{item.orderDetail}</Link></Button><br/>
+                  <Button className="operate_btn"><Link to={ "/people/order/detail/" + item.order }>{item.orderDetail}</Link></Button><br/>
 
                   <Button className="operate_btn">{item.exportOrder}</Button><br/>
                   <Button className="operate_btn">{item.buyRepeat}</Button><br/>
@@ -185,8 +183,8 @@ class PeopleOrderListPage extends React.Component {
         this.getOrderListFn()
     }
     selectNavFn = (index)=> {
-        let navItem = this.state.tableNavArr[index];
 
+        let navItem = this.state.tableNavArr[index];
         this.setState({
             currentNavIndex: index
         }, function () {
@@ -196,7 +194,6 @@ class PeopleOrderListPage extends React.Component {
     goorderDetailFn = (item)=>{
         window.localStorage.href = "/people/order/detail"
     }
-
     getOrderListFn = (status)=> {
         let _this = this;
         let formData = new FormData();
@@ -206,9 +203,9 @@ class PeopleOrderListPage extends React.Component {
         formData.append("storeId", 1);
         formData.append("storeType", 6);
         formData.append("orderParentNo", ""); 
+    
         formData.append("status", status || ""); 
-        formData.append("pageSize", 10); 
-
+        formData.append("pageSize", 5); 
         formData.append("pageNum", 1); 
         formData.append("startTime", ""); 
         formData.append("endTime", ""); 
@@ -222,7 +219,7 @@ class PeopleOrderListPage extends React.Component {
             let resOrderArr = resData.records;
             let totalCount = resData.total;
             let orderArr = [];
-            console.log(resOrderArr)
+            // console.log(resOrderArr)
             resOrderArr.forEach((item, index)=> {
                 let orderItem = {
                       key: index,
@@ -250,10 +247,12 @@ class PeopleOrderListPage extends React.Component {
                       },
                       orderState:  item.status,
                       operateText: {
+
+                          order: item.orderParentNo,
                           payBtn: "去付款",
                           orderDetail: "订单详情",
+  
                           exportOrder: "导出订单",
-
                           buyRepeat: "再次购买",
                           cancelOrder: "取消订单"
                       }
@@ -315,7 +314,6 @@ class PeopleOrderListPage extends React.Component {
                     phone: "12345"
                 },
                 totalMoney: 2000,
-                
                 payTotalMoney: 2100,
                 customerInfo: {
                     uName: "丁",
@@ -343,12 +341,18 @@ class PeopleOrderListPage extends React.Component {
                         })}
                     </ul>
 
-                  
-                    <Table dataSource={this.state.orderArr} columns={columns} className="order_table" pagination={false}/>;
+
+
+                    {this.state.orderArr.length>0 && <Table  bordered={true} dataSource={this.state.orderArr} columns={columns} className="order_table" pagination={false}/>}
+                    
+                    <div className="page_con">
+                        <Pagination defaultCurrent={1} total={50} className="page"/>
+                    </div> 
                 </div>
             </div>
         )
     }
 }
+
 
 export default PeopleOrderListPage

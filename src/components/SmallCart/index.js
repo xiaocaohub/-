@@ -184,6 +184,22 @@ class CartSmall extends React.Component {
           
         })
     }
+    putCountFn = (e, item, index)=> {
+        let value = e.target.value;
+        item.goods_num = value;
+        let cartArr = this.state.cartArr;
+
+        cartArr[index] = item;
+        this.setState({
+            cartArr: cartArr
+        })
+    }
+    blurGoodCountFn = (goodItem)=> {
+        console.log("blurGoodCountFn goodItem")
+        console.log(goodItem)
+        console.log("blurGoodCountFn goodItem")
+        this.changeGoodCountFn(goodItem)
+    }
     deleteGoodConfirmFn = (item, index)=> {
         let _this = this;
         let cartArr = this.state.cartArr;
@@ -346,7 +362,7 @@ class CartSmall extends React.Component {
                                             <div className="price">{ item.price }</div>
                                             <div className="count_con">
                                                     <div className="btn reduce" onClick={()=>{this.reduceFn(item, index)}}>-</div>
-                                                    <Input className="count" value={item.goods_num}/>
+                                                    <Input className="count" value={item.goods_num} onChange={(e)=> {this.putCountFn(e, item, index)}} onBlur={()=>{this.blurGoodCountFn(item)}}/>
                                                     <div className="btn" onClick={()=>{this.addFn(item, index)}}>+</div>      
                                             </div>
                                             <div className="sub_total">{ item.price * item.goods_num }</div>

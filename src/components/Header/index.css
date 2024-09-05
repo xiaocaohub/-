@@ -4,6 +4,8 @@
     left:0;
     top:0;
     z-index:20;
+    border-bottom:1px solid #e1e1e1;
+    /* border-bottom:1px solid brown; */
 }
 .header_con .header_top{
     height:40px;
@@ -29,12 +31,8 @@
 
 .header_con .header_top .header_img{
     display:block;
-
-    width:29px;
-    height:29px;
     float:right;
-    border-radius:32px;
-    margin-top:5px;
+    color:#fff;
 }
 
 
@@ -43,7 +41,9 @@
     padding:20px 0;
     background:#fff;
 }
+
 .header_con .header_bottom .logo{
+
     float:left;
     display:block;
     width:12.7%;
@@ -95,6 +95,7 @@
     font-weight:450;
     font-size:20px;
     border-bottom-color:#C6A189;
+    
 }
 
 .header_con .header_bottom .nav_list > li:hover{

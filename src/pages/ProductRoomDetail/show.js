@@ -1,5 +1,5 @@
 import React from "react";
-import {Row, Col, message} from "antd";
+import {Row, Col, message, Button} from "antd";
 import DetailInfo from "../../components/ProductRoomDetail/DetailInfo";
 
 import Design from "../../components/ProductRoomDetail/Design";
@@ -32,7 +32,9 @@ class Show extends React.Component {
             goodInfo: "",
             goodInfoFlag: false,
             cartArr: [],
-            addCartFlag: true  // 防止多次点击
+            addCartFlag: true,  // 防止多次点击
+
+            sameGoodArr: []
         }    
     }
     componentDidMount () {
@@ -47,9 +49,9 @@ class Show extends React.Component {
     }
     initFn = ()=> {
         let cartArr = getStorageFn("cartArr") || [];
-        console.log("init cartArr")
-        console.log(cartArr)
-        console.log("init cartArr")
+        // console.log("init cartArr")
+        // console.log(cartArr)
+        // console.log("init cartArr")
         this.setState({
             cartArr: cartArr
         })
@@ -63,6 +65,7 @@ class Show extends React.Component {
         }, function () {
             // _this.props.getGoodInfoFn(id)
             this.getGoodInfoFn(id)
+            this.getSameGoodFn()
         })
     } 
 
@@ -124,9 +127,9 @@ class Show extends React.Component {
         if (!addCartFlag) {
             return ;
         } 
-        console.log("currentGood----------start")
-        console.log(currentGood)
-        console.log("currentGood---------start")
+        // console.log("currentGood----------start")
+        // console.log(currentGood)
+        // console.log("currentGood---------start")
         currentGood.goods_id = parseInt(this.state.goodId);
         currentGood.attribute_id = currentGood.cid;
  
@@ -138,26 +141,26 @@ class Show extends React.Component {
             cartArr.forEach((item, index)=>{
                 if (item.goods_id == currentGood.goods_id && item.attribute_id == currentGood.attribute_id) {  
                     item.goods_num += 1;
-                    console.log("currentGood item")
-                    console.log(item)
-                    console.log("currentGood item")
+                    // console.log("currentGood item")
+                    // console.log(item)
+                    // console.log("currentGood item")
 
                     item.cid = currentGood.cid;
+
                     currentGood = item;
                 }
             })
         } else {
-            console.log("小于0")
             currentGood.goods_num = 1;
             currentGood.selectFlag = false;
             // cartArr.push(currentGood)
         }
 
-        console.log("currentGood------end")
+        // console.log("currentGood------end")
                  
                  
-        console.log(currentGood)
-        console.log("currentGood-----end")
+        // console.log(currentGood)
+        // console.log("currentGood-----end")
         // setStorageFn("cartArr", cartArr)
 
         this.setState({
@@ -192,7 +195,7 @@ class Show extends React.Component {
         }).then((res)=> {
             let code = res.data.code;
             if (code == 200) {
-                message.success("加入成功")
+                message.success("加入成功")      
                 _this.getCartInfoFn()
             } else {
                 message.error(res.data.message);
@@ -263,8 +266,30 @@ class Show extends React.Component {
                 _this.props.totalCartGoodCountFn(length)
             })
             setStorageFn("cartArr", resData)
+        })  
+    }
+    getSameGoodFn = ()=> {
+ 
+        let _this = this;    
+        let formData = new FormData();
+ 
+        formData.append("api", "app.product.listSimilarProduct");          
+        formData.append("storeId", 1);
+        formData.append("storeType", 6);
+        formData.append("productId", this.state.goodId);
+        request({
+            url: "/api/gw",         
+            method: "POST",
+            data: formData
+        }).then((res)=> {
+            let resData = res.data.data.goodsList;
+            console.log(resData)
+            let sameGoodArr = resData.splice(0, 6)
+            _this.setState({
+                sameGoodArr: sameGoodArr
+            })
         })
-       
+ 
     }
     render () {
         return (
@@ -285,14 +310,14 @@ class Show extends React.Component {
                             </ul>
 
                             {this.state.designCurrentIndex == 0 && <Design></Design>}
-            
-                            {this.state.designCurrentIndex == 1 && <SameKind></SameKind>}
+                            {this.state.designCurrentIndex == 1 &&  this.state.sameGoodArr.length>0 && <SameKind sameGoodArr={this.state.sameGoodArr}></SameKind>}
                         </div>
                     </Col>
                     
                     <Col span={3}></Col>
                 </Row>
                 
+              
                 {this.state.goodInfo && this.state.currentGood &&<GoodDetail goodDetail={this.state.goodInfo} currentGood={this.state.currentGood}></GoodDetail>}
                 {this.props.state.commonState.showCartFlag && <SmallCart hideSmallCart={this.props.hideSmallCartFn} totalCartGoodCountFn={this.totalCartGoodCountFn}></SmallCart>}
             </div>

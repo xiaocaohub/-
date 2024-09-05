@@ -4,7 +4,7 @@ import "./index.css";
 
 import goodImg from "../../../assets/recomend_good1.png";
  
-import EmptyPage from "../../Empty";
+import EmptyImg from "../../../assets/shopping.png";
 class GoodDetail extends React.Component {
     constructor (props) {
         super(props)
@@ -81,9 +81,9 @@ class GoodDetail extends React.Component {
                     {this.state.content.length>0 && <div className="left" dangerouslySetInnerHTML={{ __html: this.state.content }}>
                          
                     </div>}
-                    {this.state.content.length==0 &&  <div className="left">
-                            <EmptyPage></EmptyPage>
-                         </div>}
+                    {this.state.content.length==0 &&  <div className="left" >
+                            <img src={EmptyImg} alt=""/>
+                    </div>}
                   
                      
                     <div className="right">

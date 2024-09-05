@@ -28,8 +28,8 @@ class Good extends React.Component {
 
             <li className="good" id="good">
             
-                <Link to={ "/series/list/" + this.props.goodInfo.brand_id } >         
-                    <img src={this.props.goodInfo.brand_image} alt="" className="good_img" style={{height: this.state.goodImgHeight + "px"}}/>
+                <Link to={ "/series/list/" + this.props.goodInfo.brand_id } target="_blank">         
+                    <img src={this.props.goodInfo.brand_image} alt="" className="good_img" style={{height: this.state.goodImgHeight + "px"}} />
                 </Link>
 
                 <div className="title">{this.props.goodInfo.brand_name}</div>

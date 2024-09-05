@@ -41,24 +41,20 @@
 }
 .series_good .text_con .price{
     height:25px;
+
     line-height:25px;
+    
     font-size:21px;
     margin-top:3%;
-
-
     overflow: hidden;
 }
-
-
-
-
 .series_good .text_con .price .unit{
     font-size:15px;
     position:relative;
     top:-2px;
 }
-.series_good:hover,
 
+.series_good:hover,
 .series_good:hover .btn_group {
     display: block;
     border-color:#C6A189;
@@ -84,12 +80,15 @@
     height:32px;
     line-height:32px;
     text-align:center;
-    float:left;
+    /* float:left; */
+    float: none !important;
+    margin: 0 auto;
     font-size:12px;
     border:1px solid #C6A189;
     color:#C6A189;
+    border-radius: 32px;
 }
-.series_good .btn_group > li:first-child{
+/* .series_good .btn_group > li:first-child{
     margin-left: 5%;
     border-right:none;
     border-top-left-radius: 32px;
@@ -98,7 +97,7 @@
 .series_good .btn_group > li:last-child{
     border-top-right-radius: 32px;
     border-bottom-right-radius: 32px;
-}
+} */
 .series_good .btn_group > li .collect_icon{
    margin-right:3px;
 }

@@ -153,6 +153,18 @@ class Show extends React.Component {
             }
             remarks.push(orderItem)
         })
+
+         
+
+        let skuNums = [];
+        let orderList = orders[0].details;
+        orderList.forEach((orderItem, index)=> {
+            let item = {num: orderItem.num, skuId: orderItem.skuId}
+            skuNums.push(item)
+        })
+        let skuNumsStr = JSON.stringify(skuNums);
+
+        
         let userInfoDetail = getStorageFn("userInfoDetail");
         if (!this.state.date) {
             message.error("请选择日期")
@@ -183,7 +195,10 @@ class Show extends React.Component {
 
         formData.append("address",  userInfoDetail.detailAdress);
         formData.append("tel",  userInfoDetail.phone);
-        formData.append("invoice", 0)
+
+        formData.append("invoice", 1);
+        formData.append("skuNums", skuNumsStr)
+
         request({
             url: "/api/gw",         
             method: "POST",    

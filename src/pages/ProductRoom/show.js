@@ -20,7 +20,8 @@ class Show extends React.Component {
             goodList: [],
             total: 0,
             currentPage: 1,
-            pageSize: 16
+            pageSize: 16,
+            optionIds: ""
         }
     }
     componentDidMount () {
@@ -47,6 +48,9 @@ class Show extends React.Component {
 
         let productLabel = "";
         let sort = "";
+        this.setState({
+            optionIds: optionIds
+        })
         if (optionIds) {
             if (optionIds.spaceSid && optionIds.spaceId) {
                 productClass = "-" + optionIds.spaceSid + "-" + optionIds.spaceId + "-";
@@ -68,8 +72,8 @@ class Show extends React.Component {
             if (optionIds.sort) {
                 sort = optionIds.sort;
             }
-            console.log("productClass: " + productClass)
-            console.log("productClass styleId: " + styleId)
+            // console.log("productClass: " + productClass)
+            // console.log("productClass styleId: " + styleId)
         }
        
         
@@ -182,7 +186,7 @@ class Show extends React.Component {
                                     this.setState({
                                         currentPage: params
                                     }, function () {
-                                        this.getGoodListFn()
+                                        this.getGoodListFn(this.state.optionIds)
                                     })
                                 }}
                                 onShowSizeChange = {(current, size)=>{

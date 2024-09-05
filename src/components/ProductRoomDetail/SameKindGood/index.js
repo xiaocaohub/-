@@ -1,9 +1,9 @@
 import React from "react";
 import {Link} from "react-router-dom";
 import "./index.css";
-
 import goodImg from "../../../assets/recomend_good1.png";
 class SameGood extends React.Component {
+    
     render () {
         return (
             <div className="same_kind_good">

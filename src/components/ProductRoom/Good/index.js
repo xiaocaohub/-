@@ -29,7 +29,7 @@ class Good extends React.Component {
         return (
             
             <div className="series_good" id="product_room_good">
-                <Link to={"/productroom/detail/" + this.props.itemData.id} className="good_img">
+                <Link to={"/productroom/detail/" + this.props.itemData.id} className="good_img" target="_blank">
                     {/* <img src={this.props.itemData.coverImg} alt=""  style={{height: this.state.goodImgHeight + "px"}}/> */}
                     <img src={this.props.itemData.coverImg} alt=""  />
                 </Link>
@@ -39,14 +39,23 @@ class Good extends React.Component {
             
             
                 </div>
-                <ul className="btn_group">
-                    <li>       
+                {/* <ul className="btn_group">
+                     <li>       
                        <HeartOutlined className="collect_icon"/>加入收藏夹
                     
                     </li>
 
-                    <li>进入系列集</li>
-                </ul>
+                    <li>进入系列集</li>  
+
+                    
+                </ul> */}
+                <ul className="btn_group">
+               
+
+                    <li>进入系列集</li>  
+
+                    
+                </ul> 
             </div>
         )
     }

@@ -2,7 +2,11 @@ import React from "react";
 import {Link} from "react-router-dom";
 import {Row, Col, Carousel} from "antd";
 
-import hotSellImg from "../../../assets/hot_sell_1.png";
+import hotSellImg1 from "../../../assets/hot_sell_1.png";
+
+import hotSellImg2 from "../../../assets/hot_sell_2.png";
+import hotSellImg3 from "../../../assets/hot_sell_3.png";
+import hotSellImg4 from "../../../assets/hot_sell_4.png";
 
 import {setImgAutoHeightFn} from "../../../utils/imgAuto";
 import hotTitleImg from "../../../assets/index_title_hot.png";
@@ -59,7 +63,7 @@ class HotSelling extends React.Component {
                         <div className="hot_banner_con">
                             <div className="left_btn" onClick={this.prev}></div>
                             <div className="right_btn" onClick={this.next}></div>
-                            <Carousel  afterChange={this.onChange} dots={false}    ref={dom=>{this.img=dom }}>
+                            {/* <Carousel  afterChange={this.onChange} dots={false}    ref={dom=>{this.img=dom }}>
                                 <div>
                          
                                     {this.props.hotSellArrData.length>0 && this.props.hotSellArrData.map((item, index)=>{
@@ -138,9 +142,198 @@ class HotSelling extends React.Component {
                                         }
                                     })}
                                 </div>
-                            </Carousel>
+                            </Carousel> */}
                             
 
+
+
+
+                            <Carousel  afterChange={this.onChange} dots={false}    ref={dom=>{this.img=dom }}>
+                                <div>
+                                    <div className="good_item" id="hot_good">
+                                        <Link to={"/productroom/detail/"} >   
+                                            <img src={hotSellImg1} className="good_img" /> 
+                                        </Link>
+
+                                        <div className="text_con">
+                                            <div className="txt">博纳豪斯 棉麻马鞍皮沙发</div>
+                                            <div className="price">¥16199</div>
+                                        </div>
+                                    </div>
+
+                                    <div className="good_item" id="hot_good">
+                                        <Link to={"/productroom/detail/"} >   
+                                            <img src={hotSellImg2} className="good_img" /> 
+                                        </Link>
+
+                                        <div className="text_con">
+                                            <div className="txt">博纳豪斯 棉麻马鞍皮沙发</div>
+                                            <div className="price">¥16199</div>
+                                        </div>
+                                    </div>
+
+                                    <div className="good_item" id="hot_good">
+                                        <Link to={"/productroom/detail/"} >   
+                                            <img src={hotSellImg3} className="good_img" /> 
+                                        </Link>
+
+                                        <div className="text_con">
+                                            <div className="txt">博纳豪斯 棉麻马鞍皮沙发</div>
+                                            <div className="price">¥16199</div>
+                                        </div>
+                                    </div>
+
+                                    <div className="good_item" id="hot_good">
+                                        <Link to={"/productroom/detail/"} >   
+                                            <img src={hotSellImg4} className="good_img" /> 
+                                        </Link>
+
+                                        <div className="text_con">
+                                            <div className="txt">博纳豪斯 棉麻马鞍皮沙发</div>
+                                            <div className="price">¥16199</div>
+                                        </div>
+                                    </div>
+                                </div>
+                              
+                                
+                                <div>
+                                    <div className="good_item" id="hot_good">
+                                        <Link to={"/productroom/detail/"} >   
+                                            <img src={hotSellImg1} className="good_img" /> 
+                                        </Link>
+
+                                        <div className="text_con">
+                                            <div className="txt">博纳豪斯 棉麻马鞍皮沙发</div>
+                                            <div className="price">¥16199</div>
+                                        </div>
+                                    </div>
+
+                                    <div className="good_item" id="hot_good">
+                                        <Link to={"/productroom/detail/"} >   
+                                            <img src={hotSellImg2} className="good_img" /> 
+                                        </Link>
+
+                                        <div className="text_con">
+                                            <div className="txt">博纳豪斯 棉麻马鞍皮沙发</div>
+                                            <div className="price">¥16199</div>
+                                        </div>
+                                    </div>
+
+                                    <div className="good_item" id="hot_good">
+                                        <Link to={"/productroom/detail/"} >   
+                                            <img src={hotSellImg3} className="good_img" /> 
+                                        </Link>
+
+                                        <div className="text_con">
+                                            <div className="txt">博纳豪斯 棉麻马鞍皮沙发</div>
+                                            <div className="price">¥16199</div>
+                                        </div>
+                                    </div>
+
+                                    <div className="good_item" id="hot_good">
+                                        <Link to={"/productroom/detail/"} >   
+                                            <img src={hotSellImg4} className="good_img" /> 
+                                        </Link>
+
+                                        <div className="text_con">
+                                            <div className="txt">博纳豪斯 棉麻马鞍皮沙发</div>
+                                            <div className="price">¥16199</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <div className="good_item" id="hot_good">
+                                        <Link to={"/productroom/detail/"} >   
+                                            <img src={hotSellImg1} className="good_img" /> 
+                                        </Link>
+
+                                        <div className="text_con">
+                                            <div className="txt">博纳豪斯 棉麻马鞍皮沙发</div>
+                                            <div className="price">¥16199</div>
+                                        </div>
+                                    </div>
+
+                                    <div className="good_item" id="hot_good">
+                                        <Link to={"/productroom/detail/"} >   
+                                            <img src={hotSellImg2} className="good_img" /> 
+                                        </Link>
+
+                                        <div className="text_con">
+                                            <div className="txt">博纳豪斯 棉麻马鞍皮沙发</div>
+                                            <div className="price">¥16199</div>
+                                        </div>
+                                    </div>
+
+                                    <div className="good_item" id="hot_good">
+                                        <Link to={"/productroom/detail/"} >   
+                                            <img src={hotSellImg3} className="good_img" /> 
+                                        </Link>
+
+                                        <div className="text_con">
+                                            <div className="txt">博纳豪斯 棉麻马鞍皮沙发</div>
+                                            <div className="price">¥16199</div>
+                                        </div>
+                                    </div>
+
+                                    <div className="good_item" id="hot_good">
+                                        <Link to={"/productroom/detail/"} >   
+                                            <img src={hotSellImg4} className="good_img" /> 
+                                        </Link>
+
+                                        <div className="text_con">
+                                            <div className="txt">博纳豪斯 棉麻马鞍皮沙发</div>
+                                            <div className="price">¥16199</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <div className="good_item" id="hot_good">
+                                        <Link to={"/productroom/detail/"} >   
+                                            <img src={hotSellImg1} className="good_img" /> 
+                                        </Link>
+
+                                        <div className="text_con">
+                                            <div className="txt">博纳豪斯 棉麻马鞍皮沙发</div>
+                                            <div className="price">¥16199</div>
+                                        </div>
+                                    </div>
+
+                                    <div className="good_item" id="hot_good">
+                                        <Link to={"/productroom/detail/"} >   
+                                            <img src={hotSellImg2} className="good_img" /> 
+                                        </Link>
+
+                                        <div className="text_con">
+                                            <div className="txt">博纳豪斯 棉麻马鞍皮沙发</div>
+                                            <div className="price">¥16199</div>
+                                        </div>
+                                    </div>
+
+                                    <div className="good_item" id="hot_good">
+                                        <Link to={"/productroom/detail/"} >   
+                                            <img src={hotSellImg3} className="good_img" /> 
+                                        </Link>
+
+                                        <div className="text_con">
+                                            <div className="txt">博纳豪斯 棉麻马鞍皮沙发</div>
+                                            <div className="price">¥16199</div>
+                                        </div>
+                                    </div>
+
+                                    <div className="good_item" id="hot_good">
+                                        <Link to={"/productroom/detail/"} >   
+                                            <img src={hotSellImg4} className="good_img" /> 
+                                        </Link>
+
+                                        <div className="text_con">
+                                            <div className="txt">博纳豪斯 棉麻马鞍皮沙发</div>
+                                            <div className="price">¥16199</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </Carousel>
 
                             <div className="banner_line">
                                 <span id="longline"></span>

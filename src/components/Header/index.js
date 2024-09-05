@@ -76,7 +76,8 @@ function Header () {
 
                     <span className="title" onClick={getUserInfoFn}>更懂年轻人的国潮家居平台</span>
                     {userInfo && <div className="login_btn" onClick={loginOutFn}>退出</div>}
-                    {userInfo && <img src={userInfo.headimgurl} alt="" className="header_img"/>}         
+                    {userInfo && <span className="header_img">{userInfo.phone}</span>}     
+                    {/* {userInfo && <img src={userInfo.headimgurl} alt="" className="header_img"/>}          */}
                     {!userInfo && <Link to="/login" className="login_btn">登录</Link>}
                     {!userInfo && <Link to="/register" className="login_btn">注册</Link>}
                 </Col>

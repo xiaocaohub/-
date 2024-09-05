@@ -49,7 +49,7 @@ class Pay extends React.Component {
 
         let _this = this;
         var curTime=new Date();
-        var endTime=new Date("2024/9/2, 17:9:25");
+        var endTime=new Date("2024/9/14, 0:20:0");
        
         var leftTime=parseInt((endTime.getTime()-curTime.getTime())/1000);
         var d=parseInt(leftTime/(60*60*24));

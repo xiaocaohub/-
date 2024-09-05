@@ -30,32 +30,38 @@ import PeopleOrderList from "./pages/PeopleOrderList";
 
 import PeopleOrderListPage from "./pages/PeopleOrderListPage";
 import PeopleOrderDetail from "./pages/PeopleOrderDetail";
+import Shop from "./pages/Shop";
+import ShopInfo from "./pages/ShopInfo";
 class IndexRouter extends React.Component {
+
     render () {
-        return (
+      
+    
+        return (  
             <BrowserRouter basename="/build">
                 <App>
-
                     <Switch>
-
-
+                
                         <Route path="/login" component={Login}></Route>
-                        <Route path="/register" component={Register}></Route>
+                        
+                        <Route path="/register" component={Register}></Route>        
                         <Route path="/luoke/agreement" component={LuoKeAgreement}></Route>
                         <Route path="/info/agreement" component={InfoAgreement}></Route>
-                 
                         <Route path="/people" exact component={PeopleHome}></Route>
-
                         <Route path="/people/order" render={
                             ()=> <PeopleOrderList>
                                     <Route path="/people/order/list" component={PeopleOrderListPage}></Route>
-                                    
-                                    <Route path="/people/order/detail" component={PeopleOrderDetail}></Route>
+                                    <Route path="/people/order/detail/:id" component={PeopleOrderDetail}></Route>
                                 </PeopleOrderList>
                         }>
-
-                        </Route>
+                        </Route> 
+                        <Route path="/shop" render={()=>
+                            <Shop>
+                                <Route path="/shop/info" component={ ShopInfo }></Route>
+                            </Shop>
+                        }></Route>
                         <Route path="/" render={
+                          
                             ()=><Layout>
                                     <Route path="/" exact component={Home}></Route>
                                     <Route path="/recommendegood" component={RecommendeGood}></Route>                   
@@ -70,12 +76,10 @@ class IndexRouter extends React.Component {
                                     <Route path="/checkcart" component={CheckCart}></Route>
                                     <Route path="/pay" exact component={Pay}></Route>
                                     <Route path="/us" component={Us}></Route>
-
                                     <Route path="/pay/over" component={PayOver}></Route>
+                            
                             </Layout>
-
                         }></Route>
-                      
                     </Switch>
                 </App>
             </BrowserRouter>

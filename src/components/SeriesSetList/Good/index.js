@@ -19,7 +19,7 @@ class Good extends React.Component {
     render () {
         return (
             <div className="series_good">
-                <Link to={"/productroom/detail/" + this.props.goodItem.id}>
+                <Link to={"/productroom/detail/" + this.props.goodItem.id} target="_blank">
                     <img src={this.props.goodItem.coverImg} alt="" className="good_img"/>
                 </Link>
                 <div className="text_con">
@@ -27,11 +27,18 @@ class Good extends React.Component {
                     
                     <div className="price"><span className="unit">￥</span>{this.props.goodItem.price}</div>
                 </div>
-                <ul className="btn_group">
+                {/* <ul className="btn_group">
                     <li>
                        
                        <HeartOutlined className="collect_icon"/>加入收藏夹
                     </li>
+                    <li>进入系列集</li>
+                </ul> */}
+
+
+
+                <ul className="btn_group">
+              
                     <li>进入系列集</li>
                 </ul>
             </div>

@@ -14,14 +14,9 @@ class Show extends React.Component {
             menuList: [
                 {
                     id: 0,
-                    title: "订单列表",
-                    path: "/people/order/list"
+                    title: "基本信息",
+                    path: "/shop/info"
                 
-                },
-                {
-                    id: 1,
-                    title: "定制订单",
-                    path: "/people/order/list"
                 }
             ],
             navIndex: 0
@@ -38,9 +33,9 @@ class Show extends React.Component {
               
               
                 <Header></Header>
-                <div className="people_order_con">
+                <div className="shop_con">
                     <div className="left_content">
-                        <div className="title"><span>订单管理</span></div>
+                        <div className="title"><span>店铺设置</span></div>
                         
                         <ul className="menu_list">
                                 

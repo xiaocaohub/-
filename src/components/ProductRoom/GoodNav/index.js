@@ -471,7 +471,7 @@ class GoodNav extends React.Component {
                         {this.state.navOption.categoryPname && <div className="select_nav_item" onClick={this.clearCategoryFn}>{this.state.navOption.categoryPname} <CloseOutlined /></div>}
                         {this.state.navOption.stylePname && <div className="select_nav_item" onClick={this.clearStyleFn}> {this.state.navOption.stylePname} <CloseOutlined /></div>}
                     </div>
-                    <div className="show_btn_a">收起筛选 <UpOutlined /></div>
+                    {/* <div className="show_btn_a">收起筛选 <UpOutlined /></div> */}
 
                 </div>
                 <div className="good_nav">
@@ -521,8 +521,8 @@ class GoodNav extends React.Component {
                                 {this.state.styleHover?
                                 "":
                                     (<div className="btn_group">     
-                                        <div className="btn sub_btn" onClick={this.submitStyleFn}>提交</div>
                                         <div className="btn cancel_btn" onClick={this.cancelStyleFn}>取消</div>
+                                        <div className="btn sub_btn" onClick={this.submitStyleFn}>确定</div>
                                     </div>)
                                 }       
                             </ul>
@@ -552,7 +552,7 @@ class GoodNav extends React.Component {
                                 return (<li className={this.state.currentSortIndex==index?"on":""} key={index} onClick={()=>{
                                     this.selectSortFn(item, index)
                                 }}>
-                                    {item.title} {index != 0 && item.sort=="asc" && <ArrowUpOutlined/>} {(index != 0 && item.sort=="desc") && <ArrowDownOutlined />}
+                                    {item.title} {index != 0 && item.sort=="asc"&&<ArrowUpOutlined/>} {(index != 0 && item.sort=="desc")&&<ArrowDownOutlined />}
                                 </li>)
                             })}       
                         </ul>

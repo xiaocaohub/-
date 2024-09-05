@@ -30,7 +30,9 @@ class Show extends React.Component {
                 remark: ""
             },
             // 被选择的商品
-            totalSelectGoodCount: 0
+            totalSelectGoodCount: 0,
+            // 客户信息是否保存
+            isKeep: false
         }
     }
     componentDidMount () {
@@ -69,9 +71,6 @@ class Show extends React.Component {
         })
     }
     changeGoodCountFn = (selectGood)=> {   
-        console.log("selectGood")
-        console.log(selectGood)
-      
         let _this = this; 
         let formData = new FormData();
         let token = getStorageFn("token");
@@ -80,28 +79,35 @@ class Show extends React.Component {
         formData.append("accessId", token);
         formData.append("storeId", 1);
         formData.append("storeType", 6);
-        // formData.append("cartIds", "")
         formData.append("goodsJson", JSON.stringify(goodsJson))
         request({
             url: "/api/gw",         
             method: "POST",    
             data: formData
         }).then((res)=> {
-            // console.log(res.data)
-          
+            // console.log(res.data)     
         })
+    }
+    putCountFn = (e, item, index)=> {
+        let cartArr = this.state.cartArr;
+        let value = e.target.value;
+        item.goods_num = value;
+        cartArr[index] = item;
+        this.setState({
+            cartArr: cartArr
+        })
+    }
+    blurGoodCountFn = (goodItem)=> {
+        console.log(goodItem)
+        this.changeGoodCountFn(goodItem)
     }
     totalAll = ()=> {
         let cartArr = this.state.cartArr;
+     
         let flag = true;
         let totalMoney = 0;
         let totalVol = 0;
         if (cartArr.length>0) {
-            console.log("cartArr totalALl")
-            console.log(cartArr)
-            console.log("cartArr totalALl")
-         
-         
             cartArr.forEach((item,index)=> {
                 if (!item.checked) {
                     flag = false;
@@ -137,9 +143,9 @@ class Show extends React.Component {
         })
     }
     selectGoodFn = (item, index)=> {
+
         let cartArr = this.state.cartArr;
         item.selectFlag = !item.selectFlag;
-    
         cartArr[index] = item;
         setStorageFn("cartArr", cartArr)
         this.selectGoodRequestFn(item.id)
@@ -167,9 +173,8 @@ class Show extends React.Component {
             method: "POST",    
             data: formData
         }).then((res)=> {
-            // console.log(res.data)
+
             if (res.data.data) {
-            //    message.success("删除成功")
                _this.getCartInfoFn()
 
             } else {
@@ -245,9 +250,9 @@ class Show extends React.Component {
             data: formData
         }).then((res)=> {
             let resData = res.data.data.data;
-            console.log("resData cart")
-            console.log(resData)
-            console.log("resData")
+            // console.log("resData cart")
+            // console.log(resData)
+            // console.log("resData")
 
             _this.setState({
                 cartArr: resData
@@ -271,7 +276,6 @@ class Show extends React.Component {
     }
 
     deleteSelectAllFn = ()=> {
-
         let _this = this;
         let cartArr = this.state.cartArr;
         let length = cartArr.length;
@@ -282,7 +286,6 @@ class Show extends React.Component {
                     selectCount += 1;
                 }
             })
-
             if (selectCount > 0) {
                 Modal.confirm({
                     
@@ -293,8 +296,7 @@ class Show extends React.Component {
                     onOk: function () {
                         let deleteIds = "";
                         for (let i=length-1; i>=0; i--) {
-                            if (cartArr[i].selectFlag) {
-                             
+                            if (cartArr[i].selectFlag) {               
                                 deleteIds += cartArr[i].id + ",";
                             }
                         } 
@@ -313,7 +315,6 @@ class Show extends React.Component {
         formData.append("storeId", 1);
         formData.append("storeType", 6);
         formData.append("cartIds", deleteId)
-
         request({
             url: "/api/gw",         
             method: "POST",    
@@ -331,50 +332,49 @@ class Show extends React.Component {
     }
     // 统计被选择的商品
     totleSelectGoodCountFn = ()=> {
-    
         let cartArr = this.state.cartArr;
-      
         let length = cartArr.length;
-       
-       
         let totalSelectGoodCount = 0;
         cartArr.forEach((item)=> {
             if (item.checked) {
                 totalSelectGoodCount += 1;
             }
         })
+
+
         this.setState({
- 
             totalSelectGoodCount: totalSelectGoodCount
         })
     }
 
     goPayFn = ()=> {
     
+        if (!this.state.isKeep) {
+            message.error("请保存客户信息")
+            return ;
+        }
         if (this.state.totalSelectGoodCount > 0) {
-          
             window.location.href = "/checkcart";
         } else {
             message.error("未选择商品")
         }
     }
-
-
-
-
-      // 统计购物车数量
-      totalCartGoodCountFn = ()=> {
+    // 统计购物车数量
+    totalCartGoodCountFn = ()=> {
         let _this = this;
         let formData = new FormData();
         let token = getStorageFn("token");
         formData.append("api", "app.cart.index");    
         formData.append("accessId", token);  
+    
         formData.append("storeId", 1);
         formData.append("storeType", 6);
         request({
             url: "/api/gw",         
             method: "POST",    
+    
             data: formData
+    
         }).then((res)=> {
             let resData = res.data.data.data;
             _this.setState({
@@ -385,6 +385,15 @@ class Show extends React.Component {
                 _this.props.totalCartGoodCountFn(length)
             })
             setStorageFn("cartArr", resData)
+        })
+    }
+    setKeepFn = (flag)=> {
+        console.log("keep  flag")
+        console.log(flag)
+
+        this.setState({
+
+            isKeep: flag
         })
     }
     render () {
@@ -398,9 +407,9 @@ class Show extends React.Component {
                             <div className="search_btn"></div>       
                             <Input className="serach_put"/>
                         </div>
-                        {this.state.cartArr.length>0 && <GoodTable cartArr={this.state.cartArr} totalSelectGoodCount={this.state.totalSelectGoodCount} reduceFn={this.reduceFn} addFn={this.addFn} selectGoodFn={this.selectGoodFn} deleteGoodConfirmFn={this.deleteGoodConfirmFn}></GoodTable>}
+                        {this.state.cartArr.length>0 && <GoodTable cartArr={this.state.cartArr} totalSelectGoodCount={this.state.totalSelectGoodCount} reduceFn={this.reduceFn} addFn={this.addFn} selectGoodFn={this.selectGoodFn} deleteGoodConfirmFn={this.deleteGoodConfirmFn} putCountFn={this.putCountFn} blurGoodCountFn={this.blurGoodCountFn}></GoodTable>}
             
-                        <UserInfo userInfo={this.props.state.cartState.userInfo} detailAdressFn={this.detailAdressFn} changeInfo={this.changeInfoFn}></UserInfo>
+                        <UserInfo userInfo={this.props.state.cartState.userInfo} detailAdressFn={this.detailAdressFn} changeInfo={this.changeInfoFn} setKeepFn={this.setKeepFn}></UserInfo>
                     </Col>
                     <Col span={3}></Col>
                 </Row>

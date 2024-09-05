@@ -1,23 +1,55 @@
 .productroom_detail_page .design_con{
     overflow:hidden;
     position:relative;
+  
+}
+.productroom_detail_page .design_con .same_kind_good{
+    width:14.3%;
+    float:left;
+    overflow:hidden;
+    margin-left:1.74%;
+    font-size:14px;
+ 
+}
+.productroom_detail_page .design_con .same_kind_good:first-child{
+    margin-left:0;
+}
+.productroom_detail_page .design_con .same_kind_good .img{
+    display:block;
+
+    width:100%;
+}
+
+.productroom_detail_page .design_con .same_kind_good .txt{
+    height:15px;
+    line-height:15px; 
+    overflow:hidden;
+    text-overflow: ellipsis;
+    text-wrap: nowrap;
+    margin:15px 0 5px;
+    color:#333;
+}
+.productroom_detail_page .design_con .same_kind_good .price{
+    height:17px;
+    line-height:17px;
+    overflow:hidden;
+    color:#E61D40;
 }
 .productroom_detail_page .design_con .add_icon{
     float:left;
-    margin-top:6.5%;
-
+    /* margin-top:4.5%;
+    margin-left:1%; */
     margin-left:1%;
     position: absolute;
-    left:17%;
-    top:50%;
 
-    
-    margin-top:-13px;
-
+    left:15%;
+    top:35%;
     z-index:15;
 }
 .productroom_detail_page .design_con .banner_con{
-    width:61.5%;
+    /* width:61.5%; */
+    width:55.5%;
+  
     margin-left:2.9%;
 
     float:left;
@@ -30,7 +62,7 @@
 
     height:25px;
     position:absolute;
-    top:50%;
+    top:42%;
     margin-top:-12px;
     cursor:pointer;
     z-index:15;
@@ -38,12 +70,12 @@
 
 
 .productroom_detail_page .design_con .banner_con .small_left{
-    left:0;
+    left:16px;
     background:url("../../../assets/icon/small_left.png") no-repeat center;
 }
 
 .small_right{
-    right:0;
+    right:32px;
     background:url("../../../assets/icon/small_right.png") no-repeat center;
 }
 
@@ -58,16 +90,19 @@
     width:17%;
 }
 .productroom_detail_page .design_con .good_list{
-    padding:0 5%;
+    padding:0 3%;
     margin-left:1%;
     overflow:hidden;
+
+ 
 }
 .design_good{
-    width:27%;    
+    width:26%;    
     float:left;
-    margin-left:2%;
+    margin-left:3%;
     overflow: hidden;
     position:relative;
+ 
 }
 
 .design_good .img{
@@ -100,7 +135,12 @@
 }
 .productroom_detail_page .design_con .total_con{
     width:15%;
-    float:right;
+    float:left;
+
+    margin-left:2.8%;
+
+
+ 
 }
 
  
@@ -142,7 +182,7 @@
     color:#fff;
     margin-top:12px;
 
-    border-radius:5px;
+    border-radius:6px;
     cursor:pointer;
 }
 
