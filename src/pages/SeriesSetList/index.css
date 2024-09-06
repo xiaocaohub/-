@@ -24,7 +24,7 @@
    text-align:center;
 }
 .series_list_page .banner_con .banner_text .title{
-  height:11%;
+ 
   
   color:#fff;
   font-size:2em;
@@ -62,6 +62,7 @@
 .series_list_page .good_list{
    overflow:hidden;
    margin-top:50px;
+   padding-bottom:3px;
 }
 .series_list_page .page{
    display:block;

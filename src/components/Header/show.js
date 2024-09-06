@@ -51,10 +51,10 @@ function Header () {
                        })}
                     </ul>
              
-                    <Badge count={5} className="cart_logo" offset={[-10, 0]}>
-                        <Link to="/cart">
+                    <Badge count={5} className="cart_logo" offset={[-15, -10]}>
+                        {/* <Link to="/cart">
                             <img src={topcart}/>      
-                        </Link>
+                        </Link> */}
                     </Badge>
                     <div className="search_con">
                         <div className="btn"></div>

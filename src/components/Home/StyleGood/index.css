@@ -7,7 +7,6 @@
     background:#fff;
     border:1px solid transparent;
     border-radius:10px;
-  
 }
 .style_good:nth-child(3n+1) {
     margin-left:0;
@@ -30,8 +29,10 @@
     width:75%;
     font-size:18px;
     float:left;
-    font-weight:bold;
+ 
 }
+
+
 
 
 
@@ -39,12 +40,11 @@
     height:21px;
     line-height:21px;
     overflow:hidden;
- 
+
     text-transform: uppercase;
 }
 
-.style_good .good_bottom .text_con .price{
-   
+.style_good .good_bottom .text_con .price{   
     height:28px;
     line-height:28px;
     font-size:28px;

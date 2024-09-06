@@ -499,9 +499,13 @@ class GoodNav extends React.Component {
                         </ul>
  
                         {/*  <div className="slect_more">+多选</div> */}
-                        {this.state.categoryUlShowFlag && <div className="show_btn" onClick={this.categoryUlShowFn}>  展开 <DownOutlined /></div>} 
+                        {/* {this.state.categoryUlShowFlag && <div className="show_btn" onClick={this.categoryUlShowFn}>  展开 <DownOutlined /></div>} 
 
-                        {!this.state.categoryUlShowFlag && <div className="show_btn" onClick={this.categoryUlShowFn}>收起 <UpOutlined /></div>} 
+                        {!this.state.categoryUlShowFlag && <div className="show_btn" onClick={this.categoryUlShowFn}>收起 <UpOutlined /></div>}  */}
+                 
+                 
+                        {this.state.categoryUlShowFlag && <div className={this.state.categoryUlShowFlag?"show_btn on":"show_btn"} onClick={this.categoryUlShowFn}>  展开 </div>} 
+                        {!this.state.categoryUlShowFlag && <div className={this.state.categoryUlShowFlag?"show_btn on":"show_btn"} onClick={this.categoryUlShowFn}>收起 </div>} 
                     </div>
 
                     

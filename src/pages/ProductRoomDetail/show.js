@@ -19,12 +19,12 @@ class Show extends React.Component {
         this.state = {
             designCurrentIndex: 0,
             designSameNav: [
+                // {
+                //     id: 0,
+                //     title: "设计搭配"
+                // },
                 {
                     id: 0,
-                    title: "设计搭配"
-                },
-                {
-                    id: 1,
                     title: "同类推荐"
                 }
             ],
@@ -309,8 +309,8 @@ class Show extends React.Component {
                                 })}
                             </ul>
 
-                            {this.state.designCurrentIndex == 0 && <Design></Design>}
-                            {this.state.designCurrentIndex == 1 &&  this.state.sameGoodArr.length>0 && <SameKind sameGoodArr={this.state.sameGoodArr}></SameKind>}
+                            {/* {this.state.designCurrentIndex == 0 && <Design></Design>} */}
+                            {this.state.designCurrentIndex == 0 &&  this.state.sameGoodArr.length>0 && <SameKind sameGoodArr={this.state.sameGoodArr}></SameKind>}
                         </div>
                     </Col>
                     

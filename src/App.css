@@ -1,4 +1,8 @@
 body{
-    padding-top:162px;
+    padding-top:151px;
     background:#F0F0F0;
+}
+::-webkit-input-placeholder{
+
+    color: #BBB;
 }

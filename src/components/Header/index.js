@@ -62,9 +62,9 @@ function Header () {
     }, [storeData.commonState.goodCount])
 
     function getGoodListFn () {
-        console.log("storeData-------------")
-        console.log(storeData.commonState.goodCount)
-        console.log("storeData---------")
+        // console.log("storeData-------------")
+        // console.log(storeData.commonState.goodCount)
+        // console.log("storeData---------")
         let goodCount = storeData.commonState.goodCount;
         setGoodCountFn(goodCount)
     }

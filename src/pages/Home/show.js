@@ -20,10 +20,12 @@ import {setStorageFn, getStorageFn} from "../../utils/localStorage";
 import {scrollTopFn} from "../../utils/imgAuto";
 import titleImg  from "../../assets/index_title.png";
 
+import titleImg2 from "../../assets/index_title2.png";
 import request from "../../api/request";
+import EmptyPage from "../../components/Empty";
+
 class Show extends React.Component {
     constructor (props) {
-
         super(props)
         this.state = {
             styleNav: [
@@ -34,9 +36,8 @@ class Show extends React.Component {
             styleGoodArr: [],
             showCartFlag: false, // 全局
 
-            hotSellArr: [], // 热销爆款
 
-            
+            hotSellArr: [], // 热销爆款
             recomendGoodArr: [] // 品推荐
         }
     }
@@ -129,13 +130,14 @@ class Show extends React.Component {
         let storeId = getStorageFn("storeId") || 1;
         let storeType = getStorageFn("storeType") || 6;
         let styleId = this.state.styleId;
-       
         formData.append("api", "app.product.listProduct"); 
         formData.append("storeId", storeId);
         formData.append("storeType", storeType);
         formData.append("page", 1);
         formData.append("pageSize", 6);
         // formData.append("productLabel", 102);
+
+
         formData.append("styleIds", styleId);
         getStyleGoodArrApi(formData).then((res)=>{
             let goodArr = res.data.data.goodsList;
@@ -156,13 +158,13 @@ class Show extends React.Component {
         formData.append("storeType", 6);
         request({
             url: "/api/gw",         
+
             method: "POST",    
             data: formData
-
         }).then((res)=> {
-            let resData = res.data.data.data;
- 
+            let resData = res.data.data.data; 
             resData.forEach((item, index)=>{
+
                 item.selectFlag = false;
             })
             setStorageFn("cartArr", resData)
@@ -214,29 +216,31 @@ class Show extends React.Component {
                     <img src={titleImg} alt=""/>
                 </div>
 
-                <VedioBanner></VedioBanner>                  
-                <div className="recommend_text_con">
-                    <div className="txt">年轻态 轻生活</div>
-                    <div className="title">NEW ARRIVALS</div>
-                    <div className="big_title">新品推荐</div>
-                </div>
+                <VedioBanner></VedioBanner>        
 
                 {/* 品推荐 */}
-                <div className="recommend_good_con">
-                    <Row>
-                        <Col span={3}></Col>
-                        <Col span={18}>                        
-                            <ul className="recommend_good_list">
-                                {this.state.recomendGoodArr.length>0 && this.state.recomendGoodArr.map((item, index)=>{                      
-                                    return (<Good goodInfo={item} key={item.id}></Good>)
-                                })}
-                            </ul>
-                            <div className="more_btn">搜索更多</div>
-                        </Col>
+                <div className="recommend_good_list_con">        
+                    <div className="recommend_text_con">
+                        <img src={titleImg2} className="title_img" alt=""/>
+                    </div>
+          
+                    <div className="recommend_good_con">
+                        <Row>
+                            <Col span={3}></Col>
+                            <Col span={18}>                        
+                                <ul className="recommend_good_list">
+                                    {this.state.recomendGoodArr.length>0 && this.state.recomendGoodArr.map((item, index)=>{                      
+                                        return (<Good goodInfo={item} key={item.id}></Good>)
+                                    })}
+                                </ul>
+                                <div className="more_btn">搜索更多</div>
+                            </Col>
 
-                        <Col span={3}></Col>
-                    </Row>
-                </div>
+
+                            <Col span={3}></Col>
+                        </Row>
+                    </div>
+                </div>  
 
                 {this.state.hotSellArr.length>0 && <HotSelling hotSellArrData={this.state.hotSellArr}></HotSelling>}
 
@@ -259,12 +263,12 @@ class Show extends React.Component {
                                 })}
                              
                             </ul>
+            
+                            {this.state.styleGoodArr.length==0 && <EmptyPage></EmptyPage>}
                         </div>
                     </Col>
                     <Col span={3}></Col>
                 </Row>
-            
-
             
                 {this.props.state.commonState.showCartFlag && <SmallCart hideSmallCart={this.props.hideSmallCartFn} totalCartGoodCountFn={this.totalCartGoodCountFn}></SmallCart>}
             </div>

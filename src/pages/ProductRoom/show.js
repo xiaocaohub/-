@@ -12,6 +12,8 @@ import request from "../../api/request";
 import SmallCart from "../../components/SmallCart";
 import {getStorageFn,setStorageFn} from "../../utils/localStorage";
 import {scrollTopFn} from "../../utils/imgAuto";
+import EmptyPage from "../../components/Empty";
+
 class Show extends React.Component {
     constructor (props) {
         super(props)
@@ -165,10 +167,12 @@ class Show extends React.Component {
                     <GoodNav getGoodListFn={this.getGoodListFn} total={this.state.total}></GoodNav>
 
                     <ul className="product_list">
-                        {this.state.goodList.map((item)=> {
+                        {this.state.goodList.length>0 && this.state.goodList.map((item)=> {
                             return (<Good key={item.id} itemData={item}></Good>)
                         })}
                     </ul>
+                    
+                    {this.state.goodList.length == 0 && <EmptyPage></EmptyPage>}
 
                     <div className="page_con">    
                         <ConfigProvider locale={zh_CN}>

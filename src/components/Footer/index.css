@@ -20,6 +20,7 @@
 .footer_con .footer_content .left .logo_con{
    overflow:hidden;
    position:relative;
+  
 }
 
 
@@ -29,13 +30,15 @@
    display:block;
 }
 .footer_con .footer_content .left .logo_con  .tit{
-   float:right;
- 
    position:absolute;
+   height: 14px;
+   line-height: 14px;
    right:0;
    bottom:0;
 
+
    font-size:12px;
+ 
 }
 .footer_con  .icon_list{
 
@@ -44,6 +47,7 @@
    border-top:1px solid #999;
    margin-top:29px;
    padding-top:29px;
+ 
 }
 
 .footer_con  .icon_list > li{
@@ -55,6 +59,7 @@
    overflow:hidden;
    margin-bottom:20px;
    color:#999;
+   font-size: 16px;
 }
 
 .footer_con  .icon_list > li .icon{
@@ -65,7 +70,9 @@
 }
 
 .footer_con  .info_list {
-    margin-top:20px;
+    margin-top:29px;
+    margin-bottom:20px;
+    color: #999;
 }
 .footer_con  .info_list > li{
     overflow:hidden;
@@ -85,6 +92,7 @@
     display:flex;
     flex-direction:row;
     justify-content:space-between;
+    color: #999;
 }
 .footer_con  .code_list > li{
     width:23%;
@@ -107,6 +115,7 @@
     background:#343434;
     text-align:center;
     color:#999;
+    font-size:12px;
 }
 .footer_con  .copy .copy_number{
     color:#999;

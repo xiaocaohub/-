@@ -8,7 +8,7 @@ import banner from "../../assets/seriesset_list.png";
 
 import GoodNav from "../../components/SeriesSetList/GoodNav";
 import request from "../../api/request";
-
+import EmptyPage from "../../components/Empty";
 import "./index.css";
 class Show extends React.Component {
     constructor (props) {
@@ -114,7 +114,7 @@ class Show extends React.Component {
                             })}
                         </div>
 
-
+                        {this.state.goodList.length==0 && <EmptyPage></EmptyPage>}
                         <Pagination showQuickJumper defaultCurrent={1} total={this.state.total} className="page"/>
                     </Col>
                     <Col span={3}></Col>
