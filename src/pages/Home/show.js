@@ -202,10 +202,11 @@ class Show extends React.Component {
         })
     }
     render () {
-        return (            
+        return (          
+
             <div className="main_content" onClick={this.getStyleGoodArrFn}>
                 <BannerCon></BannerCon>
-                 
+                     
                 {/* 热销爆款 */}
                 {this.state.hotSellArr.length>0 && <HotSell hotSellArrData={this.state.hotSellArr}></HotSell>}
 

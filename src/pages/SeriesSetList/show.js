@@ -96,7 +96,7 @@ class Show extends React.Component {
 
                     <Col span={18}>
                         <div className="banner_con">
-                            <img src={banner} alt="" className="banner"/>
+                            <img src={this.state.brandInfo.brand_image} alt="" className="banner"/>
                             <div className="banner_text">
                                 <div className="title">{this.state.brandInfo?this.state.brandInfo.brand_name:"---"}</div>
                                 <div className="txt">{this.state.brandInfo?this.state.brandInfo.brand_introduce:"---"}</div>

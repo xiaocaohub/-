@@ -45,20 +45,12 @@ class Show extends React.Component {
         formData.append("key", "");
 
         formData.append("pageSize", 10);
-        
         getStyleApi(formData).then((res)=>{  
-        
             let styleArr = res.data.data.list;
             // let styleId = styleArr[0].value;
             let item = {id: 0, text:"全部", value: ""};
             styleArr.unshift(item);
-            
             let styleId = "";
-            console.log("styleArr")
-          
-
-           
-
             this.setState({
                 styleNav: styleArr,
                 styleId: styleId
@@ -70,12 +62,10 @@ class Show extends React.Component {
     styleNavSelectFn = (index)=> {
         let styleNav = this.state.styleNav;
         let item = styleNav[index];
-
         this.setState({ 
             styleIndex: index,
             styleId: item.value
         }, function () {
-           
             this.getStyleGoodArrFn()
         })
     }
@@ -85,7 +75,6 @@ class Show extends React.Component {
         let storeType = getStorageFn("storeType") || 6;
         let styleId = this.state.styleId;
         formData.append("api", "app.product.getBrands"); 
-
         formData.append("storeId", storeId);
         formData.append("storeType", storeType);
         formData.append("page", 1);
@@ -104,8 +93,8 @@ class Show extends React.Component {
         })
     }
     // 统计购物车数量
+
     totalCartGoodCountFn = ()=> {
-    
         let _this = this;
         let formData = new FormData();
         let token = getStorageFn("token");
@@ -115,17 +104,12 @@ class Show extends React.Component {
         formData.append("storeType", 6);
         request({
             url: "/api/gw",         
-        
-            method: "POST",    
-        
-        
+            method: "POST",
             data: formData
         }).then((res)=> {
             let resData = res.data.data.data;
             _this.setState({
-            
                 cartArr: resData
-            
             },function () {
                 let cartArr = _this.state.cartArr;
                 let length = cartArr.length;
@@ -136,12 +120,10 @@ class Show extends React.Component {
     }
     render () {
         return (
-
            <Row className="series_con">
                 <Col span={3}></Col>
                 <Col span={18}>    
                     <div className="banner_con">
-
                         <img src={bannerImg} alt="" className="banner_img"/>
                         {/* <div className="text_con">
                             <div className="title">A MASIVE PRODUCT SUPPLY SYSTEM</div>
