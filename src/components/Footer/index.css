@@ -73,6 +73,7 @@
     margin-top:29px;
     margin-bottom:20px;
     color: #999;
+    font-size: 16px;
 }
 .footer_con  .info_list > li{
     overflow:hidden;
@@ -121,6 +122,10 @@
     color:#999;
     margin-right:29px;
     margin-left:10px;
+    text-decoration: none;
+}
+.footer_con  .copy .copy_number:hover{
+    color:#C6A189;
 }
 .footer_con  .copy .icon{
     margin-right:16px;

@@ -290,7 +290,7 @@ class UserInfo extends React.Component {
                                    return (<Option value={item.value}>{item.label}</Option>)
                                 })}                            
                             </Select>
-
+                            
 
  
                             <Select
@@ -300,20 +300,17 @@ class UserInfo extends React.Component {
                                 onChange={this.selectCityFn}   
                                 value={this.state.userInfoDetail.city}           
                             >    
-                       
-                               
-                               
-                               
                                 {this.state.userInfoDetail.cityList.length>0 && this.state.userInfoDetail.cityList.map((item, index)=>{
                                     return (<Option value={item.value} key={index}>{item.label}</Option>)
                                 })}
                             </Select>
 
+
+
                             <Select
                                 labelInValue
                                 defaultValue={{ key: '请选择' }}                            
                                 style={{ width:210, marginLeft: 20}}
-
                                 value={ this.state.userInfoDetail.area }
                                 onChange={this.selectAreaFn}
                             >
@@ -323,8 +320,6 @@ class UserInfo extends React.Component {
                         
                             </Select>
                         </Form.Item>
-
-
 
                         <Form.Item label="详细地址">
                             <Input style={{ width:670, marginLeft:20}} value={this.state.userInfoDetail.detailAdress} onChange={this.detailAdressFn}/> 
@@ -336,15 +331,11 @@ class UserInfo extends React.Component {
 
                     
                         <Form.Item label="手机号" >
-
                             <Input style={{ width:670, marginLeft:20}} value={this.state.userInfoDetail.phone} onChange={this.phoneFn}/> 
-                    
-                    
                         </Form.Item>
     
                         <Form.Item label="备注">
                             <TextArea rows={5} style={{ width:670, marginLeft: 20}} value={this.state.userInfoDetail.remark} onChange={this.remarkFn}/>
-                    
                         </Form.Item>
 
                         <Form.Item {...tailFormItemLayout}>
@@ -360,22 +351,20 @@ class UserInfo extends React.Component {
                     </div>
 
                     <ul className="user_info_text">
-
-                        <li><span className="tit">收 货 人:</span>{this.state.userInfoDetail.recipient} <div className="change_btn" onClick={this.changeFn}>修改</div></li>
-                        <li><span className="tit">联系电话:</span>{this.state.userInfoDetail.phone}</li>
-                        <li><span className="tit">收货地址:</span>
-                      
-                            {  this.state.userInfoDetail.province }       
-                            {  this.state.userInfoDetail.city }
-                            { this.state.userInfoDetail.area }
-                            
-                            { this.state.userInfoDetail.detailAdress }
+                        <li><span className="title_tit">收 货 人:</span><span className="title_txt">{this.state.userInfoDetail.recipient}</span> <div className="change_btn" onClick={this.changeFn}>修改</div></li>
+                        <li><span className="title_tit">联系电话:</span><span className="title_txt">{this.state.userInfoDetail.phone}</span></li>
+                        <li><span className="title_tit">收货地址:</span>
+                            <span className="title_txt">
+                                {  this.state.userInfoDetail.province }       
+                                {  this.state.userInfoDetail.city }
+                                { this.state.userInfoDetail.area }
+                                { this.state.userInfoDetail.detailAdress }
+                            </span>
                         </li>
 
                         <li>
-                            <span className="tit">备 注:</span>
-
-                            <div className="txt_remark">{this.state.userInfoDetail.remark }</div>    
+                            <span className="title_tit">备 注:</span>
+                            <span className="title_txt">{this.state.userInfoDetail.remark }</span>    
                         </li>
                     </ul>
                 </div>

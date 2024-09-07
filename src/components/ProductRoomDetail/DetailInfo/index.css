@@ -1,6 +1,6 @@
 .productroom_detail_page .detail_info_con{
     background:#FFF;
-    margin-top:20px;
+    margin-top:10px;
     padding:20px;
     overflow:hidden;
     border-top-left-radius: 10px;
@@ -232,6 +232,7 @@
 .productroom_detail_page  .detail_info .right .specifications_con .code_con{
     float:left;
     padding:6px 25px 3px 5px;
+    font-size: 14px;
     /* background:url("../../../assets/icon/icon_copy.png") no-repeat center right; */
 }
 .productroom_detail_page  .detail_info .right .specifications_con .download_btn{

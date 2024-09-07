@@ -6,3 +6,10 @@ body{
 
     color: #BBB;
 }
+.content_common_width{
+    max-width: 1360px;
+    width:85%;
+    margin:0 auto;  
+    overflow: hidden;
+}
+

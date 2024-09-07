@@ -23,6 +23,7 @@
 .product_nav_con .select_nav_con{
     float:left;
     margin-left:12px;
+    margin-top: 2px;
 }
 .product_nav_con .select_nav_con .clear_all{
     width:65px;
@@ -35,6 +36,9 @@
     border-radius:5px;
     overflow:hidden;
     cursor:pointer;
+
+
+    font-size: 14px;
 }
 
 .product_nav_con .select_nav_con .select_nav_item{ 
@@ -48,6 +52,7 @@
    border-radius:5px;
    border:1px solid #E8A468;
    cursor:pointer;
+   font-size: 14px;
 }
 
 .product_nav_con .good_nav{ 
@@ -93,6 +98,8 @@
     width:76%;
     float:left;
     margin-left: 11.5%;
+
+    padding-bottom: 5px;
 }
 .product_nav_con .good_nav .nav_list_con .nav_list.category_ul_on{
     height: 50px;
@@ -101,7 +108,7 @@
 }
 .product_nav_con .good_nav .nav_list_con.on{
     border:1px solid  #E8A468;
-    padding-right:15px;
+    /* padding-right:15px; */
 }
 .product_nav_con .good_nav .nav_list_con .nav_list > li{
     float:left;
@@ -154,12 +161,10 @@
 }
 .product_nav_con .good_nav .nav_list .btn_group .cancel_btn{
     color:#999;
-    border:1px solid transparent;
-}
-
-.product_nav_con .good_nav .nav_list .btn_group .cancel_btn:hover{
     border:1px solid #999;
 }
+
+
 
 
 
@@ -244,6 +249,7 @@
     cursor:pointer;
     color: #666;
     background: #f8f8f8;
+    font-size: 14px;
    
 }
 .product_nav_con .sort_con .sort_list_con .sort_list li.on{
@@ -257,6 +263,7 @@
 
 .product_nav_con .sort_con .sort_list_con .filter_sort > li{
     margin-left:4%;
+    font-size: 14px;
 }
 
 

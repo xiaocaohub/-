@@ -48,7 +48,6 @@
 }
 .check_cart_page .good_table .good_list > li{
     height:80px;
-
     padding:20px 0;
     overflow:hidden;
     border-top:1px solid #E1E1E1;
@@ -87,26 +86,25 @@
 .check_cart_page .good_table .good_list  .info .intro .txt{
     max-height:31px;
     line-height:15px;
-    font-size:12px;
+    font-size:14px;
     overflow:hidden;
 }
 
 .check_cart_page .good_table .good_list  .info .intro .size{
-
     max-height:31px;
     line-height:15px;
     margin-top:10px;
     color:#666;
+    font-size: 14px;
     overflow:hidden;
 }
-
-
 
 .check_cart_page .good_table .good_list .good_code{
     width:25%;
     line-height:80px;    
     text-align:center;
     overflow:hidden;
+    font-size: 14px;
 }
 
 .check_cart_page .good_table .good_list .vol{
@@ -114,32 +112,35 @@
     line-height:80px;
     text-align:center;
     overflow:hidden;
+    font-size: 14px;
 }
 .check_cart_page .good_table .good_list .price{
     width:10%;
     line-height:80px;
     text-align:center;
     overflow:hidden;
+    font-size: 14px;
 }
 .check_cart_page .good_table .good_list .count_con{
-   
     width:8%;
-
     line-height:80px;
     text-align:center;
+    font-size: 14px;
 }
 
  
 .check_cart_page .good_table .good_list .sub_total{
     width:13%;
     line-height:80px;
-
-
     text-align:center;
     color:#E61D40;
     overflow:hidden;
+    font-size: 14px;
 }
 
+.check_cart_page .remark_con{
+    overflow: hidden;
+}
 .check_cart_page .remark_con .title{
    width:9.5%;
    font-size:14px;

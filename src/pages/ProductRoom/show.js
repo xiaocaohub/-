@@ -108,25 +108,6 @@ class Show extends React.Component {
             })
         })
     }
-
-    // getSpaceNavFn = ()=> {
-    //     let _this = this;
-    //     let formData = new FormData();
-    //     formData.append("api", "app.product.getSpaceClassList");
-    //     formData.append("storeId", 1);
-    //     formData.append("storeType", 6);
-    //     request({
-    //         url: "/api/gw",
-    //         method: "POST",
-    //         data: formData
-    //     }).then((res)=> {
-    //         let resData =  res.data.data;
-    //         _this.setState({
-    //             spaceNavArr: resData
-    //         })
-    //     })
-    // }
-
     // 统计购物车数量
     totalCartGoodCountFn = ()=> {
     
@@ -138,18 +119,14 @@ class Show extends React.Component {
         formData.append("storeId", 1);
         formData.append("storeType", 6);
         request({
-            url: "/api/gw",         
-        
+    
+            url: "/api/gw",             
             method: "POST",    
-        
-        
             data: formData
         }).then((res)=> {
             let resData = res.data.data.data;
             _this.setState({
-            
                 cartArr: resData
-            
             },function () {
                 let cartArr = _this.state.cartArr;
                 let length = cartArr.length;
@@ -160,14 +137,13 @@ class Show extends React.Component {
     }
     render () {
         return (
-            <Row className="product_room_con">           
-                <Col span={3}></Col>
-                
-                <Col span={18}>
+            <div className="product_room_con">           
+                <div className="content_common_width">
                     <GoodNav getGoodListFn={this.getGoodListFn} total={this.state.total}></GoodNav>
-
                     <ul className="product_list">
+
                         {this.state.goodList.length>0 && this.state.goodList.map((item)=> {
+                        
                             return (<Good key={item.id} itemData={item}></Good>)
                         })}
                     </ul>
@@ -201,10 +177,10 @@ class Show extends React.Component {
                                 />
                         </ConfigProvider>
                     </div>
-                </Col>
-                <Col span={3}></Col>
+                </div>
+             
                 {this.props.state.commonState.showCartFlag && <SmallCart hideSmallCart={this.props.hideSmallCartFn} totalCartGoodCountFn={this.totalCartGoodCountFn}></SmallCart>}
-            </Row>
+            </div>
         )
     }
 }

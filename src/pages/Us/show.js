@@ -97,10 +97,8 @@ class Show extends React.Component {
             return (
                 <div className="us_page_con">
                     <img src={bannerImg} className="banner_img"/>
-                    <Row>
-                        <Col span={3}></Col> 
-    
-                        <Col span={18}>
+                    <div>
+                        <div className="content_common_width">
                             <div className="intro_text">
                                 <div className="text_con">
                                     <div className="title">珞珂是谁</div>
@@ -201,15 +199,15 @@ class Show extends React.Component {
                                     </li>
                                 </ul>
                             </div> */}
-                        </Col>
-                    </Row>
+                        </div>
+                    </div>
 
 
 
 
-                    <Row className="brand_con">
-                        <Col span={3}></Col>
-                        <Col span={18}>
+                    <div className="brand_con">
+                      
+                        <div className="content_common_width">
                                 <img src={brandTitle1} alt="" className="title_img"/>
                                 <ul className="brand_list">
                                     <li>
@@ -222,13 +220,13 @@ class Show extends React.Component {
                                         <img src={brandList3} alt="" />
                                     </li>
                                 </ul>
-                        </Col>
-                        <Col span={3}></Col>
-                    </Row>
+                        </div>
+                       
+                    </div>
 
-                    <Row className="brand_total_con">                       
-                        <Col span={3}></Col>
-                        <Col span={18}>
+                    <div className="brand_total_con">                       
+                   
+                        <div className="content_common_width">
                             <ul className="total_list">
                                 <li>
                                     <div className="title">10年</div>
@@ -252,27 +250,27 @@ class Show extends React.Component {
                                     <div className="tit">高质量产品</div>
                                 </li>
                             </ul>
-                        </Col>
-                        <Col span={3}></Col>
-                    </Row>
+                        </div>
+                  
+                    </div>
 
-                    <Row className="compete_con">
+                    <div className="compete_con">
 
-                        <Col span={3}></Col>
-                        <Col span={18}>                           
+                      
+                        <div className="content_common_width">                           
                             <img src={coreCompetence} alt="" />
-                        </Col>
-                        <Col span={3}></Col>
-                    </Row>
+                        </div>
+                       
+                    </div>
 
 
-                    <Row className="product_text_con">
-                        <Col span={3}></Col>
-                        <Col span={18} >
+                    <div className="product_text_con">
+                        
+                        <div className="content_common_width">
                              <img src={productAdvantages} alt=""/>
-                        </Col>
-                        <Col span={3}></Col>
-                    </Row>
+                        </div>
+                       
+                    </div>
                     {/* {this.state.vedioShadowFlag && <VedioShadow index={this.state.currentVedioIndex} closeFn={this.closeVedioFn}/>} */}
                     
                     {this.props.state.commonState.showCartFlag && <SmallCart hideSmallCart={this.props.hideSmallCartFn} totalCartGoodCountFn={this.totalCartGoodCountFn}></SmallCart>}

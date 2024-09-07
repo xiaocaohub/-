@@ -170,29 +170,25 @@ class Show extends React.Component {
                 </div>
 
            
-                <Row className="room_list_con">
-                    <Col span={3}></Col>
-                    <Col span={18}>
-                        <ul className="room_list">
-                            {this.state.roomList.map((item,index)=>{
-                                return (
-                                    <li key={item.id}>
-                                        <img src={item.imgSrc} alt="" className="room_img"/>
-                                        {/* <div className="text_con">
-                                            <div className="title">{item.title}</div>
-                                            <div className="txt">{item.txt}</div>
-                                        </div> */}
-                                    </li>
-                                )
-                            })}
-                        </ul>
-                    </Col>
-                    <Col span={3}></Col>
-                </Row>
+                <div className="room_list_con">
+                    <ul className="room_list content_common_width">
+                        {this.state.roomList.map((item,index)=>{
+                            return (
+                                <li key={item.id}>
+                                    <img src={item.imgSrc} alt="" className="room_img"/>
+                                    {/* <div className="text_con">
+                                        <div className="title">{item.title}</div>
+                                        <div className="txt">{item.txt}</div>
+                                    </div> */}
+                                </li>
+                            )
+                        })}
+                    </ul>
+                </div>
 
-                <Row>
-                    <Col span={3}></Col>
-                    <Col span={18} >
+                <div>
+                    
+                    <div className="content_common_width" >
                         <div className="big_room_con">
                             <RoomBanner bannerData={this.state.roomBannerArr[0]}></RoomBanner>
                             <ul className="good_list">
@@ -223,9 +219,9 @@ class Show extends React.Component {
                                  })}
                             </ul>
                         </div>
-                    </Col>
-                    <Col span={3}></Col>
-                </Row>
+                    </div>
+                
+                </div>
                 {this.props.state.commonState.showCartFlag && <SmallCart hideSmallCart={this.props.hideSmallCartFn} totalCartGoodCountFn={this.totalCartGoodCountFn}></SmallCart>}
             </div>
         )

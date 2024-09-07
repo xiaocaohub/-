@@ -133,7 +133,8 @@ class Show extends React.Component {
         let cartArr = this.state.cartArr;
         let count = 0;
         cartArr.forEach((item, index)=> {
-            if (item.selectFlag) {
+            
+            if (item.checked == 1) {
                 count += 1;
             }
         })
@@ -388,48 +389,38 @@ class Show extends React.Component {
         })
     }
     setKeepFn = (flag)=> {
-        console.log("keep  flag")
-        console.log(flag)
-
         this.setState({
-
             isKeep: flag
         })
     }
     render () {
         return (    
             <div className="cart_page_con">
-                <Row>
-                    <Col span={3}>  </Col>
-                    <Col span={18}>
-                         <div className="search_con">
-                            <div className="title">普通购买</div>
-                            <div className="search_btn"></div>       
-                            <Input className="serach_put"/>
-                        </div>
-                        {this.state.cartArr.length>0 && <GoodTable cartArr={this.state.cartArr} totalSelectGoodCount={this.state.totalSelectGoodCount} reduceFn={this.reduceFn} addFn={this.addFn} selectGoodFn={this.selectGoodFn} deleteGoodConfirmFn={this.deleteGoodConfirmFn} putCountFn={this.putCountFn} blurGoodCountFn={this.blurGoodCountFn}></GoodTable>}
-            
-                        <UserInfo userInfo={this.props.state.cartState.userInfo} detailAdressFn={this.detailAdressFn} changeInfo={this.changeInfoFn} setKeepFn={this.setKeepFn}></UserInfo>
-                    </Col>
-                    <Col span={3}></Col>
-                </Row>
-                <Row className="total_con">
-                    <Col span={3}></Col>
-                    <Col span={18}>
+                <div className="content_common_width">
+                        <div className="search_con">
+                        <div className="title">普通购买</div>
+                        <div className="search_btn"></div>       
+                        <Input className="serach_put"/>
+                    </div>
+                    {this.state.cartArr.length>0 && <GoodTable cartArr={this.state.cartArr} totalSelectGoodCount={this.state.totalSelectGoodCount} reduceFn={this.reduceFn} addFn={this.addFn} selectGoodFn={this.selectGoodFn} deleteGoodConfirmFn={this.deleteGoodConfirmFn} putCountFn={this.putCountFn} blurGoodCountFn={this.blurGoodCountFn}></GoodTable>}
+        
+                    <UserInfo userInfo={this.props.state.cartState.userInfo} detailAdressFn={this.detailAdressFn} changeInfo={this.changeInfoFn} setKeepFn={this.setKeepFn}></UserInfo>
+                </div>
+             
+                <div className="total_con">    
+                    <div className="content_common_width total_con_content">
                         <div className={this.state.selectAllFlag?"item select_all on":"item select_all"} onClick={this.selectAllFn}>全选</div>
-                        <div className="item delete_all" onClick={this.deleteSelectAllFn}>删除选中商品</div>
-                                    
+                        
+                        <div className="item delete_all" onClick={this.deleteSelectAllFn}>删除选中商品</div>            
                         <div className="item total_count">已选<span className="count"> {this.state.totalCount} </span>件商品</div>
                         {/* <Link to="/checkcart" className="pay_btn">去结算</Link> */}
                         <div className="pay_btn" onClick={this.goPayFn}>去结算</div>
                         {/* <div className="item total_money">￥{this.state.totalMoney}</div>
                         <div className="item total_money_tit">应付总额 </div> */}
-               
                         <div className="item good_money">商品总额: ￥{this.state.totalMoney}</div>
                         <div className="item vol"> 体积: {this.state.totalVol }m² </div>
-                    </Col>
-                    <Col span={3}></Col>
-                </Row>
+                    </div>
+                </div>
                 {/* {this.props.state.commonState.showCartFlag && <SmallCart hideSmallCart={this.props.hideSmallCartFn}  totalCartGoodCountFn={this.totalCartGoodCountFn}></SmallCart>} */}
             </div>
         )

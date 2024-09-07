@@ -41,6 +41,11 @@
    padding:29px 0;
    background:#fff;
    font-size:14px;
+
+}
+
+.total_con_content{
+    position: relative;
 }
 .cart_page_con  .total_con .item{
     height:29px;
@@ -51,6 +56,8 @@
     cursor:pointer;
     background:url("../../assets/icon/icon_select.png") no-repeat left center;
     float:left;
+
+    margin-top: 6px;
 }
 
 
@@ -61,26 +68,29 @@
    float:left;
    margin-left:25px;
    cursor:pointer;
+   margin-top: 6px;
 }
 .cart_page_con  .total_con .total_count{
    float:left;
    margin-left:29px;
    position:relative;
+   margin-top: 6px;
 }
 
 .cart_page_con  .total_con .total_count .count{
     font-weight:bold;
 }
-.cart_page_con  .total_con .pay_btn{
+.cart_page_con  .total_con .total_con_content  .pay_btn{
     width:124px;
-    height:42px;
-    line-height:42px;
+    height:42px ;
+    line-height:42px ;
     text-align:center;
     background:#333;
     color:#fff;
-    position:absolute;
+    /* position:absolute;
     right:0;
-    top:-5px;
+    top:-5px; */
+    float: right;
     border-radius:5px;
     overflow:hidden;
     cursor:pointer;
@@ -97,9 +107,11 @@
 }
 .cart_page_con  .total_con .good_money{
     float:right;
-    margin-right:175px;
+    margin-right:29px;
+    margin-top: 6px;
 }
 .cart_page_con  .total_con  .vol{
    float:right;
    margin-right:25px;
+   margin-top: 6px;
 }

@@ -39,11 +39,11 @@
 
     opacity:1;
 }
-.recommende_good_con .recommende_good:hover .small_img{
+/* .recommende_good_con .recommende_good:hover .small_img{
     opacity:0;
  
     transition:all 0.3s; 
-}
+} */
 .recommende_good_con .recommende_good .text_bottom{
     padding:20px 20px 31px;
     position:relative;
@@ -51,6 +51,11 @@
 .recommende_good_con .recommende_good:hover .text_bottom{
     background:#C6A189;
     color:#fff;
+}
+
+
+.recommende_good_con .recommende_good:hover {
+    border-color: #C6A189;;
 }
 .recommende_good_con .recommende_good .text_bottom .title{
  
@@ -91,4 +96,8 @@
 .recommende_good_con .recommende_good:hover .text_bottom .but_btn{
     background:#1A1A1A;
     color:#C6A189;
+}
+
+.recommende_good a{
+    text-decoration: none;
 }

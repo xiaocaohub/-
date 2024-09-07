@@ -43,16 +43,22 @@
 }
 
 
+
 .series_con .series_list_con .good_list{
     overflow:hidden;
     border-top:1px solid #E1E1E1;
     padding-bottom:2%;
     background:#fff;
+
+    border-bottom-left-radius: 12px;
+    border-bottom-right-radius: 12px;
 }
+
 .series_nav_con{
     height:73px;
     overflow:hidden;
     background:#fff;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
 }
 
- 

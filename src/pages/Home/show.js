@@ -219,27 +219,24 @@ class Show extends React.Component {
 
                 <VedioBanner></VedioBanner>        
 
-                {/* 品推荐 */}
+                {/* 品一览 */}
                 <div className="recommend_good_list_con">        
                     <div className="recommend_text_con">
                         <img src={titleImg2} className="title_img" alt=""/>
                     </div>
           
                     <div className="recommend_good_con">
-                        <Row>
-                            <Col span={3}></Col>
-                            <Col span={18}>                        
+                        
+                           
+                            <div className="content_common_width">                        
                                 <ul className="recommend_good_list">
                                     {this.state.recomendGoodArr.length>0 && this.state.recomendGoodArr.map((item, index)=>{                      
                                         return (<Good goodInfo={item} key={item.id}></Good>)
                                     })}
                                 </ul>
                                 <div className="more_btn">搜索更多</div>
-                            </Col>
+                            </div>
 
-
-                            <Col span={3}></Col>
-                        </Row>
                     </div>
                 </div>  
 
@@ -247,9 +244,7 @@ class Show extends React.Component {
 
                 <img src={popularImg} className="popular_img" alt=""/>
 
-                <Row>
-                    <Col span={3}></Col>
-                    <Col span={18}>
+                <div className="content_common_width">
                         <div className="king_good_list_con">
                             <ul className="nav_list">
                                 {this.state.styleNav.map((item, index)=> {
@@ -267,9 +262,8 @@ class Show extends React.Component {
             
                             {this.state.styleGoodArr.length==0 && <EmptyPage></EmptyPage>}
                         </div>
-                    </Col>
-                    <Col span={3}></Col>
-                </Row>
+                     
+                </div>
             
                 {this.props.state.commonState.showCartFlag && <SmallCart hideSmallCart={this.props.hideSmallCartFn} totalCartGoodCountFn={this.totalCartGoodCountFn}></SmallCart>}
             </div>

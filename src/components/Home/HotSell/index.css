@@ -4,9 +4,11 @@
 
 .hot_sell_con .hot_big{
     overflow:hidden;
-    width:98%;
-    height:100%;
+    width:65.8%;
+  
+    overflow: hidden;
     border-radius:10px;
+    float: left;
 }
 .hot_sell_con .hot_big img{
     display:block;
@@ -20,9 +22,14 @@
     opacity:0.9;
 }
 
+.hot_sell_con .hot_small_con{
+    width: 32.5%;
+    float: right;
+    overflow: hidden;
+}
 .hot_sell_con .hot_small{
     border-radius:10px;
-    margin-top:4%;
+    margin-top:5%;
     position:relative;
     overflow:hidden;
 }

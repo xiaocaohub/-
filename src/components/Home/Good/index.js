@@ -26,7 +26,7 @@ class Good extends React.Component {
     render () {
         return (
             <div className="recommend_good" id="recommend_good">
-                <Link to={"/productroom/detail/" + this.props.goodInfo.id}>
+                <Link to={"/productroom/detail/" + this.props.goodInfo.id} target="_blank">
                     {/* <img src={this.props.goodInfo.coverImg} alt="" className="good_img" style={{height: this.state.goodImgHeight + "px"}}/> */}
                     <img src={this.props.goodInfo.coverImg} alt="" className="good_img"/>
                 </Link>
@@ -39,7 +39,9 @@ class Good extends React.Component {
                         </div>
                     </div>
 
-                    <div className="cart_btn"></div>
+                    {/* <div className="cart_btn"></div> */}
+                    <Link to={"/productroom/detail/" + this.props.goodInfo.id} target="_blank" className="cart_btn"></Link>
+
                 </div>
                 <div className="line">
                     <span></span>

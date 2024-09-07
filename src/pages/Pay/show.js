@@ -79,15 +79,12 @@ class Pay extends React.Component {
     render () {
         return (
             <div className="pay_page_con">
-                <Row>
-                    <Col span={3}></Col>
-                    <Col span={18}>
+                    <div className="content_common_width">
                         <div className="order_title_con">
                             {/* <div className="order_status"></div> */}
                             <div className="title_con">
 
-        
-                                <div className="tit">订单提交成功, 请您在 <span className="last_time">{this.state.dateText}</span> 内完成支付, 否则订单会被自动取消!</div>
+                                <div className="last_time_tit">订单提交成功, 请您在 <span className="last_time">{this.state.dateText}</span> 内完成支付, 否则订单会被自动取消!</div>
                                 <div className="txt">
                                     <span className="item">订单编号: {this.state.orderNumber}</span>
                                     <span className="item">应付款金额: {this.state.payTotal.totalPrice}元</span>
@@ -111,9 +108,7 @@ class Pay extends React.Component {
 
                             <Offline payTotal={this.state.payTotal}></Offline>
                         </div>
-                    </Col>
-                    <Col span={3}></Col>
-                </Row>
+                    </div>
             </div>
         )
     }

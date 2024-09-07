@@ -16,13 +16,15 @@
     opacity:0.5;   
 }
 .cart_small_con{
-    width:52.5%;
+    width:1000px;
     height:70%;
     background:#fff;
     position:absolute;
-    left:20%;
+    left:50%;
+    margin-left:-500px;
     top:15%;
     border-radius:9px;
+    padding-bottom:10px;
 }
 .cart_small_con .top_title{
    height:60px;
@@ -134,14 +136,14 @@
     object-fit: cover;
     width:100%;
 }
+
 .cart_small_con .good_list_con .good_list > li .info_con .info{
-    
-    
     width:61%;
     height:80px;    
     float:right;
     margin-right:3%;
     font-size:12px;
+
 }
 
 .cart_small_con .good_list_con .good_list > li .info_con .info .txt{
@@ -150,16 +152,19 @@
     max-height:43px;
     overflow:hidden;
     margin-bottom:10px;
+
+ 
 }
 .cart_small_con .good_list_con .good_list > li .info_con .info .tit{
-    max-height:29px;
 
+    max-height:29px;
     line-height:14px;
     font-size:12px;
     color:#666;
-
     margin-top:5px;
     overflow:hidden;
+ 
+    text-align: left;
 }
 
 .cart_small_con .good_list_con .good_list > li .price{
@@ -179,6 +184,10 @@
     float:left;
     border-radius:0;
     margin-top:23px;
+    text-align: center;
+    border:1px solid #E1E1E1;
+    border-left: none;
+    border-right: none;
 }
 .cart_small_con .good_list_con .good_list > li .count_con .btn{
     width:20%;

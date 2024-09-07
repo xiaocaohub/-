@@ -70,43 +70,46 @@ function Header () {
     }
     return (
         <div className="header_con">
-            <div className="header_top ">
-                 
-                <div className="content_common_width">
+            <Row className="header_top">
+                <Col span={3}></Col>
+                <Col span={18}>
+
                     <span className="title" onClick={getUserInfoFn}>更懂年轻人的国潮家居平台</span>
                     {userInfo && <div className="login_btn" onClick={loginOutFn}>退出</div>}
                     {userInfo && <span className="header_img">{userInfo.phone}</span>}     
                     {/* {userInfo && <img src={userInfo.headimgurl} alt="" className="header_img"/>}          */}
                     {!userInfo && <Link to="/login" className="login_btn">登录</Link>}
                     {!userInfo && <Link to="/register" className="login_btn">注册</Link>}
-                </div>
-            </div>
-            
-            <div className="header_bottom_con">
-
-                <div className="header_bottom content_common_width">
-                        <Link to="/" className="logo">
-                            {/* <img src={logo} className="logo_img" alt=""/> */}
-                        </Link>
-                        <ul className="nav_list">
-                        {navList.map((item, index)=>{
-                                return (<li key={item.id} className={currentIndex==index?"on":""} onClick={()=>{selectNavFn(index)}}>{item.title}</li>)
-                        })}
-                        </ul>
-                
-                        <Badge count={goodCount} className="cart_logo" offset={[-10, 0]} onClick={showSmallCartFn}>           
-                            <img src={topcart}/>    
-                        </Badge>
+                </Col>
+                <Col span={3}></Col>
+            </Row>
+            <Row className="header_bottom">
+          
+                <Col span={3}></Col>
+                <Col span={18} style={{width:"1px solid brown"}}>
+                    <Link to="/" className="logo">
+                        {/* <img src={logo} className="logo_img" alt=""/> */}
+                    </Link>
+                    <ul className="nav_list">
+                       {navList.map((item, index)=>{
+                            return (<li key={item.id} className={currentIndex==index?"on":""} onClick={()=>{selectNavFn(index)}}>{item.title}</li>)
+                       })}
+                    </ul>
+             
+                    <Badge count={goodCount} className="cart_logo" offset={[-10, 0]} onClick={showSmallCartFn}>           
+                      
+                        <img src={topcart}/>    
                         {/* <Link to="/cart">
                             <img src={topcart}/>      
                         </Link> */}
-
-                        <div className="search_con">
-                            <div className="btn"></div>
-                            <input type="text" placeholder="搜索商品名称" className="search"/>
-                        </div>    
-                </div>
-            </div>
+                    </Badge>
+                    <div className="search_con">
+                        <div className="btn"></div>
+                        <input type="text" placeholder="搜索商品名称" className="search"/>
+                    </div>
+                </Col>
+                <Col span={3}></Col>
+            </Row>
         </div>
     )
 }

@@ -60,19 +60,16 @@ class GoodTable extends React.Component {
                         )
                     })}
                
-                   
-     
-
-                    <Row className="remark_con">
+                    <div className="remark_con ">
                         <div className="title">特殊信息备注:</div>
                         <TextArea
                            
                             placeholder="若延期发货, 请自行修改期望发货时间, 若定制, 请填写定制信息, 否则按常规产品出货。"
-                            autoSize={{ minRows: 3, maxRows: 5 }}
+                            autoSize={{ minRows: 5, maxRows: 10 }}
                             className="text_area"
                             onChange={this.remarkFn} 
                         />
-                    </Row>
+                    </div>
                 </ul>
             </div>
         )

@@ -383,7 +383,7 @@ class CartSmall extends React.Component {
                         <span className="delete_all" onClick={this.deleteSelectAllFn}>删除选中商品</span>
                         <Link to="/cart" className="go_cart_btn">下单采购</Link>
                         {/* <div className="go_cart_btn" onChange={this.props.goCartFn}>下单采购</div> */}
-                        <div className="down_btn">导出清单</div>
+                        {/* <div className="down_btn">导出清单</div> */}
                       
                         <div className="total">合计<span className="money">￥{this.state.totalMoney}</span></div>
                         <div className="total_good">已选 <span className="count">{this.state.cartArr.length}</span> 件商品</div>

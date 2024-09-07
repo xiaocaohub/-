@@ -2,7 +2,6 @@
     background:#F5F5F5 ;
     padding-bottom:150px;
 }
-
 .recommende_good_con .banner{
     position:relative;
     background:#e5e5e5;
@@ -12,19 +11,16 @@
 .recommende_good_con .banner img{
     width:100%;
     display:block;
- 
- 
 }
   
 
-  
-
-  
 
 
 .recommende_good_con .room_list_con{ 
     background:#fff;
+    overflow: hidden;
 }
+
 .recommende_good_con .room_list_con .room_list {
    width:80%;
    overflow:hidden;
@@ -35,12 +31,13 @@
     float:left;
     margin-left:2%;
     cursor:pointer;
-    overflow:hidden;
-
-    
+    overflow:hidden;    
     position:relative;
     border-radius:10px;
 }
+
+
+
 .recommende_good_con .room_list_con .room_list > li:first-child{
     margin-left:0;
 }

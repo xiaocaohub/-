@@ -120,9 +120,9 @@ class Show extends React.Component {
     }
     render () {
         return (
-           <Row className="series_con">
-                <Col span={3}></Col>
-                <Col span={18}>    
+           <div className="series_con">
+               
+                <div className="content_common_width">    
                     <div className="banner_con">
                         <img src={bannerImg} alt="" className="banner_img"/>
                         {/* <div className="text_con">
@@ -151,11 +151,11 @@ class Show extends React.Component {
                         {this.state.styleGoodArr.length==0 && <Empty></Empty>}
                         
                     </div>
-                </Col>
-                <Col span={3}></Col>
+                </div>
+            
 
                 {this.props.state.commonState.showCartFlag && <SmallCart hideSmallCart={this.props.hideSmallCartFn} totalCartGoodCountFn={this.totalCartGoodCountFn}></SmallCart>}
-            </Row>
+            </div>
         )
     }
 }

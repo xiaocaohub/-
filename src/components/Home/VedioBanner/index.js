@@ -83,9 +83,8 @@ class VedioBanner extends React.Component {
                 <div className="vedio_list_con">
                     <div className="shadow"></div>
                     <div className="vedio_list_content">
-                        <Row>
-                            <Col span={3}></Col>
-                            <Col span={18}>
+                       
+                            <div className="content_common_width">
                                 <div className="title_con">
                                     <div className="left">
                                         <div className="small_title">镜头说</div>
@@ -110,9 +109,8 @@ class VedioBanner extends React.Component {
                                         )
                                     })}
                                 </ul>
-                            </Col>
-                            <Col span={3}></Col>
-                        </Row>
+                            </div>
+                     
                     </div>
                 </div>
                 {this.state.vedioShadowFlag && <VedioShadow index={this.state.currentVedioIndex} closeFn={this.closeVedioFn}/>}

@@ -45,10 +45,7 @@ class HotSelling extends React.Component {
     render () {
         return (
             <div className="hot_selling_con">
-                <Row>
-
-                    <Col span={3}></Col>
-                    <Col span={18}>
+                    <div className="content_common_width">
                         <div className="title_con">
                             <div className="left">
                                 <img src={hotTitleImg} alt=""/>
@@ -195,9 +192,8 @@ class HotSelling extends React.Component {
                                 <span id="longline"></span>
                             </div>
                         </div>
-                    </Col>
-                    <Col span={3}></Col>
-                </Row>
+                    </div>
+       
             </div>
         )
     }

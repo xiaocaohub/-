@@ -1,5 +1,5 @@
 import React from "react";
-import {Row, Col, Pagination } from "antd";
+import {Row, Col, Pagination, ConfigProvider } from "antd";
 import Good from "../../components/SeriesSetList/Good";
 
 import {getGoodListApi} from "../../api/SeriesSetList";
@@ -10,6 +10,8 @@ import GoodNav from "../../components/SeriesSetList/GoodNav";
 import request from "../../api/request";
 import EmptyPage from "../../components/Empty";
 import "./index.css";
+
+import zh_CN from 'antd/es/locale/zh_CN';
 class Show extends React.Component {
     constructor (props) {
         super(props)
@@ -24,11 +26,9 @@ class Show extends React.Component {
             pageSize: 16
         }
     }
-   
     componentDidMount () {
         this.getGoodListFn()
     }
-
     getGoodListFn = (optionIds)=> {
         let formData = new FormData();
         let option = {"brandId":"","minPrice":"","maxPrice":""};
@@ -37,28 +37,21 @@ class Show extends React.Component {
         let storeType = getStorageFn("storeType") || 6;
         let productClass = "";
 
-
         let styleId = "";
         if (optionIds) {
             if (optionIds.spaceSid && optionIds.spaceId) {
                 productClass = "-" + optionIds.spaceSid + "-" + optionIds.spaceId + "-";
             }
-            
-
             if (optionIds.categoryId) {
                 productClass += optionIds.categoryId + "-";
             }
-
             if (optionIds.styleId) {
                 styleId = optionIds.styleId;
             }
         }
-      
-
         formData.append("api", "app.product.listProduct");
         formData.append("storeId", storeId);
         formData.append("storeType", storeType);
-
         formData.append("page", this.state.currentPage);
         formData.append("pageSize", this.state.pageSize);   
         formData.append("brandId", this.state.brandId);
@@ -74,13 +67,9 @@ class Show extends React.Component {
             data: formData
         }).then((res)=> {
             let resData =  res.data.data;
-
             let goodList = resData.goodsList;    
             let brandInfo = resData.brandInfo;
             let total = resData.total;
-            console.log("resData set goodList")
-            console.log(resData)
-            console.log("resData set goodList")
             this.setState({
                 brandInfo: brandInfo,
                 goodList: goodList,
@@ -115,7 +104,32 @@ class Show extends React.Component {
                         </div>
 
                         {this.state.goodList.length==0 && <EmptyPage></EmptyPage>}
-                        <Pagination showQuickJumper defaultCurrent={1} total={this.state.total} className="page"/>
+                        {/* <Pagination showQuickJumper defaultCurrent={1} total={this.state.total} className="page"/> */}
+                        <ConfigProvider locale={zh_CN}>
+                            <Pagination
+                                className="page"
+                                style={{ textAlign: "center" }}
+                                total={this.state.total}
+                                defaultCurrent={1}
+                                showSizeChanger = {false}
+                                showQuickJumper
+                                pageSize={this.state.pageSize}
+                                current={this.state.currentPage}
+                                // showTotal={totalCount => "总条数" + this.state.total + "条"}
+                                onChange={(params, state) => {
+                                    this.setState({
+                                        currentPage: params
+                                    }, function () {
+                                        this.getGoodListFn(this.state.optionIds)
+                                    })
+                                }}
+                                onShowSizeChange = {(current, size)=>{
+                                    this.setState({
+                                        pageSize: size
+                                    })
+                                }}
+                                />
+                        </ConfigProvider>
                     </Col>
                     <Col span={3}></Col>
                 </Row>

@@ -27,17 +27,17 @@ class Good extends React.Component {
     render () {
         return (
             <li className="recommende_good" id="recommend_good">
-                <Link to={this.props.goodInfo?("/productroom/detail/" + this.props.goodInfo.id):"/"} className="img">
+                <Link to={this.props.goodInfo?("/productroom/detail/" + this.props.goodInfo.id):"/"} className="img" target="_blank">
                     {/* <img src={this.props.goodInfo?this.props.goodInfo.coverImg:""} alt="" className="small_img" style={{height: this.state.goodImgHeight + "px"}}/> */}
                     <img src={this.props.goodInfo?this.props.goodInfo.coverImg:""} alt="" className="small_img"/>
-                    <img src={bigGoodImg} alt="" className="big_img"/>
+                    {/* <img src={bigGoodImg} alt="" className="big_img"/> */}
                 </Link>
                 <div className="text_bottom">
                     <div className="title">{this.props.goodInfo?this.props.goodInfo.product_title:""}</div>
                     <div className="price">
                         <span>￥</span>{this.props.goodInfo?this.props.goodInfo.price:""}
                     </div>
-                    <Link to={this.props.goodInfo?("/productroom/detail/" + this.props.goodInfo.id):"/"} className="but_btn">GO</Link>
+                    <Link to={this.props.goodInfo?("/productroom/detail/" + this.props.goodInfo.id):""} className="but_btn" target="_blank">GO</Link>
  
                 </div>
             </li>

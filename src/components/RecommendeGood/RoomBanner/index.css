@@ -56,18 +56,22 @@
     
     overflow:hidden;
     color:#fff;
-    background: #C6A189;
     position:absolute;
     height:10%;
     display:flex;
     align-items: center;
     flex-direction:row;
     justify-content:center;
+    font-size: 16px;
     bottom:24.8%;
+    text-decoration: none;
+    background:#C6A189 url("../../../assets/icon/nt_right.png") no-repeat 86% center;
+    background-size: 20px 20px;
 }
 .room_banner_con .show_more_btn:hover {
-    background:#C6A189;
+    background:#C6A189 url("../../../assets/icon/nt_right.png") no-repeat 86% center;
     transition:all 0.5s;
     color:#fff;
+    background-size: 20px 20px;
 }
  

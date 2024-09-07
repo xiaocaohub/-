@@ -107,70 +107,66 @@ class Footer extends React.Component {
     render () {
         return (
             <div className="footer_con">
-                <Row>
+                <div className="footer_content content_common_width">
+                    <div className="left">
+                        <div className="logo_con">
 
-                    <Col span={3}></Col>
-                    <Col span={18} className="footer_content">
-                        <div className="left">
-                            <div className="logo_con">
-
-                                <img src={logoFooter} alt="" className="logo_footer"/>
-                                <div className="tit">为舒适而生</div>
-                            </div>
-
-                            <ul className="icon_list">
-                                {this.state.iconArr.map((item)=>{
-                                    return (
-
-                                        <li key={item.id}>
-                                            <img src={item.imgSrc} alt="" className="icon"/>
-        
-                                            <span>{item.txt}</span>
-                                        </li>
-                                    )
-                                })}
-                            </ul>
+                            <img src={logoFooter} alt="" className="logo_footer"/>
+                            <div className="tit">为舒适而生</div>
                         </div>
 
-                        <ul className="info_list">
-                            {this.state.infoArr.map((item)=> {
-                                return ( 
+                        <ul className="icon_list">
+                            {this.state.iconArr.map((item)=>{
+                                return (
+
                                     <li key={item.id}>
-                                        <img src={item.imgSrc} alt=""/>
+                                        <img src={item.imgSrc} alt="" className="icon"/>
+    
                                         <span>{item.txt}</span>
                                     </li>
                                 )
                             })}
                         </ul>
+                    </div>
 
-                        <ul className="code_list">
-                            {this.state.codeArr.map((item)=> {
-                                return (
-                                    <li key={item.id}>
-                                        <img src={item.imgSrc} alt=""/>
-                                        <div className="txt">{item.txt}</div>
-                                    </li>
-                                )
-                            })}
-                             
-                           
-                        </ul>
-                    </Col>
-                    <Col span={3}></Col>
-                </Row>
+                    <ul className="info_list">
+                        {this.state.infoArr.map((item)=> {
+                            return ( 
+                                <li key={item.id}>
+                                    <img src={item.imgSrc} alt=""/>
+                                    <span>{item.txt}</span>
+                                </li>
+                            )
+                        })}
+                    </ul>
 
-
-                <Row>
-                    <Col span={24} className="copy">
-                        Copyright©2024 深圳市珞珂家居有限公司<a href="https://beian.miit.gov.cn" className="copy_number">粤ICP备2024161668号</a>
+                    <ul className="code_list">
+                        {this.state.codeArr.map((item)=> {
+                            return (
+                                <li key={item.id}>
+                                    <img src={item.imgSrc} alt=""/>
+                                    <div className="txt">{item.txt}</div>
+                                </li>
+                            )
+                        })}
+                            
                         
-                        {
-                            this.state.copyIcon.map((item, index)=> {
-                                return (<Link to="/" className="icon" key={index}><img src={item.imgSrc} alt=""/></Link>)
-                            })
-                        }
-                    </Col>
-                </Row>
+                    </ul>
+                </div>
+            
+      
+
+
+                
+                <div className="copy">
+                    Copyright©2024 深圳市珞珂家居有限公司<a href="https://beian.miit.gov.cn" className="copy_number">粤ICP备2024161668号</a>
+                    
+                    {
+                        this.state.copyIcon.map((item, index)=> {
+                            return (<Link to="/" className="icon" key={index}><img src={item.imgSrc} alt=""/></Link>)
+                        })
+                    }
+                </div>
             </div>
         )
     }

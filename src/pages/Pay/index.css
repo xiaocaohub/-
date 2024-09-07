@@ -8,24 +8,27 @@
     overflow:hidden;
 }
 .pay_page_con .title_con{
-    width:490px;
+    width:540px;
     background:url("../../assets/icon/submit_successfully.png") no-repeat left center;
     padding-left:62px;
     margin:0 auto;
+    border: 1px solid brown;
 }
 
-.pay_page_con .title_con .tit{
+
+.pay_page_con .title_con .last_time_tit{
     font-weight:bold;
     margin-bottom:6px;
+    font-size: 16px;
 }
 .pay_page_con .title_con .last_time{
-
     color:#E61D40;
 }
-.pay_page_con .title_con .txt{
 
+.pay_page_con .title_con .txt{
     margin-bottom:5px;
     color:#666;
+    font-size: 14px;
 }
 .pay_page_con .title_con  .item{
     margin-right:20px;
@@ -45,7 +48,7 @@
     overflow:hidden; 
 }
 .pay_page_con .pay_con .top .nav_list{
-
+    border: 1px solid brown;
     overflow:hidden;   
     float:left;
 }
@@ -60,6 +63,8 @@
     border-top:2px solid #C6A189;
     color:#C6A189;
     cursor:pointer;
+    font-size: 14px;
+    border: 1px solid brown;
 }
 .pay_page_con .pay_con .top .tit{
     float:right;

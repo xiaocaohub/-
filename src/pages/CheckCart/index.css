@@ -18,13 +18,14 @@
     float:left;
     height:29px;
     line-height:29px;
+    font-size: 14px;
 }
 .check_cart_page .invoice_info_con > li .txt{
    width:300px;
    float:left;
    line-height:29px;
    color:#666;
-  
+   font-size: 14px;
 }
 .check_cart_page .invoice_info_con > li .invoice_select{
    float:left;
@@ -56,20 +57,15 @@
 
 .check_cart_page .total_con .total_list{
    float:right;
- 
 }
 .check_cart_page .total_con .total_list li{
     height:29px;
-
     line-height:29px;
     float:left;
- 
     margin:20px 0 20px 29px;
+    font-size: 14px;
 }
 .check_cart_page .total_con .total_list li.money{
-
-
-
     color:#E61D40;
     font-size:20px;
     margin-left:0;

@@ -75,9 +75,9 @@ class GoodDetail extends React.Component {
     }
     render () {
         return (
-            <Row className="good_edit_detail">
-                <Col span={3}></Col>
-                <Col span={18} className="content">       
+            <div className="good_edit_detail">
+              
+                <div  className="content content_common_width">       
                     {this.state.content.length>0 && <div className="left" dangerouslySetInnerHTML={{ __html: this.state.content }}>
                          
                     </div>}
@@ -87,30 +87,32 @@ class GoodDetail extends React.Component {
                   
                      
                     <div className="right">
-                        <div className="title_top">
+                        {/* <div className="title_top">
                             <span className="tit">实物拍摄</span>
                             <span className={this.state.foldFlag?"show_btn":"show_btn on"} onClick={this.showMoreFn}>{this.state.foldFlag?"展开全部":"收起"}</span>
-                        </div> 
+                        </div>  */}
  
+                        {/* 实物拍摄 */}
+
                         <div className="img_txt_con"> 
                             <div className="img_list">
                                 <Image.PreviewGroup>
-                                {this.state.showRealPhotos.length>0 && this.state.showRealPhotos.map((item, index)=> {
-                                    // return (
-                                    //     <div  className="img_con" key={index} style={{height:this.state.imgHeight+"px"}}>
-                                    //         <Image src= {item}    preview={{ visible: false }}  width={150} height={this.state.imgHeight} className="img" onClick={this.showBigImgFn}/>
-                                    //     </div>
-                                    // )
-                                    return (
-                                        <div  className="img_con" key={index}>
-                                            <Image
-                                                 src= {item}      
-                                                // width={150} height={this.state.imgHeight} className="img"
-                                                width={150} height={150} className="img"
-                                        />
-                                       </div>
-                                    )
-                                })}  
+                                    {this.state.showRealPhotos.length>0 && this.state.showRealPhotos.map((item, index)=> {
+                                        // return (
+                                        //     <div  className="img_con" key={index} style={{height:this.state.imgHeight+"px"}}>
+                                        //         <Image src= {item}    preview={{ visible: false }}  width={150} height={this.state.imgHeight} className="img" onClick={this.showBigImgFn}/>
+                                        //     </div>
+                                        // )
+                                        return (
+                                            <div  className="img_con" key={index}>
+                                                <Image
+                                                    src= {item}      
+                                                    // width={150} height={this.state.imgHeight} className="img"
+                                                    width={150} height={150} className="img"
+                                            />
+                                        </div>
+                                        )
+                                    })}  
                                 </Image.PreviewGroup>
                                
                                 { this.state.showRealPhotos.length == 0 &&   (<div className="err_msg">~暂未上传实拍图~</div>)}
@@ -134,9 +136,10 @@ class GoodDetail extends React.Component {
                             </div>
                         </div>
                     </div>
-                </Col>
-                <Col span={3}></Col>
-            </Row>
+                </div>
+                
+            
+            </div>
         )
     }
 }

@@ -209,7 +209,10 @@ class Offline extends React.Component {
 
                 <ul className="pay_list">
                     {this.state.payList.map((item, index)=> {
-                        return (<li className={item.selectFlag?"on":""} key={index} onClick={()=>{this.selectPayFn(index)}}> <img src={item.imgSrc} /> {item.txt}</li>)
+                        return (<li className={item.selectFlag?"on":""} key={index} onClick={()=>{this.selectPayFn(index)}}> 
+                                    <img src={item.imgSrc} alt=""/>
+                                    <span className="txt"> {item.txt} </span>
+                                </li>)
                     })}
                     <div className="money">转账支付: <span>{this.props.payTotal.totalPrice} 元</span></div>
                 </ul>

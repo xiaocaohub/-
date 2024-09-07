@@ -233,45 +233,45 @@ class Show extends React.Component {
     render () {
         return (   
             <div className="check_cart_page">
-                <Row>
-                    <Col span={3}></Col>
+         
+                    
 
 
-                    <Col span={18}>
-                        {this.state.orders.length>0 && this.state.orders.map((orderItem, index)=> {
-                            return (<GoodTable orderItem={orderItem} key={index} index={index} remarkFn={this.remarkFn}></GoodTable>)
-                        })}
-                        
-                        <ul className="invoice_info_con">
-                            <li>
-                                <div className="title">期望发货时间</div>  
-                                
-                                {/* <DatePicker onChange={this.selectDateFn} locale={zhCN} ></DatePicker> */}
-                                {/* <input type="date" style={{display:"block",width:"250px",height: "32px", border:"1px solid #d9d9d9"}} onChange={this.selectDateFn} placeholder="请选择日期"/> */}
-                                <Input type="date" value={this.state.date} className="date_con" onChange={this.selectDateFn} />
-                            </li>
-                            <li>
-                                <div className="title">发货说明</div>
-                                <div className="txt">                         
-                                    1.现货订单我们将在期望发货时间内发货。 <br/>
-                                    2.无现货订单，发货时间以实际生产周期为准。
-                                </div>
-                            </li>
-                
+                <div className="content_common_width">
+                    {this.state.orders.length>0 && this.state.orders.map((orderItem, index)=> {
+                        return (<GoodTable orderItem={orderItem} key={index} index={index} remarkFn={this.remarkFn}></GoodTable>)
+                    })}
+                    
+                    <ul className="invoice_info_con">
+                        <li>
+                            <div className="title">期望发货时间</div>  
+                            
+                            {/* <DatePicker onChange={this.selectDateFn} locale={zhCN} ></DatePicker> */}
+                            {/* <input type="date" style={{display:"block",width:"250px",height: "32px", border:"1px solid #d9d9d9"}} onChange={this.selectDateFn} placeholder="请选择日期"/> */}
+                            <Input type="date" value={this.state.date} className="date_con" placeholder="年-月-日" onChange={this.selectDateFn} />
+                        </li>
+                        <li>
+                            <div className="title">发货说明</div>
+                            <div className="txt">                         
+                                1.现货订单我们将在期望发货时间内发货。 <br/>
+                                2.无现货订单，发货时间以实际生产周期为准。
+                            </div>
+                        </li>
+            
 
-                            <li style={{display:"none"}}>
-                                <div className="title">开票信息</div>           
-                                <div className="invoice_select">开票</div>
-                                <div className="invoice_btn">请完善发票信息<RightOutlined /></div>
-                            </li>
-                        </ul>
-                    </Col>
-                    <Col span={3}></Col>
-                </Row>
+                        <li style={{display:"none"}}>
+                            <div className="title">开票信息</div>           
+                            <div className="invoice_select">开票</div>
+                            <div className="invoice_btn">请完善发票信息<RightOutlined /></div>
+                        </li>
+                    </ul>
+                </div>
+           
+           
 
-                <Row className="total_con">
-                    <Col span={3}></Col>
-                    <Col span={18} className="total_list_con">
+                <div className="total_con">
+                    
+                    <div className="total_list_con content_common_width">
                         <div className="order_btn" onClick={this.payOrderFn}>提交订单</div>
                         <ul className="total_list">
                             <li>体积: {this.state.totalVolume}m²</li>
@@ -280,11 +280,8 @@ class Show extends React.Component {
                             <li>应付总额:</li>
                             <li className="money">￥{this.state.totalPrice + this.state.taxation} </li>
                         </ul>
-
-                    </Col>
-
-                    <Col span={3}></Col>
-                </Row>
+                    </div>
+                </div>
             </div>
         )
     }

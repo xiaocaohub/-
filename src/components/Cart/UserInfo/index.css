@@ -35,12 +35,15 @@
    font-size:17px;
    margin-bottom:20px;
    font-size:14px;
+
+
+   font-size: 16px;
 }
-
-
 .cart_page_con  .user_info_con .message_title .txt{
     margin-bottom:5px;
     color:#666;
+ 
+    font-size: 14px;
 }
 
 
@@ -61,3 +64,20 @@
 .user_info_text_con.on{
     display: block;
 }
+.user_info_text{
+    overflow: hidden;
+}
+ 
+.cart_page_con .user_info_text > li .title_tit{
+    display: block;
+    margin-right: 10px;
+    width: 62px;
+    float: left;
+ 
+}
+.cart_page_con .user_info_text > li .title_txt{
+    display: block;
+    float: left;
+ 
+}
+ 

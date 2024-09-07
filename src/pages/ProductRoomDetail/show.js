@@ -294,9 +294,9 @@ class Show extends React.Component {
     render () {
         return (
             <div className="productroom_detail_page">
-                <Row>
-                    <Col span={3}></Col>
-                    <Col span={18}>
+                <div>
+               
+                    <div className="content_common_width">
                         {this.state.goodInfo&&<DetailInfo goodDetail={this.state.goodInfo} setSelectGood={this.setSelectGoodFn} addCartFn={this.addCartFn}></DetailInfo>}
                         {this.state.goodInfoFlag&&<ShowLoading></ShowLoading>}
                         <div className="design_same_con">
@@ -312,10 +312,9 @@ class Show extends React.Component {
                             {/* {this.state.designCurrentIndex == 0 && <Design></Design>} */}
                             {this.state.designCurrentIndex == 0 &&  this.state.sameGoodArr.length>0 && <SameKind sameGoodArr={this.state.sameGoodArr}></SameKind>}
                         </div>
-                    </Col>
+                    </div>
                     
-                    <Col span={3}></Col>
-                </Row>
+                </div>
                 
               
                 {this.state.goodInfo && this.state.currentGood &&<GoodDetail goodDetail={this.state.goodInfo} currentGood={this.state.currentGood}></GoodDetail>}
