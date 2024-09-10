@@ -1,5 +1,5 @@
 .pay_page_con{ 
-   
+    background: #efefef !important;
 }
 .pay_page_con .order_title_con{
     padding:20px 0;
@@ -8,18 +8,17 @@
     overflow:hidden;
 }
 .pay_page_con .title_con{
-    width:540px;
+    width:550px;
     background:url("../../assets/icon/submit_successfully.png") no-repeat left center;
     padding-left:62px;
     margin:0 auto;
-    border: 1px solid brown;
 }
-
 
 .pay_page_con .title_con .last_time_tit{
     font-weight:bold;
     margin-bottom:6px;
     font-size: 16px;
+    color: #1a1a1a;
 }
 .pay_page_con .title_con .last_time{
     color:#E61D40;
@@ -48,7 +47,6 @@
     overflow:hidden; 
 }
 .pay_page_con .pay_con .top .nav_list{
-    border: 1px solid brown;
     overflow:hidden;   
     float:left;
 }
@@ -64,7 +62,6 @@
     color:#C6A189;
     cursor:pointer;
     font-size: 14px;
-    border: 1px solid brown;
 }
 .pay_page_con .pay_con .top .tit{
     float:right;

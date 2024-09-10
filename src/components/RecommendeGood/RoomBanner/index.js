@@ -20,7 +20,7 @@ class RoomBanner extends React.Component {
                         <div className="big_tit"></div>
                         <div className="txt"></div>
 
-                        <Link to="/" className="show_more_btn">查看更多</Link>
+                        <Link to={"/productroom?navBtn=" + this.props.bannerData.navBtn} className="show_more_btn">查看更多</Link>
                     </div>
                 </div>
             </div>

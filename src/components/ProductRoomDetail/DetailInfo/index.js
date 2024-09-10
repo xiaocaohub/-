@@ -273,7 +273,7 @@ class DetailInfo extends React.Component {
         }
     }
     addCartFn = ()=> {
-        this.props.addCartFn()
+        this.props.addCartFn(this.state.count)
     }
     render () {
         return (

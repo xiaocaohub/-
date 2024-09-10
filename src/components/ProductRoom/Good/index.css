@@ -76,17 +76,23 @@
 }
  
 .series_good .btn_group > li {
-    width:44.2%;
+ 
     height:32px;
     line-height:32px;
     text-align:center;
-    /* float:left; */
+    float:left;
     font-size:12px;
-    border:1px solid #C6A189;
+    border:1px solid #C6A189 !important;
+
+ 
     color:#C6A189;
     border-radius: 32px;
 }
-/* .series_good .btn_group > li:first-child{
+.series_good .btn_group > li a{
+    text-decoration: none;
+    color:#C6A189;
+}
+.series_good .btn_group > li:first-child{
     margin-left: 5%;
     border-right:none;
     border-top-left-radius: 32px;
@@ -95,10 +101,12 @@
 .series_good .btn_group > li:last-child{
     border-top-right-radius: 32px;
     border-bottom-right-radius: 32px;
+    float: right;
+    margin-right: 5%;
 }
 .series_good .btn_group > li .collect_icon{
    margin-right:3px;
-} */
+}
 
 .series_good .btn_group > li:hover {
     color:#fff;
@@ -106,3 +114,10 @@
     cursor:pointer;
 }
 
+
+
+
+.series_good .btn_group > li:hover a{
+    text-decoration: none;
+    color:#fff;
+}

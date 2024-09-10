@@ -32,19 +32,22 @@
 }
 
 .people_order_detail  .order_info_list > li{
-    height:15px;
+    height:20px;
 
-    line-height: 15px;
+    line-height: 20px;
  
     
     font-size:14px;
     margin-bottom:20px;
+    font-size: 14px;
+    color: #666;
 }
 
 
 .people_order_detail  .order_info_list > li .tit{
-
     margin-right:10px;
+    font-size: 14px;
+    color: #999;
 }
 .people_order_detail  .order_info_list > li .total_money{
     font-size:20px;
@@ -67,7 +70,7 @@
     cursor:pointer;
 }
 .people_order_detail .order_dedtail_con .operate_btn_list .btn:hover{
-    background:#333;
+    background: #1a1a1a;
     color:#fff;
 }
 .people_order_detail .order_dedtail_con .vertical_step{
@@ -129,10 +132,9 @@
     /* border:1px solid brown; */
 }
 .people_order_detail  .order_good_table .table_title .good_info{
-    width:25%;
+    width:37%;
     height:50px;
     float:left;
-    /* border:1px solid brown; */
 }
 
 
@@ -199,10 +201,9 @@
 }
 
 .people_order_detail  .order_good_table .good_list > li .good_info{
-    width:25%;
+    width:37%;
     padding:20px 0;
     float:left;
-    /* border:1px solid brown; */
 }
 .people_order_detail  .order_good_table .good_list > li .good_info .good_img{
     width:32.4%;
@@ -216,6 +217,7 @@
 }
 .people_order_detail  .order_good_table .good_list > li .good_info .text_con .tit{
     margin-bottom: 8px;
+    text-align: left;
 }
 .people_order_detail  .order_good_table .good_list > li .good_info .text_con .txt{
     color:#666;

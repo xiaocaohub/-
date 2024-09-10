@@ -50,35 +50,47 @@
 .cart_page_con  .total_con .item{
     height:29px;
     line-height:29px;
+    border:1px solid transparent;
 }
 .cart_page_con  .total_con .select_all{
-    padding-left:20px;
+ 
     cursor:pointer;
     background:url("../../assets/icon/icon_select.png") no-repeat left center;
     float:left;
-
+    padding-left: 29px;
     margin-top: 6px;
+ 
 }
 
 
 .cart_page_con  .total_con .select_all.on{
     background:url("../../assets/icon/icon_select_on.png") no-repeat left center;
+    padding-left: 29px;
 }
 .cart_page_con  .total_con .delete_all{
    float:left;
    margin-left:25px;
    cursor:pointer;
    margin-top: 6px;
+
+   color: #666;
 }
 .cart_page_con  .total_con .total_count{
    float:left;
    margin-left:29px;
    position:relative;
    margin-top: 6px;
+   color: #666;
+ 
+   position: relative;
+   top:-2px;
 }
 
 .cart_page_con  .total_con .total_count .count{
     font-weight:bold;
+}
+.cart_page_con  .total_con .total_count .count span{
+    font-size: 18px;
 }
 .cart_page_con  .total_con .total_con_content  .pay_btn{
     width:124px;
@@ -109,9 +121,11 @@
     float:right;
     margin-right:29px;
     margin-top: 6px;
+    color: #666;
 }
 .cart_page_con  .total_con  .vol{
    float:right;
    margin-right:25px;
    margin-top: 6px;
+   color: #666;
 }

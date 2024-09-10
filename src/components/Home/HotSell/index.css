@@ -48,7 +48,10 @@
     cursor:pointer;
 }
 
-
+.hot_sell_con .hot_small a{
+    font-size: 14px;
+    text-decoration: none;
+}
 .hot_sell_con .hot_small .search{
     display:block;
     width:80px;

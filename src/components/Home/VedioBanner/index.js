@@ -4,7 +4,7 @@ import {Link} from "react-router-dom";
 
 import VedioShadow from "../VedioShadow";
 import "./index.css";
-import bigVedio1 from "../../../assets/big_vedio1.mp4";
+ 
 import vedioImga from "../../../assets/vedio_list1.png";
 import playIcon from "../../../assets/play.png";
 
@@ -78,7 +78,7 @@ class VedioBanner extends React.Component {
     render () {
         return (
             <div className="vedio_banner_con">
-                <video  className="big_video" src={bigVedio1} style={{maxHeight: this.state.vedioHeight +"px", minHeight: this.state.vedioHeight + "px"}} id="video" muted   
+                <video  className="big_video" src="https://luockoo.oss-cn-shenzhen.aliyuncs.com/0/1/20240826/%E4%B8%80%E5%88%86%E9%92%9F%E4%BA%86%E8%A7%A3%E5%8E%9F%E5%88%9B%E7%B3%BB%E5%88%97.mp4" style={{maxHeight: this.state.vedioHeight +"px", minHeight: this.state.vedioHeight + "px"}} id="video" muted   
                     ></video>
                 <div className="vedio_list_con">
                     <div className="shadow"></div>
@@ -90,7 +90,7 @@ class VedioBanner extends React.Component {
                                         <div className="small_title">镜头说</div>
                                         <div className="big_title">video introduced</div>
                                     </div>
-                                    <Link to="/" className="more_btn">搜索更多</Link>
+                                    {/* <Link to="/" className="more_btn">搜索更多</Link> */}
                                 </div>
                                 <ul className="vedio_list">
                                     {this.state.vedioList.map((item, index)=> {

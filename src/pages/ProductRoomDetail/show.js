@@ -44,8 +44,8 @@ class Show extends React.Component {
         //this.setGoodInfo()
         this.initFn()
         
-
         scrollTopFn()
+        this.totalCartGoodCountFn()
     }
     initFn = ()=> {
         let cartArr = getStorageFn("cartArr") || [];
@@ -108,7 +108,12 @@ class Show extends React.Component {
             currentGood: currentGood
         })
     }
-    addCartFn = ()=> {
+    addCartFn = (count)=> {
+        console.log("add count")
+        console.log(count)
+        console.log("add count")
+
+
         let _this = this;
         let token = getStorageFn("token");
         if (!token) {
@@ -117,7 +122,9 @@ class Show extends React.Component {
         }
         let cartArr =  this.state.cartArr;
         
-
+        console.log("arr cartArr")
+        console.log(cartArr)
+        console.log("arr cartArr")
         let currentGood = this.state.currentGood;
         let addCartFlag = this.state.addCartFlag;
         this.setState({
@@ -135,43 +142,47 @@ class Show extends React.Component {
  
         const arr = cartArr.filter(item=>item.goods_id == currentGood.goods_id && item.attribute_id == currentGood.attribute_id);        
         
+        console.log("arr----------filter")
+        console.log(arr)
+        console.log("arr----------filter")
+
+       
         if (arr.length > 0) {
 
-    
             cartArr.forEach((item, index)=>{
+            
                 if (item.goods_id == currentGood.goods_id && item.attribute_id == currentGood.attribute_id) {  
-                    item.goods_num += 1;
+                    // item.goods_num += 1;
                     // console.log("currentGood item")
                     // console.log(item)
                     // console.log("currentGood item")
-
                     item.cid = currentGood.cid;
-
                     currentGood = item;
                 }
             })
         } else {
-            currentGood.goods_num = 1;
+            // currentGood.goods_num = 1;
             currentGood.selectFlag = false;
             // cartArr.push(currentGood)
         }
 
-        // console.log("currentGood------end")
+        console.log("currentGood------end")
                  
                  
-        // console.log(currentGood)
-        // console.log("currentGood-----end")
+        console.log(currentGood)
+        console.log("currentGood-----end")
+       
         // setStorageFn("cartArr", cartArr)
 
         this.setState({
             // cartArr: cartArr,
             currentGood: currentGood
         }, function () {
-            this.addCurrentGoodCartFn()
+            this.addCurrentGoodCartFn(count)
         })
     }
     // 当前的商品加入后台购物车
-    addCurrentGoodCartFn () {
+    addCurrentGoodCartFn (count) {
 
         let _this = this;
         let currentGood = this.state.currentGood;
@@ -186,7 +197,7 @@ class Show extends React.Component {
         formData.append("storeType", 6);
         
         formData.append("goodsId",  currentGood.goods_id );
-        formData.append("num",  currentGood.goods_num );
+        formData.append("num",  count );
         formData.append("attributeId",  currentGood.attribute_id );
         request({
             url: "/api/gw",         

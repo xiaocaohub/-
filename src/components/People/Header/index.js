@@ -15,43 +15,35 @@ function Header () {
         init()
     }, [])
     function init () {
-
         let userInfo = JSON.parse(getStorageFn("userInfo"));
-        console.log("userInfo.user_name")
-        console.log( userInfo)
-
-        setUnameFn(userInfo.user_name)
+        setUnameFn(userInfo.phone)
     }
     return (
         <div className="people_header_con">
-    
                 <Link to="/" className="logo_a"><img src={logo} alt="" className="logo"/></Link>
                 <div className="title">管理后台</div>
                 <ul className="top_nav">
                     <li className="on">
-
-                        <div className="icon"></div>
-                        <p>首页</p>
+                        <Link to="/">
+                            <div className="icon"></div>
+                            <p>首页</p>
+                        </Link>
                     </li>
+                    
                     <li>
+                        <div className="icon"></div>
+                        <p>订单</p> 
+                    </li>
+                    {/* <li>
                         <div className="icon"></div>
                         <p>店铺</p>
                     </li>
                     <li>
                         <div className="icon"></div>
-                        <p>订单</p>
-                         
-                    </li>
-                    <li>
-                        <div className="icon"></div>
                         <p>财务</p>
-                    </li>
+                    </li> */}
                 </ul>
                 <div className="out_btn" onClick={loginOutFn}>退出</div>
-
-
-
-
 
                 <div className="phone_con">
                     <div className="phone_title">欢迎您, { uName }</div>

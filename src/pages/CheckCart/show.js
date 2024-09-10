@@ -107,11 +107,11 @@ class Show extends React.Component {
             method: "POST",    
             data: formData
         }).then((res)=> {
-
-            let resData = res.data.data;
             console.log("getCartListFn----getCartListFn")
-            console.log(resData)
+            console.log(res)
             console.log("getCartListFn---getCartListFn")
+            let resData = res.data.data;
+            
             let orders =  [];
             if (resData.orders) {
                 orders = resData.orders;

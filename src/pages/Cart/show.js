@@ -360,7 +360,7 @@ class Show extends React.Component {
             message.error("未选择商品")
         }
     }
-    // 统计购物车数量
+    // 获后台购物车数据
     totalCartGoodCountFn = ()=> {
         let _this = this;
         let formData = new FormData();
@@ -399,8 +399,8 @@ class Show extends React.Component {
                 <div className="content_common_width">
                         <div className="search_con">
                         <div className="title">普通购买</div>
-                        <div className="search_btn"></div>       
-                        <Input className="serach_put"/>
+                        {/* <div className="search_btn"></div>       
+                        <Input className="serach_put"/> */}
                     </div>
                     {this.state.cartArr.length>0 && <GoodTable cartArr={this.state.cartArr} totalSelectGoodCount={this.state.totalSelectGoodCount} reduceFn={this.reduceFn} addFn={this.addFn} selectGoodFn={this.selectGoodFn} deleteGoodConfirmFn={this.deleteGoodConfirmFn} putCountFn={this.putCountFn} blurGoodCountFn={this.blurGoodCountFn}></GoodTable>}
         
@@ -412,7 +412,7 @@ class Show extends React.Component {
                         <div className={this.state.selectAllFlag?"item select_all on":"item select_all"} onClick={this.selectAllFn}>全选</div>
                         
                         <div className="item delete_all" onClick={this.deleteSelectAllFn}>删除选中商品</div>            
-                        <div className="item total_count">已选<span className="count"> {this.state.totalCount} </span>件商品</div>
+                        <div className="item total_count">已选<span className="count"> <span>{this.state.totalCount}</span> </span>件商品</div>
                         {/* <Link to="/checkcart" className="pay_btn">去结算</Link> */}
                         <div className="pay_btn" onClick={this.goPayFn}>去结算</div>
                         {/* <div className="item total_money">￥{this.state.totalMoney}</div>
@@ -426,6 +426,6 @@ class Show extends React.Component {
         )
     }
 }
-
+   
 
 export default Show;

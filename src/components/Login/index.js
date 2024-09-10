@@ -39,6 +39,10 @@ function LoginPage (props) {
 
         formData.append("password", passWord);
         loginApi(formData).then(function (res) {   
+            console.log("res login")
+            console.log(res)
+            
+            console.log("res login")
             let data = res.data.data;
             setStorageFn("storeId", 1)
 
@@ -67,23 +71,23 @@ function LoginPage (props) {
     return (
         <Form className="login_form_con login-form" >   
             <div className="title">账号密码登录</div>        
-            <Form.Item>
+            <div className="put_item">
                 <Input placeholder="请输入账号" className="put_val" value={phoneValue} onChange={phoneFn}></Input>
-            </Form.Item>
+            </div>
             
-            <Form.Item>
+            <div className="put_item">
                 <Input placeholder="请输入密码" className="put_val" value={passWord} onChange={passWordFn}></Input>
-            </Form.Item>
+            </div>
             
-            <Form.Item>
+            <div className="put_item">
                 <div className="sub_btn" onClick={loginFn}>登 录</div>
 
-            </Form.Item>
+            </div>
 
-            <Form.Item>
+            <div className="put_item">
                 <div className={autoLoginFlag?"select_con on":"select_con"} onClick={autoLoginFn}>下次自动登录</div>                   
                 <div className="forget_btn" onClick={props.forgetFn}>忘记密码</div>
-            </Form.Item>
+            </div>
             {contextHolder}
         </Form>
     )

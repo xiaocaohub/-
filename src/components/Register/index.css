@@ -113,7 +113,6 @@
     cursor:pointer;
     color:#666;
     padding-left:24px;
- 
  }
   .register_form_con .agreement_text .tit.on{
     background:url("../../assets/icon/icon_select_on.png") no-repeat left center;
@@ -124,7 +123,10 @@
     font-size:14px;
     color:#C6A189;
     text-decoration:none;
+   
  }
-
+ .register_form_con .agreement_text a{
+    margin-top:20px;
+ }
 
  

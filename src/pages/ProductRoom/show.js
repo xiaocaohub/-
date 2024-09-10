@@ -23,82 +23,182 @@ class Show extends React.Component {
             total: 0,
             currentPage: 1,
             pageSize: 16,
-            optionIds: ""
+
+            optionIds: {
+                categoryId: "",
+                categoryPname: "",
+                productLabel: "",
+                sort: "",
+                sortCriteria: "",
+                spaceId: "",
+                spacePname: "",
+                spaceSid: "",
+ 
+                productClass: "",
+                styleId: "",
+
+
+                stylePname: "",
+                keyword: ""
+            },
+
+            optionIdsFlag: false, // 是否渲染导航
+            
+            keyword: ""
         }
     }
     componentDidMount () {
         // this.getSpaceNavFn()
-        this.getGoodListFn()
+        this.init()
         scrollTopFn()
+        // console.log("window.location")
+        // console.log(window.location)
+        // console.log("window.location")
+        // this.getGoodListFn()
+        this.totalCartGoodCountFn()
     }
-    pageOnChange = (pageNumber)=> {
-        // console.log(pageNumber)
-    }
-    getGoodListFn = (optionIds)=> {
-        console.log("optionIds", optionIds)
-        // console.log("spaceId", spaceId)
-        // console.log("categoryId", categoryId)
-        let formData = new FormData();
-        let option = {"brandId":"","minPrice":"","maxPrice":""};
-        let storeId = getStorageFn("storeId") || 1;
-       
-       
-        let storeType = getStorageFn("storeType") || 6;
-        let productClass = "";
-        let styleId = "";
-        let sortCriteria = "";
 
-        let productLabel = "";
-        let sort = "";
+    init = ()=> {
+        // console.log("window.location")
+        // console.log(window.location)
+        // console.log("window.location")
+        let search = window.location.search;
+        let keyword = "";
+        let optionIds = this.state.optionIds;
+        // console.log("search init")
+        
+        // console.log(search)
+        // console.log("search init")
+        if (search && search.indexOf("keyword")!=-1) {
+            keyword = decodeURIComponent(search.split("keyword=")[1]);
+            optionIds.keyword = keyword;
+        }
+
+        if (search && search.indexOf("productLabel") != -1) {
+            let productLabel = search.split("productLabel=")[1];
+            optionIds.productLabel = productLabel;
+        }
+        
         this.setState({
-            optionIds: optionIds
+            // keyword: keyword
+            optionIds: optionIds,
+            optionIdsFlag: true
+        }, function () {
+            this.getGoodListFn()
         })
-        if (optionIds) {
-            if (optionIds.spaceSid && optionIds.spaceId) {
-                productClass = "-" + optionIds.spaceSid + "-" + optionIds.spaceId + "-";
+    }
+    // getGoodListFn = (optionIds)=> {
+    //     console.log("optionIds", optionIds)
+    //     let formData = new FormData();
+    //     let option = {"brandId":"","minPrice":"","maxPrice":""};
+    //     let storeId = getStorageFn("storeId") || 1;       
+    //     let storeType = getStorageFn("storeType") || 6;
+    //     let productClass = "";
+    //     let styleId = "";
+    //     let sortCriteria = "";
+    //     let productLabel = "";
+    //     let sort = "";
+    //     this.setState({
+    //         optionIds: optionIds
+    //     })
+
+    //     if (optionIds) {
+    //         if (optionIds.spaceSid && optionIds.spaceId) {
+    //             productClass = "-" + optionIds.spaceSid + "-" + optionIds.spaceId + "-";
+    //         }
+            
+    //         if (optionIds.categoryId) {
+    //             productClass += optionIds.categoryId + "-";
+    //         }
+    //         styleId = optionIds.styleId;
+
+    //         if (optionIds.sortCriteria) {
+    //             sortCriteria = optionIds.sortCriteria;
+    //         }
+    //         if (optionIds.productLabel) {
+    //             productLabel = optionIds.productLabel;
+    //         }
+
+    //         if (optionIds.sort) {
+    //             sort = optionIds.sort;
+    //         }
+    //     }
+       
+    //     formData.append("api", "app.product.listProduct");
+    //     formData.append("storeId", storeId);
+    //     formData.append("storeType", storeType);
+    //     formData.append("page", this.state.currentPage);
+    //     formData.append("pageSize", this.state.pageSize);   
+    //     formData.append("productClass", productClass);
+    //     formData.append("styleIds",  styleId);
+    //     formData.append("sortCriteria", sortCriteria);
+    //     formData.append("productLabel", productLabel);
+    //     formData.append("keyword", this.state.keyword);
+    //     formData.append("queryCriteria",  JSON.stringify(option));
+    //     formData.append("sort", sort);
+    //     request({
+    //         url: "/api/gw",
+    //         method: "POST",
+    //         data: formData
+    //     }).then((res)=> {
+    //         let resData =  res.data.data;
+    //         let goodList = resData.goodsList;    
+    //         let total = resData.total;
+    //         this.setState({
+    //             goodList: goodList,
+    //             total: total
+    //         })
+    //     })
+    // }
+    getGoodListFn = (option)=> {
+      //  console.log("option", option)
+        let productClass = "";
+        let optionIds = this.state.optionIds;
+
+        if (option) {
+            if (option.spaceSid && option.spaceId) {
+                productClass = "-" + option.spaceSid + "-" + option.spaceId + "-";
+                optionIds.productClass = productClass;
             }
             
-            if (optionIds.categoryId) {
-                productClass += optionIds.categoryId + "-";
+            if (option.categoryId) {
+                productClass += option.categoryId + "-";
+                optionIds.productClass = productClass;
             }
-            styleId = optionIds.styleId;
-
-            if (optionIds.sortCriteria) {
-
-                sortCriteria = optionIds.sortCriteria;
-            }
-            if (optionIds.productLabel) {
-                productLabel = optionIds.productLabel;
-            }
-
-            if (optionIds.sort) {
-                sort = optionIds.sort;
-            }
-            // console.log("productClass: " + productClass)
-            // console.log("productClass styleId: " + styleId)
         }
-       
-        
+        this.setState({
+            optionIds: optionIds
+        }, function () {
+            this.requestGoodListFn()
+        })
+    }
+    requestGoodListFn = ()=> {
+        let optionIds = this.state.optionIds;
+        // console.log("optionIds optionIds request")
+        // console.log(optionIds)
+        // console.log("optionIds optionIds request")
+        let formData = new FormData();
+        let option = {"brandId":"","minPrice":"","maxPrice":""};
+        let storeId = getStorageFn("storeId") || 1;       
+        let storeType = getStorageFn("storeType") || 6;
+   
         formData.append("api", "app.product.listProduct");
         formData.append("storeId", storeId);
         formData.append("storeType", storeType);
         formData.append("page", this.state.currentPage);
         formData.append("pageSize", this.state.pageSize);   
-        
-        formData.append("productClass", productClass);
-        formData.append("styleIds",  styleId);
-        formData.append("sortCriteria", sortCriteria);
-        
-        formData.append("productLabel", productLabel);
+        formData.append("productClass", optionIds.productClass);
+        formData.append("styleIds",  optionIds.styleId);
+        formData.append("sortCriteria", optionIds.sortCriteria);
+        formData.append("productLabel", optionIds.productLabel);
+        formData.append("keyword", optionIds.keyword);
         formData.append("queryCriteria",  JSON.stringify(option));
-        
-        formData.append("sort", sort);
+        formData.append("sort", optionIds.sort);
         request({
             url: "/api/gw",
             method: "POST",
             data: formData
         }).then((res)=> {
-            console.log(res)
             let resData =  res.data.data;
             let goodList = resData.goodsList;    
             let total = resData.total;
@@ -139,9 +239,9 @@ class Show extends React.Component {
         return (
             <div className="product_room_con">           
                 <div className="content_common_width">
-                    <GoodNav getGoodListFn={this.getGoodListFn} total={this.state.total}></GoodNav>
+                    {this.state.optionIdsFlag && <GoodNav getGoodListFn={this.getGoodListFn} total={this.state.total} optionIds={this.state.optionIds}></GoodNav>}
+                
                     <ul className="product_list">
-
                         {this.state.goodList.length>0 && this.state.goodList.map((item)=> {
                         
                             return (<Good key={item.id} itemData={item}></Good>)
@@ -150,33 +250,34 @@ class Show extends React.Component {
                     
                     {this.state.goodList.length == 0 && <EmptyPage></EmptyPage>}
 
-                    <div className="page_con">    
-                        <ConfigProvider locale={zh_CN}>
-                            <Pagination
-                                className="page"
-                                style={{ textAlign: "center" }}
-                                total={this.state.total}
-                                defaultCurrent={1}
-                                showSizeChanger = {false}
-                                showQuickJumper
-                                pageSize={this.state.pageSize}
-                                current={this.state.currentPage}
-                                // showTotal={totalCount => "总条数" + this.state.total + "条"}
-                                onChange={(params, state) => {
-                                    this.setState({
-                                        currentPage: params
-                                    }, function () {
-                                        this.getGoodListFn(this.state.optionIds)
-                                    })
-                                }}
-                                onShowSizeChange = {(current, size)=>{
-                                    this.setState({
-                                        pageSize: size
-                                    })
-                                }}
-                                />
-                        </ConfigProvider>
-                    </div>
+                    {this.state.goodList.length>0 && <div className="page_con">    
+                            <ConfigProvider locale={zh_CN}>
+                                <Pagination
+                                    className="page"
+                                    style={{ textAlign: "center" }}
+                                    total={this.state.total}
+                                    defaultCurrent={1}
+                                    showSizeChanger = {false}
+                                    showQuickJumper
+                                    pageSize={this.state.pageSize}
+                                    current={this.state.currentPage}
+                                    // showTotal={totalCount => "总条数" + this.state.total + "条"}
+                                    onChange={(params, state) => {
+                                        this.setState({
+                                            currentPage: params
+                                        }, function () {
+                                            this.getGoodListFn(this.state.optionIds)
+                                        })
+                                    }}
+                                    onShowSizeChange = {(current, size)=>{
+                                        this.setState({
+                                            pageSize: size
+                                        })
+                                    }}
+                                    />
+                            </ConfigProvider>
+                        </div>
+                    }
                 </div>
              
                 {this.props.state.commonState.showCartFlag && <SmallCart hideSmallCart={this.props.hideSmallCartFn} totalCartGoodCountFn={this.totalCartGoodCountFn}></SmallCart>}

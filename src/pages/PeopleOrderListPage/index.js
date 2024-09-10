@@ -1,138 +1,12 @@
 import React from "react";
 import {Link} from "react-router-dom";
-import {Tabs, Table, Button, Pagination  } from "antd";
+import {Tabs, Table, Button, Pagination, message, Modal  } from "antd";
 
 import "./index.css";  
 
 import {setStorageFn, getStorageFn} from "../../utils/localStorage";
 import request from "../../api/request";
-const columns = [
-    {
-      title: '订单编号',
-      dataIndex: 'nameList',
-      key: 'nameList',
-      render: (item)=> {
-        return (
-            <div>
-                <p>{item.order}</p>
-                <p>商品种数: {item.prodcutNum}</p>
-                <p>商品件数: {item.num}</p>
-            </div>    
-        )
-      }
-    },
-    {
-      title: '时间管理',
-      dataIndex: 'times',
-      key: 'times',
-      render: (item)=> {
-          return (
-            <div>
-                <p>下单时间: {item.createTime?item.createTime:"-----"}</p>
-                <p>期望发货时间: {item.estimatedDeliveryTime?item.estimatedDeliveryTime:"-----"}</p>
-                <p>预计发货时间: {item.estimatedDeliveryTime?item.estimatedDeliveryTime:"-----"}</p>
-                <p>实际发货时间: {item.realDeliveryTime?item.realDeliveryTime:"-----"}</p>
-            </div>
-          )  
-      }
-    },
-
-    {
-      title: '下单账号',
-      dataIndex: 'userNumber',
-      key: 'userNumber',
-
-      render: (item)=> {
-           
-          return (
-              <div>
-                 <p>{ item.uname }</p>
-                 <p>{ item.phone }</p>
-              </div>
-          )
-      }
-    },
-    {
-        title: '销售总额',
-        dataIndex: 'totalPrice',
-        key: 'totalPrice',
-        render: (item)=> {
-            
-            return (<p>￥{item}</p>)      
-        }
-    },
-    {
-      title: '应付总额',
-      dataIndex: 'payPrice',
-      key: 'payPrice',
-      render: (item)=> {
-          return (<p>￥{item}</p>)
-      }
-    },
-    {
-      title: '客户信息',
-      dataIndex: 'customerInfo',
-      key: 'customerInfo',
-      render: (item)=> {
-        // console.log("customerInfo")
-        // console.log(item)
-        // console.log("customerInfo")
-          return (
-              <div>
-                  <p>{item.uName}</p>
-                  <p>{item.phone}</p>
-                  <p>{item.address}</p>
-              </div>
-          )
-      }
-    },     
-    {
-      title: '订单状态',
-      dataIndex: 'orderState',
-      key: 'orderState',
-      render: (item)=> {
-          switch (item) {
-              
-              case 1: 
-                  return "代付款";
-                  break;
-              case 2:
-                  return "审核中";
-              case 3: 
-                  return "配货中";
-                  break;
-              case 4: 
-
-                  return "已发货";
-                  break;
-              case 5: 
-                  return "已完成";
-                  break;
-              case 6: 
-                  return "已取消";
-                  break;
-          }
-      }
-    },
-    {
-      title: '操作',
-      dataIndex: 'operateText',
-      key: 'operateText',
-      render: (item)=> {
-          return (
-              <div>
-                  <Button className="operate_btn">{item.payBtn}</Button> <br/>
-                  <Button className="operate_btn"><Link to={ "/people/order/detail/" + item.order }>{item.orderDetail}</Link></Button><br/>
-
-                  <Button className="operate_btn">{item.exportOrder}</Button><br/>
-                  <Button className="operate_btn">{item.buyRepeat}</Button><br/>
-                  <Button className="operate_btn">{item.cancelOrder}</Button>
-              </div>
-          )
-      }
-    }
-]
-
+import Empty from "../../components/Empty";
 class PeopleOrderListPage extends React.Component {
     constructor (props) {
         super(props)
@@ -176,6 +50,9 @@ class PeopleOrderListPage extends React.Component {
                 }
             ],
             orderArr: [],
+            status: "", // 订单状态
+            currentPage: 1,
+            pageSize: 10,
             orderTotalCount: 0
         } 
     }
@@ -186,15 +63,18 @@ class PeopleOrderListPage extends React.Component {
 
         let navItem = this.state.tableNavArr[index];
         this.setState({
-            currentNavIndex: index
+         
+            currentNavIndex: index,
+            status: navItem.status,
+            currentPage: 1
         }, function () {
-            this.getOrderListFn(navItem.status)
+            this.getOrderListFn()
         })
     }
     goorderDetailFn = (item)=>{
         window.localStorage.href = "/people/order/detail"
     }
-    getOrderListFn = (status)=> {
+    getOrderListFn = ()=> {
         let _this = this;
         let formData = new FormData();
         let token = getStorageFn("token");
@@ -204,9 +84,9 @@ class PeopleOrderListPage extends React.Component {
         formData.append("storeType", 6);
         formData.append("orderParentNo", ""); 
     
-        formData.append("status", status || ""); 
-        formData.append("pageSize", 5); 
-        formData.append("pageNum", 1); 
+        formData.append("status",  this.state.status); 
+        formData.append("pageSize", this.state.pageSize); 
+        formData.append("pageNum", this.state.currentPage); 
         formData.append("startTime", ""); 
         formData.append("endTime", ""); 
         formData.append("keyWords", ""); 
@@ -215,6 +95,9 @@ class PeopleOrderListPage extends React.Component {
             method: "POST",    
             data: formData
         }).then((res)=> {
+            console.log("res order")
+            console.log(res)
+            console.log("res order")
             let resData = res.data.data;
             let resOrderArr = resData.records;
             let totalCount = resData.total;
@@ -266,7 +149,188 @@ class PeopleOrderListPage extends React.Component {
             })
         })
     }
+
+
+    cancelOrderFn = (rowData)=> {
+        console.log(rowData)
+        let _this = this;
+        let formData = new FormData();
+        let token = getStorageFn("token");
+        // let option = {"brandId":"","minPrice":"","maxPrice":""};
+        formData.append("api", "app.orderV2.buyAgain");    
+        formData.append("accessId", token);  
+        formData.append("storeId", 1);
+        formData.append("storeType", 6);
+        formData.append("orderParentNo", rowData.nameList.order);  
+
+        Modal.confirm({
+            content: "确认取消吗?",
+            okText:"确认",
+            
+            cancelText: "取消",
+            title: "温馨提示",
+            onOk: function () {
+                request({
+                    url: "/api/gw",         
+        
+                    method: "POST",    
+                    data: formData
+                }).then((res)=> {
+                    console.log("res cancel")
+                    console.log(res)
+        
+                    if (res.data.code == 200) {
+                        message.success(res.data.message)
+                        window.location.href = "/people/order/list"
+                    } else {
+                        message.success(res.data.message)
+                    }
+                })
+            }
+        })
+     
+    }
     render () {
+        const columns = [
+            {
+              title: '订单编号',
+              dataIndex: 'nameList',
+              key: 'nameList',
+              width: '15%',
+              render: (item)=> {
+                return (
+                    <div>
+                        <p>{item.order}</p>
+                        <p>商品种数: {item.prodcutNum}</p>
+                        <p>商品件数: {item.num}</p>
+                    </div>    
+                )
+              }
+            },
+            {
+              title: '时间管理',
+              dataIndex: 'times',
+              key: 'times',
+              width: '15%',
+              render: (item)=> {
+                  return (
+                    <div>
+                        <p>下单时间: {item.createTime?item.createTime:"-----"}</p>
+                        <p>期望发货时间: {item.estimatedDeliveryTime?item.estimatedDeliveryTime:"-----"}</p>
+                        <p>预计发货时间: {item.estimatedDeliveryTime?item.estimatedDeliveryTime:"-----"}</p>
+                        <p>实际发货时间: {item.realDeliveryTime?item.realDeliveryTime:"-----"}</p>
+                    </div>
+                  )  
+              }
+            },
+            {
+              title: '下单账号',
+              dataIndex: 'userNumber',
+              key: 'userNumber',
+              width: '15%',
+              render: (item)=> {
+                   
+                  return (
+                      <div>
+                         <p>{ item.uname }</p>
+                         <p>{ item.phone }</p>
+                      </div>
+                  )
+              }
+            },
+            {
+                title: '销售总额',
+                dataIndex: 'totalPrice',
+                key: 'totalPrice',
+
+                width: '8%',
+
+
+                render: (item)=> {    
+                    return (<p>￥{item}</p>)      
+                }
+            },
+            {
+              title: '应付总额',
+              dataIndex: 'payPrice',
+              key: 'payPrice',
+              width: '8%',
+              render: (item)=> {
+                  return (<p>￥{item}</p>)
+              }
+            },
+            {
+              title: '客户信息',
+              dataIndex: 'customerInfo',
+              key: 'customerInfo',
+              width: '20%',
+              render: (item)=> {
+                // console.log("customerInfo")
+                // console.log(item)
+                // console.log("customerInfo")
+                  return (
+                      <div>
+                          <p>{item.uName}</p>
+                          <p>{item.phone}</p>
+                          <p>{item.address}</p>
+                      </div>
+                  )
+              }
+            },     
+            {
+              title: '订单状态',
+              dataIndex: 'orderState',
+              key: 'orderState',
+              width: '8%',
+              render: (item)=> {
+                  switch (item) {
+                      
+                      case 1: 
+                          return "代付款";
+                          break;
+                      case 2:
+                          return "审核中";
+                      case 3: 
+                          return "配货中";
+                          break;
+                      case 4: 
+        
+                          return "已发货";
+                          break;
+                      case 5: 
+                          return "已完成";
+                          break;
+                      case 6: 
+                          return "已取消";
+                          break;
+                  }
+              }
+            },
+            {
+              title: '操作',
+              dataIndex: 'operateText',
+              key: 'operateText',
+
+              width: '10%',
+              render: (item, itemData)=> {
+                  console.log("index table")
+                  console.log(itemData)
+                  console.log("index table")
+                  return (
+                      <div className="operate_btn_group">
+                          {/* <div className="btn">{item.payBtn}</div> <br/> */}
+                          <div className="btn"><Link to={ "/people/order/detail/" + item.order }>{item.orderDetail}</Link></div><br/>
+        
+                          {/* <div className="btn">{item.exportOrder}</div><br/> */}
+                          <div className="btn">{item.buyRepeat}</div><br/>
+                          <div className="btn" onClick={()=>{this.cancelOrderFn(itemData)}}>{item.cancelOrder}</div>
+                       
+                      </div>
+                  )
+              }
+            }
+        ]
+        
         const dataSource = [
             {
               key: '1',
@@ -337,17 +401,24 @@ class PeopleOrderListPage extends React.Component {
                 <div className="table_con">
                     <ul className="nav_list">
                         {this.state.tableNavArr.map((item, index)=> {
-                              return (<li className={this.state.currentNavIndex==index?"on": ""} onClick={()=>{this.selectNavFn(index)}}>{ item.title }</li>)
+                              return (<li className={this.state.currentNavIndex==index?"on": ""} key={index} onClick={()=>{this.selectNavFn(index)}}>{ item.title }</li>)
                         })}
                     </ul>
 
 
 
-                    {this.state.orderArr.length>0 && <Table  bordered={true} dataSource={this.state.orderArr} columns={columns} className="order_table" pagination={false}/>}
-                    
-                    <div className="page_con">
-                        <Pagination defaultCurrent={1} total={50} className="page"/>
-                    </div> 
+                    {this.state.orderArr.length>0 && <Table  bordered={true} dataSource={this.state.orderArr} columns={columns} className="order_table" pagination={false} scroll={{ x: 900, y: 500 }}/>}
+                    {this.state.orderArr.length == 0 && <Empty></Empty>}
+                    {this.state.orderArr.length>0 && <div className="page_con">
+                  
+                        <Pagination defaultCurrent={1} total={this.state.orderTotalCount}  pageSize={this.state.pageSize} className="page"  onChange={(params, state) => {
+                                    this.setState({
+                                        currentPage: params
+                                    }, function () {
+                                        this.getOrderListFn(this.state.optionIds)
+                                    })
+                                }}/>
+                    </div> }
                 </div>
             </div>
         )

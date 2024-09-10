@@ -14,15 +14,13 @@
 
 .login_page .login_con{
 
-    width:50%;
+    width:972px;
 
 
-    
-    position:absolute;
-    
-    left:25%;
+    position:absolute;    
+    left:50%;
     top:20%;
-     
+    margin-left: -486px;
 }
 .login_page .login_back{
     display:block;

@@ -11,21 +11,25 @@ class BannerCon extends React.Component {
             bannerList: [
                 {
                     id: 0,
-                    src: require("../../assets/banner1.png")
+                    src: require("../../assets/banner1.png"),
+                    url: "/us"
                 },
 
                 {
                     id: 1,
-                    src: require("../../assets/banner2.png")
+                    src: require("../../assets/banner2.png"),
+                    url: "/series/list/94"
                 },
                 {
                     id: 2,
-                    src: require("../../assets/banner3.png")
+                    src: require("../../assets/banner3.png"),
+                     url: "/series/list/95"
                 },
                 {
 
                     id: 3,
-                    src: require("../../assets/banner4.png")
+                    src: require("../../assets/banner4.png"),
+                     url: "/series/list/96"
                 }
             ]
         }
@@ -52,8 +56,8 @@ class BannerCon extends React.Component {
                     {this.state.bannerList.map((item, index)=>{
                         return (
                             <div key={index}>
-                                <Link to="/">
-                                 
+
+                                <Link to={item.url}>         
                                     <img src={item.src} className="banner_img"/>
                                 </Link> 
                             </div>

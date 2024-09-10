@@ -18,18 +18,20 @@ class HotSell extends React.Component {
                    
                    
                         <div className="hot_big">
-                            <img src={hostBig} alt=""/>
+                            <Link to="/productroom?productLabel=101"><img src={hostBig} alt=""/></Link>
                         </div>
                     
                         
                         <div className="hot_small_con" >
                             <div className="hot_small">
-                                <img src={hostSmalla} alt=""/>
-                                <Link to="/" className="search">点我搜索</Link>
+                                <Link to="/productroom?productLabel=102"><img src={hostSmalla} alt=""/>
+                                    <div className="search">点我搜索</div>
+                                </Link>
                             </div>
                             <div className="hot_small">
-                                <img src={hostSmallb} alt=""/>
-                                <Link to="/" className="search">点我搜索</Link>
+                                <Link to="/productroom?productLabel=103"><img src={hostSmallb} alt=""/>
+                                   <div className="search">点我搜索</div>
+                               </Link>
                             </div>
                         </div>
                

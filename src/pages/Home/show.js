@@ -17,11 +17,12 @@ import popularImg from "../../assets/popular_img.png";
 import {homeInfoApi, getStyleApi, getStyleGoodArrApi} from "../../api/home";
 
 import {setStorageFn, getStorageFn} from "../../utils/localStorage";
+import request from "../../api/request";
 import {scrollTopFn} from "../../utils/imgAuto";
 import titleImg  from "../../assets/index_title.png";
 
 import titleImg2 from "../../assets/index_title2.png";
-import request from "../../api/request";
+
 import EmptyPage from "../../components/Empty";
 
 class Show extends React.Component {
@@ -29,10 +30,11 @@ class Show extends React.Component {
         super(props)
         this.state = {
             styleNav: [
-                {id: 0, text:"奶油"}
+                // {id: 0, text:"奶油"}
             ],
             styleIndex: 0,
-            styleId: 0,
+
+            styleId: 1,
             styleGoodArr: [],
             showCartFlag: false, // 全局
 
@@ -41,16 +43,17 @@ class Show extends React.Component {
             recomendGoodArr: [] // 品推荐
         }
     }
-    componentDidMount () {
 
+    componentDidMount () {
         this.getHotSellInfoFn()
-        
         this.getRecomendGoodFn()
         this.getStyleFn()
         scrollTopFn()
         this.getCartInfoFn()
+        this.totalCartGoodCountFn()
     }
     // 热销爆款
+
     getHotSellInfoFn = ()=> {
         let formData = new FormData();
         let storeId = getStorageFn("storeId") || 1;
@@ -58,12 +61,10 @@ class Show extends React.Component {
         formData.append("api", "app.product.listProduct");
         formData.append("storeId", storeId);
         formData.append("storeType", storeType);
-
         formData.append("page", 1);
         formData.append("pageSize", 20);
         formData.append("productLabel", 101);
         formData.append("styleIds", "");
-
         homeInfoApi(formData).then((res)=>{
             let hotSellArr = res.data.data.goodsList;   
             this.setState({
@@ -102,7 +103,10 @@ class Show extends React.Component {
         formData.append("key", "");
         formData.append("pageSize", 10);
         getStyleApi(formData).then((res)=>{  
-            console.log(res.data)   
+
+            // console.log("style arr")
+            // console.log(res.data) 
+            // console.log("style arr")  
             let styleArr = res.data.data.list;
             let styleId = styleArr[0].value;
             this.setState({
@@ -115,9 +119,8 @@ class Show extends React.Component {
     }
     styleNavSelectFn = (index)=> {
         let styleNav = this.state.styleNav;
-
         let item = styleNav[index];
-
+       
         this.setState({ 
             styleIndex: index,
             styleId: item.value
@@ -126,22 +129,24 @@ class Show extends React.Component {
         })
     }
     getStyleGoodArrFn = ()=> {   
+        let _this = this;
         let formData = new FormData();
         let storeId = getStorageFn("storeId") || 1;
         let storeType = getStorageFn("storeType") || 6;
         let styleId = this.state.styleId;
         formData.append("api", "app.product.listProduct"); 
+        
+        
         formData.append("storeId", storeId);
         formData.append("storeType", storeType);
         formData.append("page", 1);
         formData.append("pageSize", 6);
         // formData.append("productLabel", 102);
-
-
         formData.append("styleIds", styleId);
+
         getStyleGoodArrApi(formData).then((res)=>{
             let goodArr = res.data.data.goodsList;
-            this.setState({
+            _this.setState({
                 styleGoodArr: goodArr
             })
         })
@@ -170,12 +175,6 @@ class Show extends React.Component {
             setStorageFn("cartArr", resData)
         })
     }
-
-    goCartFn = ()=> {
-        
-    }
-
-
     // 统计购物车数量
     totalCartGoodCountFn = ()=> {
         let _this = this;
@@ -203,8 +202,7 @@ class Show extends React.Component {
     }
     render () {
         return (          
-
-            <div className="main_content" onClick={this.getStyleGoodArrFn}>
+            <div className="main_content">
                 <BannerCon></BannerCon>
                      
                 {/* 热销爆款 */}
@@ -244,27 +242,29 @@ class Show extends React.Component {
 
                 <img src={popularImg} className="popular_img" alt=""/>
 
-                <div className="content_common_width">
-                        <div className="king_good_list_con">
-                            <ul className="nav_list">
-                                {this.state.styleNav.map((item, index)=> {
-                                    return (<li key={item.id} className={this.state.styleIndex===index?"on":""} onClick={()=>{this.styleNavSelectFn(index)}}>{item.text}</li>)
-                                })}
-                            </ul>
+                <div className="king_style_good_list_con">
+                    <div className="content_common_width">
+                            <div className="king_good_list_con">
+                                <ul className="nav_list">
+                                    {this.state.styleNav.map((item, index)=> {
+                                        return (<li key={item.id} className={this.state.styleIndex===index?"on":""} onClick={()=>{this.styleNavSelectFn(index)}}>{item.text}</li>)
+                                    })}
+                                </ul>
 
-                            <ul className="good_list">
-                                {/* <KindGood></KindGood> */}                             
-                                {this.state.styleGoodArr.length>0 && this.state.styleGoodArr.map((item, index)=>{
-                                    return (<StyleGood styleGood={item} key={index}></StyleGood>)
-                                })}
-                             
-                            </ul>
-            
-                            {this.state.styleGoodArr.length==0 && <EmptyPage></EmptyPage>}
-                        </div>
-                     
+                                <ul className="good_list">
+                                    {/* <KindGood></KindGood> */}                             
+                                    {this.state.styleGoodArr.length>0 && this.state.styleGoodArr.map((item, index)=>{
+                                        return (<StyleGood styleGood={item} key={index}></StyleGood>)
+                                    })}
+                                
+                                </ul>
+                
+                                {this.state.styleGoodArr.length==0 && <EmptyPage></EmptyPage>}
+                            </div>
+                        
+                    </div>
                 </div>
-            
+                
                 {this.props.state.commonState.showCartFlag && <SmallCart hideSmallCart={this.props.hideSmallCartFn} totalCartGoodCountFn={this.totalCartGoodCountFn}></SmallCart>}
             </div>
         )

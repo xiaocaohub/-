@@ -73,7 +73,7 @@ class PeopleOrderDetail extends React.Component {
                 return "已取消";
                 break ;
             case 1: 
-                return "代付款";
+                return "待付款";
                 break;
             case 2: 
                 return "备货中";
@@ -99,13 +99,17 @@ class PeopleOrderDetail extends React.Component {
             <div className="people_order_detail">    
                 
                 <div className="step_con">
-                    <Steps current={2}>
-                        <Step title="提交订单" description="2024-07-03 19:42:26" />
+                    <Steps current={this.state.orderInfo.status}>
+                        <Step title="待付款" description="" />
+                        <Step title="备货中" description="" />
+                         
+                        <Step title="待发货" description="" />
+                         
+                        <Step title="已发货" description="" />
+                        <Step title="已完成" description="" />
+                        {this.state.orderInfo.status==6 && <Step title="已退款" description="" />}
+                        {this.state.orderInfo.status==7 && <Step title="已取消" description="" />}
                         
-                        <Step title="已付款" subTitle="Left 00:00:08" description="This is a description." />
-                        <Step title="配货中" description="This is a description." />
-                        <Step title="已发货" description="This is a description." />
-                        <Step title="已完成" description="This is a description." />
                     </Steps>
                 </div>
 
@@ -126,7 +130,7 @@ class PeopleOrderDetail extends React.Component {
                             <div className="btn">去付款</div>
 
                             <div className="btn">取消订单</div>
-                            <div className="btn">导出订单</div>
+                            {/* <div className="btn">导出订单</div> */}
                             <div className="btn">再次购买</div>
                         </div>
                     </li>
@@ -206,9 +210,9 @@ class PeopleOrderDetail extends React.Component {
                                                 <div className="good_info">
                                                     <img src={goodImg} alt="" className="good_img"/>
                                                     <div className="text_con">
-                                                    <div className="tit">{goodItem.productName}</div>
-                                                    <p className="txt">编码: {goodItem.productCode} </p>
-                                                    <p className="txt">型号: {goodItem.marque}</p>
+                                                        <div className="tit">{goodItem.productName}</div>
+                                                        <p className="txt">编码: {goodItem.productCode} </p>
+                                                        <p className="txt">型号: {goodItem.marque}</p>
                                                     </div>
                                                 </div>
                                                 <div className="size"><span>{goodItem.attribute}</span></div>

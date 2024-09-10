@@ -89,7 +89,7 @@ class Pay extends React.Component {
                                     <span className="item">订单编号: {this.state.orderNumber}</span>
                                     <span className="item">应付款金额: {this.state.payTotal.totalPrice}元</span>
                                 </div>
-                                <div className="txt">本次支付金额: <span className="money"> {this.state.payTotal.totalPrice}元</span> </div>
+                                {/* <div className="txt">本次支付金额: <span className="money"> {this.state.payTotal.totalPrice}元</span> </div> */}
                             </div>
                         </div>
 

@@ -120,7 +120,6 @@ class CartSmall extends React.Component {
             totalMoney: totalMoney
         })
     }
-
     selectAllFn = ()=> { 
         let cartArr = this.state.cartArr;
         let selectAllFlag = !this.state.selectAllFlag;
@@ -128,22 +127,24 @@ class CartSmall extends React.Component {
         cartArr.forEach((item,index)=> {
             item.selectFlag = selectAllFlag ;
         })
+     
         this.setState({
             cartArr: cartArr,
             selectAllFlag: selectAllFlag
         })
     }
+
     reduceFn = (item, index)=> {
       
-        let cartArr = this.state.cartArr;
-     
+    
+        let cartArr = this.state.cartArr; 
         if (item.goods_num > 1) {
             cartArr[index].goods_num = item.goods_num - 1;
         }
+
         this.changeGoodCountFn(cartArr[index])
         
-        this.setState({
-         
+        this.setState({ 
             cartArr: cartArr
         }, function () {
             this.totalAll()
@@ -152,19 +153,18 @@ class CartSmall extends React.Component {
     addFn = (item, index)=> {
         let cartArr = this.state.cartArr;
         cartArr[index].goods_num = item.goods_num + 1;
+
         this.changeGoodCountFn(cartArr[index])
-     
         this.setState({
             cartArr: cartArr
         }, function () {
             this.totalAll()
         })
     }
-
     changeGoodCountFn = (selectGood)=> {   
         console.log("selectGood")
-        console.log(selectGood)
-      
+     
+        console.log(selectGood) 
         let _this = this; 
         let formData = new FormData();
         let token = getStorageFn("token");
@@ -181,23 +181,21 @@ class CartSmall extends React.Component {
             data: formData
         }).then((res)=> {
             // console.log(res.data)
-          
         })
     }
     putCountFn = (e, item, index)=> {
         let value = e.target.value;
         item.goods_num = value;
         let cartArr = this.state.cartArr;
-
         cartArr[index] = item;
         this.setState({
             cartArr: cartArr
         })
     }
     blurGoodCountFn = (goodItem)=> {
-        console.log("blurGoodCountFn goodItem")
-        console.log(goodItem)
-        console.log("blurGoodCountFn goodItem")
+        // console.log("blurGoodCountFn goodItem")
+        // console.log(goodItem)
+        // console.log("blurGoodCountFn goodItem")
         this.changeGoodCountFn(goodItem)
     }
     deleteGoodConfirmFn = (item, index)=> {
@@ -207,17 +205,14 @@ class CartSmall extends React.Component {
         let deleteId = item.id;
         Modal.confirm({
             title: "温馨提示",
-
             content: "确认删除吗?",
             cancelText: "取消",
             okText: "确认",
-
             onOk: function () {
                 _this.deleteGoodFn(deleteId)
             }
         })
     }
-
     deleteGoodFn = (deleteId)=> {   
         let _this = this; 
         let formData = new FormData();
@@ -227,6 +222,7 @@ class CartSmall extends React.Component {
         formData.append("storeId", 1);
         formData.append("storeType", 6);
         formData.append("cartIds", deleteId)
+
 
         request({
             url: "/api/gw",         
@@ -239,11 +235,15 @@ class CartSmall extends React.Component {
                _this.getCartInfoFn()
 
             } else {
+        
+        
                 message.error(res.data.message)
             }
         })
     }
+
     deleteSelectAllFn = ()=> {
+    
         let _this = this;
         let cartArr = this.state.cartArr;
         let length = cartArr.length;
@@ -266,8 +266,7 @@ class CartSmall extends React.Component {
                     onOk: function () {
                         let deleteIds = "";
                         for (let i=length-1; i>=0; i--) {
-                            if (cartArr[i].selectFlag) {
-                             
+                            if (cartArr[i].selectFlag) {                        
                                 deleteIds += cartArr[i].id + ",";
                             }
                         } 
@@ -277,29 +276,20 @@ class CartSmall extends React.Component {
             }
         }
     }
-
     // 获后台购物车数据
     getCartInfoFn = ()=> {
         let _this = this;
         let formData = new FormData();
         let token = getStorageFn("token");
-    
         formData.append("api", "app.cart.index");    
         formData.append("accessId", token);  
         formData.append("storeId", 1);
-        
         formData.append("storeType", 6);
-      
-      
-      
-      
         request({
             url: "/api/gw",         
             method: "POST",    
             data: formData
-
         }).then((res)=> {
-      
             let resData = res.data.data.data;
             resData.forEach((item, index)=>{
                 item.selectFlag = item.checked;
@@ -309,18 +299,15 @@ class CartSmall extends React.Component {
             }, function () {
                 _this.totalAll()
                 _this.initFn()
-    
-                console.log("delete ----------------delete")
+                // console.log("delete ----------------delete")
                 _this.props.totalCartGoodCountFn()
             })
-
             setStorageFn("cartArr", resData)
         })
     }
     render () {
         return (
             <div className="show_small_cart">
-        
                 <div className="shadow"></div>    
                 <div className="cart_small_con">
                     <div className="top_title">

@@ -69,9 +69,15 @@ class Offline extends React.Component {
         })
     }
 
-    selectDateFn = (date, dateString)=> {
+    // selectDateFn = (date, dateString)=> {
+    //     this.setState({
+    //         date: dateString
+    //     })
+    // }
+    selectDateFn = (e)=> {
+        let value = e.target.value;        
         this.setState({
-            date: dateString
+            date: value
         })
     }
     selectImgFn = (e) => {
@@ -235,7 +241,10 @@ class Offline extends React.Component {
                         </li>
                         <li>
                             <div className="title">实际汇款时间</div>
-                            <DatePicker className="date" onChange={this.selectDateFn}/>
+
+
+                            <Input type="date" value={this.state.date} className="date_con" placeholder="年-月-日" onChange={this.selectDateFn} />
+                            {/* <DatePicker className="date" onChange={this.selectDateFn}/> */}
                         </li>
                         <li>
                             <div className="title">上传汇款凭证</div>
@@ -260,7 +269,7 @@ class Offline extends React.Component {
                             <div className={this.state.fileList.length>=5?"upload_btn on":"upload_btn"}>
                                 <input type="file" className="file" onChange={(e) => this.selectImgFn(e)} multiple="multiple"/>
                             </div>
-                            <div className="txt">最多上传5张图 (每张不超过1M) 请一定按照订单金额 (精准到小数点2位) 付款, 否则财务审核不通过, 视为无效订单!</div>
+                            <div className="txt img_txt"><span>最多上传5张图 (每张不超过1M) 请一定按照订单金额 (精准到小数点2位) 付款, 否则财务审核不通过, 视为无效订单!</span></div>
                         </li>
                     </ul>
                 </div>

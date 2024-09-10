@@ -55,6 +55,7 @@
     padding:20px 0;
     overflow:hidden;
     border-top:1px solid #E1E1E1;
+    font-size:12px;
 }
 .cart_page_con .good_table .good_list > li.on{
     
@@ -100,7 +101,7 @@
 .cart_page_con .good_table .good_list  .info .intro .txt{
     max-height:31px;
     line-height:15px;
-    font-size:14px;
+    font-size:12px;
     overflow:hidden;
 }
 .cart_page_con .good_table .good_list  .info .intro .size{
@@ -108,7 +109,7 @@
     line-height:15px;
     color:#666;
     margin-top:10px;
-    font-size:14px;
+    font-size:12px;
     overflow:hidden;
 }
 .cart_page_con .good_table .good_list .good_code{
@@ -116,7 +117,7 @@
     line-height:80px;    
     text-align:center;
     overflow:hidden;
-    font-size:14px;
+ 
 }
 
 .cart_page_con .good_table .good_list .vol{
@@ -124,7 +125,7 @@
     line-height:80px;
     text-align:center;
     overflow:hidden;
-    font-size:14px;
+ 
 }
 .cart_page_con .good_table .good_list .price{
     width:9%;
@@ -133,7 +134,7 @@
 
     text-align:center;
     overflow:hidden;
-    font-size:14px;
+ 
 }
 
 .cart_page_con .good_table .good_list .count_con{
@@ -146,7 +147,7 @@
     text-align:center;
     border:1px solid #E1E1E1 ;
     float:left;
-    font-size:14px;
+ 
  
     overflow:hidden;
     margin-top:23px;
@@ -174,7 +175,7 @@
     line-height:80px;
     text-align:center;
     color:#E61D40;
-    font-size:14px;
+ 
     overflow:hidden;
 }
 .cart_page_con .good_table .good_list  .operate{

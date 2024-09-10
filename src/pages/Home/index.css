@@ -77,7 +77,12 @@
 .popular_img{
     display:block;
     width:100%;
-    margin:80px 0 56px;
+    margin-top:80px;
+}
+.king_style_good_list_con{
+    padding-top: 55px;
+ 
+    background: #F5F5F5;
 }
 .king_good_list_con{
     margin-bottom:100px;

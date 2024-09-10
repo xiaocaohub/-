@@ -1,10 +1,11 @@
 .pay_over_text_con{
     background:#fff;
     border:1px solid transparent;
+
+    margin: 20px 0;
 }
 .pay_over_text{
     width:710px;
-
     overflow:hidden;
     margin:127px auto 0;
 }
@@ -17,13 +18,18 @@
 
 .pay_over_text .text_con{   
     width:642px;
-    height:500px;
+    min-height:500px;
     float:right;
  
+    font-size:14px;
+    margin-bottom: 20px;
 }
 
-.pay_over_text .text_con .big_title{ 
+
+.pay_over_text .text_con .big_tit{ 
     font-size:20px;
+    margin-top: 8px;
+    margin-bottom: 15px;
 }
 
 .pay_over_text .text_con p span{
@@ -36,6 +42,10 @@
 }
 .pay_over_text .text_con a{
     margin-right:20px;
+    text-decoration: none;
+
+    font-size: 14px;
+    color: #0D97E5;
 }
 
 

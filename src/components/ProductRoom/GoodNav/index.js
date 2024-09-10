@@ -11,6 +11,7 @@ import {getStorageFn} from "../../../utils/localStorage";
 class GoodNav extends React.Component {
     constructor (props) {
         super(props)
+       
         this.state = {
             // 空间导航
             spaceNavArr: [],
@@ -70,7 +71,7 @@ class GoodNav extends React.Component {
                 },
                 {
                     id: 1,
-                    title: "好货物",
+                    title: "好物榜",
                     goodId: 101
                 },
                 {
@@ -85,12 +86,62 @@ class GoodNav extends React.Component {
                 }
             ],
             currentFilterIndex:0
-                       
         }
     }
     componentDidMount () {
         this.getSpaceNavFn()
         this.getStyleNavFn()
+        this.init()
+    }
+
+    init = ()=> {
+        let _this = this;
+        let productLabel = this.props.optionIds.productLabel;
+        let currentFilterIndex = 0;
+        if (productLabel) {
+            if (productLabel == 101) {
+                currentFilterIndex = 1;
+            } 
+            if (productLabel == 102) {
+                currentFilterIndex = 2;
+            }
+            if (productLabel == 103) {
+                currentFilterIndex = 3;
+            }
+        }
+        this.setState({
+            currentFilterIndex: currentFilterIndex,
+            navOption: this.props.optionIds
+        })
+
+        setTimeout(()=>{
+            _this.clickNav()
+        }, 1500)
+       
+    }
+
+    // 触发导航
+    clickNav = ()=> {
+        let btnArr = document.querySelectorAll(".space_list > li");
+       
+        let search = window.location.search;
+        let index = null;
+        if (search) {
+            if (search.indexOf("navBtn") != -1) {
+                index = parseInt(search.split("navBtn=")[1]);
+                console.log("location window index")
+                console.log(typeof index)
+                
+                
+                console.log( index)
+                console.log("location window index")
+                btnArr[index].click()
+            }
+        }
+        // console.log("location window")
+        // console.log(window.location)
+        // console.log("location window")
+        // btnArr[1].click()
     }
     styleSelectMoreFn = ()=> {
         let styleHover = !this.state.styleHover; 
@@ -100,9 +151,6 @@ class GoodNav extends React.Component {
     }
     selectStyleHoverFn = (index)=> {   
         let styleNavArr = this.state.styleNavArr;
-        // console.log("styleNavArr[index]")
-        // console.log(styleNavArr[index])
-        // console.log("styleNavArr[index]")
         let styleId = parseInt(styleNavArr[index].value);
         let navOption = this.state.navOption;
         navOption.styleId = styleId;
@@ -127,14 +175,6 @@ class GoodNav extends React.Component {
                 styleNameSelectArr.push(item.text);
             }
         })
-        // let styleId = styleIdSelectArr.join(",");
-        // let stylePname = styleNameSelectArr.join(", ");
-        // navOption.styleId = styleId;
-        // navOption.stylePname = stylePname;
-
-        // console.log("style styleIdSelectArr" )
-        // console.log(this.state.styleIdSelectArr)
-        // console.log("style styleIdSelectArr")
         this.setState({
             styleNavArr: styleNavArr,
             styleIdSelectArr: styleIdSelectArr,
@@ -143,8 +183,6 @@ class GoodNav extends React.Component {
         })
     }
     cancelStyleFn = ()=> {
-
-        // console.log(this.state.styleNavArr)
         let styleNavArr = this.state.styleNavArr;
         styleNavArr.forEach((item)=> {
             item.checked = false;
@@ -160,17 +198,12 @@ class GoodNav extends React.Component {
         let styleNameSelectArr = this.state.styleNameSelectArr;
         let styleId = styleIdSelectArr.join(",");
         let stylePname = styleNameSelectArr.join(", ");
-        // console.log("styleIdSelectArr")
-        // console.log("styleIdSelectArr", styleIdSelectArr)
-        // console.log("styleNameSelectArr", styleNameSelectArr)
-        // console.log("styleIdSelectArr")
         navOption.styleId = styleId;
         navOption.stylePname = stylePname;
         this.setState({
             styleHover: true,   
             navOption: navOption
         }, function () {
-
             this.getSpaceGoodListFn(navOption);
         })
     }
@@ -186,6 +219,7 @@ class GoodNav extends React.Component {
             data: formData
         }).then((res)=> {
             let resData =  res.data.data;
+
             let currentSpaceId = resData[0].cid;
             let currentSpaceSid = resData[0].sid;
             let currentSpacePname = resData[0].pname;
@@ -194,10 +228,15 @@ class GoodNav extends React.Component {
                 currentSpaceId: currentSpaceId,
                 currentSpaceSid: currentSpaceSid,
                 currentSpacePname: currentSpacePname
-
-
             }, function () {
+
                 _this.getCategoryNavFn()
+
+
+                let btnArr = document.querySelectorAll(".space_list > li");
+                btnArr.forEach((btnItem, i)=> {
+                    btnItem.click =   function() { _this.selectSpaceFn(_this.state.spaceNavArr[i])}
+                })
             })
         })
     }
@@ -387,14 +426,17 @@ class GoodNav extends React.Component {
     }
 
     selectSortFn = (item, index)=> {
-        console.log(item)
+        
+        
+        
         let navOption = this.state.navOption;
         let _this = this;
         let sortArr = this.state.sortArr;
         if ( item.sort == "asc") {
+        
             sortArr[index].sort = "desc";
+        
         } else {
-
             sortArr[index].sort = "asc";
         }
 
@@ -403,36 +445,31 @@ class GoodNav extends React.Component {
         }
 
         if (index == 1) {
-
             navOption.sortCriteria = "volume";
             navOption.sort =  sortArr[index].sort;
         }
+
+        
         if (index == 2) {
             navOption.sortCriteria = "price";
             navOption.sort =  sortArr[index].sort;
         }
 
         
-        
-      
         this.setState({
             currentSortIndex: index,
             navOption: navOption,
             sortArr: sortArr
         }, function () {
-            console.log("this.state.currentSortIndex:" + this.state.currentSortIndex)
-            console.log("index:" + index)
-            console.log("sort:"+ item.sort)
+            // console.log("this.state.currentSortIndex:" + this.state.currentSortIndex)
+            // console.log("index:" + index)
+            // console.log("sort:"+ item.sort)
             this.getSpaceGoodListFn(navOption)
-            
-           
-                 
         })    
     }
     selectFilterFn = (index)=>{
         let navOption = this.state.navOption;
         if (index == 0) {
-
             navOption.productLabel = "";
         }
         if (index == 1) {
@@ -478,7 +515,7 @@ class GoodNav extends React.Component {
                     {   !this.state.navOption.spacePname &&
                         <div className="nav_list_con">
                             <div className="title">空间</div>
-                            <ul className="nav_list"> 
+                            <ul className="nav_list space_list"> 
                                 {this.state.spaceNavArr.map((item, index)=> {
                                     return (<li key={item.cid} onClick={()=>{this.selectSpaceFn(item)}}> {item.pname}
                                         {/* sid{item.sid} =  cid -{item.cid} */}

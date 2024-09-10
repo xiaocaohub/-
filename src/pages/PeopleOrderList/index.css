@@ -65,4 +65,19 @@
 .people_order_con .left_content .menu_list > li.on{
 
     border-color:#C6A189;
+    background: #fafafa;
+}
+.operate_btn_group{
+    height: 115px;
+    display: flex;
+    color: #1678ff;
+    flex-direction: column;
+}
+
+
+
+.operate_btn_group .btn:hover,
+.operate_btn_group .btn:hover a{
+    color: #C6A189;
+    cursor: pointer;
 }

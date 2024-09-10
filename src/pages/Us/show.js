@@ -2,8 +2,6 @@ import React,{useEffect, useState } from "react";
 import {Row, Col} from "antd";
 import bannerImg from "../../assets/us_banner.png";
 
-import bigVedio1 from "../../assets/big_vedio1.mp4";
-
 import totalBanner from "../../assets/total_banner.png";
 
 import vedioImg from "../../assets/rsw_pic.png";
@@ -32,15 +30,17 @@ class Show extends React.Component {
             this.state = {
                 currentVedioIndex: 0,
                 // vedioShadowFlag: false,
-                vedioHeight: 0
+                vedioHeight: 0,
+                
+                vedioSrc: "https://luockoo.oss-cn-shenzhen.aliyuncs.com/0/1/20240826/%E4%B8%80%E5%88%86%E9%92%9F%E4%BA%86%E8%A7%A3%E5%8E%9F%E5%88%9B%E7%B3%BB%E5%88%97.mp4"
             }
         } 
         componentDidMount () {
             scrollTopFn()
             this.autoVedioHeightFn()
             this.play()
+            this.totalCartGoodCountFn()
         }
-
 
         play = ()=> {
             const video = document.getElementById("bigvideo");
@@ -101,7 +101,11 @@ class Show extends React.Component {
                         <div className="content_common_width">
                             <div className="intro_text">
                                 <div className="text_con">
-                                    <div className="title">珞珂是谁</div>
+                                    <div className="title">
+                                        <span>珞珂是谁</span>
+
+                                        <div className="line"></div>
+                                    </div>
     
                                     <div className="txt">
                                         <p>LUOCKOO | 珞珂家居创立于2022年，是深圳新崛起的一线国潮家居软装平台，致力于提供更懂年轻人，更符合国人审美，更舒适有品的家居解决方案。</p>

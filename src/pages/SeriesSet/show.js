@@ -32,8 +32,11 @@ class Show extends React.Component {
     componentDidMount () {
         scrollTopFn()
         this.getStyleFn()
+        this.totalCartGoodCountFn()
     }
     getStyleFn = ()=> {
+     
+     
         let formData = new FormData();
         let storeId = getStorageFn("storeId") || 1;
         let storeType = getStorageFn("storeType") || 6;

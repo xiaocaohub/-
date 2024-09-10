@@ -322,20 +322,20 @@ class UserInfo extends React.Component {
                         </Form.Item>
 
                         <Form.Item label="详细地址">
-                            <Input style={{ width:670, marginLeft:20}} value={this.state.userInfoDetail.detailAdress} onChange={this.detailAdressFn}/> 
+                            <Input style={{ width:670, marginLeft:20}} className="put_val" value={this.state.userInfoDetail.detailAdress} onChange={this.detailAdressFn}/> 
                         </Form.Item>
 
                         <Form.Item label="收件人" >
-                            <Input style={{ width:670, marginLeft:20}} value={this.state.userInfoDetail.recipient} onChange={this.recipientFn}/> 
+                            <Input style={{ width:670, marginLeft:20}} className="put_val" value={this.state.userInfoDetail.recipient} onChange={this.recipientFn}/> 
                         </Form.Item>
 
                     
                         <Form.Item label="手机号" >
-                            <Input style={{ width:670, marginLeft:20}} value={this.state.userInfoDetail.phone} onChange={this.phoneFn}/> 
+                            <Input style={{ width:670, marginLeft:20}} className="put_val" value={this.state.userInfoDetail.phone} onChange={this.phoneFn}/> 
                         </Form.Item>
     
                         <Form.Item label="备注">
-                            <TextArea rows={5} style={{ width:670, marginLeft: 20}} value={this.state.userInfoDetail.remark} onChange={this.remarkFn}/>
+                            <TextArea rows={5} style={{ width:670, marginLeft: 20}} className="put_val" value={this.state.userInfoDetail.remark} onChange={this.remarkFn}/>
                         </Form.Item>
 
                         <Form.Item {...tailFormItemLayout}>

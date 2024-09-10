@@ -37,27 +37,29 @@ class Show extends React.Component {
                 }
             ],
 
-
             roomBannerArr: [
                 {
                     id: 0,
                     topTitle: "餐厅",
 
                     topTxt: "/Dining area",
-                    imgSrc: require("../../assets/room_list_banner1.png")
+
+                    imgSrc: require("../../assets/room_list_banner1.png"),
+                    navBtn: 2
                 },
                 {
                     id: 1,
                     topTitle: "客厅",
                     topTxt: "/LIVING ROOM",
-                    imgSrc: require("../../assets/room_list_banner2.png")
+                    imgSrc: require("../../assets/room_list_banner2.png"),
+                    navBtn: 0
                 },
                 {
-                    id: 2,
-                    
+                    id: 2,   
                     topTitle: "卧房",
                     topTxt: "/BEDROOM",
-                    imgSrc: require("../../assets/room_list_banner3.png")
+                    imgSrc: require("../../assets/room_list_banner3.png"),
+                    navBtn: 1
                 }
             ],
             roomFirstArr: "",
@@ -70,6 +72,7 @@ class Show extends React.Component {
         this.getGoodInfoFn()
         this.getGoodInfoTwoFn()
         this.getGoodInfoThreeFn()
+        this.totalCartGoodCountFn()
     }
     getGoodInfoFn = ()=> {
         let formData = new FormData();
@@ -192,7 +195,7 @@ class Show extends React.Component {
                         <div className="big_room_con">
                             <RoomBanner bannerData={this.state.roomBannerArr[0]}></RoomBanner>
                             <ul className="good_list">
-                                {this.state.roomTwoArr && this.state.roomTwoArr.map((item,index)=> {
+                                {this.state.roomFirstArr && this.state.roomFirstArr.map((item,index)=> {
                                     
                                     return (<Good goodInfo={item} key={index}></Good>)
                                  })}
@@ -213,7 +216,7 @@ class Show extends React.Component {
                             <RoomBanner bannerData={this.state.roomBannerArr[2]}></RoomBanner>
                             
                             <ul className="good_list">
-                                {this.state.roomTwoArr && this.state.roomTwoArr.map((item,index)=> {
+                                {this.state.roomThreeArr && this.state.roomThreeArr.map((item,index)=> {
                                     
                                     return (<Good goodInfo={item} key={index}></Good>)
                                  })}
