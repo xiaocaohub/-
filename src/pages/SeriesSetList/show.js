@@ -24,45 +24,156 @@ class Show extends React.Component {
             brandInfo: "",
             total: 0,
             currentPage: 1,
-            pageSize: 16
+            pageSize: 16,
+            optionIds: {
+                categoryId: "",
+                categoryPname: "",
+                productLabel: "",
+                sort: "",
+                sortCriteria: "",
+                spaceId: "",
+                spacePname: "",
+                spaceSid: "",
+ 
+                productClass: "",
+
+
+                styleId: "",
+                stylePname: "",
+                keyword: ""
+            },
+            optionIdsFlag: false
         }
     }
     componentDidMount () {
+        this.init()
         this.getGoodListFn()
         this.totalCartGoodCountFn()
     }
-    getGoodListFn = (optionIds)=> {
+    init = ()=> {
+        // console.log("window.location")
+        // console.log(window.location)
+        // console.log("window.location")
+        let search = window.location.search;
+        let keyword = "";
+        let optionIds = this.state.optionIds;
+        // console.log("search init")
+        
+        // console.log(search)
+        // console.log("search init")
+        if (search && search.indexOf("keyword")!=-1) {
+            keyword = decodeURIComponent(search.split("keyword=")[1]);
+            optionIds.keyword = keyword;
+        }
+
+        if (search && search.indexOf("productLabel") != -1) {
+            let productLabel = search.split("productLabel=")[1];
+            optionIds.productLabel = productLabel;
+        }
+        
+        this.setState({
+            // keyword: keyword
+            optionIds: optionIds,
+            optionIdsFlag: true
+        }, function () {
+            this.getGoodListFn()
+        })
+    }
+    // getGoodListFn = (optionIds)=> {
+    //     let formData = new FormData();
+    //     let option = {"brandId":"","minPrice":"","maxPrice":""};
+    //     let storeId = getStorageFn("storeId") || 1;
+
+    //     let storeType = getStorageFn("storeType") || 6;
+    //     let productClass = "";
+
+    //     let styleId = "";
+    //     if (optionIds) {
+    //         if (optionIds.spaceSid && optionIds.spaceId) {
+    //             productClass = "-" + optionIds.spaceSid + "-" + optionIds.spaceId + "-";
+    //         }
+    //         if (optionIds.categoryId) {
+    //             productClass += optionIds.categoryId + "-";
+    //         }
+    //         if (optionIds.styleId) {
+    //             styleId = optionIds.styleId;
+    //         }
+    //     }
+    //     formData.append("api", "app.product.listProduct");
+    //     formData.append("storeId", storeId);
+    //     formData.append("storeType", storeType);
+    //     formData.append("page", this.state.currentPage);
+    //     formData.append("pageSize", this.state.pageSize);   
+    //     formData.append("brandId", this.state.brandId);
+    //     formData.append("productClass", productClass);
+    //     formData.append("styleIds",  styleId);
+
+    //     formData.append("sortCriteria", "");        
+    //     formData.append("queryCriteria",  JSON.stringify(option));
+    //     formData.append("sort", "");
+    //     request({
+    //         url: "/api/gw",
+    //         method: "POST",
+    //         data: formData
+    //     }).then((res)=> {
+    //         let resData =  res.data.data;
+    //         let goodList = resData.goodsList;    
+    //         let brandInfo = resData.brandInfo;
+    //         let total = resData.total;
+    //         this.setState({
+    //             brandInfo: brandInfo,
+    //             goodList: goodList,
+    //             total: total
+    //         })
+    //     })
+    // }
+    getGoodListFn = (option)=> {
+        let productClass = "";
+        let optionIds = this.state.optionIds;
+
+        if (option) {
+            if (option.spaceSid && option.spaceId) {
+                productClass = "-" + option.spaceSid + "-" + option.spaceId + "-";
+                option.productClass = productClass;
+            }
+            
+            if (option.categoryId) {
+                productClass += option.categoryId + "-";
+                option.productClass = productClass;
+            }
+            optionIds = option;
+        }
+
+        this.setState({
+            optionIds: optionIds
+        }, function () {
+            this.requestGoodListFn()
+        })
+    }
+
+
+    requestGoodListFn = ()=> {
+        let optionIds = this.state.optionIds;
+        // console.log("optionIds optionIds request")
+        // console.log(optionIds)
+        // console.log("optionIds optionIds request")
         let formData = new FormData();
         let option = {"brandId":"","minPrice":"","maxPrice":""};
-        let storeId = getStorageFn("storeId") || 1;
-
+        let storeId = getStorageFn("storeId") || 1;       
         let storeType = getStorageFn("storeType") || 6;
-        let productClass = "";
-
-        let styleId = "";
-        if (optionIds) {
-            if (optionIds.spaceSid && optionIds.spaceId) {
-                productClass = "-" + optionIds.spaceSid + "-" + optionIds.spaceId + "-";
-            }
-            if (optionIds.categoryId) {
-                productClass += optionIds.categoryId + "-";
-            }
-            if (optionIds.styleId) {
-                styleId = optionIds.styleId;
-            }
-        }
+   
         formData.append("api", "app.product.listProduct");
         formData.append("storeId", storeId);
         formData.append("storeType", storeType);
         formData.append("page", this.state.currentPage);
         formData.append("pageSize", this.state.pageSize);   
-        formData.append("brandId", this.state.brandId);
-        formData.append("productClass", productClass);
-        formData.append("styleIds",  styleId);
-
-        formData.append("sortCriteria", "");        
+        formData.append("productClass", optionIds.productClass);
+        formData.append("styleIds",  optionIds.styleId);
+        formData.append("sortCriteria", optionIds.sortCriteria);
+        formData.append("productLabel", optionIds.productLabel);
+        formData.append("keyword", optionIds.keyword);
         formData.append("queryCriteria",  JSON.stringify(option));
-        formData.append("sort", "");
+        formData.append("sort", optionIds.sort);
         request({
             url: "/api/gw",
             method: "POST",
@@ -70,10 +181,8 @@ class Show extends React.Component {
         }).then((res)=> {
             let resData =  res.data.data;
             let goodList = resData.goodsList;    
-            let brandInfo = resData.brandInfo;
             let total = resData.total;
             this.setState({
-                brandInfo: brandInfo,
                 goodList: goodList,
                 total: total
             })
@@ -117,8 +226,10 @@ class Show extends React.Component {
                         </div>
                     </div>
                     
-                    <GoodNav getGoodListFn={this.getGoodListFn} total={this.state.total}></GoodNav>
+      
 
+
+                    {this.state.optionIdsFlag && <GoodNav getGoodListFn={this.getGoodListFn} total={this.state.total} optionIds={this.state.optionIds}></GoodNav>}
                     <div className="good_list">
                         {this.state.goodList.length>0 && this.state.goodList.map((item, index)=>{
                             return (

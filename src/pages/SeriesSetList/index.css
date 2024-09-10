@@ -23,11 +23,10 @@
    z-index:1;
    text-align:center;
 }
+
 .series_list_page .banner_con .banner_text .title{
- 
-  
   color:#fff;
-  font-size:2em;
+  font-size:3.2em;
   margin-top:5.7%;
   overflow:hidden;
 }
@@ -46,11 +45,9 @@
    height:12%;
    background:#fff;
    color:#C6A189;
-   
    margin:0 auto;
    display:flex;
    flex-direction:row;
-
    justify-content: center;
    align-items: center;
    border-radius: 40px;

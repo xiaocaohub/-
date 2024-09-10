@@ -11,10 +11,10 @@ import "./index.css";
 class DetailInfo extends React.Component {
     constructor (props) {
         super(props)
-        // console.log("show detail props")
-        // console.log(props)
+        console.log("show detail props")
+        console.log(props)
 
-        // console.log("show detail props")
+        console.log("show detail props")
         this.state = {
             // 大图 index
             currentIndex: 1,
@@ -259,18 +259,32 @@ class DetailInfo extends React.Component {
         })
     }
     copyFn () {
-        const textarea = document.createElement("textarea");
-        textarea.readOnly = "readonly";
-        textarea.style.position = "absolute";
-        textarea.style.left = "-999px";
-        textarea.style.opacity = "0";
-        textarea.value = message.value;
-        document.body.appendChild(textarea)
-        textarea.select()
-        const result = document.execCommand("copy");
-        if (result) {
-            console.log("copy success", result)
-        }
+        // const textarea = document.createElement("textarea");
+        // textarea.readOnly = "readonly";
+        // textarea.style.position = "absolute";
+        // textarea.style.left = "-999px";
+        // textarea.style.opacity = "0";
+        // textarea.value = message.value;
+        // document.body.appendChild(textarea)
+        // textarea.select()
+        // const result = document.execCommand("copy");
+        // if (result) {
+        //     console.log("copy success", result)
+        // }
+        const text = document.getElementById("code_con").innerText;
+        // 创建一个临时的输入框来存储文本
+        const input = document.createElement('input');
+        input.value = text;
+       
+        // 将输入框添加到页面，但不显示
+        document.body.appendChild(input);
+        input.select(); // 选择输入框的内容
+        
+        // 执行复制命令
+        document.execCommand('copy');
+        
+        // 移除临时输入框
+        document.body.removeChild(input)
     }
     addCartFn = ()=> {
         this.props.addCartFn(this.state.count)
@@ -308,7 +322,7 @@ class DetailInfo extends React.Component {
                         <div className="top_tit">
                             <span className="tit">{this.props.goodDetail.product.brandName}</span>
                             <span className="txt">
-                                <Link to="/">进入系列</Link> 
+                                <Link to= {"/series/list/" + this.props.goodDetail.product.brandId }>进入系列</Link> 
                                 <RightOutlined className="right_icon"/>    
                             </span>
                         </div>
@@ -347,15 +361,14 @@ class DetailInfo extends React.Component {
                                     } else {
                                         return (<li className="dis" key={item.id}>{item.attributeValue}</li>)
                                     }
-                                   
                                 })}                               
                             </ul>
                         </div>
 
                         <div className="specifications_con">
-                           
                             <div className="title_name">编码</div>
-                            <div className="code_con" onClick={this.copyFn}>{this.state.currentGood?this.state.currentGood.productCode:this.props.goodDetail.skuBeanList[0].productCode}</div>
+
+                            <div className="code_con" id="code_con" onClick={this.copyFn}>{this.state.currentGood?this.state.currentGood.productCode:this.props.goodDetail.skuBeanList[0].productCode}</div>
                         </div>
 
                         {/* <div className="specifications_con">

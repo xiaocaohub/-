@@ -35,9 +35,9 @@ class Show extends React.Component {
                 spaceSid: "",
  
                 productClass: "",
+
+
                 styleId: "",
-
-
                 stylePname: "",
                 keyword: ""
             },
@@ -150,22 +150,46 @@ class Show extends React.Component {
     //         })
     //     })
     // }
+    // getGoodListFn = (option)=> {
+    //     let productClass = "";
+    //     let optionIds = this.state.optionIds;
+
+    //     if (option) {
+    //         if (option.spaceSid && option.spaceId) {
+    //             productClass = "-" + option.spaceSid + "-" + option.spaceId + "-";
+    //             optionIds.productClass = productClass;
+    //         }
+            
+    //         if (option.categoryId) {
+    //             productClass += option.categoryId + "-";
+    //             optionIds.productClass = productClass;
+    //         }
+    //     }
+    //     this.setState({
+    //         optionIds: optionIds
+    //     }, function () {
+    //         this.requestGoodListFn()
+    //     })
+    // }
     getGoodListFn = (option)=> {
-      //  console.log("option", option)
         let productClass = "";
+     
+     
         let optionIds = this.state.optionIds;
 
         if (option) {
             if (option.spaceSid && option.spaceId) {
                 productClass = "-" + option.spaceSid + "-" + option.spaceId + "-";
-                optionIds.productClass = productClass;
+                option.productClass = productClass;
             }
             
             if (option.categoryId) {
                 productClass += option.categoryId + "-";
-                optionIds.productClass = productClass;
+                option.productClass = productClass;
             }
+            optionIds = option;
         }
+
         this.setState({
             optionIds: optionIds
         }, function () {
@@ -209,17 +233,20 @@ class Show extends React.Component {
         })
     }
     // 统计购物车数量
+
     totalCartGoodCountFn = ()=> {
+    
     
         let _this = this;
         let formData = new FormData();
         let token = getStorageFn("token");
         formData.append("api", "app.cart.index");    
+    
         formData.append("accessId", token);  
+    
         formData.append("storeId", 1);
         formData.append("storeType", 6);
         request({
-    
             url: "/api/gw",             
             method: "POST",    
             data: formData
@@ -236,6 +263,7 @@ class Show extends React.Component {
         })
     }
     render () {
+        
         return (
             <div className="product_room_con">           
                 <div className="content_common_width">

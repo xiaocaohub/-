@@ -233,7 +233,8 @@
     float:left;
     padding:6px 25px 3px 5px;
     font-size: 14px;
-    /* background:url("../../../assets/icon/icon_copy.png") no-repeat center right; */
+
+    background:url("../../../assets/icon/icon_copy.png") no-repeat center right;
 }
 .productroom_detail_page  .detail_info .right .specifications_con .download_btn{
     float:left;

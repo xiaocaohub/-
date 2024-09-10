@@ -91,7 +91,6 @@
     border-bottom:1px solid #E1E1E1;
     overflow:hidden;
 }
-
 .king_good_list_con .nav_list > li{
     height: 20px;
     line-height: 20px;
@@ -104,6 +103,9 @@
 .king_good_list_con .nav_list > li.on{
     font-size: 20px;
     border-bottom:2px solid #C6A189;
+
+    color: #C6A189;
+    font-weight: bold;
 }
 .king_good_list_con .good_list{
     overflow:hidden;

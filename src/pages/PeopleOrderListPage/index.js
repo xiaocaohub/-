@@ -46,7 +46,7 @@ class PeopleOrderListPage extends React.Component {
                   id: 5,
                   title: "已取消",
                   
-                   status: 6
+                   status: 0
                 }
             ],
             orderArr: [],
@@ -113,19 +113,23 @@ class PeopleOrderListPage extends React.Component {
                       },
                       times: {
                           createTime: item.createTime,
-                          estimatedDeliveryTime: item.estimatedDeliveryTime,
+                          expectedDeliveryTime: item.expectedDeliveryTime,
                           estimatedDeliveryTime: item.estimatedDeliveryTime,
                           realDeliveryTime: item.realDeliveryTime
                       },
                       userNumber: {
-                          uname: item.name,
-                          phone: item.mobile
+                          uname: item.userName,
+                          phone: item.userTel
                       },
                       totalPrice: item.totalPrice,
                       payPrice: item.payPrice,
                       customerInfo: {
                           uName: item.name,
-                          phone: item.userTel,   
+                          phone: item.mobile, 
+                          provice: item.provice,
+                        
+                          city: item.city,
+                          area: item.area,
                           address: item.address
                       },
                       orderState:  item.status,
@@ -149,39 +153,44 @@ class PeopleOrderListPage extends React.Component {
             })
         })
     }
-
-
     cancelOrderFn = (rowData)=> {
+        console.log("rowData")
         console.log(rowData)
+        console.log("rowData")
+
+ 
         let _this = this;
+
         let formData = new FormData();
         let token = getStorageFn("token");
-        // let option = {"brandId":"","minPrice":"","maxPrice":""};
-        formData.append("api", "app.orderV2.buyAgain");    
+        formData.append("api", "app.orderV2.cancelOrder");    
+
         formData.append("accessId", token);  
         formData.append("storeId", 1);
         formData.append("storeType", 6);
         formData.append("orderParentNo", rowData.nameList.order);  
-
         Modal.confirm({
+
             content: "确认取消吗?",
             okText:"确认",
-            
             cancelText: "取消",
             title: "温馨提示",
             onOk: function () {
                 request({
-                    url: "/api/gw",         
-        
+                    url: "/api/gw",
                     method: "POST",    
                     data: formData
                 }).then((res)=> {
-                    console.log("res cancel")
-                    console.log(res)
-        
+                    // console.log("res cancel")
+                    // console.log(res)
                     if (res.data.code == 200) {
                         message.success(res.data.message)
-                        window.location.href = "/people/order/list"
+                        _this.setState({
+
+                            status: rowData.orderState
+                        }, function () {
+                            _this.getOrderListFn()
+                        })
                     } else {
                         message.success(res.data.message)
                     }
@@ -189,6 +198,26 @@ class PeopleOrderListPage extends React.Component {
             }
         })
      
+    }
+    showCancelBrnFn = (status)=> {
+        switch (status) {
+            case 1: 
+               return true;
+               break;
+            default:
+                return false;
+                break;
+        }
+    }
+    showPayBtnFn = (status)=> {
+        switch (status) {
+            case 1: 
+               return true;
+               break;
+            default:
+                return false;
+                break;
+        }
     }
     render () {
         const columns = [
@@ -216,7 +245,7 @@ class PeopleOrderListPage extends React.Component {
                   return (
                     <div>
                         <p>下单时间: {item.createTime?item.createTime:"-----"}</p>
-                        <p>期望发货时间: {item.estimatedDeliveryTime?item.estimatedDeliveryTime:"-----"}</p>
+                        <p>期望发货时间: {item.expectedDeliveryTime?item.expectedDeliveryTime:"-----"}</p>
                         <p>预计发货时间: {item.estimatedDeliveryTime?item.estimatedDeliveryTime:"-----"}</p>
                         <p>实际发货时间: {item.realDeliveryTime?item.realDeliveryTime:"-----"}</p>
                     </div>
@@ -265,14 +294,11 @@ class PeopleOrderListPage extends React.Component {
               key: 'customerInfo',
               width: '20%',
               render: (item)=> {
-                // console.log("customerInfo")
-                // console.log(item)
-                // console.log("customerInfo")
                   return (
                       <div>
                           <p>{item.uName}</p>
                           <p>{item.phone}</p>
-                          <p>{item.address}</p>
+                          <p>{item.provice}{item.city}{item.area}{item.address}</p>
                       </div>
                   )
               }
@@ -284,9 +310,11 @@ class PeopleOrderListPage extends React.Component {
               width: '8%',
               render: (item)=> {
                   switch (item) {
-                      
+                      case 0: 
+                        return "已取消";
+                        break;
                       case 1: 
-                          return "代付款";
+                          return "待付款";
                           break;
                       case 2:
                           return "审核中";
@@ -300,30 +328,38 @@ class PeopleOrderListPage extends React.Component {
                       case 5: 
                           return "已完成";
                           break;
-                      case 6: 
-                          return "已取消";
-                          break;
+                      case 6:
+                          
+                           return "已退款";
+                           break;
                   }
               }
             },
             {
+
+
+
               title: '操作',
-              dataIndex: 'operateText',
+            //   dataIndex: 'operateText',
               key: 'operateText',
 
               width: '10%',
-              render: (item, itemData)=> {
+
+              render: (item)=> {
                   console.log("index table")
-                  console.log(itemData)
+                  console.log(item)
+          
                   console.log("index table")
                   return (
                       <div className="operate_btn_group">
-                          {/* <div className="btn">{item.payBtn}</div> <br/> */}
-                          <div className="btn"><Link to={ "/people/order/detail/" + item.order }>{item.orderDetail}</Link></div><br/>
-        
-                          {/* <div className="btn">{item.exportOrder}</div><br/> */}
-                          <div className="btn">{item.buyRepeat}</div><br/>
-                          <div className="btn" onClick={()=>{this.cancelOrderFn(itemData)}}>{item.cancelOrder}</div>
+                          {this.showPayBtnFn(item.orderState) && <div className="btn">去付款</div>} <br/>
+                          <div className="btn"><Link to={ "/people/order/detail/" + item.operateText.order }>订单详情</Link></div> <br/>
+                          <div className="btn">导出订单</div><br/>
+
+
+                          <div className="btn">再次购买</div><br/>
+                         
+                          {this.showCancelBrnFn(item.orderState) && <div className="btn" onClick={()=>{this.cancelOrderFn(item)}}>取消订单</div>}
                        
                       </div>
                   )

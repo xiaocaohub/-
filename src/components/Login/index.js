@@ -51,7 +51,7 @@ function LoginPage (props) {
             if (data && data.access_id) {
                 messageApi.open({
                     type: 'success',
-                    content: '登陆成功',
+                    content: '登录成功',
                     duration: 10,
                 });
                 setStorageFn("token", data.access_id); 

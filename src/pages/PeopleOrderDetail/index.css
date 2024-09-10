@@ -59,8 +59,8 @@
 
 .people_order_detail .order_dedtail_con .operate_btn_list .btn{
     width:124px;
-    height:42px;
-    line-height:42px;
+    height:40px;
+    line-height:40px;
     text-align:center;
     border:1px solid #333;
     border-radius:5px;
@@ -69,10 +69,7 @@
     margin-right:15px;
     cursor:pointer;
 }
-.people_order_detail .order_dedtail_con .operate_btn_list .btn:hover{
-    background: #1a1a1a;
-    color:#fff;
-}
+ 
 .people_order_detail .order_dedtail_con .vertical_step{
     margin-top:20px;
     margin-left:20px;
