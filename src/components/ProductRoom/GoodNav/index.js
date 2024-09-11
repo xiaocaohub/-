@@ -102,6 +102,11 @@ class GoodNav extends React.Component {
         let _this = this;
         let productLabel = this.props.optionIds.productLabel;
         let currentFilterIndex = 0;
+        let optionIds = this.props.optionIds;
+
+         console.log("location window")
+        console.log(window.location)
+        console.log("location window")
         if (productLabel) {
             if (productLabel == 101) {
                 currentFilterIndex = 1;
@@ -113,9 +118,19 @@ class GoodNav extends React.Component {
                 currentFilterIndex = 3;
             }
         }
+        let search = window.location.search;
+      
+        if (search) {
+            let keywordStr = search.split("keyword=")[1];
+            let keyword = decodeURIComponent(keywordStr);
+            
+            optionIds.keyword = keyword;
+        }
+        
+       
         this.setState({
             currentFilterIndex: currentFilterIndex,
-            navOption: this.props.optionIds
+            navOption: optionIds
         })
 
         setTimeout(()=>{

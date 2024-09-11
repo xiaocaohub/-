@@ -89,6 +89,9 @@ function Header () {
     }
     function searchFn () {
         let  searchValueStr = encodeURIComponent(searchValue);
+        console.log("searchValue searchValue")
+        console.log(searchValueStr)
+        console.log('searchValue searchValue')
         window.location.href = "/productroom?keyword=" + searchValueStr;
     } 
     return (
@@ -134,7 +137,7 @@ function Header () {
 
                         <div className="search_con">
                             <div className="btn" onClick={searchFn}></div>
-                            <input type="text" placeholder="搜索商品名称" value={searchValue} onChange={searchValueFn} className="search"/>
+                            <input type="text" placeholder="搜索商品名称/编码" value={searchValue} onChange={searchValueFn} className="search"/>
                         </div>    
                 </div>
             </div>

@@ -17,6 +17,10 @@
     height:100vh;
     float:left;
     background:#fff;
+    position: fixed;
+    left: 0;
+
+    top:79px;
 }
 
 .people_order_con .main_content{

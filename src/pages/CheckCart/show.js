@@ -72,11 +72,9 @@ class Show extends React.Component {
             method: "POST",    
             data: formData
         }).then((res)=> {
-            let resData = res.data.data.data;
+            let resData = res.data.data.data || [];
 
-            console.log("getCartInfoFn---")
-            console.log(resData)
-            console.log("getCartInfoFn---")
+ 
             setStorageFn("cartArr", resData)
             _this.setState({
                 cartArr: resData
@@ -107,11 +105,7 @@ class Show extends React.Component {
             method: "POST",    
             data: formData
         }).then((res)=> {
-            console.log("getCartListFn----getCartListFn")
-            console.log(res)
-            console.log("getCartListFn---getCartListFn")
-            let resData = res.data.data;
-            
+            let resData = res.data.data  || [];
             let orders =  [];
             if (resData.orders) {
                 orders = resData.orders;
@@ -250,13 +244,13 @@ class Show extends React.Component {
                             {/* <input type="date" style={{display:"block",width:"250px",height: "32px", border:"1px solid #d9d9d9"}} onChange={this.selectDateFn} placeholder="请选择日期"/> */}
                             <Input type="date" value={this.state.date} className="date_con" placeholder="年-月-日" onChange={this.selectDateFn} />
                         </li>
-                        <li>
+                        {/* <li>
                             <div className="title">发货说明</div>
                             <div className="txt">                         
                                 1.现货订单我们将在期望发货时间内发货。 <br/>
                                 2.无现货订单，发货时间以实际生产周期为准。
                             </div>
-                        </li>
+                        </li> */}
             
 
                         <li style={{display:"none"}}>

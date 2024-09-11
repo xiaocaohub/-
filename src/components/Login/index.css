@@ -45,8 +45,8 @@
 
 .login_form_con .select_con{
     float:left;
-    background:url("../../assets/check_false_icon.png") no-repeat left center;
-    padding-left:20px;
+    background:url("../../assets/icon/icon_select.png") no-repeat left center;
+    padding-left:25px;
 
     cursor:pointer;
     color:#666;
@@ -55,7 +55,7 @@
 
 .login_form_con .select_con.on{
     
-    background:url("../../assets/check_true_icon.png") no-repeat left center;
+    background:url("../../assets/icon/icon_select_on.png") no-repeat left center;
 }
 .login_form_con .forget_btn{
     float:right;

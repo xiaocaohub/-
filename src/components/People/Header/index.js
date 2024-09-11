@@ -28,31 +28,38 @@ function Header () {
                             <div className="icon"></div>
                             <p>首页</p>
                         </Link>
-                    </li>
-                    
+                    </li>   
                     <li>
-                        <div className="icon"></div>
-                        <p>订单</p> 
-                    </li>
-                    {/* <li>
                         <div className="icon"></div>
                         <p>店铺</p>
                     </li>
+
+
+
+
+                    <li className="on">
+                        <div className="icon"></div>
+                        <p>订单</p> 
+                    </li>
+
                     <li>
+
                         <div className="icon"></div>
                         <p>财务</p>
-                    </li> */}
+                    </li>
                 </ul>
                 <div className="out_btn" onClick={loginOutFn}>退出</div>
 
                 <div className="phone_con">
                     <div className="phone_title">欢迎您, { uName }</div>
                     <ul className="btn_list">
-                        <li><Link to="/login">修改密码</Link></li>
+                        {/* <li><Link to="/login">修改密码</Link></li> */}
 
                         <li className="out_b" onClick={loginOutFn}>退出登录</li>
                     </ul>
                 </div>
+
+                <Link to="/" className="go_index">返回商城</Link>
         </div>
     )
 }

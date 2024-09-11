@@ -91,6 +91,7 @@
 }
 .cart_page_con  .total_con .total_count .count span{
     font-size: 18px;
+    color: #1a1a1a;
 }
 .cart_page_con  .total_con .total_con_content  .pay_btn{
     width:124px;
@@ -128,4 +129,9 @@
    margin-right:25px;
    margin-top: 6px;
    color: #666;
+}
+.cart_page_con  .total_con  .good_money span,
+.cart_page_con  .total_con  .vol span{
+    color:#1a1a1a;
+    
 }

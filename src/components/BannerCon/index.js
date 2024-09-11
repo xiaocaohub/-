@@ -67,14 +67,16 @@ class BannerCon extends React.Component {
                 </Carousel>
 
                 <div className="operate_con">
-                    <Row>
-                        <Col span={3}></Col>
-                        <Col span={18} className="operate">
-                            <div className="btn btn_left" onClick={this.prev}></div>
-                            <div className="btn btn_right" onClick={this.next}></div>
-                        </Col>
-                        <Col span={3}></Col>
-                    </Row>
+                 
+                        
+                        {/* <Col span={18} className="operate">
+                             
+                        </Col> */}
+                    <div className="operate">
+                       
+                        <div className="btn btn_left" onClick={this.prev}></div>
+                        <div className="btn btn_right" onClick={this.next}></div>
+                    </div>
                 </div>
             </div>
         )

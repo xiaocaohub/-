@@ -285,6 +285,7 @@ class DetailInfo extends React.Component {
         
         // 移除临时输入框
         document.body.removeChild(input)
+        message.success("复制成功")
     }
     addCartFn = ()=> {
         this.props.addCartFn(this.state.count)
@@ -325,6 +326,7 @@ class DetailInfo extends React.Component {
                                 <Link to= {"/series/list/" + this.props.goodDetail.product.brandId }>进入系列</Link> 
                                 <RightOutlined className="right_icon"/>    
                             </span>
+                            <span className="company_name">{this.props.goodDetail.mchName}</span>
                         </div>
 
                         <div className="title">

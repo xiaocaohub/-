@@ -14,7 +14,7 @@ class Show extends React.Component {
         this.state = {
             cartArr: [],
 
-            selectAllFlag: false,
+            selectAllFlag: 0,
             totalMoney: 0,
             totalCount: 0,
             totalVol: 0, // 总体积
@@ -98,33 +98,33 @@ class Show extends React.Component {
         })
     }
     blurGoodCountFn = (goodItem)=> {
-        console.log(goodItem)
         this.changeGoodCountFn(goodItem)
+        this.totalAll()
     }
     totalAll = ()=> {
         let cartArr = this.state.cartArr;
      
-        let flag = true;
+        let selectAllFlag = 1;
         let totalMoney = 0;
         let totalVol = 0;
         if (cartArr.length>0) {
             cartArr.forEach((item,index)=> {
-                if (!item.checked) {
-                    flag = false;
+                if (item.checked == 0 || !item.checked) {
+                    selectAllFlag = 0;
                 }
                 if (item.checked) {
+            
                     totalMoney += item.price * item.goods_num;
                     totalVol += item.capacity;
-                    console.log("totalVol", totalVol)
                 }
             })
         } else {
-            flag = false;
+            selectAllFlag = 0;
             totalMoney = 0;
             totalVol = 0;
         }
         this.setState({
-            selectAllFlag: flag,
+            selectAllFlag: selectAllFlag,
             totalMoney: totalMoney,
             totalVol: totalVol
         })
@@ -143,10 +143,10 @@ class Show extends React.Component {
             totalCount: count
         })
     }
-    selectGoodFn = (item, index)=> {
 
+    selectGoodFn = (item, index)=> {
         let cartArr = this.state.cartArr;
-        item.selectFlag = !item.selectFlag;
+        item.checked = item.checked == 1?0:1;
         cartArr[index] = item;
         setStorageFn("cartArr", cartArr)
         this.selectGoodRequestFn(item.id)
@@ -157,7 +157,6 @@ class Show extends React.Component {
             this.totalSelectGoodFn()
         })
     }
-
 
     selectGoodRequestFn = (selectId)=> {   
         let _this = this; 
@@ -176,7 +175,7 @@ class Show extends React.Component {
         }).then((res)=> {
 
             if (res.data.data) {
-               _this.getCartInfoFn()
+            //    _this.getCartInfoFn()
 
             } else {
                 message.error(res.data.message)
@@ -185,11 +184,20 @@ class Show extends React.Component {
     }
     selectAllFn = ()=> {
         let cartArr = this.state.cartArr;
-        let selectAllFlag = !this.state.selectAllFlag;
+        let selectAllFlag = this.state.selectAllFlag==1?0:1;
+        let ids = "";
         cartArr.forEach((item,index)=> {
-            item.selectFlag = selectAllFlag ;
+            item.checked = selectAllFlag;
+            ids += item.id + ",";
         })
+        // console.log("ids-------------")
+        // console.log(ids)
+
+        // console.log("ids--------------")
+
+        this.selectGoodRequestFn(ids)
         this.setState({
+
             cartArr: cartArr,
             selectAllFlag: selectAllFlag
         })
@@ -251,18 +259,30 @@ class Show extends React.Component {
             data: formData
         }).then((res)=> {
             let resData = res.data.data.data;
-            // console.log("resData cart")
-            // console.log(resData)
-            // console.log("resData")
+            let arr = [];
+            if (resData && resData.length > 0) {
+
+                resData.forEach((item, index)=> {
+                    if (item.checked == 1) {
+                        arr.push(item)
+                    }
+                })
+            }
+
+            console.log("arr resData arr")
+            console.log(resData)
+            console.log("arr resData arr")
+
 
             _this.setState({
-                cartArr: resData
+                cartArr: arr
             }, function () {
                 _this.totalSelectGoodFn()
                 _this.totalAll()
                 _this.totleSelectGoodCountFn()
             })
-            setStorageFn("cartArr", resData)
+            // setStorageFn("cartArr", resData)
+            setStorageFn("cartArr", arr)
         })
     }
 
@@ -341,15 +361,12 @@ class Show extends React.Component {
                 totalSelectGoodCount += 1;
             }
         })
-
-
         this.setState({
             totalSelectGoodCount: totalSelectGoodCount
         })
     }
 
     goPayFn = ()=> {
-    
         if (!this.state.isKeep) {
             message.error("请保存客户信息")
             return ;
@@ -367,15 +384,12 @@ class Show extends React.Component {
         let token = getStorageFn("token");
         formData.append("api", "app.cart.index");    
         formData.append("accessId", token);  
-    
         formData.append("storeId", 1);
         formData.append("storeType", 6);
         request({
-            url: "/api/gw",         
+            url: "/api/gw",
             method: "POST",    
-    
             data: formData
-    
         }).then((res)=> {
             let resData = res.data.data.data;
             _this.setState({
@@ -417,8 +431,8 @@ class Show extends React.Component {
                         <div className="pay_btn" onClick={this.goPayFn}>去结算</div>
                         {/* <div className="item total_money">￥{this.state.totalMoney}</div>
                         <div className="item total_money_tit">应付总额 </div> */}
-                        <div className="item good_money">商品总额: ￥{this.state.totalMoney}</div>
-                        <div className="item vol"> 体积: {this.state.totalVol }m² </div>
+                        <div className="item good_money">商品总额: ￥ <span>{this.state.totalMoney}</span></div>
+                        <div className="item vol"> 体积: <span>{this.state.totalVol.toFixed(2) }</span> m³ </div>
                     </div>
                 </div>
                 {/* {this.props.state.commonState.showCartFlag && <SmallCart hideSmallCart={this.props.hideSmallCartFn}  totalCartGoodCountFn={this.totalCartGoodCountFn}></SmallCart>} */}

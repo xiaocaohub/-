@@ -41,21 +41,20 @@ class GoodTable extends React.Component {
                     <li className="info">商品信息</li>
                     <li className="good_code">商品编码</li>
                     <li className="vol">体积(m³)</li>
-                    <li className="price">供货单价(元)</li>
 
+                    <li className="price">销售单价(元)</li>
+                    
                     <li className="count">数量</li>
-
                     <li className="sub_total">小计(元)</li>
                     <li className="operate">操作</li>
                 </ul>
           
-          
-                {this.props.totalSelectGoodCount==0 && <EmptyPage></EmptyPage>}
+                {/* {this.props.totalSelectGoodCount==0 && <EmptyPage></EmptyPage>} */}
                 <ul className="good_list">
-                    {this.props.cartArr.map((item, index)=>{
+                    {this.props.cartArr.length>0 && this.props.cartArr.map((item, index)=>{
                         return (
-                            <li key={item.id} className={item.checked?"":"on"}>
-          
+                            
+                            <li key={item.id}>
                                 <div className={item.checked?"select on":"select"} onClick={()=>{this.selectGoodFn(item, index)}}></div>
           
                                 <div className="info">          
@@ -70,25 +69,22 @@ class GoodTable extends React.Component {
 
                                 </div>
                                 <div className="good_code"> {item.productCode} </div>
-                        
-
                                 <div className="vol"> {item.capacity} </div>
                                 <div className="price">{item.price}</div>
                                 <div className="count_con">
+
                                     <div className="btn" onClick={()=>{this.reduceFn(item, index)}}> - </div>
                                     <Input className="count" value={item.goods_num} onChange={(e)=>{this.putCountFn(e, item, index)}} onBlur={()=>{this.blurGoodCountFn(item)}}/>
-                               
                                     <div className="btn" onClick={()=>{this.addFn(item, index)}}> + </div>
                                 </div>
         
                                 <div className="sub_total">{item.price * item.goods_num}</div>
-        
                                 <div className="operate" onClick={()=>{this.deleteGoodConfirmFn(item, index)}}></div>
                             </li>
                         )
                     })}
                 </ul>
-
+                {this.props.cartArr.length == 0 && <EmptyPage></EmptyPage>}
             </div>
         )
     }

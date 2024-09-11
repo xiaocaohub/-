@@ -13,8 +13,9 @@
     height:20px;
     line-height:20px;
     float:left;
-    font-size:15px;
+    font-size:16px;
 }
+ 
 .cart_page_con .user_info_con .title .txt{
     height:20px;
     line-height:20px;
@@ -26,8 +27,8 @@
 }
 
 .cart_page_con .user_info_con .form_con .put_val{
-    font-size: 12px;
-    color: #999;
+    font-size: 14px;
+    color: #1a1a1a;
 }
 .cart_page_con .user_info_con .form_con .submit_btn{
     background:#333;
@@ -75,6 +76,7 @@
 .user_info_text{
     overflow: hidden;
 }
+ 
  
 .cart_page_con .user_info_text > li .title_tit{
     display: block;

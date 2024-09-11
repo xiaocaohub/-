@@ -6,11 +6,19 @@
 
 .people_order_list_page_con .table_con{
     background:#fff;
+    padding-top:83px;
 }
 .people_order_list_page_con .nav_list{
     border-bottom:1px solid #E1E1E1;
     overflow:hidden;
-    margin-top:20px;
+    padding-top:20px;
+
+    position: fixed;
+    width: 100%;
+    top:80px;
+    left: 12%;
+    z-index: 10;
+    background: #fff;
 }
 .people_order_list_page_con .nav_list > li{
     width:61px;

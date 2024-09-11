@@ -76,7 +76,7 @@ function LoginPage (props) {
             </div>
             
             <div className="put_item">
-                <Input placeholder="请输入密码" className="put_val" value={passWord} onChange={passWordFn}></Input>
+                <Input placeholder="请输入密码" className="put_val" type="password" value={passWord} onChange={passWordFn}></Input>
             </div>
             
             <div className="put_item">

@@ -51,7 +51,7 @@ class HotSelling extends React.Component {
                                 <img src={hotTitleImg} alt=""/>
                             </div>
 
-                            <Link to="/" className="more_btn">搜索更多</Link>
+                            <Link to="/productroom" className="more_btn">搜索更多</Link>
                         </div>
 
                         <div className="hot_banner_con">

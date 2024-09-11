@@ -132,6 +132,7 @@
 
 .productroom_detail_page  .detail_info .right .top_tit .txt{
     color:#E8A468;
+    float: left;
 }
 .productroom_detail_page  .detail_info .right .top_tit .txt a{
     font-size:12px;
@@ -140,6 +141,14 @@
     display:block;
     float:left;
     text-decoration:underline;
+}
+
+.productroom_detail_page  .detail_info .right .top_tit  .company_name{
+    float: left;
+    font-size: 12px;
+    margin-left: 20px;
+    margin-top: 5px;
+    color: #1A1A1A;
 }
 .productroom_detail_page  .detail_info .right .top_tit .txt .right_icon{
     margin-top:7px;
@@ -233,7 +242,7 @@
     float:left;
     padding:6px 25px 3px 5px;
     font-size: 14px;
-
+    cursor: pointer;
     background:url("../../../assets/icon/icon_copy.png") no-repeat center right;
 }
 .productroom_detail_page  .detail_info .right .specifications_con .download_btn{

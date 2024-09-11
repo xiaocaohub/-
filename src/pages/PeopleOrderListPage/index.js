@@ -354,10 +354,10 @@ class PeopleOrderListPage extends React.Component {
                       <div className="operate_btn_group">
                           {this.showPayBtnFn(item.orderState) && <div className="btn">去付款</div>} <br/>
                           <div className="btn"><Link to={ "/people/order/detail/" + item.operateText.order }>订单详情</Link></div> <br/>
-                          <div className="btn">导出订单</div><br/>
+                          {/* <div className="btn">导出订单</div><br/> */}
 
 
-                          <div className="btn">再次购买</div><br/>
+                          {/* <div className="btn">再次购买</div><br/> */}
                          
                           {this.showCancelBrnFn(item.orderState) && <div className="btn" onClick={()=>{this.cancelOrderFn(item)}}>取消订单</div>}
                        
@@ -440,13 +440,11 @@ class PeopleOrderListPage extends React.Component {
                               return (<li className={this.state.currentNavIndex==index?"on": ""} key={index} onClick={()=>{this.selectNavFn(index)}}>{ item.title }</li>)
                         })}
                     </ul>
-
-
-
-                    {this.state.orderArr.length>0 && <Table  bordered={true} dataSource={this.state.orderArr} columns={columns} className="order_table" pagination={false} scroll={{ x: 900, y: 500 }}/>}
+                    {this.state.orderArr.length>0 && <Table  bordered={true} dataSource={this.state.orderArr} columns={columns} className="order_table" pagination={false}  />}
+                    
                     {this.state.orderArr.length == 0 && <Empty></Empty>}
+                    
                     {this.state.orderArr.length>0 && <div className="page_con">
-                  
                         <Pagination defaultCurrent={1} total={this.state.orderTotalCount}  pageSize={this.state.pageSize} className="page"  onChange={(params, state) => {
                                     this.setState({
                                         currentPage: params

@@ -38,7 +38,7 @@ class PayOver extends React.Component {
                                     
                                     
                                     <p>订单编号: {this.state.orderNumber}</p>
-                                    <p><Link to="/">查看订单详情</Link> <Link to="/">继续逛逛</Link></p>
+                                    <p><Link to={ "/people/order/detail/" + this.state.orderNumber }>查看订单详情</Link> <Link to="/">继续逛逛</Link></p>
                                     <div className="line"></div>
                                     <p>重要提示：下单后, <span>珞珂平台及销售商不会以订单异常、系统升级为由, 要求您点任何链接 进行退款！</span></p>
                                     

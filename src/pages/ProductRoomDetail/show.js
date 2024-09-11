@@ -122,9 +122,9 @@ class Show extends React.Component {
         }
         let cartArr =  this.state.cartArr;
         
-        console.log("arr cartArr")
-        console.log(cartArr)
-        console.log("arr cartArr")
+        // console.log("arr cartArr")
+        // console.log(cartArr)
+        // console.log("arr cartArr")
         let currentGood = this.state.currentGood;
         let addCartFlag = this.state.addCartFlag;
         this.setState({
@@ -293,8 +293,8 @@ class Show extends React.Component {
             method: "POST",
             data: formData
         }).then((res)=> {
+
             let resData = res.data.data.goodsList;
-            console.log(resData)
             let sameGoodArr = resData.splice(0, 6)
             _this.setState({
                 sameGoodArr: sameGoodArr

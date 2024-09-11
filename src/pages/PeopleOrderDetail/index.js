@@ -63,9 +63,9 @@ class PeopleOrderDetail extends React.Component {
                 orderArr: orderArr
             })
             
-            console.log("order detail")
-            console.log(resData)
-            console.log("order detail")
+            // console.log("order detail")
+            // console.log(resData)
+            // console.log("order detail")
         })
     }
 
@@ -143,7 +143,7 @@ class PeopleOrderDetail extends React.Component {
                         <ul className="order_info_list">
                             <li><span className="tit">主订单号:</span> {this.state.orderInfo.orderParentNo}</li>
                             <li><span className="tit">下单时间:</span>  {this.state.orderInfo.createTime}</li>
-                            <li><span className="tit">下单账号:</span>  {this.state.orderInfo.userName}  {this.state.orderInfo.mobile}</li>
+                            <li><span className="tit">下单账号:</span>  {this.state.orderInfo.userName}  {this.state.orderInfo.userTel}</li>
                             <li><span className="tit">客户信息:</span>
                               {this.state.orderInfo.name} {this.state.orderInfo.mobile} {this.state.orderInfo.provice}{this.state.orderInfo.city}{this.state.orderInfo.area} {this.state.orderInfo.address}
                             </li>
@@ -155,7 +155,7 @@ class PeopleOrderDetail extends React.Component {
 
                             {this.showCancelBrnFn(this.state.orderInfo.status) && <div className="btn">取消订单</div>}
                             {/* <div className="btn">导出订单</div> */}
-                            <div className="btn">再次购买</div>
+                            {/* <div className="btn">再次购买</div> */}
                         </div>
                     </li>
 
@@ -179,26 +179,23 @@ class PeopleOrderDetail extends React.Component {
                         <ul className="order_info_list">
                             <li><span className="tit">收货人:</span> {this.state.orderInfo.name}</li>
                             <li><span className="tit">手机号:</span> { this.state.orderInfo.mobile }</li>
-
-                            <li><span className="tit">下单账号:</span> {this.state.orderInfo.userName} {this.state.orderInfo.userTel}</li>
                             <li><span className="tit">收货地址:</span>  {this.state.orderInfo.provice}{this.state.orderInfo.city}{this.state.orderInfo.area} {this.state.orderInfo.address}</li>
-                            
-                            <li>
+                            {/* <li>
                                 <span className="tit">期望发货时间:</span> 
-                                
                                 {this.state.orderInfo.expectedDeliveryTime?this.state.orderInfo.expectedDeliveryTime:"-----"} 
-                                {/* <span className="change_time">更改时间</span> */}
-                            </li>
+                                
+                                <span className="change_time">更改时间</span>
+                            </li> */}
                         </ul>
                     </li>
                      
                     <li>
                         <div className="title">付款信息</div>
                         <ul className="order_info_list">
-                            <li><span className="tit">商品总价:</span> ¥{this.state.orderInfo.totalPrice}</li>
+                            <li><span className="tit">商品总价:</span> ¥ {this.state.orderInfo.totalPrice}</li>
 
-                            <li><span className="tit">商品税额:</span> ¥{this.state.orderInfo.taxation}</li>
-                            <li><span className="tit">应付总额:</span> ¥{ this.state.orderInfo.payPrice }</li>
+                            {/* <li><span className="tit">商品税额:</span> ¥ {this.state.orderInfo.taxation}</li> */}
+                            <li><span className="tit">应付总额:</span> ¥ { this.state.orderInfo.payPrice }</li>
                             <li><span className="tit">付款时间:</span> {this.state.orderInfo.offlinePayTime} </li>
                             <li><span className="tit">付款方式:</span>  线下汇款 </li>
                         </ul>
@@ -245,7 +242,7 @@ class PeopleOrderDetail extends React.Component {
                                             <li>
                                                 <div className="good_info">
                                                 
-                                                    <img src={goodImg} alt="" className="good_img"/>
+                                                    <img src={ goodItem.imgurl } alt="" className="good_img"/>
                                                 
                                                     <div className="text_con">
                                                         <div className="tit">{goodItem.productName}</div>

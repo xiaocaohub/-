@@ -57,10 +57,10 @@
     border-top:1px solid #E1E1E1;
     font-size:12px;
 }
-.cart_page_con .good_table .good_list > li.on{
+/* .cart_page_con .good_table .good_list > li.on{
     
     display:none;
-}
+} */
 .cart_page_con .good_table .good_list > li:first-child{
     border:none;
 }

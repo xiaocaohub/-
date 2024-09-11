@@ -9,7 +9,9 @@ const { TextArea } = Input;
 class GoodTable extends React.Component {
     constructor (props) {
         super(props)
- 
+        console.log("this.props.orderItem.details")
+        console.log(props.orderItem.details)
+        console.log("this.props.orderItem.details")
     }
     remarkFn = (e)=> {
         let value = e.target.value;
@@ -41,7 +43,7 @@ class GoodTable extends React.Component {
                                     
                                     
                                     <Link to="/" className="good_img">
-                                        <img src={goodImg} alt=""/>
+                                        <img src={item.imgurl} alt=""/>
                                     </Link>
                                     <div className="intro">
 

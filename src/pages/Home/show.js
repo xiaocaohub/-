@@ -1,6 +1,6 @@
 import React from "react";
 import {Row, Col} from "antd";
-
+import {Link} from "react-router-dom";
 
 import "./index.css";
 import BannerCon from "../../components/BannerCon";
@@ -224,27 +224,26 @@ class Show extends React.Component {
                     </div>
           
                     <div className="recommend_good_con">
-                        
-                           
                             <div className="content_common_width">                        
                                 <ul className="recommend_good_list">
                                     {this.state.recomendGoodArr.length>0 && this.state.recomendGoodArr.map((item, index)=>{                      
                                         return (<Good goodInfo={item} key={item.id}></Good>)
                                     })}
                                 </ul>
-                                <div className="more_btn">搜索更多</div>
+                                <Link to="/productroom" className="more_btn">搜索更多</Link>
                             </div>
-
                     </div>
                 </div>  
-
                 {this.state.hotSellArr.length>0 && <HotSelling hotSellArrData={this.state.hotSellArr}></HotSelling>}
 
-                <img src={popularImg} className="popular_img" alt=""/>
 
+
+                <img src={popularImg} className="popular_img" alt=""/>
                 <div className="king_style_good_list_con">
                     <div className="content_common_width">
+
                             <div className="king_good_list_con">
+                        
                                 <ul className="nav_list">
                                     {this.state.styleNav.map((item, index)=> {
                                         return (<li key={item.id} className={this.state.styleIndex===index?"on":""} onClick={()=>{this.styleNavSelectFn(index)}}>{item.text}</li>)

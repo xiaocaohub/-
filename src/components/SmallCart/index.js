@@ -15,8 +15,9 @@ class CartSmall extends React.Component {
         this.state = {
             cartArr: [],
 
-            selectAllFlag: false,
+            selectAllFlag: 0,
             totalMoney: 0,
+            totalSelectCount: 0,
             setImgHeight: 0
         }
     }
@@ -36,15 +37,11 @@ class CartSmall extends React.Component {
         //     this.totalAll()
         // })
 
-
-
         let cartArr = this.state.cartArr;
         if (cartArr.length>0) {
             this.setImgHeightFn()
         }
     }
-
-
     setImgHeightFn = ()=> {
         let img = document.querySelectorAll(".info_con .img")[0];
         let setImgHeight = setImgAutoHeightFn(img);
@@ -54,18 +51,19 @@ class CartSmall extends React.Component {
     }
     selectGoodFn = (item, index)=> {
         let cartArr = this.state.cartArr;
-
-        item.selectFlag = !item.selectFlag;
+        item.checked = item.checked==1?0:1;
         cartArr[index] = item;
+
         setStorageFn("cartArr", cartArr)
-        
         this.selectGoodRequestFn(item.id)
         this.setState({
+        
             cartArr: cartArr
         }, function () {
             this.totalAll()
         })
     }
+
     selectGoodRequestFn = (selectId)=> {
         let _this = this; 
         let formData = new FormData();
@@ -81,56 +79,56 @@ class CartSmall extends React.Component {
             method: "POST",    
             data: formData
         }).then((res)=> {
-            console.log("slect")
-            console.log(res.data)
             if (res.data) {
-
-                
+     
             }
-            // if (res.data.data) {
-            //    message.success("删除成功")
-            //    _this.getCartInfoFn()
-
-            // } else {
-            //     message.error(res.data.message)
-            // }
         })
     }
+
     totalAll = ()=> {
         let cartArr = this.state.cartArr;
-        let flag = true;
-
+        let selectAllFlag = 1;
         let totalMoney = 0;
+        let totalSelectCount = 0;
+
         if (cartArr.length>0) {
             cartArr.forEach((item,index)=> {
-                if (!item.selectFlag) {
-                    flag = false;
+                if (item.checked == 0 || !item.checked) {
+                 
+                    selectAllFlag = 0;
                 }
-                if (item.selectFlag) {
+                if (item.checked == 1) {
                     totalMoney += item.price * item.goods_num;
+                    totalSelectCount += 1;
                 }
             })
         } else {
+            selectAllFlag = 0;
 
-            flag = false;
             totalMoney = 0;
+            totalSelectCount = 0;
         }
         this.setState({
-            selectAllFlag: flag,
-            totalMoney: totalMoney
+            selectAllFlag: selectAllFlag,
+            totalMoney: totalMoney,
+            totalSelectCount: totalSelectCount
         })
     }
     selectAllFn = ()=> { 
         let cartArr = this.state.cartArr;
-        let selectAllFlag = !this.state.selectAllFlag;
+        let selectAllFlag = this.state.selectAllFlag==1?0:1;
         
         cartArr.forEach((item,index)=> {
-            item.selectFlag = selectAllFlag ;
+
+            item.checked = selectAllFlag ;
         })
      
         this.setState({
             cartArr: cartArr,
             selectAllFlag: selectAllFlag
+        }, function () {
+
+            this.totalAll()
         })
     }
 
@@ -208,6 +206,8 @@ class CartSmall extends React.Component {
             content: "确认删除吗?",
             cancelText: "取消",
             okText: "确认",
+
+            centered: true,
             onOk: function () {
                 _this.deleteGoodFn(deleteId)
             }
@@ -222,8 +222,6 @@ class CartSmall extends React.Component {
         formData.append("storeId", 1);
         formData.append("storeType", 6);
         formData.append("cartIds", deleteId)
-
-
         request({
             url: "/api/gw",         
             method: "POST",    
@@ -233,40 +231,41 @@ class CartSmall extends React.Component {
             if (res.data.data) {
                message.success("删除成功")
                _this.getCartInfoFn()
-
             } else {
-        
         
                 message.error(res.data.message)
             }
         })
     }
-
     deleteSelectAllFn = ()=> {
     
         let _this = this;
+     
+     
         let cartArr = this.state.cartArr;
-        let length = cartArr.length;
-        
+        let length = cartArr.length;   
         if (length > 0) {
             let selectCount = 0;
+
             cartArr.forEach((item)=> {
-                if (item.selectFlag) {
+            
+                if (item.checked == 1) {
                     selectCount += 1;
                 }
             })
 
             if (selectCount > 0) {
-
                 Modal.confirm({
                     title: "温馨提示",
                     content: "确认删除吗?",
+                    
                     cancelText: "取消",
                     okText: "确认",
+                    centered: true,
                     onOk: function () {
                         let deleteIds = "";
                         for (let i=length-1; i>=0; i--) {
-                            if (cartArr[i].selectFlag) {                        
+                            if (cartArr[i].checked == 1) {                        
                                 deleteIds += cartArr[i].id + ",";
                             }
                         } 
@@ -291,9 +290,13 @@ class CartSmall extends React.Component {
             data: formData
         }).then((res)=> {
             let resData = res.data.data.data;
-            resData.forEach((item, index)=>{
-                item.selectFlag = item.checked;
-            })
+            console.log("getCartInfoFn good ")
+            console.log(res)
+
+            console.log("getCartInfoFn good ")
+            // resData.forEach((item, index)=>{
+            //     item.selectFlag = item.checked;
+            // })
             _this.setState({
                 cartArr: resData
             }, function () {
@@ -332,7 +335,8 @@ class CartSmall extends React.Component {
                                     return (
                                         <li key={index}> 
                                             <div className="select_con">
-                                                <div className={item.selectFlag?"select on":"select"} onClick={()=>{this.selectGoodFn(item, index)}}></div>
+
+                                                <div className={item.checked==1?"select on":"select"} onClick={()=>{this.selectGoodFn(item, index)}}></div>
                                             </div>
                                             <div className="info_con">
                                                 
@@ -373,7 +377,7 @@ class CartSmall extends React.Component {
                         {/* <div className="down_btn">导出清单</div> */}
                       
                         <div className="total">合计<span className="money">￥{this.state.totalMoney}</span></div>
-                        <div className="total_good">已选 <span className="count">{this.state.cartArr.length}</span> 件商品</div>
+                        <div className="total_good">已选 <span className="count">{this.state.totalSelectCount}</span> 件商品</div>
                     </div>  
                 </div>
             </div>

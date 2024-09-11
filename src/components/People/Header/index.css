@@ -3,16 +3,18 @@
     padding:12px 0;
     background:#333;
     float: left;
+
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 10;
 }
 
-.people_header_con .logo_con{
- 
-}
  .people_header_con .logo_a{
     float:left;
     margin-top:9px;
- 
  }
+ 
 .people_header_con .logo{
     width:218px;
     display:block;
@@ -33,55 +35,69 @@
     margin:7px 0 5px 29px;
     padding-left:20px;
 }
-.people_header_con .top_nav{
-    width:22.9%;
+
+
+.people_header_con .top_nav{ 
     float:left;
-    
-
-
-    /* display:flex;
-    flex-direction:row;
-    justify-content: space-around; */
     margin-left:2%;
-
 }
 
-
 .people_header_con .top_nav li{
+
     float:left;
- 
     color:#fff;
     text-align:center;
     font-size:14px;
-    
     margin-right: 80px;
     cursor: pointer;
 }
 
+.people_header_con .top_nav li.on{
 
+    color: #C6A189;
+}
 .people_header_con .top_nav li .icon{    
     width:29px;
     height:29px;
- 
     background:url("../../../assets/icon/people_header_nav2.png") no-repeat center;
 }
 .people_header_con .top_nav li.on .icon{    
     background:url("../../../assets/icon/people_header_nav1_on.png") no-repeat center;
 }
-
 .people_header_con .top_nav li:nth-child(1) .icon{   
-    background:url("../../../assets/icon/people_header_nav2.png") no-repeat center;
+    background:url("../../../assets/icon/people_header_nav1.png") no-repeat center;
+}
+.people_header_con .top_nav li:nth-child(1):hover .icon{   
+    background:url("../../../assets/icon/people_header_nav1_on.png") no-repeat center;
 }
 .people_header_con .top_nav li:nth-child(2) .icon{   
     background:url("../../../assets/icon/people_header_nav2.png") no-repeat center;
- 
+ }
+ .people_header_con .top_nav li:nth-child(2):hover .icon{   
+    background:url("../../../assets/icon/people_header_nav2_on.png") no-repeat center;
  }
  .people_header_con .top_nav li:nth-child(3) .icon{   
+  
     background:url("../../../assets/icon/people_header_nav3.png") no-repeat center;
  }
-
+ .people_header_con .top_nav li:nth-child(3):hover .icon{   
+    background:url("../../../assets/icon/people_header_nav3_on.png") no-repeat center;
+ }
  .people_header_con .top_nav li:nth-child(4) .icon{
     background:url("../../../assets/icon/people_header_nav4.png") no-repeat center;
+ }
+
+ .people_header_con .top_nav li:nth-child(4):hover .icon{
+    background:url("../../../assets/icon/people_header_nav4_on.png") no-repeat center;
+ }
+
+ .people_header_con .top_nav li:nth-child(1),
+ .people_header_con .top_nav li:nth-child(2),
+ .people_header_con .top_nav li:nth-child(4) {
+    display: none;
+ }
+ .people_header_con .top_nav li.on .icon {
+    background:url("../../../assets/icon/people_header_nav3_on.png") no-repeat center;
  }
 .people_header_con .top_nav li p{
     margin-top:5px;
@@ -119,13 +135,19 @@
 
     position:relative;
     margin-top:15px;
-}
 
+    background: url("../../../assets/icon/chevron_on.png") no-repeat right center;
+    cursor: pointer;
+}
+.people_header_con .phone_con:hover {
+    background: url("../../../assets/icon/chevron_down.png") no-repeat right center;
+}
 .people_header_con .phone_con .phone_title{
     height:29px;
     line-height: 29px;
     font-size: 14px;
-    color:#999;
+    color:#C6A189;
+
 
     text-align: center;
 }
@@ -155,9 +177,19 @@
     color:#333;
     text-decoration: none;
 }
-
-
 .people_header_con .phone_con .btn_list > li.out_b{
     color:#C6A189;
     background:#333;
+}
+.go_index{
+    display:block;
+    margin-top: 17px;
+    float: right;
+
+
+    font-size:18px;
+    color: #C6A189;
+    background:url("../../../assets/icon/back_mall.png") no-repeat left center;
+    padding-left: 32px;
+    margin-right: 40px;
 }

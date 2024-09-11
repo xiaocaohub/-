@@ -30,15 +30,20 @@
   margin-top:5.7%;
   overflow:hidden;
 }
-
-
-
-
 .series_list_page .banner_con .banner_text .txt {
     height:5.9%;
     color:#F0F0F0;
     font-size: 18px;
-    margin:2% 0;
+    margin:1.5% 0 1%;
+}
+
+
+.series_list_page .banner_con .banner_text  .companey_name{
+    height:20px;
+    color:#F0F0F0;
+
+    font-size: 12px;
+    margin-bottom: 20px;
 }
 .series_list_page .banner_con .banner_text .btn{
    width:149px;

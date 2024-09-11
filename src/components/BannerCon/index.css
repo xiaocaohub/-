@@ -27,14 +27,18 @@
 .banner_con .operate_con .operate .btn{
    width:40px;
    height:40px;
+
    position:absolute; 
    top:320px;
    margin-top:-20px;
    cursor:pointer;
 }
+
 .banner_con .operate_con .operate .btn_left{
-  background: url("../../assets/left_banner1.png") no-repeat;
-  left:0;
+
+
+  background: url("../../assets/left_banner1.png") no-repeat; 
+  left:10%;
 }
 
 .banner_con .operate_con .operate .btn_left:hover{
@@ -43,7 +47,7 @@
 }
 .banner_con .operate_con .operate .btn_right{
   background: url("../../assets/right_banner1.png") no-repeat;
-  right:0;
+  right:10%;
 }
 .banner_con .operate_con .operate .btn_right:hover{
   background: url("../../assets/right_banner2.png") no-repeat;

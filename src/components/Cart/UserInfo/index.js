@@ -11,10 +11,11 @@ import areaData from "../../../citys/area";
 import "./index.css";
 const { Option } = Select;
 let areaList = [];
+
 const formItemLayout = {
     labelCol: {
-      xs: { span: 1 },
-      sm: { span: 1 },
+      xs: { span: 2 },
+      sm: { span: 2 },
     },
 
     wrapperCol: {
@@ -277,7 +278,7 @@ class UserInfo extends React.Component {
                     </div>
 
                     <Form className="form_con"  {...formItemLayout}>
-                        <Form.Item label="所在地区" >
+                        <Form.Item label="所在地区" width="150px">
                        
                             <Select
                                 labelInValue  defaultValue={{ key: '请选择' }}
@@ -348,6 +349,8 @@ class UserInfo extends React.Component {
                 <div className={!this.state.changeFlag?"user_info_text_con on":"user_info_text_con"}>
                     <div className="title">
                         <div className="tit">客户信息</div>
+                        
+                        <div className="txt">（注：客户收货地址信息）</div>
                     </div>
 
                     <ul className="user_info_text">
@@ -369,14 +372,11 @@ class UserInfo extends React.Component {
                     </ul>
                 </div>
 
-                <div className="message_title">
+                {/* <div className="message_title">
                     <div className="title">物流提示</div>
                     <div className="txt">1.本产品不包含物流费用。</div>
-
                     <div className="txt">2.发货前物流公司会与你沟通物流相关费用。</div>
-                
-                
-                </div>
+                </div> */}
             </div>
         )
     }

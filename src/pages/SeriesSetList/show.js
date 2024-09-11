@@ -16,12 +16,13 @@ import zh_CN from 'antd/es/locale/zh_CN';
 class Show extends React.Component {
     constructor (props) {
         super(props)
-
         this.state = {
+            // 系列集
             brandId: parseInt(props.match.params.id),        
             goodListArr: [],
             goodList: [],
             brandInfo: "",
+            goodInfo: "",
             total: 0,
             currentPage: 1,
             pageSize: 16,
@@ -33,11 +34,11 @@ class Show extends React.Component {
                 sortCriteria: "",
                 spaceId: "",
                 spacePname: "",
+
                 spaceSid: "",
- 
+                
+                
                 productClass: "",
-
-
                 styleId: "",
                 stylePname: "",
                 keyword: ""
@@ -51,16 +52,12 @@ class Show extends React.Component {
         this.totalCartGoodCountFn()
     }
     init = ()=> {
-        // console.log("window.location")
-        // console.log(window.location)
-        // console.log("window.location")
+        console.log("window.location")
+        console.log(window.location)
+        console.log("window.location")
         let search = window.location.search;
         let keyword = "";
         let optionIds = this.state.optionIds;
-        // console.log("search init")
-        
-        // console.log(search)
-        // console.log("search init")
         if (search && search.indexOf("keyword")!=-1) {
             keyword = decodeURIComponent(search.split("keyword=")[1]);
             optionIds.keyword = keyword;
@@ -151,13 +148,10 @@ class Show extends React.Component {
         })
     }
 
-
     requestGoodListFn = ()=> {
         let optionIds = this.state.optionIds;
-        // console.log("optionIds optionIds request")
-        // console.log(optionIds)
-        // console.log("optionIds optionIds request")
         let formData = new FormData();
+
         let option = {"brandId":"","minPrice":"","maxPrice":""};
         let storeId = getStorageFn("storeId") || 1;       
         let storeType = getStorageFn("storeType") || 6;
@@ -174,17 +168,25 @@ class Show extends React.Component {
         formData.append("keyword", optionIds.keyword);
         formData.append("queryCriteria",  JSON.stringify(option));
         formData.append("sort", optionIds.sort);
+        formData.append("brandId", this.state.brandId);
+      
         request({
             url: "/api/gw",
             method: "POST",
             data: formData
         }).then((res)=> {
             let resData =  res.data.data;
-            let goodList = resData.goodsList;    
+            let goodList = resData.goodsList;   
+            let brandInfo = resData.brandInfo; 
             let total = resData.total;
+            console.log("brandInfo brandInfo")
+            console.log(resData)
+            console.log("brandInfo brandInfo")
             this.setState({
+                brandInfo: brandInfo,
                 goodList: goodList,
-                total: total
+                total: total,
+                goodInfo: resData
             })
         })
     }
@@ -205,6 +207,7 @@ class Show extends React.Component {
             let resData = res.data.data.data;
             _this.setState({
                 cartArr: resData
+        
             },function () {
                 let cartArr = _this.state.cartArr;
                 let length = cartArr.length;
@@ -222,6 +225,7 @@ class Show extends React.Component {
                         <div className="banner_text">
                             <div className="title">{this.state.brandInfo?this.state.brandInfo.brand_name:"---"}</div>
                             <div className="txt">{this.state.brandInfo?this.state.brandInfo.brand_introduce:"---"}</div>
+                            <div className="companey_name">{this.state.goodInfo.mchName}</div>
                             <div className="btn">在售商品{this.state.total}款</div>
                         </div>
                     </div>

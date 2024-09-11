@@ -231,14 +231,20 @@
     left: 0;
     bottom: 0;
     background: #fff;
+    border-bottom-left-radius: 9px;
+    border-bottom-right-radius: 9px;
  }
  .cart_small_con .total_con .select_all{
-   float:left;
 
+
+   float:left;
    margin-top:23px;
    background:url("../../assets/icon/icon_select.png") no-repeat left center;
    padding-left:29px;
+
    cursor:pointer;
+   
+   
    margin-left: 29px;
 }
 

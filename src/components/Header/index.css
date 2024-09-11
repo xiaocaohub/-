@@ -47,6 +47,11 @@
    line-height: 40px;
    color: #C6A189;
    cursor: pointer;
+   padding-right: 25px;
+   background: url("../../assets/icon/chevron_on.png") no-repeat right 59.9%;
+}
+.header_con .header_top .header_img:hover .phone{
+    background: url("../../assets/icon/chevron_down.png") no-repeat right 59.9%;
 }
 
 .header_con .header_top .header_img .btn_group{
