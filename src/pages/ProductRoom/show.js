@@ -39,7 +39,7 @@ class Show extends React.Component {
 
                 styleId: "",
                 stylePname: "",
-                keyword: ""
+                keyWord: ""
             },
 
             optionIdsFlag: false, // 是否渲染导航
@@ -59,19 +59,26 @@ class Show extends React.Component {
     }
 
     init = ()=> {
-        // console.log("window.location")
-        // console.log(window.location)
-        // console.log("window.location")
-        let search = window.location.search;
-        let keyword = "";
+        let search = window.location.search;      
         let optionIds = this.state.optionIds;
-        // console.log("search init")
-        
-        // console.log(search)
-        // console.log("search init")
+ 
+        console.log("window.location")
+
+        console.log(optionIds)
+        console.log("window.location")
+    
         if (search && search.indexOf("keyword")!=-1) {
-            keyword = decodeURIComponent(search.split("keyword=")[1]);
-            optionIds.keyword = keyword;
+            let keyword = search.split("keyword=")[1];
+            optionIds.keyWord = keyword;
+        } 
+
+        if (search && search.indexOf("keyword") == -1) {
+
+console.log("keyword ----------------")
+            optionIds.keyWord = "";
+            console.log("optionIds optionIds")
+            console.log(optionIds)
+            console.log("optionIds optionIds")
         }
 
         if (search && search.indexOf("productLabel") != -1) {
@@ -196,6 +203,7 @@ class Show extends React.Component {
             this.requestGoodListFn()
         })
     }
+
     requestGoodListFn = ()=> {
         let optionIds = this.state.optionIds;
         // console.log("optionIds optionIds request")
@@ -205,7 +213,12 @@ class Show extends React.Component {
         let option = {"brandId":"","minPrice":"","maxPrice":""};
         let storeId = getStorageFn("storeId") || 1;       
         let storeType = getStorageFn("storeType") || 6;
-   
+        
+        let keyWord = "";
+        if (optionIds.keyWord) {
+            keyWord =  encodeURIComponent(optionIds.keyWord);
+        } 
+       
         formData.append("api", "app.product.listProduct");
         formData.append("storeId", storeId);
         formData.append("storeType", storeType);
@@ -215,7 +228,7 @@ class Show extends React.Component {
         formData.append("styleIds",  optionIds.styleId);
         formData.append("sortCriteria", optionIds.sortCriteria);
         formData.append("productLabel", optionIds.productLabel);
-        formData.append("keyword", optionIds.keyword);
+        formData.append("keyword", keyWord);
         formData.append("queryCriteria",  JSON.stringify(option));
         formData.append("sort", optionIds.sort);
         request({

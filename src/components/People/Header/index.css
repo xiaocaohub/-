@@ -101,7 +101,8 @@
  }
 .people_header_con .top_nav li p{
     margin-top:5px;
-    color: #999;
+    /* color: #999; */
+    color: #C6A189;
 }
 
 .people_header_con .top_nav li  a{

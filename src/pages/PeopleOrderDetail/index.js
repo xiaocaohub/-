@@ -151,7 +151,7 @@ class PeopleOrderDetail extends React.Component {
                         </ul>
 
                         <div className="operate_btn_list">
-                            {this.showPayBtnFn(this.state.orderInfo.status) && <div className="btn">去付款</div>}
+                            {/* {this.showPayBtnFn(this.state.orderInfo.status) && <div className="btn">去付款</div>} */}
 
                             {this.showCancelBrnFn(this.state.orderInfo.status) && <div className="btn">取消订单</div>}
                             {/* <div className="btn">导出订单</div> */}
@@ -180,12 +180,12 @@ class PeopleOrderDetail extends React.Component {
                             <li><span className="tit">收货人:</span> {this.state.orderInfo.name}</li>
                             <li><span className="tit">手机号:</span> { this.state.orderInfo.mobile }</li>
                             <li><span className="tit">收货地址:</span>  {this.state.orderInfo.provice}{this.state.orderInfo.city}{this.state.orderInfo.area} {this.state.orderInfo.address}</li>
-                            {/* <li>
+                            <li>
                                 <span className="tit">期望发货时间:</span> 
                                 {this.state.orderInfo.expectedDeliveryTime?this.state.orderInfo.expectedDeliveryTime:"-----"} 
                                 
-                                <span className="change_time">更改时间</span>
-                            </li> */}
+                                {/* <span className="change_time">更改时间</span> */}
+                            </li>
                         </ul>
                     </li>
                      

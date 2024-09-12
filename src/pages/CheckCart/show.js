@@ -107,7 +107,7 @@ class Show extends React.Component {
         }).then((res)=> {
             let resData = res.data.data  || [];
             let orders =  [];
-            if (resData.orders) {
+            if (resData.orders && resData.orders.length>0) {
                 orders = resData.orders;
             }
             orders.forEach((item, index)=>{
@@ -262,17 +262,18 @@ class Show extends React.Component {
                 </div>
            
            
-
                 <div className="total_con">
                     
                     <div className="total_list_con content_common_width">
                         <div className="order_btn" onClick={this.payOrderFn}>提交订单</div>
                         <ul className="total_list">
-                            <li>体积: {this.state.totalVolume}m²</li>
-                            <li>税额: ￥{this.state.taxation}</li>
+                            <li>体积: {this.state.totalVolume>0?this.state.totalVolume.toFixed(2):this.state.totalVolume}m²</li>
+                            {/* <li>税额: ￥{this.state.taxation}</li> */}
                             <li>商品总额: ￥{this.state.totalPrice}</li>
                             <li>应付总额:</li>
-                            <li className="money">￥{this.state.totalPrice + this.state.taxation} </li>
+                            {/* <li className="money">￥{this.state.totalPrice + this.state.taxation} </li> */}
+                            <li className="money">￥{this.state.totalPrice } </li>
+                            
                         </ul>
                     </div>
                 </div>

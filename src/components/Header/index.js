@@ -92,7 +92,8 @@ function Header () {
         console.log("searchValue searchValue")
         console.log(searchValueStr)
         console.log('searchValue searchValue')
-        window.location.href = "/productroom?keyword=" + searchValueStr;
+        // window.location.href = "/productroom?keyword=" + searchValueStr;
+        window.location.href = "/productroom?keyword=" + searchValue;
     } 
     return (
         <div className="header_con">
@@ -137,7 +138,7 @@ function Header () {
 
                         <div className="search_con">
                             <div className="btn" onClick={searchFn}></div>
-                            <input type="text" placeholder="搜索商品名称/编码" value={searchValue} onChange={searchValueFn} className="search"/>
+                            <input type="text" placeholder="商品名称/编码/型号" value={searchValue} onChange={searchValueFn} className="search"/>
                         </div>    
                 </div>
             </div>

@@ -22,12 +22,16 @@
 }
 .pay_page_con .title_con .last_time{
     color:#E61D40;
+    overflow: hidden;
 }
 
 .pay_page_con .title_con .txt{
     margin-bottom:5px;
     color:#666;
     font-size: 14px;
+}
+.pay_page_con .title_con .last_time .last_txt{
+    float: right;
 }
 .pay_page_con .title_con  .item{
     margin-right:20px;

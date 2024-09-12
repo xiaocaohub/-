@@ -84,7 +84,7 @@ class Pay extends React.Component {
                             {/* <div className="order_status"></div> */}
                             <div className="title_con">
 
-                                <div className="last_time_tit">订单提交成功, 请您在 <span className="last_time">{this.state.dateText}</span> 内完成支付, 否则订单会被自动取消!</div>
+                                <div className="last_time_tit">订单提交成功, 请您在 <span className="last_time">{this.state.dateText}</span> <span className="last_txt">内完成支付, 否则订单会被自动取消!</span></div>
                                 <div className="txt">
                                     <span className="item">订单编号: {this.state.orderNumber}</span>
                                     <span className="item">应付款金额: {this.state.payTotal.totalPrice}元</span>

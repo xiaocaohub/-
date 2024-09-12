@@ -8,7 +8,7 @@ let instance = axios.create({
 })
 
 instance.interceptors.request.use(
-
+    
     config => {
         let token = getStorageFn("token");
         config.headers.Authorization = "12345";

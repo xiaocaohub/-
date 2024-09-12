@@ -28,7 +28,7 @@ class GoodTable extends React.Component {
                     <li className="good_code">商品编码</li>
                     <li className="vol">体积(m³)</li>
 
-                    <li className="price">供货单价(元)</li>
+                    <li className="price">销售单价(元)</li>
                     <li className="count">数量</li>
                     <li className="sub_total">小计(元)</li>
      

@@ -352,7 +352,7 @@ class PeopleOrderListPage extends React.Component {
                   console.log("index table")
                   return (
                       <div className="operate_btn_group">
-                          {this.showPayBtnFn(item.orderState) && <div className="btn">去付款</div>} <br/>
+                          {/* {this.showPayBtnFn(item.orderState) && <div className="btn">去付款</div>} <br/> */}
                           <div className="btn"><Link to={ "/people/order/detail/" + item.operateText.order }>订单详情</Link></div> <br/>
                           {/* <div className="btn">导出订单</div><br/> */}
 
@@ -440,7 +440,7 @@ class PeopleOrderListPage extends React.Component {
                               return (<li className={this.state.currentNavIndex==index?"on": ""} key={index} onClick={()=>{this.selectNavFn(index)}}>{ item.title }</li>)
                         })}
                     </ul>
-                    {this.state.orderArr.length>0 && <Table  bordered={true} dataSource={this.state.orderArr} columns={columns} className="order_table" pagination={false}  />}
+                    {this.state.orderArr.length>0 && <Table    dataSource={this.state.orderArr} columns={columns} className="order_table" pagination={false}  />}
                     
                     {this.state.orderArr.length == 0 && <Empty></Empty>}
                     

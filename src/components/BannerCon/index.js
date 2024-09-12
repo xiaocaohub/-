@@ -31,10 +31,30 @@ class BannerCon extends React.Component {
                     src: require("../../assets/banner4.png"),
                      url: "/series/list/96"
                 }
-            ]
+            ],
+            bannerHeight: 0
         }
         this.prev = this.prev.bind(this)
         this.next = this.next.bind(this)
+    }
+    
+    componentDidMount () {
+        this.init()
+    }
+    init = ()=> {
+        let _this = this;
+        
+        let bannerList = this.state.bannerList;
+        if (bannerList.length > 0) {        
+            let bannerImg = document.querySelectorAll(".banner_img")[0];
+            bannerImg.onload = function () {
+                let bannerHeight = bannerImg.clientHeight;
+
+                _this.setState({
+                    bannerHeight: bannerHeight
+                })
+            }
+        }
     }
     prev = (index)=> {
   
@@ -48,6 +68,7 @@ class BannerCon extends React.Component {
         
        // console.log(index)
     }
+
     render () {
         return (
             <div className="banner_con">
@@ -74,8 +95,8 @@ class BannerCon extends React.Component {
                         </Col> */}
                     <div className="operate">
                        
-                        <div className="btn btn_left" onClick={this.prev}></div>
-                        <div className="btn btn_right" onClick={this.next}></div>
+                        <div className="btn btn_left" onClick={this.prev} style={{top: (this.state.bannerHeight/2 - 20) + "px"}}></div>
+                        <div className="btn btn_right" onClick={this.next} style={{top: (this.state.bannerHeight/2 -20) + "px"}}></div>
                     </div>
                 </div>
             </div>

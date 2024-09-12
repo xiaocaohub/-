@@ -38,8 +38,10 @@ function Header () {
 
 
                     <li className="on">
-                        <div className="icon"></div>
-                        <p>订单</p> 
+                        <Link to="/people/order/list">
+                            <div className="icon"></div>
+                            <p>订单</p> 
+                        </Link>
                     </li>
 
                     <li>

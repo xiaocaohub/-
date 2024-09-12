@@ -129,7 +129,7 @@
     /* border:1px solid brown; */
 }
 .people_order_detail  .order_good_table .table_title .good_info{
-    width:37%;
+    width:33%;
     height:50px;
     float:left;
 }
@@ -137,10 +137,9 @@
 
 
 .people_order_detail  .order_good_table .table_title .size{
-    width:14%;    
+    width:17.9%;    
     height:50px;
     line-height:50px;
-
     float:left;
     /* border:1px solid  brown; */
 }
@@ -198,7 +197,7 @@
 }
 
 .people_order_detail  .order_good_table .good_list > li .good_info{
-    width:37%;
+    width:33%;
     padding:20px 0;
     float:left;
 }
@@ -220,7 +219,7 @@
     color:#666;
 }
 .people_order_detail  .order_good_table .good_list > li .size{
-    width:14%;
+    width:17.9%;
     padding:20px 0;
 
     display: flex;

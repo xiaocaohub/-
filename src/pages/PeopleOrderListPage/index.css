@@ -1,6 +1,5 @@
 .people_order_list_page_con{
     min-height: 500px;
- 
 }
 
 
@@ -38,8 +37,10 @@
 }
 
 .people_order_list_page_con .order_table{
+ 
     margin-top:10px;
     margin-left:20px;
+    margin-right: 20px;
     border:1px solid #E1E1E1;
 }
 

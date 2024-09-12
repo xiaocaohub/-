@@ -115,7 +115,7 @@ class Show extends React.Component {
                 if (item.checked) {
             
                     totalMoney += item.price * item.goods_num;
-                    totalVol += item.capacity;
+                    totalVol += item.capacity * item.goods_num;
                 }
             })
         } else {
@@ -214,6 +214,7 @@ class Show extends React.Component {
             content: "确认删除吗?",
             cancelText: "取消",
 
+            centered: true,
             okText: "确认",
             onOk: function () {
                 _this.deleteGoodFn(deleteId)
@@ -309,11 +310,13 @@ class Show extends React.Component {
             })
             if (selectCount > 0) {
                 Modal.confirm({
-                    
                     title: "温馨提示",
                     content: "确认删除吗?",
                     cancelText: "取消",
+
                     okText: "确认",
+                    
+                    centered: true,
                     onOk: function () {
                         let deleteIds = "";
                         for (let i=length-1; i>=0; i--) {
@@ -321,6 +324,7 @@ class Show extends React.Component {
                                 deleteIds += cartArr[i].id + ",";
                             }
                         } 
+                        
                         _this.deleteGoodFn(deleteIds)
                     }
                 })
