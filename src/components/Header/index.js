@@ -89,11 +89,8 @@ function Header () {
     }
     function searchFn () {
         let  searchValueStr = encodeURIComponent(searchValue);
-        console.log("searchValue searchValue")
-        console.log(searchValueStr)
-        console.log('searchValue searchValue')
-        // window.location.href = "/productroom?keyword=" + searchValueStr;
-        window.location.href = "/productroom?keyword=" + searchValue;
+        window.location.href = "/build/productroom?keyword=" + searchValueStr;
+        // window.location.href = "/productroom?keyword=" + searchValue;
     } 
     return (
         <div className="header_con">
@@ -134,7 +131,7 @@ function Header () {
                         </Badge>
                         {/* <Link to="/cart">
                             <img src={topcart}/>      
-                        </Link> */}
+          n              </Link> */}
 
                         <div className="search_con">
                             <div className="btn" onClick={searchFn}></div>

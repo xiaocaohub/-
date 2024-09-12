@@ -125,6 +125,7 @@ class GoodNav extends React.Component {
             let keyword = decodeURIComponent(keywordStr);
             
             optionIds.keyword = keyword;
+            optionIds.keyWord = keyword;
         }
         
        

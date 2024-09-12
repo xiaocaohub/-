@@ -13,8 +13,8 @@ class CartSmall extends React.Component {
     constructor (props) {
         super(props)
         this.state = {
+            
             cartArr: [],
-
             selectAllFlag: 0,
             totalMoney: 0,
             totalSelectCount: 0,
@@ -117,12 +117,14 @@ class CartSmall extends React.Component {
     selectAllFn = ()=> { 
         let cartArr = this.state.cartArr;
         let selectAllFlag = this.state.selectAllFlag==1?0:1;
-        
+        let ids = "";
         cartArr.forEach((item,index)=> {
 
             item.checked = selectAllFlag ;
+            ids += item.id + ",";
         })
      
+        this.selectGoodRequestFn(ids);
         this.setState({
             cartArr: cartArr,
             selectAllFlag: selectAllFlag
@@ -308,6 +310,23 @@ class CartSmall extends React.Component {
             setStorageFn("cartArr", resData)
         })
     }
+
+    goCartFn = ()=> {
+        let cartArr = this.state.cartArr;
+
+        let selectCount = 0;
+        cartArr.forEach((item, index)=> {
+            if (item.checked == 1) {
+                selectCount += 1;
+            }
+        })
+        if (selectCount == 0) {
+            message.error("请选择商品")
+            return  ;
+        }
+        window.location.href = "/cart";
+
+    }
     render () {
         return (
             <div className="show_small_cart">
@@ -372,7 +391,10 @@ class CartSmall extends React.Component {
                     <div className="total_con">
                         <div className={this.state.selectAllFlag?"select_all on":"select_all"} onClick={this.selectAllFn}>全选</div>
                         <span className="delete_all" onClick={this.deleteSelectAllFn}>删除选中商品</span>
-                        <Link to="/cart" className="go_cart_btn">下单采购</Link>
+                        {/* <Link to="/cart" className="go_cart_btn">下单采购</Link> */}
+
+                        <div className="go_cart_btn" onClick={this.goCartFn}>下单采购</div>
+
                         {/* <div className="go_cart_btn" onChange={this.props.goCartFn}>下单采购</div> */}
                         {/* <div className="down_btn">导出清单</div> */}
                       

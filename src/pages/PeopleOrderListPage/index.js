@@ -181,8 +181,6 @@ class PeopleOrderListPage extends React.Component {
                     method: "POST",    
                     data: formData
                 }).then((res)=> {
-                    // console.log("res cancel")
-                    // console.log(res)
                     if (res.data.code == 200) {
                         message.success(res.data.message)
                         _this.setState({
@@ -197,7 +195,6 @@ class PeopleOrderListPage extends React.Component {
                 })
             }
         })
-     
     }
     showCancelBrnFn = (status)=> {
         switch (status) {
@@ -337,32 +334,26 @@ class PeopleOrderListPage extends React.Component {
             },
             {
 
-
-
-              title: '操作',
+                title: '操作',
             //   dataIndex: 'operateText',
-              key: 'operateText',
+                key: 'operateText',
+                width: '10%',
 
-              width: '10%',
+                render: (item)=> {
 
-              render: (item)=> {
-                  console.log("index table")
-                  console.log(item)
-          
-                  console.log("index table")
-                  return (
-                      <div className="operate_btn_group">
-                          {/* {this.showPayBtnFn(item.orderState) && <div className="btn">去付款</div>} <br/> */}
-                          <div className="btn"><Link to={ "/people/order/detail/" + item.operateText.order }>订单详情</Link></div> <br/>
-                          {/* <div className="btn">导出订单</div><br/> */}
+                    return (
+                        <div className="operate_btn_group">
+                            {/* {this.showPayBtnFn(item.orderState) && <div className="btn">去付款</div>} <br/> */}
+                            <div className="btn"><Link to={ "/people/order/detail/" + item.operateText.order }>订单详情</Link></div> <br/>
+                            {/* <div className="btn">导出订单</div><br/> */}
 
 
-                          {/* <div className="btn">再次购买</div><br/> */}
-                         
-                          {this.showCancelBrnFn(item.orderState) && <div className="btn" onClick={()=>{this.cancelOrderFn(item)}}>取消订单</div>}
-                       
-                      </div>
-                  )
+                            {/* <div className="btn">再次购买</div><br/> */}
+                            
+                            {this.showCancelBrnFn(item.orderState) && <div className="btn" onClick={()=>{this.cancelOrderFn(item)}}>取消订单</div>}
+                        
+                        </div>
+                    )
               }
             }
         ]
