@@ -2,6 +2,8 @@ import {connect} from "react-redux";
 import Show from "./show";
 import {getGoodInfoAction} from "../../actions/ProductRoomDetail";
 
+import {setStorageFn, getStorageFn} from "../../utils/localStorage";
+
 let mapStateToProps = state=> {
     // console.log("mapState detail")
     // console.log(state)
@@ -20,7 +22,9 @@ let mapDispatchToProps = dispatch=> {
             let _this = this;    
             let formData = new FormData();
             let option = {"brandId":"","minPrice":"","maxPrice":""};
-            formData.append("api", "app.product.productDetails");          
+            let token = getStorageFn("token");
+            formData.append("api", "app.product.productDetails"); 
+            formData.append("accessId", token);         
             formData.append("storeId", 1);
             formData.append("storeType", 6);
             formData.append("productId", goodId);       

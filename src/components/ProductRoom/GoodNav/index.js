@@ -11,16 +11,17 @@ import {getStorageFn} from "../../../utils/localStorage";
 class GoodNav extends React.Component {
     constructor (props) {
         super(props)
+        // console.log("goodNav props")
+        // console.log(props)
+        // console.log("goodNav props")
         this.state = {
             // 空间导航
-
             spaceNavArr: [],
             currentSpaceId: "",
             currentSpaceSid: "",
             currentSpacePname: "",
             // 品类导航
             categoryNavArr: [],  
-
             currentCategoryId: "",
             navOption: {
                 spacePname: "",
@@ -35,8 +36,9 @@ class GoodNav extends React.Component {
                 sort: "asc",
 
                 productClass: "",
+ 
 
-
+                keyWord: "",
                 keyword: ""
             },
             // 风格导航
@@ -104,9 +106,9 @@ class GoodNav extends React.Component {
         let currentFilterIndex = 0;
         let optionIds = this.props.optionIds;
 
-         console.log("location window")
-        console.log(window.location)
-        console.log("location window")
+        //  console.log("location window --------- goodNav")
+        // console.log(optionIds)
+        // console.log("location window -------- goodNav")
         if (productLabel) {
             if (productLabel == 101) {
                 currentFilterIndex = 1;
@@ -118,17 +120,36 @@ class GoodNav extends React.Component {
                 currentFilterIndex = 3;
             }
         }
-        let search = window.location.search;
+        // let search = window.location.search;
       
-        if (search) {
-            let keywordStr = search.split("keyword=")[1];
-            let keyword = decodeURIComponent(keywordStr);
+        // if (search) {
+        //     let keywordStr = search.split("keyword=")[1];
+        //     let keyword = decodeURIComponent(keywordStr);
             
-            optionIds.keyword = keyword;
-            optionIds.keyWord = keyword;
-        }
+        //     optionIds.keyword = keyword;
+        //     optionIds.keyWord = keyword;
+        // }
         
-       
+        // if (search && search.indexOf("keyword")!=-1) {
+         
+
+
+        
+        //     let keywordStr = search.split("keyword=")[1];
+        //     let keyword = decodeURIComponent(keywordStr);
+        //     optionIds.keyWord = keyword;
+        //     optionIds.keyword = keyword;
+        // } 
+
+        // if (search && search.indexOf("keyword") == -1) {
+
+        //     console.log("keyword ----------------")
+        //     optionIds.keyWord = "";
+        //     optionIds.keyword = "";
+        //     console.log("optionIds optionIds")
+        //     console.log(optionIds)
+        //     console.log("optionIds optionIds")
+        // }
         this.setState({
             currentFilterIndex: currentFilterIndex,
             navOption: optionIds
@@ -149,12 +170,10 @@ class GoodNav extends React.Component {
         if (search) {
             if (search.indexOf("navBtn") != -1) {
                 index = parseInt(search.split("navBtn=")[1]);
-                console.log("location window index")
-                console.log(typeof index)
-                
-                
-                console.log( index)
-                console.log("location window index")
+                // console.log("location window index")
+                // console.log(typeof index)
+                // console.log( index)
+                // console.log("location window index")
                 btnArr[index].click()
             }
         }
@@ -262,9 +281,7 @@ class GoodNav extends React.Component {
         let _this = this;
         let formData = new FormData();
         formData.append("api", "app.product.getSecondClassList");
-
         formData.append("parentId", this.state.currentSpaceId);
-        
         formData.append("storeId", 1);
         formData.append("storeType", 6);
         request({
@@ -274,17 +291,14 @@ class GoodNav extends React.Component {
         }).then((res)=> {
             let resData =  res.data.data;  
             resData.forEach((item, index)=> {
-        
                 item.checked = false;
             }) 
             _this.setState({
-        
                 categoryNavArr: resData
             })
         })
     }
     getStyleNavFn = ()=> {
-        
         let _this = this;
         let formData = new FormData();
         let storeId = getStorageFn("storeId") || 1;
@@ -294,7 +308,6 @@ class GoodNav extends React.Component {
         formData.append("storeType", storeType);
         formData.append("page", 1);
         formData.append("pageSize", 6);
-        
         formData.append("key", "");
         formData.append("pageSize", 10);
         request({
@@ -304,7 +317,6 @@ class GoodNav extends React.Component {
         }).then((res)=> {
             let resData =  res.data.data.list;
             resData.forEach((item, index)=>{
-        
                 item.checked = false;
             })
             _this.setState({

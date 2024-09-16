@@ -81,7 +81,10 @@ class Show extends React.Component {
         let _this = this;    
         let formData = new FormData();
         let option = {"brandId":"","minPrice":"","maxPrice":""};
-        formData.append("api", "app.product.productDetails");          
+        let token = getStorageFn("token");
+        formData.append("api", "app.product.productDetails");    
+        
+        formData.append("accessId", token);      
         formData.append("storeId", 1);
         formData.append("storeType", 6);
         formData.append("productId", goodId);

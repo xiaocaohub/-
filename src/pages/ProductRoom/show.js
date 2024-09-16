@@ -39,7 +39,8 @@ class Show extends React.Component {
 
                 styleId: "",
                 stylePname: "",
-                keyWord: ""
+                keyWord: "",
+                keyword: ""
             },
 
             optionIdsFlag: false, // 是否渲染导航
@@ -61,29 +62,28 @@ class Show extends React.Component {
     init = ()=> {
         let search = window.location.search;      
         let optionIds = this.state.optionIds;
- 
-        console.log("window.location")
-
-        console.log(optionIds)
-        console.log("window.location")
-    
         if (search && search.indexOf("keyword")!=-1) {
-            let keyword = search.split("keyword=")[1];
+            let keywordStr = search.split("keyword=")[1];
+            let keyword = decodeURIComponent(keywordStr);
+            // let keyword = search.split("keyword=")[1];
             optionIds.keyWord = keyword;
+            optionIds.keyword = keyword;
         } 
 
         if (search && search.indexOf("keyword") == -1) {
-
-console.log("keyword ----------------")
             optionIds.keyWord = "";
-            console.log("optionIds optionIds")
-            console.log(optionIds)
-            console.log("optionIds optionIds")
+            optionIds.keyword = "";
+            // console.log("optionIds optionIds")
+            // console.log(optionIds)
+            // console.log("optionIds optionIds")
         }
 
         if (search && search.indexOf("productLabel") != -1) {
             let productLabel = search.split("productLabel=")[1];
             optionIds.productLabel = productLabel;
+            // console.log("optionIds optionIds productLabel")
+            // console.log(optionIds)
+            // console.log("optionIds optionIds productLabel")
         }
         
         this.setState({
@@ -215,10 +215,14 @@ console.log("keyword ----------------")
         let storeType = getStorageFn("storeType") || 6;
         
         let keyWord = "";
+
         if (optionIds.keyWord) {
             keyWord =  encodeURIComponent(optionIds.keyWord);
         } 
        
+        //     console.log("optionIds optionIds encodeURIComponent")
+        // console.log(optionIds)
+        // console.log("optionIds optionIds encodeURIComponent")
         formData.append("api", "app.product.listProduct");
         formData.append("storeId", storeId);
         formData.append("storeType", storeType);
@@ -246,17 +250,12 @@ console.log("keyword ----------------")
         })
     }
     // 统计购物车数量
-
     totalCartGoodCountFn = ()=> {
-    
-    
         let _this = this;
         let formData = new FormData();
         let token = getStorageFn("token");
         formData.append("api", "app.cart.index");    
-    
         formData.append("accessId", token);  
-    
         formData.append("storeId", 1);
         formData.append("storeType", 6);
         request({
@@ -276,7 +275,6 @@ console.log("keyword ----------------")
         })
     }
     render () {
-        
         return (
             <div className="product_room_con">           
                 <div className="content_common_width">
@@ -284,7 +282,6 @@ console.log("keyword ----------------")
                 
                     <ul className="product_list">
                         {this.state.goodList.length>0 && this.state.goodList.map((item)=> {
-                        
                             return (<Good key={item.id} itemData={item}></Good>)
                         })}
                     </ul>

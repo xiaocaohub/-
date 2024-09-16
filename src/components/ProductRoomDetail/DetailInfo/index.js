@@ -3,6 +3,8 @@ import {Link} from "react-router-dom";
 import {Input, message} from "antd";
 
 import { RightOutlined, StarOutlined, ShareAltOutlined } from '@ant-design/icons';
+
+import {setStorageFn, getStorageFn} from "../../../utils/localStorage";
 import codeImg from "../../../assets/footer_code2.png";
 import "./index.css";
 
@@ -11,10 +13,10 @@ import "./index.css";
 class DetailInfo extends React.Component {
     constructor (props) {
         super(props)
-        console.log("show detail props")
-        console.log(props)
+        // console.log("show detail props")
+        // console.log(props)
 
-        console.log("show detail props")
+        // console.log("show detail props")
         this.state = {
             // 大图 index
             currentIndex: 1,
@@ -40,7 +42,10 @@ class DetailInfo extends React.Component {
             // 选中的商品
             currentGood: props.goodDetail.skuBeanList[0],
             // 选中颜色匹配上的所有商品
-            allColorSizeGoodArr: []
+            allColorSizeGoodArr: [],
+
+            // 是否开启供货价
+            supplyPriceStatus: false
         }   
     }
     componentDidMount () {
@@ -48,6 +53,12 @@ class DetailInfo extends React.Component {
        this.setBigImgHeightFn()
     }
     initDataFn = ()=> {
+
+        let supplyPriceStatus = getStorageFn("supplyPriceStatus");
+        console.log("supplyPriceStatus detail")
+        console.log( supplyPriceStatus)
+
+        console.log("supplyPriceStatus detail")
         let attrList = this.props.goodDetail.attrList;
         let colorArr = attrList[0].attr;
         let colorTitle = attrList[0].attrName;
@@ -67,7 +78,8 @@ class DetailInfo extends React.Component {
             allGoodArr: allGoodArr,
             selectGoodIds: selectGoodIds,
             currentGood: goodFirst,    
-            bigImg: goodFirst.imgurl
+            bigImg: goodFirst.imgurl,
+            supplyPriceStatus: supplyPriceStatus
         }, function () {
             this.selectSizeFn(0)
             this.selectColorFn(0)
@@ -337,7 +349,10 @@ class DetailInfo extends React.Component {
                             <div className="intro">{this.props.goodDetail.product.subTitle} </div>
                         </div>
 
-                        <div className="price"><span className="unit">￥</span>{this.state.currentGood?this.state.currentGood.price:this.props.goodDetail.skuBeanList[0].price}</div>
+                        <div className="price">
+                            <span className="unit">￥</span>{this.state.currentGood?this.state.currentGood.price:this.props.goodDetail.skuBeanList[0].price}
+                            { this.state.supplyPriceStatus && <span className="supply_price">供货价: {this.state.currentGood?this.state.currentGood.discountPrice:this.props.goodDetail.skuBeanList[0].discountPrice}</span> }
+                        </div>
                       
                       
                         <div className="specifications_con">

@@ -303,30 +303,30 @@ class CartSmall extends React.Component {
                 cartArr: resData
             }, function () {
                 _this.totalAll()
+
                 _this.initFn()
-                // console.log("delete ----------------delete")
+                
+                
                 _this.props.totalCartGoodCountFn()
             })
             setStorageFn("cartArr", resData)
         })
     }
-
     goCartFn = ()=> {
+     
         let cartArr = this.state.cartArr;
-
         let selectCount = 0;
         cartArr.forEach((item, index)=> {
             if (item.checked == 1) {
                 selectCount += 1;
-            }
+            } 
         })
         if (selectCount == 0) {
             message.error("请选择商品")
             return  ;
         }
-        window.location.href = "/cart";
-
-    }
+        window.location.href = "/cart"; 
+    }    
     render () {
         return (
             <div className="show_small_cart">

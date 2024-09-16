@@ -153,28 +153,23 @@ class PeopleOrderListPage extends React.Component {
             })
         })
     }
-    cancelOrderFn = (rowData)=> {
-        console.log("rowData")
-        console.log(rowData)
-        console.log("rowData")
 
- 
+    cancelOrderFn = (rowData)=> { 
         let _this = this;
-
         let formData = new FormData();
+
         let token = getStorageFn("token");
         formData.append("api", "app.orderV2.cancelOrder");    
-
         formData.append("accessId", token);  
         formData.append("storeId", 1);
         formData.append("storeType", 6);
         formData.append("orderParentNo", rowData.nameList.order);  
         Modal.confirm({
-
             content: "确认取消吗?",
             okText:"确认",
             cancelText: "取消",
             title: "温馨提示",
+            centered: true,
             onOk: function () {
                 request({
                     url: "/api/gw",
@@ -183,12 +178,7 @@ class PeopleOrderListPage extends React.Component {
                 }).then((res)=> {
                     if (res.data.code == 200) {
                         message.success(res.data.message)
-                        _this.setState({
-
-                            status: rowData.orderState
-                        }, function () {
-                            _this.getOrderListFn()
-                        })
+                        _this.getOrderListFn()
                     } else {
                         message.success(res.data.message)
                     }

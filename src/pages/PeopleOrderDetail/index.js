@@ -1,5 +1,7 @@
 import React from "react";
-import {Steps} from "antd";
+import { } from "antd";
+import {Steps, Table, Button, message, Modal  } from "antd";
+
 import goodImg from "../../assets/recomend_good1.png";
 
 import {setStorageFn, getStorageFn} from "../../utils/localStorage";
@@ -115,6 +117,46 @@ class PeopleOrderDetail extends React.Component {
                 break;
         }
     }
+    cancelOrderFn = ()=> { 
+        let _this = this;
+
+        let formData = new FormData();
+        let token = getStorageFn("token");
+        formData.append("api", "app.orderV2.cancelOrder");    
+        formData.append("accessId", token);  
+        formData.append("storeId", 1);
+        formData.append("storeType", 6);
+        formData.append("orderParentNo",  this.state.orderNumber); 
+        
+        Modal.confirm({
+            content: "确认取消吗?",
+            okText:"确认",
+            cancelText: "取消",
+            title: "温馨提示",
+        
+            centered: true,
+
+
+            onOk: function () {
+                request({
+                    url: "/api/gw",
+                    method: "POST",    
+                    data: formData
+                }).then((res)=> {
+
+                    if (res.data.code == 200) {
+                        message.success(res.data.message)
+                        setTimeout(()=> {
+                            window.location.href = "/build/people/order/list"; 
+                        }, 2000)
+                            
+                    } else {
+                        message.error(res.data.message)
+                    }
+                })
+            }
+        })
+    }
     render () {
         return (
             <div className="people_order_detail">    
@@ -152,8 +194,8 @@ class PeopleOrderDetail extends React.Component {
 
                         <div className="operate_btn_list">
                             {/* {this.showPayBtnFn(this.state.orderInfo.status) && <div className="btn">去付款</div>} */}
+                            {this.showCancelBrnFn(this.state.orderInfo.status) && <div className="btn" onClick={this.cancelOrderFn}>取消订单</div>}
 
-                            {this.showCancelBrnFn(this.state.orderInfo.status) && <div className="btn">取消订单</div>}
                             {/* <div className="btn">导出订单</div> */}
                             {/* <div className="btn">再次购买</div> */}
                         </div>

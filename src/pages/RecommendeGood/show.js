@@ -79,8 +79,11 @@ class Show extends React.Component {
         let storeId = getStorageFn("storeId") || 1;
         let storeType = getStorageFn("storeType") || 6;
         let styleId = this.state.styleId;
+        let token = getStorageFn("token");
         formData.append("api", "app.product.listProduct"); 
+        formData.append("accessId", token);
         formData.append("storeId", storeId);
+        
         formData.append("storeType", storeType);
         formData.append("page", 1);
         formData.append("pageSize", 6);

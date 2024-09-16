@@ -22,9 +22,10 @@ import {scrollTopFn} from "../../utils/imgAuto";
 import titleImg  from "../../assets/index_title.png";
 
 import titleImg2 from "../../assets/index_title2.png";
-
 import EmptyPage from "../../components/Empty";
 
+
+ 
 class Show extends React.Component {
     constructor (props) {
         super(props)
@@ -32,18 +33,17 @@ class Show extends React.Component {
             styleNav: [
                 // {id: 0, text:"奶油"}
             ],
-            styleIndex: 0,
 
+            styleIndex: 0,
+            
+            
             styleId: 1,
             styleGoodArr: [],
             showCartFlag: false, // 全局
-
-
             hotSellArr: [], // 热销爆款
             recomendGoodArr: [] // 品推荐
         }
     }
-
     componentDidMount () {
         this.getHotSellInfoFn()
         this.getRecomendGoodFn()
@@ -153,6 +153,7 @@ class Show extends React.Component {
     }
     // 获后台购物车数据
     getCartInfoFn = ()=> {
+        
         let _this = this;
         let formData = new FormData();
         let token = getStorageFn("token");
@@ -172,6 +173,8 @@ class Show extends React.Component {
 
                 item.selectFlag = false;
             })
+        
+        
             setStorageFn("cartArr", resData)
         })
     }
@@ -265,6 +268,8 @@ class Show extends React.Component {
                 </div>
                 
                 {this.props.state.commonState.showCartFlag && <SmallCart hideSmallCart={this.props.hideSmallCartFn} totalCartGoodCountFn={this.totalCartGoodCountFn}></SmallCart>}
+          
+           
             </div>
         )
     }

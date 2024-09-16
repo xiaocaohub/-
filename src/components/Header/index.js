@@ -8,6 +8,7 @@ import logo from "../../assets/logo.png";
 import topcart from "../../assets/shopping_cart.png";
 import { getStorageFn } from "../../utils/localStorage";
 
+import {CHECK_SUPPLY_PRICE} from "../../actionType/common";
 function Header () {
     const dispatch = useDispatch();
     const navList = [
@@ -92,6 +93,10 @@ function Header () {
         window.location.href = "/build/productroom?keyword=" + searchValueStr;
         // window.location.href = "/productroom?keyword=" + searchValue;
     } 
+    
+    function checkSupplyPriceFn () {
+        dispatch({type: CHECK_SUPPLY_PRICE, payload: true})
+    }
     return (
         <div className="header_con">
             <div className="header_top">            
@@ -103,7 +108,8 @@ function Header () {
                             <div className="phone">{userInfo.phone}</div>
                             <ul className="btn_group">
                                 <li><Link to="/people/order/list">会员后台</Link></li>
-                                {/* <li>查看供货价</li> */}
+
+                                 <li onClick={checkSupplyPriceFn}>查看供货价</li>
                                
                                 <li onClick={loginOutFn}>退出登录</li>
                             </ul>
