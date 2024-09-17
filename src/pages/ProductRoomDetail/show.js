@@ -93,7 +93,12 @@ class Show extends React.Component {
             method: "POST",
             data: formData
         }).then((res)=> {
+
+
             let resData = res.data.data;
+            console.log("resData goodInfo")
+            console.log(resData)
+            console.log("resData goodInfo")
             _this.setState({
                 goodInfo: resData
             })
@@ -106,15 +111,15 @@ class Show extends React.Component {
         }) 
     }
     setSelectGoodFn = (currentGood)=> {
-        console.log("currentGoodFn", currentGood)
+        // console.log("currentGoodFn", currentGood)
         this.setState({
             currentGood: currentGood
         })
     }
     addCartFn = (count)=> {
-        console.log("add count")
-        console.log(count)
-        console.log("add count")
+        // console.log("add count")
+        // console.log(count)
+        // console.log("add count")
 
 
         let _this = this;
@@ -125,9 +130,9 @@ class Show extends React.Component {
         }
         let cartArr =  this.state.cartArr;
         
-        console.log("arr cartArr")
-        console.log(cartArr)
-        console.log("arr cartArr")
+        // console.log("arr cartArr")
+        // console.log(cartArr)
+        // console.log("arr cartArr")
         let currentGood = this.state.currentGood;
         let addCartFlag = this.state.addCartFlag;
         this.setState({
@@ -145,9 +150,9 @@ class Show extends React.Component {
  
         const arr = cartArr.filter(item=>item.goods_id == currentGood.goods_id && item.attribute_id == currentGood.attribute_id);        
         
-        console.log("arr----------filter")
-        console.log(arr)
-        console.log("arr----------filter")
+        // console.log("arr----------filter")
+        // console.log(arr)
+        // console.log("arr----------filter")
 
        
         if (arr.length > 0) {
@@ -169,11 +174,11 @@ class Show extends React.Component {
             // cartArr.push(currentGood)
         }
 
-        console.log("currentGood------end")
+        // console.log("currentGood------end")
                  
                  
-        console.log(currentGood)
-        console.log("currentGood-----end")
+        // console.log(currentGood)
+        // console.log("currentGood-----end")
        
         // setStorageFn("cartArr", cartArr)
 

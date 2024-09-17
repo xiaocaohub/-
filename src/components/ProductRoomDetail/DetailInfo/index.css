@@ -17,6 +17,11 @@
 .productroom_detail_page  .detail_info .left .big_img_con{
     position:relative;
     overflow:hidden;
+    cursor: pointer;
+}
+
+.productroom_detail_page  .detail_info .left .big_img_con video{
+    cursor: pointer;
 }
 .productroom_detail_page  .detail_info .left .big_img_c{
     object-fit: cover;
