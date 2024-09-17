@@ -23,28 +23,28 @@ function Header () {
     ]
     const [currentIndex, setIndexFn] = useState(0);
     const [userInfo, setUserInfoFn] = useState("");
+
     let [goodCount, setGoodCountFn] = useState(0);
-    
     let [searchValue, setSearchValueFn] = useState("");
     const history = useHistory();
     const storeData = useSelector(state=>state)
-   
     useEffect(()=>{
         getGoodListFn()
         getUserInfoFn()
         matchNav()
     }, [storeData.commonState.goodCount, window.location.href])
 
+
+
+    
     function getUserInfoFn () {
-    
-    
         let userInfo = JSON.parse(getStorageFn("userInfo"));
         setUserInfoFn(userInfo)
     }
+
     function selectNavFn (index) { 
     
         setIndexFn(index)
-    
         const url = navList[index].path;
         history.push(url)
     } 
@@ -53,14 +53,17 @@ function Header () {
     }
     function loginOutFn () {
         window.localStorage.clear()
+        
         message.success('退出成功');
         setTimeout(()=>{
             history.push("/login")
+        
         }, 2000)
     } 
     function matchNav () {
         let pathname = window.location.pathname;
         let pathNameArr = pathname.split("build/");
+        
         let pathNameFirst = pathNameArr[1];
         let pathUrl = "";
         let currentIndex = 0;
@@ -80,6 +83,7 @@ function Header () {
         }   
         setIndexFn(currentIndex)
     }
+
     function getGoodListFn () {
         let goodCount = storeData.commonState.goodCount;
         setGoodCountFn(goodCount)

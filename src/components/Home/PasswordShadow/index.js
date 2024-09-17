@@ -39,15 +39,11 @@ function PasswordShadow () {
 
                 dispatch({type: CHECK_SUPPLY_PRICE, payload: false})
                 dispatch({type: SWITCH_SUPPLY_PRICE, payload: true})
+                setPassWordFn("")
             } else {
+
                 message.error(res.data.message)
-            }
-            console.log("res")
-            console.log(res)
-
-            console.log("res")
-
-            //let resData = res.data.data.data;   
+            }  
         })
     }
     return (
@@ -62,7 +58,7 @@ function PasswordShadow () {
                     <Form.Item hasFeedback label="密码">
 
                         {/* <Input placeholder="请输入密码" className="pass_word"/> */}
-                        <input type="text"  placeholder="请输入密码" value={passWord} className="pass_word" onChange={changePasswordFn}/>
+                        <input type="password"  placeholder="请输入密码" value={passWord} className="pass_word" onChange={changePasswordFn}/>
                 </Form.Item>
 
                 <div className="sub_btn" onClick={subMitFn}>确定</div>

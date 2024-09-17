@@ -18,13 +18,10 @@ var mapDispatchToProps = (dispatch)=> {
         },
         // 统计购物车数量
         totalCartGoodCountFn (goodCount) {
-            console.log("totalCartGoodCountFn---------index page")
-            console.log(goodCount)
-
             dispatch({type:"change_good_count", payload: goodCount})
         }
     }
 }
-
 const Home = connect(mapStateToProps, mapDispatchToProps)(Show);
+
 export default Home;

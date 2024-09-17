@@ -21,7 +21,9 @@ class PeopleOrderListPage extends React.Component {
                 },
                 {
                   id: 1,
-                  title: "待付款",
+                //   title: "待付款",
+                  title: "待确认",
+                  
                   status: 1
                 },
                 {

@@ -55,10 +55,6 @@ class DetailInfo extends React.Component {
     initDataFn = ()=> {
 
         let supplyPriceStatus = getStorageFn("supplyPriceStatus");
-        console.log("supplyPriceStatus detail")
-        console.log( supplyPriceStatus)
-
-        console.log("supplyPriceStatus detail")
         let attrList = this.props.goodDetail.attrList;
         let colorArr = attrList[0].attr;
         let colorTitle = attrList[0].attrName;

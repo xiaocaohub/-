@@ -39,15 +39,11 @@ function LoginPage (props) {
 
         formData.append("password", passWord);
         loginApi(formData).then(function (res) {   
-            console.log("res login")
-            console.log(res)
-            
-            console.log("res login")
             let data = res.data.data;
             setStorageFn("storeId", 1)
 
-
             setStorageFn("storeType", 6) 
+
             if (data && data.access_id) {
                 messageApi.open({
                     type: 'success',
@@ -81,7 +77,6 @@ function LoginPage (props) {
             
             <div className="put_item">
                 <div className="sub_btn" onClick={loginFn}>登 录</div>
-
             </div>
 
             <div className="put_item">

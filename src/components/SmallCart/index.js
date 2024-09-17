@@ -18,42 +18,54 @@ class CartSmall extends React.Component {
             selectAllFlag: 0,
             totalMoney: 0,
             totalSelectCount: 0,
-            setImgHeight: 0
+            setImgHeight: 0,
+
+            supplyPriceStatusValue: ""
         }
     }
     componentDidMount () {
-         //this.initFn()
         this.getCartInfoFn()
     }
 
     initFn = ()=> {
-        // let cartArr = getStorageFn("cartArr") || [];
-        // this.setState({
-        //     cartArr: cartArr
-        // }, function () {
-        //     if (cartArr.length>0) {
-        //         this.setImgHeightFn()
-        //     }
-        //     this.totalAll()
-        // })
-
         let cartArr = this.state.cartArr;
         if (cartArr.length>0) {
             this.setImgHeightFn()
         }
+        let supplyPriceStatus = getStorageFn("supplyPriceStatus");
+        
+        let supplyPriceStatusValue = "";
+        
+        
+        console.log("supplyPriceStatus detail")
+        console.log( supplyPriceStatus)
+        console.log("supplyPriceStatus detail")
+        if (supplyPriceStatus == true) {
+
+            supplyPriceStatusValue = 1;
+        
+        } else {
+            supplyPriceStatusValue = ""
+        } 
+        this.setState({
+            supplyPriceStatusValue: supplyPriceStatusValue
+        })
+        
     }
     setImgHeightFn = ()=> {
         let img = document.querySelectorAll(".info_con .img")[0];
         let setImgHeight = setImgAutoHeightFn(img);
         this.setState({
+
+
             setImgHeight: setImgHeight
         })
     }
     selectGoodFn = (item, index)=> {
         let cartArr = this.state.cartArr;
         item.checked = item.checked==1?0:1;
-        cartArr[index] = item;
 
+        cartArr[index] = item;
         setStorageFn("cartArr", cartArr)
         this.selectGoodRequestFn(item.id)
         this.setState({
@@ -292,30 +304,22 @@ class CartSmall extends React.Component {
             data: formData
         }).then((res)=> {
             let resData = res.data.data.data;
-            console.log("getCartInfoFn good ")
-            console.log(res)
-
-            console.log("getCartInfoFn good ")
-            // resData.forEach((item, index)=>{
-            //     item.selectFlag = item.checked;
-            // })
             _this.setState({
+
                 cartArr: resData
             }, function () {
                 _this.totalAll()
-
                 _this.initFn()
-                
-                
                 _this.props.totalCartGoodCountFn()
             })
             setStorageFn("cartArr", resData)
         })
     }
+
     goCartFn = ()=> {
-     
         let cartArr = this.state.cartArr;
         let selectCount = 0;
+
         cartArr.forEach((item, index)=> {
             if (item.checked == 1) {
                 selectCount += 1;
@@ -326,7 +330,79 @@ class CartSmall extends React.Component {
             return  ;
         }
         window.location.href = "/cart"; 
-    }    
+    }  
+    exportCartFn = ()=> {
+        let _this = this;
+        
+        let formData = new FormData();
+        
+        
+        let token = getStorageFn("token");
+        let cartArr = this.state.cartArr;
+        let exportArr = [];
+        console.log("cartArr cartArr")
+        console.log(cartArr)
+
+        console.log("cartArr cartArr")
+
+
+
+        cartArr.forEach((goodItem, index)=>{
+            let item = {}
+
+            item.area = goodItem.areaName;
+            item.picture = goodItem.imgurl;
+            item.categoryName = goodItem.categoryName;
+
+            item.productCode = goodItem.productCode;
+            
+            item.parameters = goodItem.skuName;
+            
+            item.marque = goodItem.marque;
+            item.material = goodItem.material;
+            item.num = goodItem.goods_num ;
+            item.price = goodItem.price ;
+            exportArr.push(item);
+        })
+        let exportArrStr = JSON.stringify(exportArr);
+
+        formData.append("api", "app.cart.exportGoodsExcel");    
+        formData.append("accessId", token);
+        formData.append("storeId", 1);
+        formData.append("storeType", 6);
+        
+        formData.append("supplierOpen", this.state.supplyPriceStatusValue);
+        formData.append("content", exportArrStr)
+
+
+        formData.append("exportType", 1)
+         request({
+        
+
+            
+            url: "/api/gw",         
+
+            method: "POST",    
+            
+            data: formData
+        
+        }).then((res)=> {
+            console.log("res export")
+            console.log(res)
+            console.log("res export")
+        
+        })
+        // request({
+        //     url: "/api/gw",         
+        //     method: "GET",
+        //     params: formData
+        // }).then((res)=> {
+        //     console.log("res export")
+        //     console.log(res)
+        //     console.log("res export")
+        
+        // })
+    }
     render () {
         return (
             <div className="show_small_cart">
@@ -396,7 +472,7 @@ class CartSmall extends React.Component {
                         <div className="go_cart_btn" onClick={this.goCartFn}>下单采购</div>
 
                         {/* <div className="go_cart_btn" onChange={this.props.goCartFn}>下单采购</div> */}
-                        {/* <div className="down_btn">导出清单</div> */}
+                        <div className="down_btn" onClick={this.exportCartFn}>导出清单</div>
                       
                         <div className="total">合计<span className="money">￥{this.state.totalMoney}</span></div>
                         <div className="total_good">已选 <span className="count">{this.state.totalSelectCount}</span> 件商品</div>
