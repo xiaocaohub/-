@@ -38,10 +38,10 @@ class Show extends React.Component {
         }    
     }
     componentDidMount () {
-
         this.setGoodId()   
         //this.props.getGoodInfoFn() 
         //this.setGoodInfo()
+
         this.initFn()
         
         scrollTopFn()
@@ -49,9 +49,7 @@ class Show extends React.Component {
     }
     initFn = ()=> {
         let cartArr = getStorageFn("cartArr") || [];
-        // console.log("init cartArr")
-        // console.log(cartArr)
-        // console.log("init cartArr")
+
         this.setState({
             cartArr: cartArr
         })
@@ -63,12 +61,10 @@ class Show extends React.Component {
         this.setState({
             goodId: id
         }, function () {
-            // _this.props.getGoodInfoFn(id)
             this.getGoodInfoFn(id)
             this.getSameGoodFn()
         })
     } 
-
     // 设置商品详情
     setGoodInfo = ()=> {  
         let _this = this;
@@ -77,13 +73,13 @@ class Show extends React.Component {
             goodInfo: _this.props.productRoomDetailState.goodInfo
         })
     }
+
     getGoodInfoFn = (goodId)=> {
         let _this = this;    
         let formData = new FormData();
         let option = {"brandId":"","minPrice":"","maxPrice":""};
         let token = getStorageFn("token");
         formData.append("api", "app.product.productDetails");    
-        
         formData.append("accessId", token);      
         formData.append("storeId", 1);
         formData.append("storeType", 6);
@@ -93,8 +89,6 @@ class Show extends React.Component {
             method: "POST",
             data: formData
         }).then((res)=> {
-
-
             let resData = res.data.data;
             console.log("resData goodInfo")
             console.log(resData)
@@ -111,7 +105,7 @@ class Show extends React.Component {
         }) 
     }
     setSelectGoodFn = (currentGood)=> {
-        // console.log("currentGoodFn", currentGood)
+        console.log("currentGoodFn setSelectGoodFn", currentGood)
         this.setState({
             currentGood: currentGood
         })
@@ -135,11 +129,19 @@ class Show extends React.Component {
         // console.log("arr cartArr")
         let currentGood = this.state.currentGood;
         let addCartFlag = this.state.addCartFlag;
+        if (!currentGood) {
+            message.error("请选择商品")
+            return ;
+        }
+        
+
+        
+
         this.setState({
             addCartFlag: false
         })
-
         if (!addCartFlag) {
+          
             return ;
         } 
         // console.log("currentGood----------start")

@@ -13,7 +13,6 @@ class DetailInfo extends React.Component {
         super(props)
         console.log("show detail props")
         console.log(props)
-
         console.log("show detail props")
         this.state = {
             // 大图 index
@@ -32,35 +31,29 @@ class DetailInfo extends React.Component {
             // 所有规格商品
             allGoodArr: [],
             // 选中的商品 colorId, sizeId
-            selectGoodIds: [],
-
-            
-            
-            
+            selectGoodIds: [],            
             // 选中的商品
-            // currentGood: props.goodDetail.skuBeanList[0],
-            currentGood: "",
+
+            currentGood: props.goodDetail.skuBeanList[0],
+
+            
             goodFirst: props.goodDetail.skuBeanList[0],
-
             // 选中颜色匹配上的所有商品
-
             allColorSizeGoodArr: [],
             // 是否开启供货价
+
             supplyPriceStatus: false,
-            vedioSrc: props.goodDetail.product.productVideo || "https://luockoo.oss-cn-shenzhen.aliyuncs.com/0/1/20240826/%E4%B8%80%E5%88%86%E9%92%9F%E4%BA%86%E8%A7%A3%E4%B8%87%E7%89%A9%E7%B3%BB%E5%88%97.mp4",
-            defaultImgArr: props.goodDetail.product.defaultImgArr
+            
+            vedioSrc: props.goodDetail.product.productVideo || "https://luockoo.oss-cn-shenzhen.aliyuncs.com/0/1/20240826/%E4%B8%80%E5%88%86%E9%92%9F%E4%BA%86%E8%A7%A3%E4%B8%87%E7%89%A9%E7%B3%BB%E5%88%97.mp4"
         }   
     }
     componentDidMount () {
        this.initDataFn()
-
        this.setBigImgHeightFn()
     }
+
     initDataFn = ()=> {
-        
-        let _this = this;
         let supplyPriceStatus = getStorageFn("supplyPriceStatus");
-        let vedioSrc = this.props.goodDetail.product.productVideo;
         let attrList = this.props.goodDetail.attrList;
         let colorArr = attrList[0].attr;
         let colorTitle = attrList[0].attrName;
@@ -68,24 +61,12 @@ class DetailInfo extends React.Component {
         let sizeTile = attrList[1].attrName;
         let allGoodArr = this.props.goodDetail.skuBeanList;
         let selectGoodIds = [];
-        let currentGood = "";
-
-        let currentColorIndex = 0;
-        let currentSizeIndex = 0;
         selectGoodIds[0] = colorArr[0].id;
         selectGoodIds[1] = sizeArr[0].id;
         let goodFirst = this.props.goodDetail.skuBeanList[0];
         // console.log("goodFirst goodFirst")
         // console.log(goodFirst)
         // console.log("goodFirst goodFirst")
-
-        if (!vedioSrc) {
-            currentGood = goodFirst;
-        } else {
-            currentColorIndex = -1;
-
-            currentSizeIndex = -1;
-        }
         this.setState({
             colorArr: colorArr,
             colorTitle: colorTitle,
@@ -94,16 +75,14 @@ class DetailInfo extends React.Component {
             allGoodArr: allGoodArr,
             selectGoodIds: selectGoodIds,
             goodFirst: goodFirst,
-            currentGood: currentGood,
+            currentGood: goodFirst,
             bigImg: goodFirst.imgurl,
-            supplyPriceStatus: supplyPriceStatus,
-            currentColorIndex: currentColorIndex,
-            currentSizeIndex: currentSizeIndex
+            supplyPriceStatus: supplyPriceStatus
         }, function () {
-            _this.selectSizeFn(0)
-            _this.selectColorFn(0)
-           
-            _this.props.setSelectGood(goodFirst)
+            this.selectSizeFn(0)
+            this.selectColorFn(0)
+            this.props.setSelectGood(goodFirst)
+
             this.play()
         })  
     }
@@ -122,7 +101,9 @@ class DetailInfo extends React.Component {
             smallHeight: smallHeight
         })
     }
-    play = ()=> {  
+
+    play = ()=> {
+       
         const video = document.getElementById("bigvideo");
         // console.log("------------------------------")
         // console.dir(video)
@@ -135,94 +116,44 @@ class DetailInfo extends React.Component {
         //     video.style.outline = "none";
         // })
     }
-
-
     leftImgFn = ()=> {
-        let _this = this;
-        let currentGood = this.state.currentGood;
-        let defaultImgArr = this.state.defaultImgArr;
-        if (currentGood) {
-            let imgArr = this.state.currentGood.imgArr;
-            
-            let length = imgArr.length;
-            let currentIndex = this.state.currentIndex;
-            let bigImg = "";
-            if (currentIndex > 0) {
-                currentIndex -= 1;
-            } else {
-                currentIndex = length - 1;
-            }
-            bigImg = imgArr[currentIndex];
-            this.setState({
-                currentIndex: currentIndex,
-                bigImg: bigImg
-            })
-
+        let imgArr = this.state.currentGood.imgArr;
+        let length = imgArr.length;
+        let currentIndex = this.state.currentIndex;
+        let bigImg = "";
+        if (currentIndex > 0) {
+            currentIndex -= 1;
         } else {
-            let length = defaultImgArr.length;
-            let currentIndex = this.state.currentIndex;
-            let bigImg = "";
-            if (currentIndex > 0) {
-                currentIndex -= 1;
-            } else {
-                currentIndex = length - 1;
-            }
-            if (currentIndex==0) {
-                _this.play()
-            }
-            bigImg = defaultImgArr[currentIndex];
-            this.setState({
-                currentIndex: currentIndex,
-                bigImg: bigImg
-            })
+            currentIndex = length - 1;
         }
+        bigImg = imgArr[currentIndex];
+        this.setState({
+            currentIndex: currentIndex,
+            bigImg: bigImg
+        })
+   
     }
     rightImgFn = ()=> {
-        let _this = this;
-        let currentGood = this.state.currentGood;
-        let defaultImgArr = this.state.defaultImgArr;
-        if (currentGood) {
-            let imgArr = this.state.currentGood.imgArr;
-            let length = imgArr.length;
-            let currentIndex = this.state.currentIndex;
-            let bigImg = "";
-            if (currentIndex >= (length-1)) {
-                currentIndex = 0;
-            } else {
-                currentIndex +=  1;
-            }
-            bigImg = imgArr[currentIndex];
-    
-            this.setState({
-                currentIndex: currentIndex,
-                bigImg: bigImg
-            })
+        let imgArr = this.state.currentGood.imgArr;
+        let length = imgArr.length;
+        let currentIndex = this.state.currentIndex;
+        let bigImg = "";
+        if (currentIndex >= (length-1)) {
+            currentIndex = 0;
         } else {
-            let length = defaultImgArr.length;
-            let currentIndex = this.state.currentIndex;
-            let bigImg = "";
-            if (currentIndex >= (length-1)) {
-                currentIndex = 0;
-             
-                if (currentIndex==0) {
-                    _this.play()
-                }
-            } else {
-                currentIndex +=  1;
-            }
-            bigImg = defaultImgArr[currentIndex];
-    
-            this.setState({
-                currentIndex: currentIndex,
-                bigImg: bigImg
-            })
+            currentIndex +=  1;
         }
-        
+        bigImg = imgArr[currentIndex];
+
+        this.setState({
+            currentIndex: currentIndex,
+            bigImg: bigImg
+        })
     }
 
     selectNavFn = (index, item)=> {
-        let _this = this;
 
+        let _this = this;
         this.setState({
             currentIndex: index,
             bigImg: item
@@ -253,57 +184,21 @@ class DetailInfo extends React.Component {
     }
     selectColorFn = (index)=> {
 
-        let _this = this;
-        let currentColorIndex = this.state.currentColorIndex;
         let color = this.state.colorArr[index];
         let selectGoodIds = this.state.selectGoodIds;
+        selectGoodIds[0] = color.id;
         let sizeArr = this.resetSizeArrFn();
-        if (currentColorIndex == index) {
-            index = -1;
-            selectGoodIds[0] = "";     
-            color = "";
-
-            _this.setState({
-                currentColorIndex: index,
-                selectGoodIds: selectGoodIds,
-                currentColor: color,
-                currentGood: ""
-            
-            }, function () {
-                _this.props.setSelectGood("")
-            })
-            
-        } else {
-            selectGoodIds[0] = color.id;
-            _this.setState({
-                currentColorIndex: index,
-                selectGoodIds: selectGoodIds,
-                currentColor: color
-            }, function () {   
-                if (_this.state.currentSizeIndex != -1) {
-                    // _this.checkColorArrDisableFn()
-
-                    _this.checkSizeArrDisableFn()
-                    _this.selectGoodFn()
-                }
-            })
-        }
-        
-    
-        // this.setState({
-        //     currentColorIndex: index,
-        //     selectGoodIds: selectGoodIds,
-
-        //     currentColor: color
-        // }, function () {
-        //     if (index != -1) {
-        //         this.checkColorArrDisableFn()
-        //         this.selectGoodFn()
-        //     }
-        // })
+        this.setState({
+            currentColorIndex: index,
+            selectGoodIds: selectGoodIds,
+            currentColor: color
+            // sizeArr: sizeArr
+        }, function () {
+            this.checkSizeArrDisableFn()
+            this.selectGoodFn()
+        })
     }
     resetSizeArrFn = ()=> {
-
         let sizeArr = this.state.sizeArr;
         sizeArr.forEach((item)=> {
             item.showFlag = true;
@@ -337,50 +232,17 @@ class DetailInfo extends React.Component {
         })
     }
     selectSizeFn = (index)=> {
-        let _this = this;
-        let currentSizeIndex = this.state.currentSizeIndex;
         let size = this.state.sizeArr[index];
         let selectGoodIds = this.state.selectGoodIds;    
-        
-        if (currentSizeIndex == index) {
-            index = -1;
-
-            selectGoodIds[1] = "";
-            size = "";
-            _this.setState({
-                currentSizeIndex: index,
-                selectGoodIds: selectGoodIds,
-                currentSize: size,
-                currentGood: ""
-            }, function () {
-                _this.props.setSelectGood("")
-            })
-        } else {
-            selectGoodIds[1] = size.id;
-            this.setState({
-                currentSizeIndex: index,
-                selectGoodIds: selectGoodIds,
-                currentSize: size
-            }, function () {
-                if (_this.state.currentColorIndex != -1) {
-                    _this.checkColorArrDisableFn()
-                    _this.selectGoodFn()
-                }
-               
-            })
-        }
-        // this.setState({
-        //     currentSizeIndex: index,
-        //     selectGoodIds: selectGoodIds,
-        //     currentSize: size
-        // }, function () {
-
-        //     if (index != -1) {
-        //         this.checkColorArrDisableFn()
-        //         this.selectGoodFn()
-        //     }
-           
-        // })
+        selectGoodIds[1] = size.id;
+        this.setState({
+            currentSizeIndex: index,
+            selectGoodIds: selectGoodIds,
+            currentSize: size
+        }, function () {
+            this.checkColorArrDisableFn()
+            this.selectGoodFn()
+        })
     }
     checkColorArrDisableFn = ()=> {    
         let currentSize = this.state.currentSize;
@@ -427,16 +289,22 @@ class DetailInfo extends React.Component {
             bigImg: bigImg,
             currentIndex: 0
         }, function () {
-            console.log("currentGood currentGood")
-
-            console.log(currentGood)
-
-
-            console.log("currentGood currentGood")
             this.props.setSelectGood(currentGood)
         })
     }
     copyFn () {
+        // const textarea = document.createElement("textarea");
+        // textarea.readOnly = "readonly";
+        // textarea.style.position = "absolute";
+        // textarea.style.left = "-999px";
+        // textarea.style.opacity = "0";
+        // textarea.value = message.value;
+        // document.body.appendChild(textarea)
+        // textarea.select()
+        // const result = document.execCommand("copy");
+        // if (result) {
+        //     console.log("copy success", result)
+        // }
         const text = document.getElementById("code_con").innerText;
         // 创建一个临时的输入框来存储文本
         const input = document.createElement('input');
@@ -463,13 +331,10 @@ class DetailInfo extends React.Component {
                     <div className="left">
                         <div className="big_img_con">
                             <div className="big_img_c">
-                               
-                                { !this.state.currentGood &&  this.state.currentIndex==0 && <video  className="big_video" src={this.state.vedioSrc} controls 
+                                {this.state.currentIndex==0 &&<video  className="big_video" src={this.state.vedioSrc} controls 
                                     style={{width:"100%",height: this.state.bigHeight + "px"}} id="bigvideo"  muted>
-                                </video>} 
-                                { this.state.currentGood && <img src={this.state.bigImg} alt="" className="big_img" id="big_img"   style={{height: this.state.bigHeight + "px"}} onClick={this.checkSizeArrDisableFn}/>}
-                                { !this.state.currentGood && this.state.defaultImgArr.length>0 && this.state.currentIndex>0 && <img src={this.state.bigImg} alt="" className="big_img" id="big_img"   style={{height: this.state.bigHeight + "px"}} onClick={this.checkSizeArrDisableFn}/>}
-
+                                </video>}
+                                {this.state.currentIndex>0 && <img src={this.state.bigImg} alt="" className="big_img" id="big_img"   style={{height: this.state.bigHeight + "px"}} onClick={this.checkSizeArrDisableFn}/>}
                                 {/* <img src={this.state.bigImg} alt="" className="big_img" id="big_img"  onClick={this.checkSizeArrDisableFn}/> */}
                               
                             </div>
@@ -483,21 +348,12 @@ class DetailInfo extends React.Component {
                                 
                                 
                             </li> */}
-
-                            {
-                                !this.state.currentGood && this.state.defaultImgArr.length>0 && this.state.defaultImgArr.map((item, index)=> {
-                                  // return (<li className={this.state.currentIndex==index?"small_img on":"small_img"}  onClick={()=>{this.selectNavFn(index, item)}} key={index}>
-                                 
-                                    return (<li className={ this.state.currentIndex==index?"small_img on":"small_img"}  style={{height:this.state.smallHeight + "px"}} onClick={()=>{this.selectNavFn(index, item)}} key={index}>      
-                                        <img src={item} alt=""  />
-                                    </li>)
-                                })
-                            }
                             {
                                 this.state.currentGood && this.state.currentGood.imgArr.map((item, index)=> {
                                   // return (<li className={this.state.currentIndex==index?"small_img on":"small_img"}  onClick={()=>{this.selectNavFn(index, item)}} key={index}>
                                  
-                                    return (<li className={ this.state.currentIndex==index?"small_img on":"small_img"}  style={{height:this.state.smallHeight + "px"}} onClick={()=>{this.selectNavFn(index, item)}} key={index}>      
+                                    return (<li className={ this.state.currentIndex==index?"small_img on":"small_img"}  style={{height:this.state.smallHeight + "px"}} onClick={()=>{this.selectNavFn(index, item)}} key={index}>
+                                
                                         <img src={item} alt=""  />
                                     </li>)
                                 })

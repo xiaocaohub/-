@@ -129,7 +129,7 @@ class Show extends React.Component {
                                     ></video>
                                    
                                 </div>
-                            </div>
+                          </div>
     
                             {/* <div className="brand_con">
                                 <div className="brand_title_con">

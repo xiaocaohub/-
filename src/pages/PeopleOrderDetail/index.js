@@ -13,9 +13,9 @@ const { Step } = Steps;
 class PeopleOrderDetail extends React.Component {
     constructor (props) {
         super(props)
+
         this.state = {
             orderNumber: "",
-
             orderArr: [],
             orderInfo: ""
         }
@@ -23,30 +23,29 @@ class PeopleOrderDetail extends React.Component {
     componentDidMount () {
        this.getOrderNumberFn()
     }
-    getOrderNumberFn = ()=> {
 
+    getOrderNumberFn = ()=> {
         let orderNumber = window.location.pathname.split("/detail/")[1];
         this.setState({
-            orderNumber: orderNumber
 
+            orderNumber: orderNumber
         }, function () {
             this.getOrderDetialFn()
         })
     }
     getOrderDetialFn = (optionIds)=> {
         let _this = this;
-        let formData = new FormData();
-        
+
+
+        let formData = new FormData();        
         let token = getStorageFn("token");
-        
-        
         let storeId = getStorageFn("storeId") || 1;
         let storeType = getStorageFn("storeType") || 6;
-        formData.append("api", "app.orderV2.orderDetail");
-        formData.append("storeId", storeId);
 
-        formData.append("storeType", storeType);
+        formData.append("api", "app.orderV2.orderDetail");
         
+        formData.append("storeId", storeId);
+        formData.append("storeType", storeType);
         formData.append("accessId", token);
         formData.append("orderParentNo", this.state.orderNumber);   
         request({
@@ -54,14 +53,14 @@ class PeopleOrderDetail extends React.Component {
             method: "POST",      
             data: formData
         }).then((res)=> {
+
             let resData =  res.data.data;
             let orderArr = resData.orders;
-            console.log("resData orderInfo")
-            console.log(resData)
-            console.log("resData orderInfo")
+            // console.log("resData orderInfo")
+            // console.log(resData)
+            // console.log("resData orderInfo")
             _this.setState({
                 orderInfo: resData,
-
                 orderArr: orderArr
             })
             
