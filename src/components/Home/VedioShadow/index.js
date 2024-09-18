@@ -33,7 +33,10 @@ class VedioShadow extends React.Component {
         this.autoVedioHeightFn()
     }
     play = ()=> {
+     
         const video = document.getElementById("bigvideo");
+     
+     
         video.autoplay = true;
         video.style.outline = "none";
     }

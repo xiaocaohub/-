@@ -20,7 +20,8 @@ class CartSmall extends React.Component {
             totalSelectCount: 0,
             setImgHeight: 0,
 
-            supplyPriceStatusValue: ""
+            supplyPriceStatus: false,
+            supplyPriceStatusValue: null
         }
     }
     componentDidMount () {
@@ -32,14 +33,17 @@ class CartSmall extends React.Component {
         if (cartArr.length>0) {
             this.setImgHeightFn()
         }
+       
         let supplyPriceStatus = getStorageFn("supplyPriceStatus");
         
+
         let supplyPriceStatusValue = "";
         
         
         console.log("supplyPriceStatus detail")
         console.log( supplyPriceStatus)
         console.log("supplyPriceStatus detail")
+
         if (supplyPriceStatus == true) {
 
             supplyPriceStatusValue = 1;
@@ -48,6 +52,8 @@ class CartSmall extends React.Component {
             supplyPriceStatusValue = ""
         } 
         this.setState({
+
+            supplyPriceStatus: supplyPriceStatus,
             supplyPriceStatusValue: supplyPriceStatusValue
         })
         
@@ -102,6 +108,7 @@ class CartSmall extends React.Component {
         let selectAllFlag = 1;
         let totalMoney = 0;
         let totalSelectCount = 0;
+        let supplyPriceStatusValue = this.state.supplyPriceStatusValue;
 
         if (cartArr.length>0) {
             cartArr.forEach((item,index)=> {
@@ -110,7 +117,12 @@ class CartSmall extends React.Component {
                     selectAllFlag = 0;
                 }
                 if (item.checked == 1) {
-                    totalMoney += item.price * item.goods_num;
+                    if (supplyPriceStatusValue == 1) {
+                        totalMoney += item.discountPrice * item.goods_num;
+                    } else {
+                        totalMoney += item.price * item.goods_num;
+                    }
+                    
                     totalSelectCount += 1;
                 }
             })
@@ -145,19 +157,15 @@ class CartSmall extends React.Component {
             this.totalAll()
         })
     }
-
     reduceFn = (item, index)=> {
-      
-    
         let cartArr = this.state.cartArr; 
         if (item.goods_num > 1) {
             cartArr[index].goods_num = item.goods_num - 1;
         }
-
         this.changeGoodCountFn(cartArr[index])
-        
         this.setState({ 
             cartArr: cartArr
+
         }, function () {
             this.totalAll()
         })
@@ -174,9 +182,9 @@ class CartSmall extends React.Component {
         })
     }
     changeGoodCountFn = (selectGood)=> {   
-        console.log("selectGood")
+        // console.log("selectGood")
      
-        console.log(selectGood) 
+        // console.log(selectGood) 
         let _this = this; 
         let formData = new FormData();
         let token = getStorageFn("token");
@@ -192,7 +200,12 @@ class CartSmall extends React.Component {
             method: "POST",    
             data: formData
         }).then((res)=> {
+            // console.log("add")
+
             // console.log(res.data)
+            if (res.data.data == true) {
+                _this.getCartInfoFn()
+            }
         })
     }
     putCountFn = (e, item, index)=> {
@@ -227,6 +240,7 @@ class CartSmall extends React.Component {
             }
         })
     }
+
     deleteGoodFn = (deleteId)=> {   
         let _this = this; 
         let formData = new FormData();
@@ -291,7 +305,10 @@ class CartSmall extends React.Component {
     }
     // 获后台购物车数据
     getCartInfoFn = ()=> {
+
         let _this = this;
+        
+        
         let formData = new FormData();
         let token = getStorageFn("token");
         formData.append("api", "app.cart.index");    
@@ -315,11 +332,10 @@ class CartSmall extends React.Component {
             setStorageFn("cartArr", resData)
         })
     }
-
     goCartFn = ()=> {
+     
         let cartArr = this.state.cartArr;
         let selectCount = 0;
-
         cartArr.forEach((item, index)=> {
             if (item.checked == 1) {
                 selectCount += 1;
@@ -340,10 +356,10 @@ class CartSmall extends React.Component {
         let token = getStorageFn("token");
         let cartArr = this.state.cartArr;
         let exportArr = [];
-        console.log("cartArr cartArr")
-        console.log(cartArr)
+        // console.log("cartArr cartArr")
+        // console.log(cartArr)
 
-        console.log("cartArr cartArr")
+        // console.log("cartArr cartArr")
 
 
 
@@ -445,13 +461,19 @@ class CartSmall extends React.Component {
                                                 </div>
                                             </div>
             
-                                            <div className="price">{ item.price }</div>
+                                            {this.state.supplyPriceStatusValue != null && this.state.supplyPriceStatusValue==1 &&<div className="price">{ item.discountPrice }</div>}
+                                            {this.state.supplyPriceStatusValue != null && this.state.supplyPriceStatusValue=="" &&<div className="price">{ item.price }</div>}
                                             <div className="count_con">
                                                     <div className="btn reduce" onClick={()=>{this.reduceFn(item, index)}}>-</div>
                                                     <Input className="count" value={item.goods_num} onChange={(e)=> {this.putCountFn(e, item, index)}} onBlur={()=>{this.blurGoodCountFn(item)}}/>
                                                     <div className="btn" onClick={()=>{this.addFn(item, index)}}>+</div>      
                                             </div>
-                                            <div className="sub_total">{ item.price * item.goods_num }</div>
+
+
+                                            {this.state.supplyPriceStatusValue != null && this.state.supplyPriceStatusValue==1 && <div className="sub_total"> { item.discountPrice * item.goods_num } </div> }
+                                            {this.state.supplyPriceStatusValue != null && this.state.supplyPriceStatusValue=="" &&  <div className="sub_total"> { item.price * item.goods_num } </div>}
+
+                                            
                                             <div className="operate_con">
                                                 <div className="delete" onClick={()=>{this.deleteGoodConfirmFn(item, index)}}></div>
                                             </div>

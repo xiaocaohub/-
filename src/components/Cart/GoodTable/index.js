@@ -1,15 +1,39 @@
 import React from "react";
 import {Link} from "react-router-dom";
 import {Input} from "antd";
-
 import EmptyPage from "../../Empty";
+import {setStorageFn, getStorageFn} from "../../../utils/localStorage";
 
 import "./index.css";
 import goodImg from "../../../assets/recomend_good1.png";
 class GoodTable extends React.Component {
     constructor (props) {
         super(props)
-        console.log('props----------', props)
+        this.state = {
+
+            supplyPriceStatus: false,
+            supplyPriceStatusValue: null
+        }
+    }
+    componentDidMount () {
+       this.initFn()
+    }
+    initFn = ()=> {
+        let supplyPriceStatus = getStorageFn("supplyPriceStatus");
+        let supplyPriceStatusValue = "";
+
+        console.log("supplyPriceStatus detail")
+        console.log( supplyPriceStatus)
+        if (supplyPriceStatus == true) {
+        
+            supplyPriceStatusValue = 1;
+        } else {
+            supplyPriceStatusValue = ""
+        } 
+        this.setState({
+            supplyPriceStatus: supplyPriceStatus,
+            supplyPriceStatusValue: supplyPriceStatusValue
+        })
     }
     reduceFn = (item, index)=> {
         this.props.reduceFn(item, index)
@@ -69,8 +93,11 @@ class GoodTable extends React.Component {
 
                                 </div>
                                 <div className="good_code"> {item.productCode} </div>
+                             
                                 <div className="vol"> {item.capacity} </div>
-                                <div className="price">{item.price}</div>
+                                {this.state.supplyPriceStatusValue != null && this.state.supplyPriceStatusValue==1 &&<div className="price">{ item.discountPrice }</div>}
+                                {this.state.supplyPriceStatusValue != null && this.state.supplyPriceStatusValue=="" &&<div className="price">{ item.price }</div>}
+                                {/* <div className="price">{item.price}</div> */}
                                 <div className="count_con">
 
                                     <div className="btn" onClick={()=>{this.reduceFn(item, index)}}> - </div>

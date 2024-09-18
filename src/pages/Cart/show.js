@@ -32,21 +32,39 @@ class Show extends React.Component {
             // 被选择的商品
             totalSelectGoodCount: 0,
             // 客户信息是否保存
-            isKeep: false
+            isKeep: false,
+
+            supplyPriceStatus: false,
+
+
+            supplyPriceStatusValue: null
         }
     }
     componentDidMount () {
+
+        this.initFn()
+
         this.getCartInfoFn()
     }
+    initFn = ()=> {
+        let supplyPriceStatus = getStorageFn("supplyPriceStatus");
+        let supplyPriceStatusValue = "";
 
-    // init = ()=> {
+        
+        if (supplyPriceStatus == true) {
+        
+            supplyPriceStatusValue = 1;
+        } else {
+            supplyPriceStatusValue = ""
+        } 
 
+ 
+        this.setState({
+            supplyPriceStatus: supplyPriceStatus,
+            supplyPriceStatusValue: supplyPriceStatusValue
+        })
+    }
 
-    //     let cartArr = getStorageFn("cartArr") || [];
-    //     this.setState({
-    //         cartArr: cartArr
-    //     })
-    // }
     reduceFn = (item, index)=> {
         let cartArr = this.state.cartArr;
         if (item.goods_num > 1) {
@@ -62,7 +80,7 @@ class Show extends React.Component {
     }
     addFn = (item, index)=> {
         let cartArr = this.state.cartArr;
-        cartArr[index].goods_num = item.goods_num + 1;
+        cartArr[index].goods_num = Number(item.goods_num) + 1;
         this.setState({
             cartArr: cartArr
         }, function () {
@@ -103,18 +121,28 @@ class Show extends React.Component {
     }
     totalAll = ()=> {
         let cartArr = this.state.cartArr;
-     
         let selectAllFlag = 1;
         let totalMoney = 0;
+
         let totalVol = 0;
+        let supplyPriceStatusValue = this.state.supplyPriceStatusValue;
         if (cartArr.length>0) {
             cartArr.forEach((item,index)=> {
                 if (item.checked == 0 || !item.checked) {
                     selectAllFlag = 0;
                 }
                 if (item.checked) {
-            
-                    totalMoney += item.price * item.goods_num;
+                    
+                    
+                    
+                    
+                    
+                    if (supplyPriceStatusValue == 1) {
+                        totalMoney += item.discountPrice * item.goods_num;
+                    } else {
+                        totalMoney += item.price * item.goods_num;
+                    }
+                
                     totalVol += item.capacity * item.goods_num;
                 }
             })

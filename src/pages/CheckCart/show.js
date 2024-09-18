@@ -186,16 +186,14 @@ class Show extends React.Component {
         formData.append("sheng", userInfoDetail.province); 
         formData.append("city",  userInfoDetail.city);
         formData.append("quyu",  userInfoDetail.area);
-
         formData.append("address",  userInfoDetail.detailAdress);
         formData.append("tel",  userInfoDetail.phone);
-
         formData.append("invoice", 1);
         formData.append("skuNums", skuNumsStr)
-
         request({
             url: "/api/gw",         
             method: "POST",    
+            
             data: formData
         }).then((res)=> {
             if (res.data.code == 200) {

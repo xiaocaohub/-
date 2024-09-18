@@ -66,9 +66,9 @@ class DetailInfo extends React.Component {
         selectGoodIds[0] = colorArr[0].id;
         selectGoodIds[1] = sizeArr[0].id;
         let goodFirst = this.props.goodDetail.skuBeanList[0];
-        console.log("goodFirst goodFirst")
-        console.log(goodFirst)
-        console.log("goodFirst goodFirst")
+        // console.log("goodFirst goodFirst")
+        // console.log(goodFirst)
+        // console.log("goodFirst goodFirst")
         this.setState({
             colorArr: colorArr,
             colorTitle: colorTitle,
@@ -83,6 +83,8 @@ class DetailInfo extends React.Component {
             this.selectSizeFn(0)
             this.selectColorFn(0)
             this.props.setSelectGood(goodFirst)
+
+            this.play()
         })  
     }
     setBigImgHeightFn () {
@@ -96,10 +98,24 @@ class DetailInfo extends React.Component {
         let smallWidth = smallImg.clientWidth;
         let smallHeight = (smallWidth * 2) / 3;
         this.setState({
-            
             bigHeight: height,
             smallHeight: smallHeight
         })
+    }
+
+    play = ()=> {
+       
+        const video = document.getElementById("bigvideo");
+        // console.log("------------------------------")
+        // console.dir(video)
+        if (video) {
+            video.autoplay = true;
+            video.style.outline = "none";
+        }
+        // setTimeout(()=>{
+        //     video.autoplay = true;
+        //     video.style.outline = "none";
+        // })
     }
     leftImgFn = ()=> {
         let imgArr = this.state.currentGood.imgArr;
@@ -135,10 +151,17 @@ class DetailInfo extends React.Component {
             bigImg: bigImg
         })
     }
+
     selectNavFn = (index, item)=> {
+
+        let _this = this;
         this.setState({
             currentIndex: index,
             bigImg: item
+        }, function () {
+            if (index == 0) {
+                _this.play()
+             }
         })
     }
     changeCountFn = (e) => {

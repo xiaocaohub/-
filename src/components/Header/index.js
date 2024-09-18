@@ -8,7 +8,7 @@ import logo from "../../assets/logo.png";
 import topcart from "../../assets/shopping_cart.png";
 import { getStorageFn } from "../../utils/localStorage";
 
-import {CHECK_SUPPLY_PRICE} from "../../actionType/common";
+import {CHECK_SUPPLY_PRICE, SWITCH_SUPPLY_PRICE} from "../../actionType/common";
 function Header () {
     const dispatch = useDispatch();
     const navList = [
@@ -99,7 +99,14 @@ function Header () {
     } 
     
     function checkSupplyPriceFn () {
-        dispatch({type: CHECK_SUPPLY_PRICE, payload: true})
+        let supplyPriceStatus = getStorageFn("supplyPriceStatus");
+        if (!supplyPriceStatus) {
+            dispatch({type: CHECK_SUPPLY_PRICE, payload: true})
+        } else {
+
+            dispatch({type: SWITCH_SUPPLY_PRICE, payload: true})
+        }
+        
     }
     return (
         <div className="header_con">
