@@ -1,0 +1,237 @@
+import React from "react";
+import {Row, Col} from "antd";
+import RoomBanner from "../../components/RecommendeGood/RoomBanner";
+
+import Good from "../../components/RecommendeGood/Good";
+import banner1 from "../../assets/recommendeGood_banner.png";
+import "./index.css";
+import {setStorageFn, getStorageFn} from "../../utils/localStorage";
+import request from "../../api/request";
+import {getGoodInfoApi} from "../../api/RecommendeGood";
+import SmallCart from "../../components/SmallCart";
+import {scrollTopFn} from "../../utils/imgAuto";
+class Show extends React.Component {
+    constructor (props) {
+        super(props)
+
+        this.state = {
+            roomList: [
+                {
+                    id: 0,
+                    imgSrc: require("../../assets/room_list_1.png"),
+                    title: "餐厅区",
+                    txt: "LIVING ROOM AREA"
+                },
+                {
+                    id: 1,
+                    imgSrc: require("../../assets/room_list_2.png"),
+                    title: "客厅区",
+                    txt: "BEDROOM AREA"
+                },
+                {
+                    id: 2,
+
+                    imgSrc: require("../../assets/room_list_3.png"),
+                    title: "卧房区",
+                    txt: "DINING AREA"
+                }
+            ],
+
+            roomBannerArr: [
+                {
+                    id: 0,
+                    topTitle: "餐厅",
+
+                    topTxt: "/Dining area",
+
+                    imgSrc: require("../../assets/room_list_banner1.png"),
+                    navBtn: 2
+                },
+                {
+                    id: 1,
+                    topTitle: "客厅",
+                    topTxt: "/LIVING ROOM",
+                    imgSrc: require("../../assets/room_list_banner2.png"),
+                    navBtn: 0
+                },
+                {
+                    id: 2,   
+                    topTitle: "卧房",
+                    topTxt: "/BEDROOM",
+                    imgSrc: require("../../assets/room_list_banner3.png"),
+                    navBtn: 1
+                }
+            ],
+            roomFirstArr: "",
+            roomTwoArr: "",
+            roomThreeArr: ""
+        }
+    }
+    componentDidMount () {
+        scrollTopFn()
+        this.getGoodInfoFn()
+        this.getGoodInfoTwoFn()
+        this.getGoodInfoThreeFn()
+        this.totalCartGoodCountFn()
+    }
+    getGoodInfoFn = ()=> {
+        let formData = new FormData();
+        let storeId = getStorageFn("storeId") || 1;
+        let storeType = getStorageFn("storeType") || 6;
+        let styleId = this.state.styleId;
+        let token = getStorageFn("token");
+        formData.append("api", "app.product.listProduct"); 
+        formData.append("accessId", token);
+        formData.append("storeId", storeId);
+        
+        formData.append("storeType", storeType);
+        formData.append("page", 1);
+        formData.append("pageSize", 6);
+        formData.append("productLabel", 102);
+        formData.append("productClass", "-148-167-");
+        getGoodInfoApi(formData).then((res)=>{
+            let goodArr = res.data.data.goodsList;
+            this.setState({
+                roomFirstArr: goodArr
+            })
+        })
+    }
+    getGoodInfoTwoFn = ()=> {
+        let formData = new FormData();
+        let storeId = getStorageFn("storeId") || 1;
+        let storeType = getStorageFn("storeType") || 6;
+        let styleId = this.state.styleId;
+        formData.append("api", "app.product.listProduct"); 
+        formData.append("storeId", storeId);
+        formData.append("storeType", storeType);
+        formData.append("page", 1);
+        formData.append("pageSize", 6);
+        formData.append("productLabel", 102);
+        formData.append("productClass", "-148-150-");
+        getGoodInfoApi(formData).then((res)=>{
+            console.log(res.data)
+            let goodArr = res.data.data.goodsList;
+            this.setState({
+                roomTwoArr: goodArr
+            })
+        })
+    }
+    getGoodInfoThreeFn = ()=> {
+        let formData = new FormData();
+        let storeId = getStorageFn("storeId") || 1;
+        let storeType = getStorageFn("storeType") || 6;
+        let styleId = this.state.styleId;
+        formData.append("api", "app.product.listProduct"); 
+        formData.append("storeId", storeId);
+        formData.append("storeType", storeType);
+        formData.append("page", 1);
+        formData.append("pageSize", 6);
+        formData.append("productLabel", 102);
+
+
+        formData.append("productClass", "-148-166-");
+        getGoodInfoApi(formData).then((res)=>{
+            let goodArr = res.data.data.goodsList;
+            this.setState({
+                roomThreeArr: goodArr
+            })
+        })
+    }
+    // 统计购物车数量
+    totalCartGoodCountFn = ()=> {
+        let _this = this;
+       
+        let formData = new FormData();
+       
+       
+        let token = getStorageFn("token");
+        formData.append("api", "app.cart.index");    
+        formData.append("accessId", token);  
+        formData.append("storeId", 1);
+        formData.append("storeType", 6);
+        request({
+            url: "/api/gw",         
+            method: "POST",    
+            data: formData
+
+        }).then((res)=> {
+            let resData = res.data.data.data;
+            _this.setState({
+                cartArr: resData
+            
+            },function () {
+                let cartArr = _this.state.cartArr;
+                let length = cartArr.length;
+                _this.props.totalCartGoodCountFn(length)
+            })
+            setStorageFn("cartArr", resData)
+        })
+       
+    }
+    render () {
+        return (
+            <div className="recommende_good_con">
+                <div className="banner">      
+                    <img src={banner1} alt="" onClick={()=>{this.getGoodInfoFn()}}/>  
+                </div>
+
+           
+                <div className="room_list_con">
+                    <ul className="room_list content_common_width">
+                        {this.state.roomList.map((item,index)=>{
+                            return (
+                                <li key={item.id}>
+                                    <img src={item.imgSrc} alt="" className="room_img"/>
+                                    {/* <div className="text_con">
+                                        <div className="title">{item.title}</div>
+                                        <div className="txt">{item.txt}</div>
+                                    </div> */}
+                                </li>
+                            )
+                        })}
+                    </ul>
+                </div>
+
+                <div>
+                    
+                    <div className="content_common_width" >
+                        <div className="big_room_con">
+                            <RoomBanner bannerData={this.state.roomBannerArr[0]}></RoomBanner>
+                            <ul className="good_list">
+                                {this.state.roomFirstArr && this.state.roomFirstArr.map((item,index)=> {
+                                    
+                                    return (<Good goodInfo={item} key={index}></Good>)
+                                 })}
+                            </ul>
+                        </div>
+                        
+                        <div className="big_room_con">
+                            <RoomBanner bannerData={this.state.roomBannerArr[1]}></RoomBanner>
+                            <ul className="good_list">
+                                {this.state.roomTwoArr && this.state.roomTwoArr.map((item,index)=> {
+                                    
+                                    return (<Good goodInfo={item} key={index}></Good>)
+                                 })}
+                            </ul>
+                        </div>
+
+                        <div className="big_room_con">
+                            <RoomBanner bannerData={this.state.roomBannerArr[2]}></RoomBanner>
+                            
+                            <ul className="good_list">
+                                {this.state.roomThreeArr && this.state.roomThreeArr.map((item,index)=> {
+                                    
+                                    return (<Good goodInfo={item} key={index}></Good>)
+                                 })}
+                            </ul>
+                        </div>
+                    </div>
+                
+                </div>
+                {this.props.state.commonState.showCartFlag && <SmallCart hideSmallCart={this.props.hideSmallCartFn} totalCartGoodCountFn={this.totalCartGoodCountFn}></SmallCart>}
+            </div>
+        )
+    }
+}
+
+export default Show;
