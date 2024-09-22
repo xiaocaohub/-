@@ -124,9 +124,6 @@ class Show extends React.Component {
         }
         let cartArr =  this.state.cartArr;
         
-        // console.log("arr cartArr")
-        // console.log(cartArr)
-        // console.log("arr cartArr")
         let currentGood = this.state.currentGood;
         let addCartFlag = this.state.addCartFlag;
         if (!currentGood) {
@@ -140,49 +137,33 @@ class Show extends React.Component {
         this.setState({
             addCartFlag: false
         })
-        if (!addCartFlag) {
-          
+        if (!addCartFlag) {      
             return ;
         } 
-        // console.log("currentGood----------start")
-        // console.log(currentGood)
-        // console.log("currentGood---------start")
+    
         currentGood.goods_id = parseInt(this.state.goodId);
         currentGood.attribute_id = currentGood.cid;
  
         const arr = cartArr.filter(item=>item.goods_id == currentGood.goods_id && item.attribute_id == currentGood.attribute_id);        
         
-        // console.log("arr----------filter")
-        // console.log(arr)
-        // console.log("arr----------filter")
-
-       
         if (arr.length > 0) {
-
             cartArr.forEach((item, index)=>{
-            
                 if (item.goods_id == currentGood.goods_id && item.attribute_id == currentGood.attribute_id) {  
-                    // item.goods_num += 1;
-                    // console.log("currentGood item")
-                    // console.log(item)
-                    // console.log("currentGood item")
                     item.cid = currentGood.cid;
                     currentGood = item;
                 }
             })
         } else {
-            // currentGood.goods_num = 1;
             currentGood.selectFlag = false;
-            // cartArr.push(currentGood)
         }
 
-        // console.log("currentGood------end")
+        console.log("currentGood------end")
                  
                  
-        // console.log(currentGood)
-        // console.log("currentGood-----end")
-       
-        // setStorageFn("cartArr", cartArr)
+        console.log(currentGood)
+        console.log("currentGood-----end")
+    
+  
 
         this.setState({
             // cartArr: cartArr,

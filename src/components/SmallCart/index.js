@@ -8,6 +8,7 @@ import imgGood from "../../assets/recomend_good1.png";
 import {setStorageFn, getStorageFn} from "../../utils/localStorage";
 import {setImgAutoHeightFn} from "../../utils/imgAuto";
 import request from "../../api/request";
+import requestd from "../../api/requestd";
 import Empty from "../Empty";
 class CartSmall extends React.Component {
     constructor (props) {
@@ -103,6 +104,28 @@ class CartSmall extends React.Component {
         })
     }
 
+
+    selectAllGoodRequestFn = (selectId, checked)=> {
+        let _this = this; 
+        let formData = new FormData();
+        let token = getStorageFn("token");
+        selectId = selectId + "";
+        formData.append("api", "app.cart.checkedAllCart");
+        formData.append("accessId", token);
+        formData.append("storeId", 1);
+        formData.append("storeType", 6);
+        formData.append("cartIds", selectId)
+        formData.append("checked", checked);
+        request({
+            url: "/api/gw",         
+            method: "POST",    
+            data: formData
+        }).then((res)=> {
+            if (res.data) {
+     
+            }
+        })
+    }
     totalAll = ()=> {
         let cartArr = this.state.cartArr;
         let selectAllFlag = 1;
@@ -148,7 +171,8 @@ class CartSmall extends React.Component {
             ids += item.id + ",";
         })
      
-        this.selectGoodRequestFn(ids);
+        // this.selectGoodRequestFn(ids);
+        this.selectAllGoodRequestFn(ids, selectAllFlag)
         this.setState({
             cartArr: cartArr,
             selectAllFlag: selectAllFlag
@@ -363,9 +387,10 @@ class CartSmall extends React.Component {
 
 
 
+
+
         cartArr.forEach((goodItem, index)=>{
             let item = {}
-
             item.area = goodItem.areaName;
             item.picture = goodItem.imgurl;
             item.categoryName = goodItem.categoryName;
@@ -373,13 +398,13 @@ class CartSmall extends React.Component {
             item.productCode = goodItem.productCode;
             
             item.parameters = goodItem.skuName;
-            
             item.marque = goodItem.marque;
             item.material = goodItem.material;
             item.num = goodItem.goods_num ;
             item.price = goodItem.price ;
             exportArr.push(item);
         })
+ 
         let exportArrStr = JSON.stringify(exportArr);
 
         formData.append("api", "app.cart.exportGoodsExcel");    
@@ -392,34 +417,28 @@ class CartSmall extends React.Component {
 
 
         formData.append("exportType", 1)
-         request({
-        
-
-            
+        requestd({
             url: "/api/gw",         
-
-            method: "POST",    
-            
-            data: formData
-        
+            method: "POST",
+            data: formData,
+            responseType:'blob'
         }).then((res)=> {
-            console.log("res export")
-            console.log(res)
-            console.log("res export")
-        
+            let blob = new Blob([res.data], {type: "application/actet-stream;charset=utf-8"})
+            if ('download' in document.createElement("a")) {
+                const elink = document.createElement("a");
+                elink.download = "购物车订单"  + ".xls"
+                elink.style.display = "none";
+                elink.href = URL.createObjectURL(blob)
+                document.body.appendChild(elink)
+                elink.click()
+                URL.revokeObjectURL(elink.href)
+                document.body.removeChild(elink)
+            } else {
+                navigator.msSaveBlob(blob, "购物车订单"  + ".xls")
+            }
         })
-        // request({
-        //     url: "/api/gw",         
-        //     method: "GET",
-        //     params: formData
-        // }).then((res)=> {
-        //     console.log("res export")
-        //     console.log(res)
-        //     console.log("res export")
-        
-        // })
     }
-    render () {
+    render () { 
         return (
             <div className="show_small_cart">
                 <div className="shadow"></div>    
@@ -432,8 +451,9 @@ class CartSmall extends React.Component {
                         <ul className="table_title">
                             <li className="select_con"></li>
                             <li className="info_con">商品信息</li>
-                            <li className="price">单价(元)</li>
-
+                             
+                            {this.state.supplyPriceStatusValue != null && this.state.supplyPriceStatusValue==1 &&<li className="price">供货价(元)</li>}
+                            {this.state.supplyPriceStatusValue != null && this.state.supplyPriceStatusValue=="" &&<li className="price">单价(元)</li>}
 
                             <li className="count_con">数量</li>
                             <li className="sub_total">金额(元)</li>

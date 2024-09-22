@@ -47,21 +47,20 @@ class Show extends React.Component {
         this.getCartInfoFn()
     }
     initFn = ()=> {
+        let userInfo = JSON.parse(getStorageFn("userInfo"));
         let supplyPriceStatus = getStorageFn("supplyPriceStatus");
         let supplyPriceStatusValue = "";
-
-        
         if (supplyPriceStatus == true) {
-        
             supplyPriceStatusValue = 1;
         } else {
+
             supplyPriceStatusValue = ""
         } 
-
- 
         this.setState({
+
             supplyPriceStatus: supplyPriceStatus,
-            supplyPriceStatusValue: supplyPriceStatusValue
+            supplyPriceStatusValue: supplyPriceStatusValue,
+            userInfo: userInfo
         })
     }
 
@@ -120,12 +119,21 @@ class Show extends React.Component {
         this.totalAll()
     }
     totalAll = ()=> {
+
+        let _this = this;
         let cartArr = this.state.cartArr;
         let selectAllFlag = 1;
         let totalMoney = 0;
 
         let totalVol = 0;
         let supplyPriceStatusValue = this.state.supplyPriceStatusValue;
+
+ 
+ 
+     
+ 
+        let totalSelectGoodCount = 0;
+        
         if (cartArr.length>0) {
             cartArr.forEach((item,index)=> {
                 if (item.checked == 0 || !item.checked) {
@@ -137,13 +145,14 @@ class Show extends React.Component {
                     
                     
                     
-                    if (supplyPriceStatusValue == 1) {
+                    if (supplyPriceStatusValue == 1 ||  _this.state.userInfo.roleId) {
                         totalMoney += item.discountPrice * item.goods_num;
                     } else {
                         totalMoney += item.price * item.goods_num;
                     }
                 
                     totalVol += item.capacity * item.goods_num;
+                    totalSelectGoodCount += 1;
                 }
             })
         } else {
@@ -154,9 +163,45 @@ class Show extends React.Component {
         this.setState({
             selectAllFlag: selectAllFlag,
             totalMoney: totalMoney,
-            totalVol: totalVol
+            totalVol: totalVol,
+            totalSelectGoodCount:  totalSelectGoodCount
         })
     }
+    // totalAllSmallCart = ()=> {
+    //     let cartArr = this.state.cartArr;
+    //     let selectAllFlag = 1;
+    //     let totalMoney = 0;
+    //     let totalSelectCount = 0;
+    //     let supplyPriceStatusValue = this.state.supplyPriceStatusValue;
+
+    //     if (cartArr.length>0) {
+    //         cartArr.forEach((item,index)=> {
+    //             if (item.checked == 0 || !item.checked) {
+                 
+    //                 selectAllFlag = 0;
+    //             }
+    //             if (item.checked == 1) {
+    //                 if (supplyPriceStatusValue == 1) {
+    //                     totalMoney += item.discountPrice * item.goods_num;
+    //                 } else {
+    //                     totalMoney += item.price * item.goods_num;
+    //                 }
+                    
+    //                 totalSelectCount += 1;
+    //             }
+    //         })
+    //     } else {
+    //         selectAllFlag = 0;
+
+    //         totalMoney = 0;
+    //         totalSelectCount = 0;
+    //     }
+    //     this.setState({
+    //         selectAllFlag: selectAllFlag,
+    //         totalMoney: totalMoney,
+    //         totalSelectCount: totalSelectCount
+    //     })
+    // }
     totalSelectGoodFn = ()=> {
         let cartArr = this.state.cartArr;
         let count = 0;
@@ -210,6 +255,32 @@ class Show extends React.Component {
             }
         })
     }
+    selectAllGoodRequestFn = (selectId, checked)=> {   
+        let _this = this; 
+        let formData = new FormData();
+        let token = getStorageFn("token");
+        selectId = selectId + "";
+        formData.append("api", "app.cart.checkedAllCart");
+        formData.append("accessId", token);
+        formData.append("storeId", 1);
+        formData.append("storeType", 6);
+        formData.append("cartIds", selectId)
+        formData.append("checked", checked)
+        request({
+            url: "/api/gw",         
+            method: "POST",    
+            data: formData
+        }).then((res)=> {
+
+            if (res.data.data) {
+            //    _this.getCartInfoFn()
+                 _this.totalAll()
+            } else {
+                message.error(res.data.message)
+            }
+        })
+    }
+
     selectAllFn = ()=> {
         let cartArr = this.state.cartArr;
         let selectAllFlag = this.state.selectAllFlag==1?0:1;
@@ -218,14 +289,13 @@ class Show extends React.Component {
             item.checked = selectAllFlag;
             ids += item.id + ",";
         })
-        // console.log("ids-------------")
-        // console.log(ids)
+        console.log("ids-------------")
+        console.log(cartArr)
 
-        // console.log("ids--------------")
+        console.log("ids--------------")
+        this.selectAllGoodRequestFn(ids, selectAllFlag)
 
-        this.selectGoodRequestFn(ids)
         this.setState({
-
             cartArr: cartArr,
             selectAllFlag: selectAllFlag
         })
@@ -272,6 +342,7 @@ class Show extends React.Component {
             }
         })
     }
+
     // 获后台购物车数据
     getCartInfoFn = ()=> {
         let _this = this;
@@ -281,8 +352,8 @@ class Show extends React.Component {
         formData.append("accessId", token);  
         formData.append("storeId", 1);
         formData.append("storeType", 6);
-        request({
 
+        request({
             url: "/api/gw",         
             method: "POST",    
             data: formData
@@ -290,7 +361,6 @@ class Show extends React.Component {
             let resData = res.data.data.data;
             let arr = [];
             if (resData && resData.length > 0) {
-
                 resData.forEach((item, index)=> {
                     if (item.checked == 1) {
                         arr.push(item)
@@ -301,6 +371,9 @@ class Show extends React.Component {
             console.log("arr resData arr")
             console.log(resData)
             console.log("arr resData arr")
+
+
+
 
 
             _this.setState({

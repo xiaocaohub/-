@@ -26,9 +26,10 @@ class Show extends React.Component {
             totalPrice: 0, // 总价
             taxation: 0, // 税额
             orderFlag: true,
-            date: ""
+            date: "",
+
+            userInfo: ""
         }
- 
     }
     componentDidMount () {
         this.getCartInfoFn()
@@ -36,11 +37,10 @@ class Show extends React.Component {
     }
 
 
-
     // init = ()=> {
-    //     let date =  new Date().toLocaleDateString();
+    //     let userInfo = JSON.parse(getStorageFn("userInfo"));
     //     this.setState({
-    //         date: date
+    //         userInfo: userInfo
     //     })
     // }
     // 选中商品 id
