@@ -376,46 +376,37 @@ class CartSmall extends React.Component {
         
         let formData = new FormData();
         
-        
         let token = getStorageFn("token");
+        
         let cartArr = this.state.cartArr;
         let exportArr = [];
-        // console.log("cartArr cartArr")
-        // console.log(cartArr)
-
-        // console.log("cartArr cartArr")
-
-
-
-
-
         cartArr.forEach((goodItem, index)=>{
-            let item = {}
-            item.area = goodItem.areaName;
-            item.picture = goodItem.imgurl;
-            item.categoryName = goodItem.categoryName;
+            if (goodItem.checked == 1) {
+                let item = {}
 
-            item.productCode = goodItem.productCode;
-            
-            item.parameters = goodItem.skuName;
-            item.marque = goodItem.marque;
-            item.material = goodItem.material;
-            item.num = goodItem.goods_num ;
-            item.price = goodItem.price ;
-            exportArr.push(item);
+                item.area = goodItem.areaName;
+    
+                item.picture = goodItem.imgurl;
+                
+                item.categoryName = goodItem.categoryName;
+                item.productCode = goodItem.productCode;
+                item.parameters = goodItem.skuName;
+                item.marque = goodItem.marque;
+                item.material = goodItem.material;
+                item.num = goodItem.goods_num ;
+                item.price = goodItem.price ;
+                exportArr.push(item);
+            }
         })
  
         let exportArrStr = JSON.stringify(exportArr);
-
         formData.append("api", "app.cart.exportGoodsExcel");    
         formData.append("accessId", token);
         formData.append("storeId", 1);
         formData.append("storeType", 6);
-        
         formData.append("supplierOpen", this.state.supplyPriceStatusValue);
+        
         formData.append("content", exportArrStr)
-
-
         formData.append("exportType", 1)
         requestd({
             url: "/api/gw",         
