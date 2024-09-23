@@ -328,16 +328,12 @@ class DetailInfo extends React.Component {
 
             _this.setState({
                 currentColorIndex: index,
-                currentIndex: 0,
                 selectGoodIds: selectGoodIds,
                 currentColor: color,
                 currentGood: ""
             
             }, function () {
                 _this.props.setSelectGood("")
-
-
-                _this.setBigImgFn()
             })
             
         } else {
@@ -417,25 +413,20 @@ class DetailInfo extends React.Component {
             selectGoodIds[1] = "";
             size = "";
             _this.setState({
-                currentSizeIndex: index,
-                currentIndex: 0,
-                selectGoodIds: selectGoodIds,
 
+                currentSizeIndex: index,
+                selectGoodIds: selectGoodIds,
                 currentSize: size,
                 currentGood: ""
             }, function () {
                 _this.props.setSelectGood("")
-                _this.setBigImgFn()
             })
         } else {
             selectGoodIds[1] = size.id;
             this.setState({
                 currentSizeIndex: index,
-
                 selectGoodIds: selectGoodIds,
-                
                 currentSize: size
-            
             }, function () {
                 if (_this.state.currentColorIndex != -1) {
                     _this.checkColorArrDisableFn()
@@ -444,6 +435,9 @@ class DetailInfo extends React.Component {
                
             })
         }
+
+
+        this.setBigImg()
         // this.setState({
         //     currentSizeIndex: index,
         //     selectGoodIds: selectGoodIds,
@@ -485,16 +479,12 @@ class DetailInfo extends React.Component {
     }
     vedioCheckColorArrDisableFn = ()=> {
         let colorArr = this.state.colorArr;
-
         colorArr.forEach((colorItem)=>{
             colorItem.showFlag = true;
         })
-        console.log("colorArr vedioCheckColorArrDisableFn")
-        console.log(colorArr)
-
-        console.log("colorArr vedioCheckColorArrDisableFn")
-        
-        
+        // console.log("colorArr vedioCheckColorArrDisableFn")
+        // console.log(colorArr)
+        // console.log("colorArr vedioCheckColorArrDisableFn")
         this.setState({
             colorArr: colorArr
         })
@@ -564,7 +554,7 @@ class DetailInfo extends React.Component {
     addCartFn = ()=> {
         this.props.addCartFn(this.state.count)
     }
-    setBigImgFn = () => {
+    setBigImg = () => {
         let vedioSrc = this.state.vedioSrc;
         let defaultImgArr = this.state.defaultImgArr;
         let currentGood = this.state.currentGood;
@@ -572,6 +562,7 @@ class DetailInfo extends React.Component {
 
         if (!currentGood && !vedioSrc && defaultImgArr.length > 0) {
              bigImg = defaultImgArr[0];
+             
         }
         this.setState({
             bigImg: bigImg
@@ -589,7 +580,6 @@ class DetailInfo extends React.Component {
                                     style={{width:"100%",height: this.state.vedioHeight + "px"}} id="bigvideo"  muted>
                                 </video>} 
                                 
-                         
                                 { this.state.currentGood && <img src={this.state.bigImg} alt="" className="big_img" id="big_img"   style={{height: this.state.bigHeight + "px"}} />}
                                 { !this.state.currentGood && this.state.vedioSrc && this.state.defaultImgArr.length>0 && this.state.currentIndex>0 && <img src={this.state.bigImg} alt="" className="big_img" id="big_img"   style={{height: this.state.bigHeight + "px"}} />}
                                 { !this.state.currentGood && !this.state.vedioSrc && this.state.defaultImgArr.length>0 &&  <img src={this.state.bigImg} alt="" className="big_img" id="big_img"   style={{height: this.state.bigHeight + "px"}}/>}
@@ -739,6 +729,8 @@ class DetailInfo extends React.Component {
                         </div>
 
                     </div>
+
+                     <div style={{border:"1px solid brown"}}>{ JSON.stringify(this.state.currentGood)} </div>
                 </div>
             </div>
         )
