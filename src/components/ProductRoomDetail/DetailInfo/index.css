@@ -111,7 +111,11 @@
     border:2px solid #C6A189;
     border-bottom:0;
 } */
- 
+ .productroom_detail_page .big_img_con .big_video{
+    display: block;
+
+    object-fit: cover;
+ }
 .productroom_detail_page  .detail_info .right {
     width:36.5%;
     float:right;

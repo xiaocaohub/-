@@ -54,7 +54,8 @@ class DetailInfo extends React.Component {
     componentDidMount () {
        this.initDataFn()
 
-       this.setBigImgHeightFn()
+    //    this.setBigImgHeightFn()
+    //    this.setBigVedioHeightFn()
     }
     initDataFn = ()=> {
         
@@ -100,38 +101,71 @@ class DetailInfo extends React.Component {
             currentColorIndex: currentColorIndex,
             currentSizeIndex: currentSizeIndex
         }, function () {
-            console.log("currentGood init")
-            console.log(currentGood)
-            console.log("currentGood init")
             if (vedioSrc) {
                 // _this.selectSizeFn(-1)
                 // _this.selectColorFn(-1)
+                _this.setBigVedioHeightFn()
                  _this.vedioCheckColorArrDisableFn()
                  _this.vedioCheckSizeArrDisableFn()
             } else {
                 _this.selectSizeFn(0)
                 _this.selectColorFn(0)
+                _this.setBigImgHeightFn()
             }
             
-           
+             
+        
             _this.props.setSelectGood(goodFirst)
             this.play()
         })  
     }
     setBigImgHeightFn () {
         let bigImg = document.getElementById("big_img");
+        console.log("width bigImg -----", bigImg)
         if (!bigImg) {
             return ;
         }
         let width = bigImg.width;
         let height = (width * 2)/3 ;
+
+        console.log("width bigImg")
+        console.log(width)
+        console.log(height)
+        console.log("width bigImg")
         let smallImg = document.querySelectorAll(".img_nav li")[0];
         let smallWidth = smallImg.clientWidth;
         let smallHeight = (smallWidth * 2) / 3;
+
+        
         this.setState({
             bigHeight: height,
             smallHeight: smallHeight
         })
+    }
+
+
+
+
+    setBigVedioHeightFn () {
+        let bigVedio = document.getElementById("bigvideo");
+        let vedioSrc = this.state.vedioSrc;
+
+        if (!bigVedio) {
+
+            return ;
+        }
+        let width = bigVedio.clientWidth;
+        let height = (width * 2)/3 ;
+
+        console.log("width bigVedio")
+        console.log(width)
+        console.log(height)
+        console.log("width bigVedio")
+        this.setState({
+
+            vedioHeight: height
+        })
+ 
     }
     play = ()=> {  
         const video = document.getElementById("bigvideo");
@@ -512,11 +546,12 @@ class DetailInfo extends React.Component {
             <div className="detail_info_con">
                 <div className="detail_info">             
                     <div className="left">
-                        <div className="big_img_con">
-                            <div className="big_img_c">
-                       
+
+
+                        <div className="big_img_con">  
+                            <div className="big_img_c" style={{height: this.state.bigHeight + "px"}}>
                                 { !this.state.currentGood && this.state.vedioSrc && this.state.currentIndex==0 && <video  className="big_video" src={this.state.vedioSrc} controls 
-                                    style={{width:"100%",height: this.state.bigHeight + "px"}} id="bigvideo"  muted>
+                                    style={{width:"100%",height: this.state.vedioHeight + "px"}} id="bigvideo"  muted>
                                 </video>} 
                                 { this.state.currentGood && <img src={this.state.bigImg} alt="" className="big_img" id="big_img"   style={{height: this.state.bigHeight + "px"}} onClick={this.checkSizeArrDisableFn}/>}
                                 { !this.state.currentGood && this.state.defaultImgArr.length>0 && this.state.currentIndex>0 && <img src={this.state.bigImg} alt="" className="big_img" id="big_img"   style={{height: this.state.bigHeight + "px"}} onClick={this.checkSizeArrDisableFn}/>}
