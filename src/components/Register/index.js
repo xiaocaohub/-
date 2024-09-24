@@ -83,13 +83,20 @@ class RegisterPage extends React.Component {
     }
     registerFn = ()=> {
         let _this = this;
+       
         let formData = new FormData(); 
+        let readFlag = this.state.readFlag;
         formData.append("api", "app.login.register");
         formData.append("storeId", 1);
         formData.append("storeType", 6);
         formData.append("phone", this.state.phoneValue);
         formData.append("keyCode", this.state.code);
         formData.append("password", this.state.passWord);
+        if (!readFlag) {
+
+            message.error("请选择同意")
+            return ;
+        }
         request({
             url: "/api/gw",
             method: "POST",
@@ -133,8 +140,10 @@ class RegisterPage extends React.Component {
                     <div className={this.state.setFlag?"code_btn on": "code_btn"}>{"还剩"+this.state.count+"秒"}</div>
                 </div>
                 <div className="item_put"> 
-                    <input type="text" className="put_val" placeholder="设置密码" value={this.state.passWord} onChange={this.passWordFn}/>
+                    <input type="password" className="put_val" placeholder="设置密码" value={this.state.passWord} onChange={this.passWordFn}/>
+                 
                     <div className="msg">请输入设置密码</div>
+                
                 </div>
                 {/* <div className="item_put">
                     <input type="text" className="put_val" placeholder="确认新密码"/>
@@ -142,7 +151,7 @@ class RegisterPage extends React.Component {
                 </div> */}
                 <div className="sub_btn" onClick={this.registerFn}>注册</div>
                 <div className="agreement_text">
-                    <div className={this.state.readFlag?"tit on": "tit"} onClick={this.readoverFn}>我已阅读并同意</div>
+                    <span className={this.state.readFlag?"tit on": "tit"} onClick={this.readoverFn}>我已阅读并同意</span>
                    
                     <Link to="/luoke/agreement" className="txt">《珞珂用户服务协议》</Link>
                     <Link to="/info/agreement" className="txt">《信息数据收集协议》</Link>

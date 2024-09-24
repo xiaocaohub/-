@@ -126,6 +126,10 @@ class Show extends React.Component {
         
         let currentGood = this.state.currentGood;
         let addCartFlag = this.state.addCartFlag;
+        console.log("currentGood")
+
+        console.log(currentGood)
+        console.log("currentGood")
         if (!currentGood) {
             message.error("请选择商品")
             return ;

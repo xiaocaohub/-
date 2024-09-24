@@ -135,16 +135,23 @@ class DetailInfo extends React.Component {
                 _this.setBigVedioHeightFn()
                  _this.vedioCheckColorArrDisableFn()
                  _this.vedioCheckSizeArrDisableFn()
+
+
+                _this.props.setSelectGood("")
             } else if (!vedioSrc && defaultImgArr.length > 0) {
                 _this.setBigVedioHeightFn()
                 _this.vedioCheckColorArrDisableFn()
+                
                 _this.vedioCheckSizeArrDisableFn()
+            
+                _this.props.setSelectGood("")
             } else if (!vedioSrc && defaultImgArr.length == 0) {
                 _this.selectSizeFn(0)
                 _this.selectColorFn(0)
                 _this.setBigImgHeightFn()
+
+                _this.props.setSelectGood(goodFirst)
             }
-            _this.props.setSelectGood(goodFirst)
             this.play()
         })  
     }
@@ -489,10 +496,10 @@ class DetailInfo extends React.Component {
         colorArr.forEach((colorItem)=>{
             colorItem.showFlag = true;
         })
-        console.log("colorArr vedioCheckColorArrDisableFn")
-        console.log(colorArr)
+        // console.log("colorArr vedioCheckColorArrDisableFn")
+        // console.log(colorArr)
 
-        console.log("colorArr vedioCheckColorArrDisableFn")
+        // console.log("colorArr vedioCheckColorArrDisableFn")
         
         
         this.setState({
@@ -508,10 +515,10 @@ class DetailInfo extends React.Component {
             sizeItem.showFlag = true;
         })
 
-        console.log("sizeArr vedioCheckColorArrDisableFn")
-        console.log(sizeArr)
+        // console.log("sizeArr vedioCheckColorArrDisableFn")
+        // console.log(sizeArr)
 
-        console.log("sizeArr vedioCheckColorArrDisableFn")
+        // console.log("sizeArr vedioCheckColorArrDisableFn")
         this.setState({
             sizeArr: sizeArr
         })
@@ -535,12 +542,11 @@ class DetailInfo extends React.Component {
             bigImg: bigImg,
             currentIndex: 0
         }, function () {
-            console.log("currentGood currentGood")
-
-            console.log(currentGood)
 
 
-            console.log("currentGood currentGood")
+            // console.log("currentGood currentGood")
+            // console.log(currentGood)
+            // console.log("currentGood currentGood")
             this.props.setSelectGood(currentGood)
         })
     }
@@ -567,9 +573,9 @@ class DetailInfo extends React.Component {
     setBigImgFn = () => {
         let vedioSrc = this.state.vedioSrc;
         let defaultImgArr = this.state.defaultImgArr;
+
         let currentGood = this.state.currentGood;
         let bigImg = "";
-
         if (!currentGood && !vedioSrc && defaultImgArr.length > 0) {
              bigImg = defaultImgArr[0];
         }
@@ -577,6 +583,7 @@ class DetailInfo extends React.Component {
             bigImg: bigImg
         })
     }
+    
     render () {
         return (
             <div className="detail_info_con">
@@ -744,5 +751,6 @@ class DetailInfo extends React.Component {
         )
     }
 }
+
 
 export default DetailInfo;
