@@ -120,7 +120,7 @@ function Header () {
                             <ul className="btn_group">
                                 <li><Link to="/people/order/list">会员后台</Link></li>
 
-                                 <li onClick={checkSupplyPriceFn}>查看供货价</li>
+                                {userInfo.roleId && <li onClick={checkSupplyPriceFn}>查看供货价</li> }
                                
                                 <li onClick={loginOutFn}>退出登录</li>
                             </ul>

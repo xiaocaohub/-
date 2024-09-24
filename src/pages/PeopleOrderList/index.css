@@ -66,7 +66,6 @@
     background: #fafafa;
 }
 .operate_btn_group{
-    height: 115px;
     display: flex;
     color: #0D97E5;
     flex-direction: column;

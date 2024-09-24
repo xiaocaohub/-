@@ -90,9 +90,9 @@ class Show extends React.Component {
             data: formData
         }).then((res)=> {
             let resData = res.data.data;
-            console.log("resData goodInfo")
-            console.log(resData)
-            console.log("resData goodInfo")
+            // console.log("resData goodInfo")
+            // console.log(resData)
+            // console.log("resData goodInfo")
             _this.setState({
                 goodInfo: resData
             })
@@ -105,7 +105,7 @@ class Show extends React.Component {
         }) 
     }
     setSelectGoodFn = (currentGood)=> {
-        console.log("currentGoodFn setSelectGoodFn", currentGood)
+        // console.log("currentGoodFn setSelectGoodFn", currentGood)
         this.setState({
             currentGood: currentGood
         })
@@ -126,10 +126,10 @@ class Show extends React.Component {
         
         let currentGood = this.state.currentGood;
         let addCartFlag = this.state.addCartFlag;
-        console.log("currentGood")
+        // console.log("currentGood")
 
-        console.log(currentGood)
-        console.log("currentGood")
+        // console.log(currentGood)
+        // console.log("currentGood")
         if (!currentGood) {
             message.error("请选择商品")
             return ;
@@ -160,15 +160,10 @@ class Show extends React.Component {
         } else {
             currentGood.selectFlag = false;
         }
-
-        console.log("currentGood------end")
-                 
-                 
-        console.log(currentGood)
-        console.log("currentGood-----end")
+        // console.log("currentGood------end")             
+        // console.log(currentGood)
+        // console.log("currentGood-----end")
     
-  
-
         this.setState({
             // cartArr: cartArr,
             currentGood: currentGood

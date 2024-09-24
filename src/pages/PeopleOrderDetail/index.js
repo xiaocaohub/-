@@ -1,5 +1,5 @@
 import React from "react";
-import { } from "antd";
+import { Link } from "react-router-dom";
 import {Steps, Table, Button, message, Modal  } from "antd";
 
 import goodImg from "../../assets/recomend_good1.png";
@@ -17,13 +17,39 @@ class PeopleOrderDetail extends React.Component {
         this.state = {
             orderNumber: "",
             orderArr: [],
-            orderInfo: ""
+            orderInfo: "",
+            supplyPriceStatus: false,
+            
+            supplyPriceStatusValue: null,
+            userInfo: ""
         }
     }
     componentDidMount () {
        this.getOrderNumberFn()
+       this.initFn()
     }
 
+    initFn = ()=> {
+        let supplyPriceStatus = getStorageFn("supplyPriceStatus");
+        let supplyPriceStatusValue = "";
+        
+        let userInfo = JSON.parse(getStorageFn("userInfo"));
+     
+
+        if (supplyPriceStatus == true) {
+            supplyPriceStatusValue = 1;
+        } else {
+            supplyPriceStatusValue = ""
+        } 
+        this.setState({
+            supplyPriceStatus: supplyPriceStatus,
+
+            supplyPriceStatusValue: supplyPriceStatusValue,
+
+
+            userInfo: userInfo
+        })
+    }
     getOrderNumberFn = ()=> {
         let orderNumber = window.location.pathname.split("/detail/")[1];
         this.setState({
@@ -166,13 +192,13 @@ class PeopleOrderDetail extends React.Component {
                     </Steps>}
                     
                     {this.state.orderInfo.status>1 && <Steps current={this.state.orderInfo.status - 1}> 
-          
+                        <Step title="提交订单" description="" />
                         <Step title="待付款" description="" />
                         <Step title="审核中" description="" />
-                        <Step title="备货中" description="" />
+                        <Step title="配货中" description="" />
                         <Step title="已发货" description="" />
+                        <Step title="待收货" description="" />
                         <Step title="已完成" description="" />
-                        <Step title="已退款" description="" />
                     </Steps>}
                 </div>
 
@@ -192,7 +218,7 @@ class PeopleOrderDetail extends React.Component {
                         </ul>
 
                         <div className="operate_btn_list">
-                            {/* {this.showPayBtnFn(this.state.orderInfo.status) && <div className="btn">去付款</div>} */}
+                            {this.showPayBtnFn(this.state.orderInfo.status) && <Link to="/pay/over" className="btn">去付款</Link>}
                             {this.showCancelBrnFn(this.state.orderInfo.status) && <div className="btn" onClick={this.cancelOrderFn}>取消订单</div>}
 
                             {/* <div className="btn">导出订单</div> */}
@@ -205,7 +231,6 @@ class PeopleOrderDetail extends React.Component {
                        <div className="title">订单跟踪</div>
                         <Steps direction="vertical" current={1} className="vertical_step">
                             {this.state.orderInfo && this.state.orderInfo.messages.map((item, index)=> {
-                                console.log("item, item")
                                  return (<Step key={index} title={item.messageContent} description={new Date(item.createTime).toLocaleString()} />)
                             })}
                              
@@ -257,16 +282,20 @@ class PeopleOrderDetail extends React.Component {
 
 
                 <div className="order_good_info_list_con">
+
                     <div className="title">订单商品</div>
                     {this.state.orderArr.length>0 && this.state.orderArr.map((orderItem, index)=>{
-                        return (
-                             
+                        return (         
                             <div className="order_good_table">
                                 <div className="table_title">
                                     <div className="good_info">商品信息</div>
                                     <div className="size">规格</div>
                                     <div className="vol">体积(m³)</div>
-                                    <div className="price">销售单价(元)</div>
+                                    {/* <div className="price">销售单价(元)</div> */}
+                                    
+                                    {this.state.userInfo.roleId && <div className="price"> 供货单价 (元)</div>}
+                                    {!this.state.userInfo.roleId && this.state.supplyPriceStatusValue != null && this.state.supplyPriceStatusValue==1 && <div className="price"> 供货单价 (元)</div>}
+                                    {!this.state.userInfo.roleId && this.state.supplyPriceStatusValue != null && this.state.supplyPriceStatusValue=="" && <div className="price">销售单价(元)</div>}
                                     <div className="count">数量</div>
 
                                     {/* <div className="return_goods_count">退货数量</div> */}
@@ -274,19 +303,19 @@ class PeopleOrderDetail extends React.Component {
                                     <div className="status">状态</div>
                                 </div>
         
-
                                 <ul className="good_list">
                               
-                              
+        
                                     {orderItem.details.length>0 && orderItem.details.map((goodItem, i)=> {
                                         return (
                                             <li>
                                                 <div className="good_info">
-                                                
-                                                    <img src={ goodItem.imgurl } alt="" className="good_img"/>
-                                                
+                                                    <img src={ goodItem.imgurl } alt="" className="good_img"/>                                        
                                                     <div className="text_con">
+
                                                         <div className="tit">{goodItem.productName}</div>
+                                                        
+                                                        
                                                         <p className="txt">编码: {goodItem.productCode} </p>
                                                         <p className="txt">型号: {goodItem.marque}</p>
                                                     </div>
@@ -295,18 +324,19 @@ class PeopleOrderDetail extends React.Component {
                                                 <div className="vol">{ goodItem.totalVolume }</div>
                 
                                                 <div className="price">{goodItem.supplierPrice}</div>
+
                                                 <div className="count">{ goodItem.num }</div>
                                                 {/* <div className="return_goods_count">1</div> */}
                                                 <div className="total_money">{ goodItem.totalSupplierPrice }</div>
-                                             
                                                 <div className="status">{this.orderStatusFn(goodItem.status)}</div>
                                             </li>
                                         )
                                     })}  
                                 </ul>
                                 <p className="time_txt">子订单号: {orderItem.orderNo?orderItem.orderNo:"-----"} </p>
+                                
+                                
                                 <p className="time_txt">预计发货时间: {orderItem.estimatedDeliveryTime?orderItem.estimatedDeliveryTime:"-----"}</p>
-        
                                 <p className="time_txt">实际发货时间: {orderItem.realDeliveryTime?orderItem.realDeliveryTime:"-----"}</p>
                             </div>
                         )

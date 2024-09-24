@@ -26,25 +26,22 @@ class GoodTable extends React.Component {
 
     initFn = ()=> {
         let supplyPriceStatus = getStorageFn("supplyPriceStatus");
-     
         let supplyPriceStatusValue = "";   
         let userInfo = JSON.parse(getStorageFn("userInfo"));
         if (supplyPriceStatus == true) {
-
             supplyPriceStatusValue = 1;
         } else {
             supplyPriceStatusValue = ""
         } 
+
         this.setState({
 
+
             supplyPriceStatus: supplyPriceStatus,
-            
-            
             supplyPriceStatusValue: supplyPriceStatusValue,
             userInfo: userInfo
         })
     }
-
     remarkFn = (e)=> {
     
         let value = e.target.value;    
@@ -62,7 +59,8 @@ class GoodTable extends React.Component {
                 
 
                     {this.state.userInfo.roleId && <li className="price"> 供货单价 (元)</li>}
-                    {this.state.supplyPriceStatusValue != null && this.state.supplyPriceStatusValue==1 && <li className="price"> 供货单价 (元)</li>}
+                    {!this.state.userInfo.roleId && this.state.supplyPriceStatusValue != null && this.state.supplyPriceStatusValue==1 && <li className="price"> 供货单价 (元)</li>}
+        
                     {!this.state.userInfo.roleId && this.state.supplyPriceStatusValue != null && this.state.supplyPriceStatusValue=="" && <li className="price">销售单价(元)</li>}
                     <li className="count">数量</li>
                     <li className="sub_total">小计(元)</li>

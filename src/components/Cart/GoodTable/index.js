@@ -75,7 +75,7 @@ class GoodTable extends React.Component {
                     
 
                     {this.state.userInfo.roleId && <li className="price"> 供货单价 (元)</li>}
-                    {this.state.supplyPriceStatusValue != null && this.state.supplyPriceStatusValue==1 && <li className="price"> 供货单价 (元)</li>}
+                    {!this.state.userInfo.roleId && this.state.supplyPriceStatusValue != null && this.state.supplyPriceStatusValue==1 && <li className="price"> 供货单价 (元)</li>}
                     {!this.state.userInfo.roleId && this.state.supplyPriceStatusValue != null && this.state.supplyPriceStatusValue=="" && <li className="price">销售单价(元)</li>}
                     <li className="count">数量</li>
                     <li className="sub_total">小计(元)</li>

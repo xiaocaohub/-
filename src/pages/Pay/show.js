@@ -101,7 +101,7 @@ class Pay extends React.Component {
                                 </ul>
 
 
-                                <span className="tit"><InfoCircleOutlined /> 付款说明</span>
+                                {/* <span className="tit"><InfoCircleOutlined /> 付款说明</span> */}
                             </div>
 
                             {/* <Platform ></Platform>  */}

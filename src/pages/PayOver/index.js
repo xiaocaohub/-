@@ -4,6 +4,7 @@ import {Link} from "react-router-dom";
 
 import {getStorageFn} from "../../utils/localStorage";
 
+import {scrollTopFn} from "../../utils/imgAuto";
 import "./index.css";
 
 class PayOver extends React.Component {
@@ -16,6 +17,7 @@ class PayOver extends React.Component {
     }
     componentDidMount () {
         this.init()
+        scrollTopFn()
     }
     init () {
 

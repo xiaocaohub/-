@@ -11,10 +11,10 @@ import "./index.css";
 class DetailInfo extends React.Component {
     constructor (props) {
         super(props)
-        console.log("show detail props")
-        console.log(props)
+        // console.log("show detail props")
+        // console.log(props)
 
-        console.log("show detail props")
+        // console.log("show detail props")
         this.state = {
             // 大图 index
             currentIndex: 0,
@@ -59,7 +59,6 @@ class DetailInfo extends React.Component {
     //    this.setBigVedioHeightFn()
     }
     initDataFn = ()=> {
-        
         let _this = this;
         let supplyPriceStatus = getStorageFn("supplyPriceStatus");
         let vedioSrc = this.props.goodDetail.product.productVideo;
@@ -77,12 +76,10 @@ class DetailInfo extends React.Component {
 
         let currentColorIndex = 0;
         let currentSizeIndex = 0;
-
         let bigImg = "";
         selectGoodIds[0] = colorArr[0].id;
         selectGoodIds[1] = sizeArr[0].id;
         let goodFirst = this.props.goodDetail.skuBeanList[0];
-
         if (!vedioSrc && defaultImgArr.length == 0) {
             currentGood = goodFirst;
         } else {
@@ -92,17 +89,14 @@ class DetailInfo extends React.Component {
         if (vedioSrc) {
             vedioNavSrc =  vedioSrc + "?x-oss-process=video/snapshot,t_1,m_fast";
             let indexType = defaultImgArr.find((item)=>{
-
                 return item == vedioNavSrc;
             })
 
             if (!indexType) {
+
                 defaultImgArr.unshift(vedioNavSrc)
             }
         }
-
-        
-
 
         if (!currentGood && vedioSrc) {
             bigImg = "";
@@ -536,13 +530,13 @@ class DetailInfo extends React.Component {
                 currentGood = allGoodArr[i];
             }
         }
+      
         let bigImg = currentGood.imgurl;
         this.setState({
             currentGood: currentGood,
             bigImg: bigImg,
             currentIndex: 0
         }, function () {
-
 
             // console.log("currentGood currentGood")
             // console.log(currentGood)
@@ -583,7 +577,7 @@ class DetailInfo extends React.Component {
             bigImg: bigImg
         })
     }
-    
+
     render () {
         return (
             <div className="detail_info_con">

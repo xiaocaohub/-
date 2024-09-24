@@ -97,9 +97,9 @@ class PeopleOrderListPage extends React.Component {
             method: "POST",    
             data: formData
         }).then((res)=> {
-            console.log("res order")
-            console.log(res)
-            console.log("res order")
+            // console.log("res order")
+            // console.log(res)
+            // console.log("res order")
             let resData = res.data.data;
             let resOrderArr = resData.records;
             let totalCount = resData.total;
@@ -207,6 +207,30 @@ class PeopleOrderListPage extends React.Component {
                 return false;
                 break;
         }
+    }
+    exportOrderFn = (item)=> {
+        // console.log(item)
+
+        let  orderParentNo = item.operateText.order;
+        let _this = this;
+
+        let formData = new FormData()
+        let token = getStorageFn("token");
+        formData.append("api", "app.orderV2.export");    
+        formData.append("accessId", token);  
+        formData.append("storeId", 1);
+        formData.append("storeType", 6);
+        formData.append("orderParentNo", orderParentNo); 
+        formData.append("exportType", 1); 
+        request({
+            url: "/api/gw",         
+            method: "POST",    
+            data: formData
+        }).then((res)=> {
+            
+            console.log(res)
+        })
+
     }
     render () {
         const columns = [
@@ -335,14 +359,14 @@ class PeopleOrderListPage extends React.Component {
 
                     return (
                         <div className="operate_btn_group">
-                            {/* {this.showPayBtnFn(item.orderState) && <div className="btn">去付款</div>} <br/> */}
-                            <div className="btn"><Link to={ "/people/order/detail/" + item.operateText.order }>订单详情</Link></div> <br/>
-                            {/* <div className="btn">导出订单</div><br/> */}
-
-
+                           
+                           
+                            {this.showPayBtnFn(item.orderState) && <Link to="/pay/over" className="btn"> 去付款 </Link>} 
+                            <div className="btn"><Link to={ "/people/order/detail/" + item.operateText.order }>订单详情</Link></div> 
+                            <div className="btn" onClick={()=>{ this.exportOrderFn(item) }}>导出订单</div><br/>
                             {/* <div className="btn">再次购买</div><br/> */}
                             
-                            {this.showCancelBrnFn(item.orderState) && <div className="btn" onClick={()=>{this.cancelOrderFn(item)}}>取消订单</div>}
+                            {this.showCancelBrnFn(item.orderState) && <div className="btn" onClick={()=>{this.cancelOrderFn(item)}}>取消订单 </div>}
                         
                         </div>
                     )

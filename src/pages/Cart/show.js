@@ -19,12 +19,12 @@ class Show extends React.Component {
             totalCount: 0,
             totalVol: 0, // 总体积
             setImgHeight: 0,
-            userInfo: {
 
+            userInfo: {
                 province: "",
                 city: "",
-                area: "",
 
+                area: "",
                 detailAdress: "",
                 recipient: "", // 收件人
                 remark: ""
@@ -289,10 +289,10 @@ class Show extends React.Component {
             item.checked = selectAllFlag;
             ids += item.id + ",";
         })
-        console.log("ids-------------")
-        console.log(cartArr)
+        // console.log("ids-------------")
+        // console.log(cartArr)
 
-        console.log("ids--------------")
+        // console.log("ids--------------")
         this.selectAllGoodRequestFn(ids, selectAllFlag)
 
         this.setState({
@@ -368,27 +368,24 @@ class Show extends React.Component {
                 })
             }
 
-            console.log("arr resData arr")
-            console.log(resData)
-            console.log("arr resData arr")
-
-
-
-
-
+            // console.log("arr resData arr")
+            // console.log(resData)
+            // console.log("arr resData arr")
             _this.setState({
                 cartArr: arr
             }, function () {
                 _this.totalSelectGoodFn()
+
                 _this.totalAll()
+                
                 _this.totleSelectGoodCountFn()
             })
             // setStorageFn("cartArr", resData)
             setStorageFn("cartArr", arr)
         })
     }
-
     detailAdressFn = (value)=> {
+     
         console.log()
     }
     changeInfoFn = (userInfo)=> {
@@ -397,8 +394,8 @@ class Show extends React.Component {
     showFn = ()=> {
         console.log(this.props.state.cartState.userInfo)
     }
-
     deleteSelectAllFn = ()=> {
+    
         let _this = this;
         let cartArr = this.state.cartArr;
         let length = cartArr.length;
@@ -414,24 +411,23 @@ class Show extends React.Component {
                     title: "温馨提示",
                     content: "确认删除吗?",
                     cancelText: "取消",
-
                     okText: "确认",
-                    
                     centered: true,
+
                     onOk: function () {
                         let deleteIds = "";
                         for (let i=length-1; i>=0; i--) {
                             if (cartArr[i].selectFlag) {               
                                 deleteIds += cartArr[i].id + ",";
                             }
-                        } 
-                        
+                        }     
                         _this.deleteGoodFn(deleteIds)
                     }
                 })
             }
         }
     }
+
     deleteGoodFn = (deleteId)=> {   
         let _this = this; 
         let formData = new FormData();
@@ -439,18 +435,20 @@ class Show extends React.Component {
         formData.append("api", "app.cart.delCart");
         formData.append("accessId", token);
         formData.append("storeId", 1);
+      
+      
         formData.append("storeType", 6);
         formData.append("cartIds", deleteId)
         request({
             url: "/api/gw",         
+      
             method: "POST",    
+      
             data: formData
         }).then((res)=> {
-            // console.log(res.data)
             if (res.data.data) {
                message.success("删除成功")
                _this.getCartInfoFn()
-
             } else {
                 message.error(res.data.message)
             }
@@ -470,7 +468,6 @@ class Show extends React.Component {
             totalSelectGoodCount: totalSelectGoodCount
         })
     }
-
     goPayFn = ()=> {
         if (!this.state.isKeep) {
             message.error("请保存客户信息")

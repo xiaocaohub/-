@@ -83,6 +83,7 @@ class Show extends React.Component {
             })
         })
     }
+    
     getCartListFn = (selectId)=> {
         let orderFlag = this.state.orderFlag;
         this.setState({
@@ -235,12 +236,15 @@ class Show extends React.Component {
                     })}
                     
                     <ul className="invoice_info_con">
+                 
+                 
                         <li>
-                            <div className="title">期望发货时间</div>  
-                            
+                            <div className="title">期望发货时间</div>             
                             {/* <DatePicker onChange={this.selectDateFn} locale={zhCN} ></DatePicker> */}
                             {/* <input type="date" style={{display:"block",width:"250px",height: "32px", border:"1px solid #d9d9d9"}} onChange={this.selectDateFn} placeholder="请选择日期"/> */}
+                           
                             <Input type="date" value={this.state.date} className="date_con" placeholder="年-月-日" onChange={this.selectDateFn} />
+                        
                         </li>
                         {/* <li>
                             <div className="title">发货说明</div>
