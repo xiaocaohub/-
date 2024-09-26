@@ -194,7 +194,7 @@ class Offline extends React.Component {
             if (res.data.code == 200) {
                 message.success(res.data.message)
                 setTimeout(()=>{
-                    window.location.href = "/pay/over"
+                    window.location.href = "/payover"
                 }, 2000)
             } else {
                 message.error(res.data.message)

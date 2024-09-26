@@ -62,8 +62,10 @@ function Header () {
     } 
     function matchNav () {
         let pathname = window.location.pathname;
-        let pathNameArr = pathname.split("build/");
+        // let pathNameArr = pathname.split("build/");
         
+        let pathNameArr = pathname.split("/");
+   
         let pathNameFirst = pathNameArr[1];
         let pathUrl = "";
         let currentIndex = 0;
@@ -94,7 +96,8 @@ function Header () {
     }
     function searchFn () {
         let  searchValueStr = encodeURIComponent(searchValue);
-        window.location.href = "/build/productroom?keyword=" + searchValueStr;
+        // window.location.href = "/build/productroom?keyword=" + searchValueStr;
+        window.location.href = "/productroom?keyword=" + searchValueStr;
         // window.location.href = "/productroom?keyword=" + searchValue;
     } 
     

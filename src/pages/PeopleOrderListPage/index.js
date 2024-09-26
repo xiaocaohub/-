@@ -6,6 +6,7 @@ import "./index.css";
 
 import {setStorageFn, getStorageFn} from "../../utils/localStorage";
 import request from "../../api/request";
+import requestd from "../../api/requestd";
 import Empty from "../../components/Empty";
 class PeopleOrderListPage extends React.Component {
     constructor (props) {
@@ -163,6 +164,7 @@ class PeopleOrderListPage extends React.Component {
         let token = getStorageFn("token");
         formData.append("api", "app.orderV2.cancelOrder");    
         formData.append("accessId", token);  
+      
         formData.append("storeId", 1);
         formData.append("storeType", 6);
         formData.append("orderParentNo", rowData.nameList.order);  
@@ -214,18 +216,27 @@ class PeopleOrderListPage extends React.Component {
         let  orderParentNo = item.operateText.order;
         let _this = this;
 
-        let formData = new FormData()
+        let formData = new FormData();
         let token = getStorageFn("token");
         formData.append("api", "app.orderV2.export");    
         formData.append("accessId", token);  
         formData.append("storeId", 1);
         formData.append("storeType", 6);
         formData.append("orderParentNo", orderParentNo); 
+
         formData.append("exportType", 1); 
-        request({
-            url: "/api/gw",         
-            method: "POST",    
-            data: formData
+        requestd({
+            url: "/api/gw",    
+
+            method: "POST",
+            data: formData,
+            responseType: 'blob',
+            headers: {
+            //     'Content-disposition': "attachment; filename=数据报表.xlsx",
+               
+                 'Content-Type': "application/x-www-form-urlencoded"
+            }
+            // responseType:'blob'
         }).then((res)=> {
             
             console.log(res)
@@ -361,10 +372,10 @@ class PeopleOrderListPage extends React.Component {
                         <div className="operate_btn_group">
                            
                            
-                            {this.showPayBtnFn(item.orderState) && <Link to="/pay/over" className="btn"> 去付款 </Link>} 
+                            {this.showPayBtnFn(item.orderState) && <Link to="/payover" className="btn"> 去付款 </Link>} 
                             <div className="btn"><Link to={ "/people/order/detail/" + item.operateText.order }>订单详情</Link></div> 
-                            <div className="btn" onClick={()=>{ this.exportOrderFn(item) }}>导出订单</div><br/>
-                            {/* <div className="btn">再次购买</div><br/> */}
+                            <div className="btn" onClick={()=>{ this.exportOrderFn(item) }}>导出订单</div>
+                            {/* <div className="btn">再次购买</div> */}
                             
                             {this.showCancelBrnFn(item.orderState) && <div className="btn" onClick={()=>{this.cancelOrderFn(item)}}>取消订单 </div>}
                         

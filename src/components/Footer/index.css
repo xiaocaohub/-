@@ -120,9 +120,11 @@
 }
 .footer_con  .copy .copy_number{
     color:#999;
-    margin-right:29px;
     margin-left:10px;
     text-decoration: none;
+}
+.footer_con  .copy .copy_number:nth-child(2){
+    margin-right:29px;
 }
 .footer_con  .copy .copy_number:hover{
     color:#C6A189;

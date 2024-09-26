@@ -26,7 +26,7 @@ class Good extends React.Component {
     render () {
         return (
             <div className="recommend_good" id="recommend_good">
-                <Link to={"/productroom/detail/" + this.props.goodInfo.id} target="_blank">
+                <Link to={"/productroomdetail?id=" + this.props.goodInfo.id} target="_blank">
                     {/* <img src={this.props.goodInfo.coverImg} alt="" className="good_img" style={{height: this.state.goodImgHeight + "px"}}/> */}
                     <img src={this.props.goodInfo.coverImg} alt="" className="good_img"/>
                 </Link>

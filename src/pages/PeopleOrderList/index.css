@@ -79,6 +79,5 @@
 }
 .operate_btn_group .btn:hover,
 .operate_btn_group .btn:hover a{
-    color: #C6A189;
     cursor: pointer;
 }

@@ -29,16 +29,15 @@ class Good extends React.Component {
         return (
             
             <div className="series_good" id="product_room_good">
-                {/* <Link to={"/productroomh/detail?id=" + this.props.itemData.id} className="good_img" target="_blank"> */}
-                <Link to={"/productroomdetail?id=" + this.props.itemData.id} className="good_img" target="_blank">
+                <Link to={"/productroom/detail/" + this.props.itemData.id} className="good_img" target="_blank">
                     {/* <img src={this.props.itemData.coverImg} alt=""  style={{height: this.state.goodImgHeight + "px"}}/> */}
                     <img src={this.props.itemData.coverImg} alt=""  />
                 </Link>
                 <div className="text_con">
-
-
                     <div className="txt">{this.props.itemData.product_title}</div>
-                    <div className="price"><span className="unit">￥</span>{parseInt(this.props.itemData.price)}</div>            
+                    <div className="price"><span className="unit">￥</span>{parseInt(this.props.itemData.price)}</div>
+            
+            
                 </div>
                 {/* <ul className="btn_group">
                      <li>       

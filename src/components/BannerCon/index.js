@@ -18,18 +18,18 @@ class BannerCon extends React.Component {
                 {
                     id: 1,
                     src: require("../../assets/banner2.png"),
-                    url: "/series/list/94"
+                    url: "/serieslist?id=94"
                 },
                 {
                     id: 2,
                     src: require("../../assets/banner3.png"),
-                     url: "/series/list/95"
+                     url: "/serieslist?id=95"
                 },
                 {
 
                     id: 3,
                     src: require("../../assets/banner4.png"),
-                     url: "/series/list/96"
+                     url: "/serieslist?id=96"
                 }
             ],
             bannerHeight: 0

@@ -28,7 +28,7 @@ class StyleGood extends React.Component {
         return (
 
             <div className="style_good" id="style_good">
-                <Link to={"/productroom/detail/" + this.props.styleGood.id }>
+                <Link to={"/productroomdetail?id=" + this.props.styleGood.id } target="_blank">
                     {/* <img src={this.props.styleGood.coverImg} alt="" className="good_img" style={{height: this.state.goodImgHeight + "px"}}/> */}
                     <img src={this.props.styleGood.coverImg} alt="" className="good_img" />
                 </Link>

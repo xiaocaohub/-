@@ -18,7 +18,9 @@ class Show extends React.Component {
         super(props)
         this.state = {
             // 系列集
-            brandId: parseInt(props.match.params.id),        
+            // brandId: parseInt(props.match.params.id),    
+            
+            brandId: "",
             goodListArr: [],
             goodList: [],
             brandInfo: "",
@@ -58,6 +60,8 @@ class Show extends React.Component {
         let search = window.location.search;
         let keyword = "";
         let optionIds = this.state.optionIds;
+        let href = window.location.href;
+        let brandId = href.split("id=")[1];
         if (search && search.indexOf("keyword")!=-1) {
             keyword = decodeURIComponent(search.split("keyword=")[1]);
             optionIds.keyword = keyword;
@@ -71,7 +75,8 @@ class Show extends React.Component {
         this.setState({
             // keyword: keyword
             optionIds: optionIds,
-            optionIdsFlag: true
+            optionIdsFlag: true,
+            brandId: brandId
         }, function () {
             this.getGoodListFn()
         })

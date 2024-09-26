@@ -18,6 +18,8 @@ export const setVedioHeightFn = function (wrapDiv) {
 
 
 export const scrollTopFn = function () {
+    console.log("scrollTopFn")
+
     document.body.scrollTop = document.documentElement.scrollTop = 0;
 }
 

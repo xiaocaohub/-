@@ -142,7 +142,7 @@ class HotSelling extends React.Component {
                             <Carousel  afterChange={this.onChange} dots={false}    ref={dom=>{this.img=dom }}>
                                 <div>
                                     <div className="good_item"  id="hot_good">
-                                        <Link to={"/productroom/detail/563"} >   
+                                        <Link to={"/productroomdetail?id=563"}  target="_blank" >   
                                             <img src={hotSellImg1} className="good_img"/> 
                                         </Link>
 
@@ -153,7 +153,7 @@ class HotSelling extends React.Component {
                                     </div>
                             
                                     <div className="good_item"  id="hot_good">
-                                        <Link to={"/productroom/detail/635"} >   
+                                        <Link to={"/productroomdetail?id=635"}  target="_blank">   
                                             <img src={hotSellImg2} className="good_img"/> 
                                         </Link>
 
@@ -164,7 +164,7 @@ class HotSelling extends React.Component {
                                     </div>
 
                                     <div className="good_item"  id="hot_good">
-                                        <Link to={"/productroom/detail/648"} >   
+                                        <Link to={"/productroomdetail?id=648"}  target="_blank">   
                                             <img src={hotSellImg3} className="good_img"/> 
                                         </Link>
 
@@ -176,7 +176,7 @@ class HotSelling extends React.Component {
 
                                     
                                     <div className="good_item"  id="hot_good">
-                                        <Link to={"/productroom/detail/645"} >   
+                                        <Link to={"/productroomdetail?id=645"}  target="_blank">   
                                             <img src={hotSellImg4} className="good_img"/> 
                                         </Link>
 

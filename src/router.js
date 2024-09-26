@@ -38,7 +38,8 @@ class IndexRouter extends React.Component {
       
     
         return (  
-            <BrowserRouter basename="/build">
+            // basename="/build"
+            <BrowserRouter>
                 <App>
                     <Switch>
                 
@@ -60,23 +61,27 @@ class IndexRouter extends React.Component {
                                 <Route path="/shop/info" component={ ShopInfo }></Route>
                             </Shop>
                         }></Route>
-                        <Route path="/" render={
-                          
+                        <Route path="/" render={   
                             ()=><Layout>
                                     <Route path="/" exact component={Home}></Route>
-                                    <Route path="/recommendegood" component={RecommendeGood}></Route>                   
+                                    <Route path="/recommendegood" component={RecommendeGood}></Route> 
+                                    <Route path="/productroomdetail" component={ ProductRoomDetail }></Route>                  
                                     <Route path="/productroom" exact component={ProductRoom}></Route>       
-                                    <Route path="/productroom/detail/:id" component={ ProductRoomDetail }></Route>
+                                    {/* <Route path="/productroom/detail/:id" component={ ProductRoomDetail }></Route> */}
+                                   
                                     <Route path="/series" exact component={SeriesSet}></Route>
-                                    <Route path="/series/list/:id" component={SeriesSetList}></Route> 
+                                    {/* <Route path="/series/list/:id" component={SeriesSetList}></Route>  */}
+                                    <Route path="/serieslist" component={SeriesSetList}></Route> 
                                     <Route path="/artist" exact component={Artist}></Route>
-                                    <Route path="/artist/detail/:id" component={ArtistDetail}></Route
-                                    >
+                                    {/* <Route path="/artist/detail/:id" component={ArtistDetail}></Route
+                                    > */}
+
+                                    <Route path="/artist/detail" component={ArtistDetail}></Route>
                                     <Route path="/cart" component={Cart}></Route>
                                     <Route path="/checkcart" component={CheckCart}></Route>
                                     <Route path="/pay" exact component={Pay}></Route>
                                     <Route path="/us" component={Us}></Route>
-                                    <Route path="/pay/over" component={PayOver}></Route>
+                                    <Route path="/payover" component={PayOver}></Route>
                             
                             </Layout>
                         }></Route>

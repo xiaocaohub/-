@@ -55,8 +55,13 @@ class Show extends React.Component {
         })
     }
     setGoodId = ()=> {
+        console.log("window location")
+        console.log(window.location)
+
+        console.log("window location")
         let url = window.location.href;
         let id = url.split("id=")[1];
+       // let id = this.props.match.params.id;
         let _this = this;
 
         this.setState({

@@ -42,10 +42,10 @@ class Show extends React.Component {
         //this.props.getGoodInfoFn() 
         //this.setGoodInfo()
 
-        this.initFn()
+      //  this.initFn()
         
-        scrollTopFn()
-        this.totalCartGoodCountFn()
+        // scrollTopFn()
+        // this.totalCartGoodCountFn()
     }
     initFn = ()=> {
         let cartArr = getStorageFn("cartArr") || [];
@@ -55,15 +55,20 @@ class Show extends React.Component {
         })
     }
     setGoodId = ()=> {
+        console.log("window location")
+        console.log(window.location)
+
+        console.log("window location")
         let url = window.location.href;
         let id = url.split("id=")[1];
+       // let id = this.props.match.params.id;
         let _this = this;
 
         this.setState({
             goodId: id
         }, function () {
-            this.getGoodInfoFn(id)
-            this.getSameGoodFn()
+            // this.getGoodInfoFn(id)
+            // this.getSameGoodFn()
         })
     } 
     // 设置商品详情
@@ -297,30 +302,33 @@ class Show extends React.Component {
         return (
             <div className="productroom_detail_page">
                 <div>
-               
                     <div className="content_common_width">
-                        {this.state.goodInfo&&<DetailInfo goodDetail={this.state.goodInfo} setSelectGood={this.setSelectGoodFn} addCartFn={this.addCartFn}></DetailInfo>}
-                        {this.state.goodInfoFlag&&<ShowLoading></ShowLoading>}
+
+                        商品详情  -- { this.state.goodId }
+
+
+                        {/* {this.state.goodInfo&&<DetailInfo goodDetail={this.state.goodInfo} setSelectGood={this.setSelectGoodFn} addCartFn={this.addCartFn}></DetailInfo>} */}
+                        {/* {this.state.goodInfoFlag&&<ShowLoading></ShowLoading>} */}
                         <div className="design_same_con">
-            
+{/*             
                             <ul className="nav_list">          
                                 {this.state.designSameNav.map((item, index)=> {
                                     return (<li className={this.state.designCurrentIndex == index?"on":""} onClick={()=>{this.selectSameFn(index)}} key={item.id}>
                                         {item.title}
                                     </li>)
                                 })}
-                            </ul>
+                            </ul> */}
 
                             {/* {this.state.designCurrentIndex == 0 && <Design></Design>} */}
-                            {this.state.designCurrentIndex == 0 &&  this.state.sameGoodArr.length>0 && <SameKind sameGoodArr={this.state.sameGoodArr}></SameKind>}
+                            {/* {this.state.designCurrentIndex == 0 &&  this.state.sameGoodArr.length>0 && <SameKind sameGoodArr={this.state.sameGoodArr}></SameKind>} */}
                         </div>
                     </div>
                     
                 </div>
                 
               
-                {this.state.goodInfo && this.state.currentGood &&<GoodDetail goodDetail={this.state.goodInfo} currentGood={this.state.currentGood}></GoodDetail>}
-                {this.props.state.commonState.showCartFlag && <SmallCart hideSmallCart={this.props.hideSmallCartFn} totalCartGoodCountFn={this.totalCartGoodCountFn}></SmallCart>}
+                {/* {this.state.goodInfo && this.state.currentGood &&<GoodDetail goodDetail={this.state.goodInfo} currentGood={this.state.currentGood}></GoodDetail>}
+                {this.props.state.commonState.showCartFlag && <SmallCart hideSmallCart={this.props.hideSmallCartFn} totalCartGoodCountFn={this.totalCartGoodCountFn}></SmallCart>} */}
             </div>
         )
     }
