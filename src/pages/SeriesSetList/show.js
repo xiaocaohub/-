@@ -13,6 +13,8 @@ import EmptyPage from "../../components/Empty";
 import "./index.css";
 
 import zh_CN from 'antd/es/locale/zh_CN';
+
+import ShowLoading from "../../components/Loading";
 class Show extends React.Component {
     constructor (props) {
         super(props)
@@ -36,27 +38,25 @@ class Show extends React.Component {
                 sortCriteria: "",
                 spaceId: "",
                 spacePname: "",
-
-                spaceSid: "",
-                
-                
+                spaceSid: "",        
                 productClass: "",
                 styleId: "",
+                
                 stylePname: "",
+
                 keyword: ""
             },
-            optionIdsFlag: false
+            optionIdsFlag: false,
+            loadingFlag: false
         }
     }
     componentDidMount () {
+        this.props.setNavIndexFn()
         this.init()
         this.getGoodListFn()
         this.totalCartGoodCountFn()
     }
     init = ()=> {
-        console.log("window.location")
-        console.log(window.location)
-        console.log("window.location")
         let search = window.location.search;
         let keyword = "";
         let optionIds = this.state.optionIds;
@@ -73,66 +73,17 @@ class Show extends React.Component {
         }
         
         this.setState({
-            // keyword: keyword
             optionIds: optionIds,
             optionIdsFlag: true,
-            brandId: brandId
+            brandId: brandId,
+            loadingFlag: true
         }, function () {
             this.getGoodListFn()
         })
     }
-    // getGoodListFn = (optionIds)=> {
-    //     let formData = new FormData();
-    //     let option = {"brandId":"","minPrice":"","maxPrice":""};
-    //     let storeId = getStorageFn("storeId") || 1;
-
-    //     let storeType = getStorageFn("storeType") || 6;
-    //     let productClass = "";
-
-    //     let styleId = "";
-    //     if (optionIds) {
-    //         if (optionIds.spaceSid && optionIds.spaceId) {
-    //             productClass = "-" + optionIds.spaceSid + "-" + optionIds.spaceId + "-";
-    //         }
-    //         if (optionIds.categoryId) {
-    //             productClass += optionIds.categoryId + "-";
-    //         }
-    //         if (optionIds.styleId) {
-    //             styleId = optionIds.styleId;
-    //         }
-    //     }
-    //     formData.append("api", "app.product.listProduct");
-    //     formData.append("storeId", storeId);
-    //     formData.append("storeType", storeType);
-    //     formData.append("page", this.state.currentPage);
-    //     formData.append("pageSize", this.state.pageSize);   
-    //     formData.append("brandId", this.state.brandId);
-    //     formData.append("productClass", productClass);
-    //     formData.append("styleIds",  styleId);
-
-    //     formData.append("sortCriteria", "");        
-    //     formData.append("queryCriteria",  JSON.stringify(option));
-    //     formData.append("sort", "");
-    //     request({
-    //         url: "/api/gw",
-    //         method: "POST",
-    //         data: formData
-    //     }).then((res)=> {
-    //         let resData =  res.data.data;
-    //         let goodList = resData.goodsList;    
-    //         let brandInfo = resData.brandInfo;
-    //         let total = resData.total;
-    //         this.setState({
-    //             brandInfo: brandInfo,
-    //             goodList: goodList,
-    //             total: total
-    //         })
-    //     })
-    // }
     getGoodListFn = (option)=> {
         let productClass = "";
         let optionIds = this.state.optionIds;
-
         if (option) {
             if (option.spaceSid && option.spaceId) {
                 productClass = "-" + option.spaceSid + "-" + option.spaceId + "-";
@@ -156,13 +107,12 @@ class Show extends React.Component {
     requestGoodListFn = ()=> {
         let optionIds = this.state.optionIds;
         let formData = new FormData();
-
         let option = {"brandId":"","minPrice":"","maxPrice":""};
         let storeId = getStorageFn("storeId") || 1;       
         let storeType = getStorageFn("storeType") || 6;
-   
         formData.append("api", "app.product.listProduct");
         formData.append("storeId", storeId);
+
         formData.append("storeType", storeType);
         formData.append("page", this.state.currentPage);
         formData.append("pageSize", this.state.pageSize);   
@@ -184,14 +134,12 @@ class Show extends React.Component {
             let goodList = resData.goodsList;   
             let brandInfo = resData.brandInfo; 
             let total = resData.total;
-            console.log("brandInfo brandInfo")
-            console.log(resData)
-            console.log("brandInfo brandInfo")
             this.setState({
                 brandInfo: brandInfo,
                 goodList: goodList,
                 total: total,
-                goodInfo: resData
+                goodInfo: resData,
+                loadingFlag: false
             })
         })
     }
@@ -211,8 +159,8 @@ class Show extends React.Component {
         }).then((res)=> {
             let resData = res.data.data.data;
             _this.setState({
+
                 cartArr: resData
-        
             },function () {
                 let cartArr = _this.state.cartArr;
                 let length = cartArr.length;
@@ -234,9 +182,6 @@ class Show extends React.Component {
                             <div className="btn">在售商品{this.state.total}款</div>
                         </div>
                     </div>
-                    
-      
-
 
                     {this.state.optionIdsFlag && <GoodNav getGoodListFn={this.getGoodListFn} total={this.state.total} optionIds={this.state.optionIds}></GoodNav>}
                     <div className="good_list">
@@ -247,8 +192,7 @@ class Show extends React.Component {
                         })}
                     </div>
 
-                    {this.state.goodList.length==0 && <EmptyPage></EmptyPage>}
-                    {/* <Pagination showQuickJumper defaultCurrent={1} total={this.state.total} className="page"/> */}
+                    {this.state.goodList.length==0 && <EmptyPage></EmptyPage>}        
                     <ConfigProvider locale={zh_CN}>
                         <Pagination
                             className="page"
@@ -259,7 +203,6 @@ class Show extends React.Component {
                             showQuickJumper
                             pageSize={this.state.pageSize}
                             current={this.state.currentPage}
-                            // showTotal={totalCount => "总条数" + this.state.total + "条"}
                             onChange={(params, state) => {
                                 this.setState({
                                     currentPage: params
@@ -276,11 +219,9 @@ class Show extends React.Component {
                     </ConfigProvider>
                 </div>
                 {this.props.state.commonState.showCartFlag && <SmallCart hideSmallCart={this.props.hideSmallCartFn} totalCartGoodCountFn={this.totalCartGoodCountFn}></SmallCart>}
+                {this.state.loadingFlag && <ShowLoading></ShowLoading>}
             </div>
         )
     }
 }
-
-
-
 export default Show;

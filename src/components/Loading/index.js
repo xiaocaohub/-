@@ -9,7 +9,7 @@ class ShowLoading extends React.Component {
             <div className="show_loading_page">
                 
                 <div className="shadow"></div>
-                <Spin /></div>
+                <Spin className="load_icon" size="large" /></div>
         )
     }
 }

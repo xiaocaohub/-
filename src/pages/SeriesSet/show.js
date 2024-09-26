@@ -12,35 +12,38 @@ import SmallCart from "../../components/SmallCart";
 import Good from "../../components/SeriesSet/Good";
 import {scrollTopFn} from "../../utils/imgAuto";
 import request from "../../api/request";
- 
+import ShowLoading from "../../components/Loading";
+
 class Show extends React.Component {
     constructor (props) {
         super(props)
         this.state = {
-            // navArr: [
-            //     {id: 0,title: "全部"}
-            // ],
             styleNav: [
-
                 {id: 0, text:"全部", value: 0}
             ],
             styleIndex: 0,
             styleId: 0,
-            styleGoodArr: []
+
+            styleGoodArr: [],
+            loadingFlag: false
         }
     }
     componentDidMount () {
         scrollTopFn()
         this.getStyleFn()
         this.totalCartGoodCountFn()
+        this.setState({
+            
+            loadingFlag: true
+        })
     }
     getStyleFn = ()=> {
-     
-     
         let formData = new FormData();
         let storeId = getStorageFn("storeId") || 1;
         let storeType = getStorageFn("storeType") || 6;
+
         formData.append("api", "saas.dic.getDictionaryInfo");
+        
         formData.append("storeId", storeId);
         formData.append("storeType", storeType);
         formData.append("page", 1);
@@ -50,15 +53,18 @@ class Show extends React.Component {
         formData.append("pageSize", 10);
         getStyleApi(formData).then((res)=>{  
             let styleArr = res.data.data.list;
-            // let styleId = styleArr[0].value;
+            
             let item = {id: 0, text:"全部", value: ""};
             styleArr.unshift(item);
             let styleId = "";
+          
             this.setState({
                 styleNav: styleArr,
-                styleId: styleId
+                styleId: styleId,
+                loadingFlag: false
             }, function () {
-               this.getStyleGoodArrFn()
+          
+                this.getStyleGoodArrFn()
             })
         })
     }
@@ -158,6 +164,8 @@ class Show extends React.Component {
             
 
                 {this.props.state.commonState.showCartFlag && <SmallCart hideSmallCart={this.props.hideSmallCartFn} totalCartGoodCountFn={this.totalCartGoodCountFn}></SmallCart>}
+                {this.state.loadingFlag && <ShowLoading></ShowLoading>}
+      
             </div>
         )
     }

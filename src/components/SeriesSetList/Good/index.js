@@ -38,8 +38,8 @@ class Good extends React.Component {
 
 
                 <ul className="btn_group">
-                    <li className="item_btn"><Link to={"/series/list/" + this.props.goodItem.brand_id} target="_blank">进入系列集</Link></li>  
-                    <li className="item_btn"><Link to={"/productroom/detail/" + this.props.goodItem.id} target="_blank">立即购买</Link></li> 
+                    <li className="item_btn"><Link to={"/serieslist?id=" + this.props.goodItem.brand_id} target="_blank">进入系列集</Link></li>  
+                    <li className="item_btn"><Link to={"/productroomdetail?id=" + this.props.goodItem.id} target="_blank">立即购买</Link></li> 
                 </ul>  
             </div>
         )

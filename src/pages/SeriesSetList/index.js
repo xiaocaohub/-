@@ -1,8 +1,9 @@
 import {connect} from "react-redux";
 import Show from "./show";
-let mapStateToProps = state=> {
+import {CHANGE_NAV_INDEX} from "../../actionType/common";
 
-    console.log("state", state)
+let mapStateToProps = state=> {
+ 
     return {
         state: {
             commonState: state.commonState
@@ -12,7 +13,11 @@ let mapStateToProps = state=> {
 
 
 let mapDispatchToProps = dispatch=> {
+
     return {
+        setNavIndexFn () {
+            dispatch({type:CHANGE_NAV_INDEX, payload: 3})
+        },
         hideSmallCartFn () {
             dispatch({type:"show_small_cart", payload: false})
         },

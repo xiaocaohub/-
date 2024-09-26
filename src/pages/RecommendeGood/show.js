@@ -10,10 +10,12 @@ import request from "../../api/request";
 import {getGoodInfoApi} from "../../api/RecommendeGood";
 import SmallCart from "../../components/SmallCart";
 import {scrollTopFn} from "../../utils/imgAuto";
+
+import ShowLoading from "../../components/Loading";
 class Show extends React.Component {
+
     constructor (props) {
         super(props)
-
         this.state = {
             roomList: [
                 {
@@ -30,13 +32,11 @@ class Show extends React.Component {
                 },
                 {
                     id: 2,
-
                     imgSrc: require("../../assets/room_list_3.png"),
                     title: "卧房区",
                     txt: "DINING AREA"
                 }
             ],
-
             roomBannerArr: [
                 {
                     id: 0,
@@ -63,8 +63,10 @@ class Show extends React.Component {
                 }
             ],
             roomFirstArr: "",
+            
             roomTwoArr: "",
-            roomThreeArr: ""
+            roomThreeArr: "",
+            loadingFlag: false
         }
     }
     componentDidMount () {
@@ -73,6 +75,9 @@ class Show extends React.Component {
         this.getGoodInfoTwoFn()
         this.getGoodInfoThreeFn()
         this.totalCartGoodCountFn()
+        this.setState({
+            loadingFlag: false
+        })
     }
     getGoodInfoFn = ()=> {
         let formData = new FormData();
@@ -92,7 +97,8 @@ class Show extends React.Component {
         getGoodInfoApi(formData).then((res)=>{
             let goodArr = res.data.data.goodsList;
             this.setState({
-                roomFirstArr: goodArr
+                roomFirstArr: goodArr,
+                loadingFlag: false
             })
         })
     }
@@ -172,7 +178,7 @@ class Show extends React.Component {
         return (
             <div className="recommende_good_con">
                 <div className="banner">      
-                    <img src={banner1} alt="" onClick={()=>{this.getGoodInfoFn()}}/>  
+                    <img src={banner1} alt="" />  
                 </div>
 
            
@@ -229,6 +235,9 @@ class Show extends React.Component {
                 
                 </div>
                 {this.props.state.commonState.showCartFlag && <SmallCart hideSmallCart={this.props.hideSmallCartFn} totalCartGoodCountFn={this.totalCartGoodCountFn}></SmallCart>}
+         
+         
+                {this.state.loadingFlag && <ShowLoading></ShowLoading>}
             </div>
         )
     }

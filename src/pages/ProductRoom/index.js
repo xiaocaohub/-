@@ -15,14 +15,14 @@ var mapDispatchToProps = (dispatch)=> {
         // 统计购物车数量
         
         totalCartGoodCountFn (goodCount) {
-            console.log("totalCartGoodCountFn")
-            console.log(goodCount)
-
+            // console.log("totalCartGoodCountFn")
+            // console.log(goodCount)
             dispatch({type:"change_good_count", payload: goodCount})
         }
     }
 }
 
 const ProductRoom = connect(mapStateToProps, mapDispatchToProps)(Show);
+
 export default ProductRoom;
 

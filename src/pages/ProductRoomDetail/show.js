@@ -12,6 +12,8 @@ import "./index.css";
 import request from "../../api/request";
 import {setStorageFn, getStorageFn} from "../../utils/localStorage";
 import {scrollTopFn} from "../../utils/imgAuto";
+
+
 class Show extends React.Component {
 
     constructor (props) {
@@ -34,24 +36,24 @@ class Show extends React.Component {
             cartArr: [],
             addCartFlag: true,  // 防止多次点击
 
-            sameGoodArr: []
+
+            sameGoodArr: [],
+            loadingFlag: false
         }    
     }
     componentDidMount () {
         this.setGoodId()   
-        //this.props.getGoodInfoFn() 
-        //this.setGoodInfo()
 
-        this.initFn()
-        
+        this.initFn()        
         scrollTopFn()
         this.totalCartGoodCountFn()
     }
     initFn = ()=> {
         let cartArr = getStorageFn("cartArr") || [];
-
+        this.props.setNavIndexFn()
         this.setState({
-            cartArr: cartArr
+            cartArr: cartArr,
+            loadingFlag: true
         })
     }
     setGoodId = ()=> {
@@ -95,7 +97,8 @@ class Show extends React.Component {
             // console.log(resData)
             // console.log("resData goodInfo")
             _this.setState({
-                goodInfo: resData
+                goodInfo: resData,
+                loadingFlag: false
             })
         })
     }
@@ -321,6 +324,8 @@ class Show extends React.Component {
               
                 {this.state.goodInfo && this.state.currentGood &&<GoodDetail goodDetail={this.state.goodInfo} currentGood={this.state.currentGood}></GoodDetail>}
                 {this.props.state.commonState.showCartFlag && <SmallCart hideSmallCart={this.props.hideSmallCartFn} totalCartGoodCountFn={this.totalCartGoodCountFn}></SmallCart>}
+         
+                {this.state.loadingFlag && <ShowLoading></ShowLoading>}
             </div>
         )
     }

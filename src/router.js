@@ -42,7 +42,6 @@ class IndexRouter extends React.Component {
             <BrowserRouter>
                 <App>
                     <Switch>
-                
                         <Route path="/login" component={Login}></Route>
                         
                         <Route path="/register" component={Register}></Route>        

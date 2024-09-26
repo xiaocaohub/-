@@ -1,11 +1,12 @@
-import {CHECK_SUPPLY_PRICE, SWITCH_SUPPLY_PRICE} from "../actionType/common";
+import {CHECK_SUPPLY_PRICE, SWITCH_SUPPLY_PRICE, CHANGE_NAV_INDEX} from "../actionType/common";
 let defaultState = {
     showCartFlag: false, // 显示小购物车
 
     showSupplyPriceFlag: false, // 显示供货价弹窗
     
     showSupplyPriceSwitchFlag: false, // 显示供货价查看弹窗
-    goodCount: 0 // 购物车数量
+    goodCount: 0, // 购物车数量
+    navIndex: 0  // 导航
 }
 function commonReducer (state = defaultState, action) {
 
@@ -40,6 +41,12 @@ function commonReducer (state = defaultState, action) {
     if (type == SWITCH_SUPPLY_PRICE) {
         let newState = JSON.parse(JSON.stringify(state));
         newState.showSupplyPriceSwitchFlag = payload;
+        return newState;
+    }
+
+    if (type == CHANGE_NAV_INDEX) {
+        let newState = JSON.parse(JSON.stringify(state));
+        newState.navIndex = payload;
         return newState;
     }
     return state;

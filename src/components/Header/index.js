@@ -28,11 +28,17 @@ function Header () {
     let [searchValue, setSearchValueFn] = useState("");
     const history = useHistory();
     const storeData = useSelector(state=>state)
+    console.log("storeData storeData")
+    console.log(storeData)
+    console.log("storeData storeData")
     useEffect(()=>{
         getGoodListFn()
         getUserInfoFn()
-        matchNav()
-    }, [storeData.commonState.goodCount, window.location.href])
+        // matchNav()
+
+
+        getNavIndexFn()
+    }, [storeData.commonState.goodCount, storeData.commonState.navIndex])
 
 
 
@@ -60,6 +66,12 @@ function Header () {
         
         }, 2000)
     } 
+
+    function getNavIndexFn () {
+        let navIndex = storeData.commonState.navIndex;
+
+        setIndexFn(navIndex)
+    }
     function matchNav () {
         let pathname = window.location.pathname;
         // let pathNameArr = pathname.split("build/");

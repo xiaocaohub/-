@@ -4,6 +4,7 @@ import {getGoodInfoAction} from "../../actions/ProductRoomDetail";
 
 import {setStorageFn, getStorageFn} from "../../utils/localStorage";
 
+import {CHANGE_NAV_INDEX} from "../../actionType/common";
 let mapStateToProps = state=> {
     // console.log("mapState detail")
     // console.log(state)
@@ -18,6 +19,11 @@ let mapStateToProps = state=> {
 
 let mapDispatchToProps = dispatch=> {
     return {
+
+        setNavIndexFn () {
+            dispatch({type:CHANGE_NAV_INDEX, payload: 2})
+        },
+        
         getGoodInfoFn (goodId) {
             let _this = this;    
             let formData = new FormData();

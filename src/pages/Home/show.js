@@ -24,7 +24,7 @@ import titleImg  from "../../assets/index_title.png";
 import titleImg2 from "../../assets/index_title2.png";
 import EmptyPage from "../../components/Empty";
 
-
+import ShowLoading from "../../components/Loading";
  
 class Show extends React.Component {
     constructor (props) {
@@ -41,7 +41,10 @@ class Show extends React.Component {
             styleGoodArr: [],
             showCartFlag: false, // 全局
             hotSellArr: [], // 热销爆款
-            recomendGoodArr: [] // 品推荐
+
+            recomendGoodArr: [], // 品推荐
+
+            loadingFlag: false
         }
     }
     componentDidMount () {
@@ -50,7 +53,11 @@ class Show extends React.Component {
         this.getStyleFn()
         scrollTopFn()
         this.getCartInfoFn()
+
         this.totalCartGoodCountFn()
+        this.setState({
+            loadingFlag: false
+        })
     }
     // 热销爆款
 
@@ -68,7 +75,8 @@ class Show extends React.Component {
         homeInfoApi(formData).then((res)=>{
             let hotSellArr = res.data.data.goodsList;   
             this.setState({
-                hotSellArr: hotSellArr
+                hotSellArr: hotSellArr,
+                loadingFlag: false
             })
         })
     }
@@ -269,7 +277,7 @@ class Show extends React.Component {
                 
                 {this.props.state.commonState.showCartFlag && <SmallCart hideSmallCart={this.props.hideSmallCartFn} totalCartGoodCountFn={this.totalCartGoodCountFn}></SmallCart>}
           
-           
+                {this.state.loadingFlag && <ShowLoading></ShowLoading>}
             </div>
         )
     }
