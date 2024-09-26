@@ -325,7 +325,7 @@ class Show extends React.Component {
                 {this.state.goodInfo && this.state.currentGood &&<GoodDetail goodDetail={this.state.goodInfo} currentGood={this.state.currentGood}></GoodDetail>}
                 {this.props.state.commonState.showCartFlag && <SmallCart hideSmallCart={this.props.hideSmallCartFn} totalCartGoodCountFn={this.totalCartGoodCountFn}></SmallCart>}
          
-                {this.state.loadingFlag && <ShowLoading></ShowLoading>}
+                {/* {this.state.loadingFlag && <ShowLoading></ShowLoading>} */}
             </div>
         )
     }

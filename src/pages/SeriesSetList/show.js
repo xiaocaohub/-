@@ -219,7 +219,8 @@ class Show extends React.Component {
                     </ConfigProvider>
                 </div>
                 {this.props.state.commonState.showCartFlag && <SmallCart hideSmallCart={this.props.hideSmallCartFn} totalCartGoodCountFn={this.totalCartGoodCountFn}></SmallCart>}
-                {this.state.loadingFlag && <ShowLoading></ShowLoading>}
+    
+                {/* {this.state.loadingFlag && <ShowLoading></ShowLoading>} */}
             </div>
         )
     }

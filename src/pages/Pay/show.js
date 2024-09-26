@@ -49,7 +49,7 @@ class Pay extends React.Component {
 
         let _this = this;
         var curTime=new Date();
-        var endTime=new Date("2024/9/14, 0:20:0");
+        var endTime=new Date("2024/10/4, 0:20:0");
        
         var leftTime=parseInt((endTime.getTime()-curTime.getTime())/1000);
         var d=parseInt(leftTime/(60*60*24));
@@ -58,7 +58,7 @@ class Pay extends React.Component {
         var s=parseInt(leftTime%60);
         let dateText = d + "天" + h + "时" + m + "分" + s + "秒";
         if(leftTime <= 0) {
-            dateText = "未支付";
+            dateText = "支付时间";
         }
 
 

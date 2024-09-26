@@ -93,7 +93,6 @@ class PeopleOrderDetail extends React.Component {
             })
         })
     }
-
     orderStatusFn = (status)=> {
         switch (status) {
             case 0:
@@ -112,12 +111,11 @@ class PeopleOrderDetail extends React.Component {
                 return "已发货";
                 break;
             case 5:
+                return "待收货";
+                break;  
+            case 6:
                 return "已完成";
                 break;
-            
-            case 6:
-                return "已退款";
-                break ;
         }
     } 
     showCancelBrnFn = (status)=> {
@@ -184,29 +182,8 @@ class PeopleOrderDetail extends React.Component {
         return (
             <div className="people_order_detail">    
                 
-                {/* <div className="step_con">
-                    {this.state.orderInfo.status==0 && <Steps current={this.state.orderInfo.status}> 
-                        <Step title="已取消" description="" />  
-                    </Steps>}
-                    
-                    {this.state.orderInfo.status>1 && <Steps current={this.state.orderInfo.status - 1}> 
-                        <Step title="提交订单" description="" />
-                        <Step title="待付款" description="" />
-                        <Step title="审核中" description="" />
-                        <Step title="配货中" description="" />
-                        <Step title="已发货" description="" />
-                        <Step title="待收货" description="" />
-                        <Step title="已完成" description="" />
-                    </Steps>}
-                </div> */}
-
                 <div className="step_con">
-{/*                 
-                    {this.state.orderInfo.status==0 && <Steps current={this.state.orderInfo.status}> 
-                        <Step title="已取消" description="" />  
-                    </Steps>} */}
-                    
-                    {<Steps current={ this.state.orderInfo.status + 1 }> 
+                    {this.state.orderInfo.status>0 && <Steps current={ this.state.orderInfo.status  }> 
                         <Step title="提交订单" description="" />
                         <Step title="待付款" description="" />
                         <Step title="审核中" description="" />
@@ -216,7 +193,6 @@ class PeopleOrderDetail extends React.Component {
                         <Step title="已完成" description="" />
                     </Steps>}
                 </div>
-
 
                 <ul className="order_dedtail_con">                    
                     <li>
@@ -232,7 +208,7 @@ class PeopleOrderDetail extends React.Component {
                         </ul>
 
                         <div className="operate_btn_list">
-                            {this.showPayBtnFn(this.state.orderInfo.status) && <Link to="/payover" className="btn">去付款</Link>}
+                            {this.showPayBtnFn(this.state.orderInfo.status) && <Link to="/pay" className="btn">去付款</Link>}
                             {this.showCancelBrnFn(this.state.orderInfo.status) && <div className="btn" onClick={this.cancelOrderFn}>取消订单</div>}
 
                             {/* <div className="btn">导出订单</div> */}
@@ -276,7 +252,7 @@ class PeopleOrderDetail extends React.Component {
 
                             {/* <li><span className="tit">商品税额:</span> ¥ {this.state.orderInfo.taxation}</li> */}
                             <li><span className="tit">应付总额:</span> ¥ { this.state.orderInfo.payPrice }</li>
-                            <li><span className="tit">付款时间:</span> {this.state.orderInfo.offlinePayTime} </li>
+                            <li><span className="tit">付款时间:</span> {this.state.orderInfo.offlinePayTime?this.state.orderInfo.offlinePayTime:"--"} </li>
                             <li><span className="tit">付款方式:</span>  线下汇款 </li>
                         </ul>
                     </li>
@@ -305,44 +281,43 @@ class PeopleOrderDetail extends React.Component {
                                     <div className="good_info">商品信息</div>
                                     <div className="size">规格</div>
                                     <div className="vol">体积(m³)</div>
-                                    {/* <div className="price">销售单价(元)</div> */}
                                     
                                     {this.state.userInfo.roleId && <div className="price"> 供货单价 (元)</div>}
                                     {!this.state.userInfo.roleId && this.state.supplyPriceStatusValue != null && this.state.supplyPriceStatusValue==1 && <div className="price"> 供货单价 (元)</div>}
                                     {!this.state.userInfo.roleId && this.state.supplyPriceStatusValue != null && this.state.supplyPriceStatusValue=="" && <div className="price">销售单价(元)</div>}
                                     <div className="count">数量</div>
-
                                     {/* <div className="return_goods_count">退货数量</div> */}
                                     <div className="total_money">合计金额(元)</div>
                                     <div className="status">状态</div>
                                 </div>
         
+
                                 <ul className="good_list">
-                              
-        
                                     {orderItem.details.length>0 && orderItem.details.map((goodItem, i)=> {
                                         return (
                                             <li>
                                                 <div className="good_info">
                                                     <img src={ goodItem.imgurl } alt="" className="good_img"/>                                        
                                                     <div className="text_con">
-
                                                         <div className="tit">{goodItem.productName}</div>
-                                                        
-                                                        
                                                         <p className="txt">编码: {goodItem.productCode} </p>
+                                                        
                                                         <p className="txt">型号: {goodItem.marque}</p>
+                                                    
+                                                    
                                                     </div>
                                                 </div>
                                                 <div className="size"><span>{goodItem.attribute}</span></div>
                                                 <div className="vol">{ goodItem.totalVolume }</div>
-                
                                                 <div className="price">{goodItem.supplierPrice}</div>
-
                                                 <div className="count">{ goodItem.num }</div>
+
                                                 {/* <div className="return_goods_count">1</div> */}
+
                                                 <div className="total_money">{ goodItem.totalSupplierPrice }</div>
-                                                <div className="status">{this.orderStatusFn(goodItem.status)}</div>
+
+
+                                                <div className="status">{this.orderStatusFn(goodItem.status)}  </div>
                                             </li>
                                         )
                                     })}  

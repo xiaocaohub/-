@@ -22,33 +22,37 @@ class PeopleOrderListPage extends React.Component {
                 },
                 {
                   id: 1,
-                //   title: "待付款",
-                  title: "待确认",
-                  
+                  title: "待付款",
+              
                   status: 1
                 },
                 {
-                  id: 2,
+
+                    id: 2,
+                    title: "待确认",
+                    status: 2
+                },
+                {
+
+                  id: 3,
+                  
+                  
                   title: "配货中",
                   status: 3
                 },
-               
                 {
-                  id: 3,
+                  id: 4,
                   title: "已发货",
                   status: 4
                 },
-
                 {
-                
-                  id: 4,
+                  id: 5,
                   title: "已完成",
                   status: 5
                 },
                 {
-                  id: 5,
-                  title: "已取消",
-                  
+                   id: 6,
+                   title: "已取消",
                    status: 0
                 }
             ],
@@ -98,15 +102,12 @@ class PeopleOrderListPage extends React.Component {
             method: "POST",    
             data: formData
         }).then((res)=> {
-            // console.log("res order")
-            // console.log(res)
-            // console.log("res order")
             let resData = res.data.data;
             let resOrderArr = resData.records;
             let totalCount = resData.total;
             let orderArr = [];
-            // console.log(resOrderArr)
             resOrderArr.forEach((item, index)=> {
+
                 let orderItem = {
                       key: index,
                       nameList: {
@@ -211,8 +212,6 @@ class PeopleOrderListPage extends React.Component {
         }
     }
     exportOrderFn = (item)=> {
-        // console.log(item)
-
         let  orderParentNo = item.operateText.order;
         let _this = this;
 
@@ -372,9 +371,9 @@ class PeopleOrderListPage extends React.Component {
                         <div className="operate_btn_group">
                            
                            
-                            {this.showPayBtnFn(item.orderState) && <Link to="/payover" className="btn"> 去付款 </Link>} 
+                            {this.showPayBtnFn(item.orderState) && <Link to="/pay" className="btn"> 去付款 </Link>} 
                             <div className="btn"><Link to={ "/people/order/detail/" + item.operateText.order }>订单详情</Link></div> 
-                            <div className="btn" onClick={()=>{ this.exportOrderFn(item) }}>导出订单</div>
+                            {/* <div className="btn" onClick={()=>{ this.exportOrderFn(item) }}>导出订单</div> */}
                             {/* <div className="btn">再次购买</div> */}
                             
                             {this.showCancelBrnFn(item.orderState) && <div className="btn" onClick={()=>{this.cancelOrderFn(item)}}>取消订单 </div>}
