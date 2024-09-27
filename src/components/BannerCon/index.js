@@ -11,25 +11,41 @@ class BannerCon extends React.Component {
             bannerList: [
                 {
                     id: 0,
-                    src: require("../../assets/banner1.png"),
+                    // src: require("../../assets/banner1.png"),
+                    src: "https://luockoo.oss-cn-shenzhen.aliyuncs.com/file/banner_01.jpg",
+                    
+                    // https://luockoo.oss-cn-shenzhen.aliyuncs.com/file/hwyl.png,
+                    
+                    // https://luockoo.oss-cn-shenzhen.aliyuncs.com/file/luockoo_home.png,
+                    
+                    // https://luockoo.oss-cn-shenzhen.aliyuncs.com/file/rexiao_1.png,
+                    // https://luockoo.oss-cn-shenzhen.aliyuncs.com/file/rexiao_2.png,
+                    // https://luockoo.oss-cn-shenzhen.aliyuncs.com/file/rexiao_3.png,
+                    // https://luockoo.oss-cn-shenzhen.aliyuncs.com/file/rexiao_04.png,
+                    // https://luockoo.oss-cn-shenzhen.aliyuncs.com/file/rxbk.png,
+                    // https://luockoo.oss-cn-shenzhen.aliyuncs.com/file/xhsf.png,
+                    // https://luockoo.oss-cn-shenzhen.aliyuncs.com/file/xptj.png,
+                    // https://luockoo.oss-cn-shenzhen.aliyuncs.com/file/xpyl.png"
+                    
+                    
                     url: "/us"
                 },
-
                 {
                     id: 1,
-                    src: require("../../assets/banner2.png"),
+                    src: "https://luockoo.oss-cn-shenzhen.aliyuncs.com/file/banner_02.jpg",
                     url: "/serieslist?id=94"
                 },
                 {
                     id: 2,
-                    src: require("../../assets/banner3.png"),
+                    src: "https://luockoo.oss-cn-shenzhen.aliyuncs.com/file/banner_03.jpg",
                      url: "/serieslist?id=95"
                 },
                 {
 
                     id: 3,
-                    src: require("../../assets/banner4.png"),
-                     url: "/serieslist?id=96"
+
+                    src: "https://luockoo.oss-cn-shenzhen.aliyuncs.com/file/banner_04.jpg",
+                    url: "/serieslist?id=96"
                 }
             ],
             bannerHeight: 0

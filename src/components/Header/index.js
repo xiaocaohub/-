@@ -133,7 +133,7 @@ function Header () {
                         <div className="header_img">
                             <div className="phone">{userInfo.phone}</div>
                             <ul className="btn_group">
-                                <li><Link to="/people/order/list">会员后台</Link></li>
+                                <li><Link to="/people_order_list">会员后台</Link></li>
 
                                 {userInfo.roleId && <li onClick={checkSupplyPriceFn}>查看供货价</li> }
                                

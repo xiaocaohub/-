@@ -369,6 +369,8 @@ class CartSmall extends React.Component {
             message.error("请选择商品")
             return  ;
         }
+
+        this.props.hideSmallCart()
         window.location.href = "/cart"; 
     }  
     exportCartFn = ()=> {

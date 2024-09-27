@@ -7,8 +7,6 @@ import goodImg from "../../assets/recomend_good1.png";
 import {setStorageFn, getStorageFn} from "../../utils/localStorage";
 
 import request from "../../api/request";
-
-import Header from "../../components/People/Header";
 import "./index.css";
 
 const { Step } = Steps;
@@ -23,20 +21,7 @@ class PeopleOrderDetail extends React.Component {
             supplyPriceStatus: false,
             
             supplyPriceStatusValue: null,
-            userInfo: "",
-            menuList: [
-                {
-                    id: 0,
-                    title: "订单列表",
-                    path: "/people_order_list"
-                }
-                // {
-                //     id: 1,
-                //     title: "定制订单",
-                //     path: "/people/order/list"
-                // }
-            ],
-            navIndex: 0
+            userInfo: ""
         }
     }
     componentDidMount () {
@@ -44,12 +29,6 @@ class PeopleOrderDetail extends React.Component {
        this.initFn()
     }
 
-    selectNavFn = (index)=> {
-     
-        this.setState({
-            navIndex: index
-        })
-    }
     initFn = ()=> {
         let supplyPriceStatus = getStorageFn("supplyPriceStatus");
         let supplyPriceStatusValue = "";
@@ -72,7 +51,7 @@ class PeopleOrderDetail extends React.Component {
         })
     }
     getOrderNumberFn = ()=> {
-        let orderNumber = window.location.href.split("id=")[1];
+        let orderNumber = window.location.pathname.split("/detail/")[1];
         this.setState({
 
             orderNumber: orderNumber
@@ -117,7 +96,7 @@ class PeopleOrderDetail extends React.Component {
     orderStatusFn = (status)=> {
         switch (status) {
             case 0:
-                return "--";
+                return "已取消";
                 break ;
             case 1: 
                 return "待付款";
@@ -189,7 +168,7 @@ class PeopleOrderDetail extends React.Component {
                     if (res.data.code == 200) {
                         message.success(res.data.message)
                         setTimeout(()=> {
-                            window.location.href = "/people_order_list"; 
+                            window.location.href = "/build/people/order/list"; 
                         }, 2000)
                             
                     } else {
@@ -201,23 +180,7 @@ class PeopleOrderDetail extends React.Component {
     }
     render () {
         return (
-
-            <div className="people_order_list_con">
-                <Header></Header>
-                <div className="people_order_con">
-                    <div className="left_content">
-                        <div className="title"><span>订单管理</span></div>
-                        
-
-                        <ul className="menu_list">        
-                            {this.state.menuList.map((item, index)=> {
-                                return (<li className={this.state.navIndex==index?"on":""} key={index} onClick={()=>{this.selectNavFn(index)}}> <Link to={item.path}>{ item.title }</Link></li>) 
-                            })}
-                        </ul>
-                    </div>
-
-                    <div className="main_content">
-                          <div className="people_order_detail">    
+            <div className="people_order_detail">    
                 
                 <div className="step_con">
                     {this.state.orderInfo.status>0 && <Steps current={ this.state.orderInfo.status  }> 
@@ -235,8 +198,6 @@ class PeopleOrderDetail extends React.Component {
                     <li>
                         <div className="title" onClick={this.getOrderDetialFn}>订单信息 </div>
                         <ul className="order_info_list">
-                         
-                         
                             <li><span className="tit">主订单号:</span> {this.state.orderInfo.orderParentNo}</li>
                             <li><span className="tit">下单时间:</span>  {this.state.orderInfo.createTime}</li>
                             <li><span className="tit">下单账号:</span>  {this.state.orderInfo.userName}  {this.state.orderInfo.userTel}</li>
@@ -356,7 +317,7 @@ class PeopleOrderDetail extends React.Component {
                                                 <div className="total_money">{ goodItem.totalSupplierPrice }</div>
 
 
-                                                <div className="status">{this.orderStatusFn(goodItem.status)} </div>
+                                                <div className="status">{this.orderStatusFn(goodItem.status)}  </div>
                                             </li>
                                         )
                                     })}  
@@ -371,12 +332,6 @@ class PeopleOrderDetail extends React.Component {
                     })}
                 </div>
             </div>
-                    </div>
-                </div>
-                
-            </div>
-
-           
         )
     }
 }

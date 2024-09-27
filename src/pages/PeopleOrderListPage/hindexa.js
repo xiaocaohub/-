@@ -8,26 +8,11 @@ import {setStorageFn, getStorageFn} from "../../utils/localStorage";
 import request from "../../api/request";
 import requestd from "../../api/requestd";
 import Empty from "../../components/Empty";
-import Header from "../../components/People/Header";
 class PeopleOrderListPage extends React.Component {
     constructor (props) {
         super(props)
         this.state = {
-
             currentNavIndex: 0,
-            menuList: [
-                {
-                    id: 0,
-                    title: "订单列表",
-                    path: "/people_order_list"
-                }
-                // {
-                //     id: 1,
-                //     title: "定制订单",
-                //     path: "/people/order/list"
-                // }
-            ],
-            navIndex: 0,
             tableNavArr: [
                 {
                    id: 0,
@@ -387,7 +372,7 @@ class PeopleOrderListPage extends React.Component {
                            
                            
                             {this.showPayBtnFn(item.orderState) && <Link to="/pay" className="btn"> 去付款 </Link>} 
-                            <div className="btn"><Link to={ "/people_order_detail?id=" + item.operateText.order }>订单详情</Link></div> 
+                            <div className="btn"><Link to={ "/people/order/detail/" + item.operateText.order }>订单详情</Link></div> 
                             {/* <div className="btn" onClick={()=>{ this.exportOrderFn(item) }}>导出订单</div> */}
                             {/* <div className="btn">再次购买</div> */}
                             
@@ -464,51 +449,29 @@ class PeopleOrderListPage extends React.Component {
             }
           ];
         return (
-
-            <div className="people_order_list_con">
-                <Header></Header>
-                <div className="people_order_con">
-                    <div className="left_content">
-                        <div className="title"><span>订单管理</span></div>
-                        
-
-                        <ul className="menu_list">        
-                            {this.state.menuList.map((item, index)=> {
-                                return (<li className={this.state.navIndex==index?"on":""} key={index} onClick={()=>{this.selectNavFn(index)}}> <Link to={item.path}>{ item.title }</Link></li>) 
-                            })}
-                        </ul>
-                    </div>
-
-                    <div className="main_content">
-                        <div className="people_order_list_page_con">
+            <div className="people_order_list_page_con">
                 
                 <div className="table_con">
-                                <ul className="nav_list">
-                                    {this.state.tableNavArr.map((item, index)=> {
-                                        return (<li className={this.state.currentNavIndex==index?"on": ""} key={index} onClick={()=>{this.selectNavFn(index)}}>{ item.title }</li>)
-                                    })}
-                                </ul>
-                                {this.state.orderArr.length>0 && <Table    dataSource={this.state.orderArr} columns={columns} className="order_table" pagination={false}  />}
-                                
-                                {this.state.orderArr.length == 0 && <Empty></Empty>}
-                                
-                                {this.state.orderArr.length>0 && <div className="page_con">
-                                    <Pagination defaultCurrent={1} total={this.state.orderTotalCount}  pageSize={this.state.pageSize} className="page"  onChange={(params, state) => {
-                                                this.setState({
-                                                    currentPage: params
-                                                }, function () {
-                                                    this.getOrderListFn(this.state.optionIds)
-                                                })
-                                            }}/>
-                                </div> }
-                            </div>
-                        </div>
-                    </div>
+                    <ul className="nav_list">
+                        {this.state.tableNavArr.map((item, index)=> {
+                              return (<li className={this.state.currentNavIndex==index?"on": ""} key={index} onClick={()=>{this.selectNavFn(index)}}>{ item.title }</li>)
+                        })}
+                    </ul>
+                    {this.state.orderArr.length>0 && <Table    dataSource={this.state.orderArr} columns={columns} className="order_table" pagination={false}  />}
+                    
+                    {this.state.orderArr.length == 0 && <Empty></Empty>}
+                    
+                    {this.state.orderArr.length>0 && <div className="page_con">
+                        <Pagination defaultCurrent={1} total={this.state.orderTotalCount}  pageSize={this.state.pageSize} className="page"  onChange={(params, state) => {
+                                    this.setState({
+                                        currentPage: params
+                                    }, function () {
+                                        this.getOrderListFn(this.state.optionIds)
+                                    })
+                                }}/>
+                    </div> }
                 </div>
-                
             </div>
-
-           
         )
     }
 }

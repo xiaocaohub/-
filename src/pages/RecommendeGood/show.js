@@ -17,22 +17,26 @@ class Show extends React.Component {
     constructor (props) {
         super(props)
         this.state = {
+            banner: "https://luockoo.oss-cn-shenzhen.aliyuncs.com/file/banner_xpj.png",
             roomList: [
                 {
                     id: 0,
-                    imgSrc: require("../../assets/room_list_1.png"),
+                    imgSrc: "https://luockoo.oss-cn-shenzhen.aliyuncs.com/file/ctq.png",
                     title: "餐厅区",
                     txt: "LIVING ROOM AREA"
                 },
                 {
                     id: 1,
-                    imgSrc: require("../../assets/room_list_2.png"),
+
+                    imgSrc: "https://luockoo.oss-cn-shenzhen.aliyuncs.com/file/ktq.png",
                     title: "客厅区",
                     txt: "BEDROOM AREA"
                 },
                 {
                     id: 2,
-                    imgSrc: require("../../assets/room_list_3.png"),
+                    imgSrc: "https://luockoo.oss-cn-shenzhen.aliyuncs.com/file/wfq.png",
+
+
                     title: "卧房区",
                     txt: "DINING AREA"
                 }
@@ -41,9 +45,7 @@ class Show extends React.Component {
                 {
                     id: 0,
                     topTitle: "餐厅",
-
                     topTxt: "/Dining area",
-
                     imgSrc: require("../../assets/room_list_banner1.png"),
                     navBtn: 2
                 },
@@ -178,7 +180,7 @@ class Show extends React.Component {
         return (
             <div className="recommende_good_con">
                 <div className="banner">      
-                    <img src={banner1} alt="" />  
+                    <img src={this.state.banner} alt="" />  
                 </div>
 
            

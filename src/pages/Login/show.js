@@ -8,11 +8,10 @@ import "./index.css";
 class Show extends React.Component {
     constructor (props) {
         super(props)
-        console.log("login")
-        console.log(props)
-        console.log("login")
         this.state = {
-            loginFlag: true
+            loginFlag: true,
+
+            loginBack: "https://luockoo.oss-cn-shenzhen.aliyuncs.com/file/log_in_bg1.png"
         }
     }
     forgetFn = ()=> {
@@ -26,7 +25,7 @@ class Show extends React.Component {
         return (
             <div className="login_page">
                 <div className="login_con">
-                    <img src={loginBack} className="login_back"/>
+                    <img src={this.state.loginBack} className="login_back"/>
                     <div className="form_con">
                         {this.state.loginFlag?<LoginPage loginFlag={this.state.loginFlag} forgetFn={this.forgetFn}/>:<ForgetPassWord /> }           
                     </div>

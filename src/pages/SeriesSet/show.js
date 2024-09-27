@@ -25,7 +25,13 @@ class Show extends React.Component {
             styleId: 0,
 
             styleGoodArr: [],
-            loadingFlag: false
+            loadingFlag: false,
+            banner: "https://luockoo.oss-cn-shenzhen.aliyuncs.com/file/series_set_banner.png"
+           
+            // https://luockoo.oss-cn-shenzhen.aliyuncs.com/file/ruanchuang_bg.png, 
+            // https://luockoo.oss-cn-shenzhen.aliyuncs.com/file/series_set_banner.png,
+            // https://luockoo.oss-cn-shenzhen.aliyuncs.com/file/wanwu_bg.png,
+            // https://luockoo.oss-cn-shenzhen.aliyuncs.com/file/yuanchuang_bg.png
         }
     }
     componentDidMount () {
@@ -33,7 +39,6 @@ class Show extends React.Component {
         this.getStyleFn()
         this.totalCartGoodCountFn()
         this.setState({
-            
             loadingFlag: true
         })
     }
@@ -133,7 +138,7 @@ class Show extends React.Component {
                
                 <div className="content_common_width">    
                     <div className="banner_con">
-                        <img src={bannerImg} alt="" className="banner_img"/>
+                        <img src={this.state.banner} alt="" className="banner_img"/>
                         {/* <div className="text_con">
                             <div className="title">A MASIVE PRODUCT SUPPLY SYSTEM</div>
                             <div className="txt">大而全的产品供应体系</div>

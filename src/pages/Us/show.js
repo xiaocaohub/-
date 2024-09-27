@@ -31,17 +31,21 @@ class Show extends React.Component {
                 currentVedioIndex: 0,
                 // vedioShadowFlag: false,
                 vedioHeight: 0,
-                
+                banner: "https://luockoo.oss-cn-shenzhen.aliyuncs.com/file/rsw_banner.png",
                 vedioSrc: "https://luockoo.oss-cn-shenzhen.aliyuncs.com/0/1/20240826/%E4%B8%80%E5%88%86%E9%92%9F%E4%BA%86%E8%A7%A3%E5%8E%9F%E5%88%9B%E7%B3%BB%E5%88%97.mp4"
+           
+           
+           
+           
             }
         } 
         componentDidMount () {
             scrollTopFn()
             this.autoVedioHeightFn()
             this.play()
+
             this.totalCartGoodCountFn()
         }
-
         play = ()=> {
             const video = document.getElementById("bigvideo");
             video.autoplay = true;
@@ -49,6 +53,7 @@ class Show extends React.Component {
         }
         closeVedioFn = ()=> {
             this.setState({
+         
                 vedioShadowFlag: false
             })
         }
@@ -56,7 +61,6 @@ class Show extends React.Component {
         autoVedioHeightFn = ()=> {
             let usVideo = document.getElementById("us_video");
             let vedioHeight = setVedioHeightFn(usVideo);
-            console.log("vedioHeight", vedioHeight)
             this.setState({
                 vedioHeight: vedioHeight
             })
@@ -64,7 +68,6 @@ class Show extends React.Component {
 
         // 统计购物车数量
         totalCartGoodCountFn = ()=> {
-        
             let _this = this;
             let formData = new FormData();
             let token = getStorageFn("token");
@@ -73,18 +76,14 @@ class Show extends React.Component {
             formData.append("storeId", 1);
             formData.append("storeType", 6);
             request({
-                url: "/api/gw",         
-            
+                url: "/api/gw",
                 method: "POST",    
-            
-            
                 data: formData
             }).then((res)=> {
                 let resData = res.data.data.data;
+
                 _this.setState({
-                
                     cartArr: resData
-                
                 },function () {
                     let cartArr = _this.state.cartArr;
                     let length = cartArr.length;
@@ -96,7 +95,7 @@ class Show extends React.Component {
         render () {
             return (
                 <div className="us_page_con">
-                    <img src={bannerImg} className="banner_img"/>
+                    <img src={this.state.banner} className="banner_img"/>
                     <div>
                         <div className="content_common_width">
                             <div className="intro_text">

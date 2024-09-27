@@ -53,6 +53,7 @@ class Show extends React.Component {
             loadingFlag: false
         }
     }
+    
     componentDidMount () {
         // this.getSpaceNavFn()
         this.init()

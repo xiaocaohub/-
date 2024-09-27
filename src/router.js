@@ -55,6 +55,8 @@ class IndexRouter extends React.Component {
                                 </PeopleOrderList>
                         }>
                         </Route> 
+                        <Route path="/people_order_list" component={ PeopleOrderListPage }></Route>
+                        <Route path="/people_order_detail" component={PeopleOrderDetail}></Route>
                         <Route path="/shop" render={()=>
                             <Shop>
                                 <Route path="/shop/info" component={ ShopInfo }></Route>

@@ -57,6 +57,7 @@
     margin:20px 20px 40px 20px;
 }
 
+
 .people_order_detail .order_dedtail_con .operate_btn_list .btn{
     width:124px;
     height:40px;
@@ -69,7 +70,10 @@
     margin-right:15px;
     cursor:pointer;
 }
- 
+.people_order_detail .order_dedtail_con .operate_btn_list .btn:first-child {
+    background: #333;
+    color: #fff;
+}
 .people_order_detail .order_dedtail_con .vertical_step{
     margin-top:20px;
     margin-left:20px;

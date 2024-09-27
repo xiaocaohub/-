@@ -74,10 +74,13 @@
 }
 
 
-.operate_btn_group .btn a{
+.operate_btn_group  a,
+.operate_btn_group .btn{
     color: #0D97E5;
 }
+.operate_btn_group  a:hover,
 .operate_btn_group .btn:hover,
-.operate_btn_group .btn:hover a{
+.operate_btn_group .btn:hover{
     cursor: pointer;
+    color: #0D97E5;
 }
